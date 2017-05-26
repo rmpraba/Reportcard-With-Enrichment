@@ -45,7 +45,7 @@
     <template is="dom-repeat" items="{{label}}">
       <center><h1>{{schoolname}}</h1>
       <h3>Continuous Comprehensive Evaluation -AY-{{academicyear}}</h3>  
-      <h4>BOY  &nbsp&nbsp&nbsp {{grade}} - &nbsp&nbsp&nbsp&nbsp&nbsp{{section}} </h4> 
+      <h4>{{assesmentname}}  &nbsp&nbsp&nbsp {{grade}} - &nbsp&nbsp&nbsp&nbsp&nbsp{{section}} </h4> 
       <table border="1" >    
       <tr>
       <th id="tb1">{{item.SNo}}</th>
@@ -86,6 +86,7 @@
         this.academicyear=localStorage.getItem("curr_sess_academicyear");
         this.grade=localStorage.getItem("curr_sess_grade");
         this.section=localStorage.getItem("curr_sess_section");
+        this.assesmentname=localStorage.getItem("curr_sess_assesmentname");
       },
       FnRefresh:function()
       {

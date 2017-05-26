@@ -113,7 +113,7 @@
     var bgrade;
     var bsection;
     var bsubject;
-
+    var count1=0,count2=0;
     Polymer({
       is: 'beginner-assesment-service',
       ready:function(){
@@ -135,8 +135,11 @@
       },
       assesmentResponse:function(e){         
          var assesmentarr=e.detail.response.returnval;
+         // alert(JSON.stringify(assesmentarr));
          sessionStorage.setItem("curr_sess_assesmentid",assesmentarr[0].assesment_id);
-         sessionStorage.setItem("curr_sess_assesmentname",assesmentarr[0].assesment_name);
+         // sessionStorage.setItem("curr_sess_assesmentname",assesmentarr[0].assesment_name);
+         document.querySelector('beginner-assesment-card').assesmentarr=assesmentarr;
+         document.querySelector('books-issuance-card').assesmentarr=assesmentarr;
          this.callGradeService();
       },
       callGradeService:function(){
@@ -149,7 +152,9 @@
          this.$.gradeajax.generateRequest();
       },
       gradeResponse:function(e){
+        // alert(JSON.stringify(e.detail.response.returnval));
           document.querySelector('beginner-assesment-card').gradearr=e.detail.response.returnval;
+          document.querySelector('books-issuance-card').gradearr=e.detail.response.returnval;
       },
       callSectionService:function(gradename){        
          this.sectionurl=sessionStorage.getItem("addrinfo")+"/section-service";
@@ -157,12 +162,14 @@
          obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
          obj.loggedid=sessionStorage.getItem("curr_sess_loggedid");
          obj.roleid=sessionStorage.getItem("curr_sess_loggedroleid");
+         obj.academicyear=localStorage.getItem("curr_sess_academicyear");
          obj.gradename=gradename;
          this.sectionparam= obj;
          this.$.sectionajax.generateRequest();
       },
       sectionResponse:function(e){        
          document.querySelector('beginner-assesment-card').sectionarr=e.detail.response.returnval; 
+         document.querySelector('books-issuance-card').sectionarr=e.detail.response.returnval; 
       },
       callSubjectService:function(gradename,section){
          this.subjecturl=sessionStorage.getItem("addrinfo")+"/subject-service";
@@ -186,14 +193,13 @@
          this.fetchstudenturl=sessionStorage.getItem("addrinfo")+"/fetchstudentbeginner-service";
          var obj={"schoolid":"","gradename":"","section":"","subject":""};
          obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+         obj.academicyear=localStorage.getItem("curr_sess_academicyear");
+         obj.assesmenttype=localStorage.getItem("curr_sess_assesmentname");
          obj.gradename=grade;
          obj.section=section;
          obj.subject=subject;
          this.fetchstudentparam= obj;
-         this.$.fetchstudentajax.generateRequest();
-
-
-        
+         this.$.fetchstudentajax.generateRequest();        
       },
       fetchstudbeginnerreportResponse:function(e)
       {
@@ -290,6 +296,8 @@
           this.fetchstudbeginnerreporturl=sessionStorage.getItem("addrinfo")+"/fetchstudbeginnerreport-service";
          var obj={"schoolid":"","gradename":"","section":"","subject":""};
          obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+         obj.academicyear=localStorage.getItem("curr_sess_academicyear");
+         obj.assesmenttype=localStorage.getItem("curr_sess_assesmentname");
          obj.gradename=bgrade;
          obj.section=bsection;
          obj.subject=bsubject;
@@ -297,27 +305,39 @@
          this.$.fetchstudbeginnerreportajax.generateRequest();
          
       },
-      callbamarkinsertService:function(studentid,category,mark,score,grade){
+      callbamarkinsertService:function(studentid,studentname,category,mark,score,grade,count){
         // alert(mark+" "+score);
+        count1=count;
         this.insertbamarkurl=sessionStorage.getItem("addrinfo")+"/insertbamark-service";
         var obj={"schoolid":"","academicyear":"","assesmentid":"","classid":"","subject":"","studentid":"","category":"","mark":"","score":"","grade":""};
         obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
         obj.academicyear=localStorage.getItem("curr_sess_academicyear");
         obj.assesmentid=sessionStorage.getItem("curr_sess_assesmentid");
+        obj.assesmenttype=sessionStorage.getItem("curr_sess_assesmentname");
         obj.classid=sessionStorage.getItem("curr_sess_classid");
         obj.subject=localStorage.getItem("curr_sess_subject");
+        obj.assesmenttype=localStorage.getItem("curr_sess_assesmentname");
+        obj.gradeid=localStorage.getItem("curr_sess_grade");
+        obj.sectionid=localStorage.getItem("curr_sess_section");
         obj.studentid=studentid;
+        obj.studentname=studentname;
         obj.category=category;
         obj.mark=mark;
         obj.score=score;
         obj.grade=grade;
+        // obj.studname=studname;
         this.insertbamarkparam= obj;  
         // alert(JSON.stringify(obj));      
         this.$.insertbamarkajax.generateRequest();
       },
       insertbamarkResponse:function(e){
         // alert(e.detail.response.returnval);
+        count2++;
+        // alert(count1+"  "+count2);
+        if(count1==count2){
         alert("Inserted!");
+        count1=0;count2=0;
+        }
       },
       callFetchGradeService:function(score){
         this.fetchgradeurl=sessionStorage.getItem("addrinfo")+"/fetchgrade-service"; 

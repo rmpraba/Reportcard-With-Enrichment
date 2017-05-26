@@ -1,0 +1,294 @@
+
+<link rel="import" href="..\..\bower_components/polymer/polymer.html">
+
+<dom-module id="books-creation-card">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      .container{
+        @apply(--layout-horizontal);
+        width: 100%;
+      }
+      .card1,.card2{
+        margin-top: 2%;
+        width: 50%;
+        margin-left: 5%;
+      }
+      .checkcard{
+        @apply(--layout-vertical);
+      }
+      .gradecard{
+        @apply(--layout-horizontal);
+      }
+      .specgradecard{
+        @apply(--layout-horizontal);
+        margin-left: 5%;
+      }
+      .gradelevelcard{
+        @apply(--layout-horizontal);        
+      }
+      paper-input,paper-dropdown-menu{
+        width: 40%;
+      }
+      .bookinfocontainer{
+        @apply(--layout-vertical);
+      }
+      .button{
+            width: 10%;
+            background: #252626;
+            color: white;
+            margin-top: 2%;
+            text-transform: none;
+            margin-left: 3%;
+      }
+      #btn2{
+            width: 10%;
+            background: #252626;
+            color: white;
+            margin-top: 2%;
+            height: 40px;
+            border-radius: 2px;
+            font-family: Calibri;
+            font-size: 17px;
+      }
+    </style>
+    <h1 align="center">Book Creation</h1>
+    <div class="container">
+
+    <div class="card1">
+      <div class="checkcard">
+      <h4>Select Grade</h4>
+      <div class="gradecard">
+      <paper-checkbox checked id="enrichmentallgrade" on-change="FnAllGrade">All Grades</paper-checkbox>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <paper-checkbox id="enrichmentspecgrade" on-change="FnSpecGrade">Specific Grade</paper-checkbox>
+      </div>     
+      <paper-card hidden$="{{hidespecgrade}}" style="height: 110px; margin-top: 20px;">
+      <div hidden$="{{hidespecgrade}}" style="margin-top: 30px;">
+      <template is="dom-repeat" items="{{gradearr}}" as="g">
+      <div class="specgradecard">
+      <template is="dom-repeat" items="{{g}}">
+      <enrichmentallgrades-card gradeid={{item.grade_id}} gradename={{item.grade_name}}></enrichmentallgrades-card>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </template>     
+      </div>
+      <br/> 
+      </template>
+      </div>
+      </paper-card>
+      
+      
+      <h4>Select Grade Level</h4>
+      <!-- <paper-checkbox on-change="FnGradeLevel">Grade Level</paper-checkbox> -->
+      <div class="gradelevelcard">
+      <template is="dom-repeat" items="{{gradelevelarr}}">
+      <enrichment-gradelevel-card ratingid="{{item.rating_id}}" grade={{item.grade}}></enrichment-gradelevel-card>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </template>
+      </div>
+      </div>
+      <br/>
+      <hr/>     
+      
+      <div>
+      <h4>Select Category</h4>
+        <paper-dropdown-menu id="enrichmentbookcreationassesment" label="Select Assesment" disabled="{{read}}" required>
+            <paper-menu id="enrichmentbookcreationassesment" class="dropdown-content"  on-iron-select="FnSelectAssesment"  attr-for-selected="value" required>  
+              <!-- <template is="dom-repeat" items="{{subjectarr}}"> -->
+                <paper-item value="BOY">BOY</paper-item>
+                <paper-item value="MOY">MOY</paper-item>
+                <paper-item value="EOY">EOY</paper-item>
+              <!-- </template> -->
+            </paper-menu>
+        </paper-dropdown-menu>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <paper-checkbox id="enrichmentbook" on-change="FnBook">Book</paper-checkbox>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <paper-checkbox id="enrichmentactivity" on-change="FnActivity">Activity</paper-checkbox>        
+      </div>
+      <hr/>
+      
+      <div class="bookinfocontainer" hidden$="{{hidebookinfocontainer}}">
+      <paper-input label="{{namelabel}}" value="{{bookname}}"></paper-input>
+      <paper-input label="{{namespeclabel}}" value="{{authorname}}"></paper-input>
+      <paper-dropdown-menu id="enrichmentbookcreationsubject" label="Select Subject" disabled="{{read}}" required>
+            <paper-menu id="enrichmentbookcreationsubject" class="dropdown-content"  on-iron-select="FnSelectSubject"  attr-for-selected="value" required>  
+              <template is="dom-repeat" items="{{subjectarr}}">
+                <paper-item value="{{item.subject_id}}">{{item.subject_name}}</paper-item>
+              </template>
+            </paper-menu>
+      </paper-dropdown-menu>
+      <paper-dropdown-menu id="enrichmentbookcreationcategory" label="Select Category" disabled="{{read}}" required>
+            <paper-menu id="enrichmentbookcreationcategory" class="dropdown-content"  on-iron-select="FnSelectCategory"  attr-for-selected="value" required>  
+              <template is="dom-repeat" items="{{categoryarr}}">
+                <paper-item value="{{item.category_id}}">{{item.category_name}}</paper-item>
+              </template>
+            </paper-menu>
+      </paper-dropdown-menu>
+      <paper-input label="Quantity" value="{{quantity}}"></paper-input>
+      </div>
+      <paper-button class="button" id="btn2" on-click="FnSubmit">Submit</paper-button>
+      <paper-button class="button" id="btn2" on-click="FnCancel">Cancel</paper-button>
+    </div>
+    
+    <!-- <div class="card2"> -->
+      <!-- <h5>Available Books</h5> -->
+    <!-- </div>       -->
+    </div>    
+    <enrichment-service id="enrichmentservice"></enrichment-service>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+    var type="";
+    var gradearr=[];
+    var gradelevelarr=[];
+    var subjectname="";
+    var subjectid="";
+    var categoryid="";
+    var categoryname="";
+    var categorytype="";
+    var assesmenttype="";
+    Polymer({
+      is: 'books-creation-card',
+      ready:function(){
+        this.hidespecgrade=true;
+        this.$.enrichmentservice.gradesforenrichmentService();
+        this.$.enrichmentservice.gradelevelforenrichmentService();
+        this.$.enrichmentservice.subjectforenrichmentService();
+        this.$.enrichmentservice.categoryforenrichmentService();
+        this.hidebookinfocontainer=true;
+      },
+      FnBook:function(){
+        this.hidebookinfocontainer=false;
+        if(document.querySelector('#enrichmentbook').checked==true){
+          document.querySelector('#enrichmentactivity').checked=false;
+          categorytype="Book";
+          this.namelabel="Book Name";
+          this.namespeclabel="Author Name";
+        }
+      },
+      FnActivity:function(){
+        this.hidebookinfocontainer=false;
+        if(document.querySelector('#enrichmentactivity').checked==true){
+          document.querySelector('#enrichmentbook').checked=false;
+          categorytype="Activity";
+          this.namelabel="Activity Name";
+          this.namespeclabel="Activity Specification";
+        }
+      },
+      FnAllGrade:function(){
+        // this.$.enrichmentservice.gradesforenrichmentService();
+        if(document.querySelector('#enrichmentallgrade').checked==true){
+          document.querySelector('#enrichmentspecgrade').checked=false;
+          type="All";
+        }
+        for(var i=0;i<gradearr.length;i++){
+          gradearr[i].flag='true';
+        }
+        this.hidespecgrade=true;
+      },
+      FnSpecGrade:function(){
+        // this.$.enrichmentservice.gradesforenrichmentService();
+        if(document.querySelector('#enrichmentspecgrade').checked==true){
+          document.querySelector('#enrichmentallgrade').checked=false;
+          type="Specific";
+        }
+        for(var i=0;i<gradearr.length;i++){
+          gradearr[i].flag='false';
+        }
+        this.hidespecgrade=false;
+      },
+      FnSetGrade:function(arr){
+        gradearr=arr;
+        for(var i=0;i<gradearr.length;i++){
+          gradearr[i].flag='true';
+        }
+      },
+      FnSetSelectedGrade:function(gradeid,flag){
+        for(var i=0;i<gradearr.length;i++){
+          if(gradearr[i].grade_id==gradeid){
+            gradearr[i].flag=flag;
+          }
+        }
+      },
+      FnSetGradeLevel:function(levelarr){
+        gradelevelarr=levelarr;
+      },
+      FnSelectSubject:function(e){
+        subjectname=e.target.selectedItem.textContent.trim();
+        subjectid=e.target.selectedItem.value.trim();
+      },
+      FnSelectCategory:function(e){
+        categoryname=e.target.selectedItem.textContent.trim();
+        categoryid=e.target.selectedItem.value.trim();
+      },
+      FnSelectAssesment:function(e){
+        assesmenttype=e.target.selectedItem.textContent.trim();
+        localStorage.setItem("curr_sess_assesmentname",assesmenttype);
+      },
+      FnSubmit:function(){
+        for(var i=0;i<gradearr.length;i++){
+          // alert(gradearr[i].flag);
+          if(gradearr[i].flag=='false'){
+          gradearr.splice(i,1);
+          i--;
+          }
+        }
+        if(gradearr.length>0){
+        var overall=[];
+        for(var i=0;i<gradearr.length;i++){
+          for(var j=0;j<gradelevelarr.length;j++){
+            var obj={};
+            obj.bookname=this.bookname;
+            obj.authorname=this.authorname;
+            obj.quantity=this.quantity;
+            obj.categorytype=categorytype;
+            obj.subjectid=subjectid;
+            obj.subjectname=subjectname;
+            obj.categoryid=categoryid;
+            obj.categoryname=categoryname;
+            obj.gradeid=gradearr[i].grade_id;
+            obj.gradename=gradearr[i].grade_name;
+            obj.assesmenttype=assesmenttype;
+            obj.grade=gradelevelarr[j];
+            overall.push(obj);
+          }
+        }
+        }
+        // alert(JSON.stringify(overall));
+        this.$.enrichmentservice.generatebooksequence(overall);
+      },
+      FnCancel:function(){
+
+      },
+      FnRefresh:function(){
+        type="";
+        document.querySelector('#enrichmentallgrade').checked=true;
+        document.querySelector('#enrichmentspecgrade').checked=false;
+        document.querySelector('#enrichmentbook').checked=false;
+        document.querySelector('#enrichmentactivity').checked=false;
+        this.hidespecgrade=true;
+        categorytype="";
+        this.hidebookinfocontainer=true;
+        subjectname="";
+        subjectid="";
+        categoryid="";
+        categoryname="";
+        categorytype="";
+        assesmenttype="";
+        gradearr=[];
+        gradelevelarr=[];
+        this.gradearr=[];
+        this.gradelevelarr=[];
+        this.bookname="";
+        this.authorname="";
+        this.quantity="";
+        this.gradearr=[];
+        this.categoryarr=[];
+        document.querySelector('#enrichmentbookcreationsubject').selected=-1;
+        document.querySelector('#enrichmentbookcreationcategory').selected=-1;
+        document.querySelector('#enrichmentbookcreationassesment').selected=-1;
+      }
+    });
+  })();
+  </script>
+</dom-module>

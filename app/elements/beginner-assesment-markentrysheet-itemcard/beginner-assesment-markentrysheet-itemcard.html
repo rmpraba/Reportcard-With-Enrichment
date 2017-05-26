@@ -66,8 +66,8 @@
         this.mark=this.score;        
       },
       callService:function(){
-        this.$.bassesmentservice.callbamarkinsertService(this.studid,"ReadingScore",this.readingscore,this.score,this.grade);
-        this.$.bassesmentservice.callbamarkinsertService(this.studid,"Activity",this.activity,this.score,this.grade);
+        this.$.bassesmentservice.callbamarkinsertService(this.studid,this.studname,"ReadingScore",this.readingscore,this.score,this.grade,2);
+        this.$.bassesmentservice.callbamarkinsertService(this.studid,this.studname,"Activity",this.activity,this.score,this.grade,2);
       },
       callFetchGrade:function(){
         this.fetchgradeurl=sessionStorage.getItem("addrinfo")+"/fetchgrade-service"; 

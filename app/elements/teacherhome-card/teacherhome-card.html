@@ -56,7 +56,7 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
     <div class="subjectteacher" hidden$="{{subjectteacher}}">
     <div class="inner1">
       <div id="entry" class="card" hidden$="{{BA}}">    
-       <paper-button on-click="FnSelectPreEntryType" no ink><img src="../../images/pre-entry.png" height="180px" width="180px"></paper-button>
+       <paper-button on-click="FnSelectPreEntryType" no ink><img src="../../images/Enrichment.png" height="180px" width="180px"></paper-button>
       </div>
       <div  class="card" hidden$="{{TA}}">
        <paper-button on-click="FnSelectTermType" no ink><img src="../../images/term.png" height="180px" width="180px"></paper-button>
@@ -574,11 +574,12 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
           document.querySelector('app-card').setPage('homepage','');
           document.querySelector('home-page').setPage('scorecard','');
          }  
-         if(localStorage.getItem('curr_sess_loggedassesmenttype')=="PreEntry") 
+         if(localStorage.getItem('curr_sess_loggedassesmenttype')=="Enrichment") 
          {
-          this.$.bassesmentservice.callAssesmentService("Beginner Level"); 
+          this.$.bassesmentservice.callAssesmentService("Enrichment"); 
           document.querySelector('app-card').setPage('homepage','');
-          document.querySelector('home-page').setPage('beginnerassesment','');
+          document.querySelector('home-page').setPage('enrichmenthome-card','');
+          // document.querySelector('home-page').setPage('beginnerassesment','');
          }
          if(localStorage.getItem('curr_sess_loggedassesmenttype')=="Analysis") 
          {
@@ -621,7 +622,7 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
          
       },
       FnSelectPreEntryType:function(){
-        localStorage.setItem('curr_sess_loggedassesmenttype','PreEntry');
+        localStorage.setItem('curr_sess_loggedassesmenttype','Enrichment');
         this.$.bassesmentservice.callAcademicService(); 
         this.$.cdialog.toggle();
       },

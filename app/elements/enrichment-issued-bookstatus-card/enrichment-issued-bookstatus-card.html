@@ -1,0 +1,55 @@
+
+<link rel="import" href="..\..\bower_components/polymer/polymer.html">
+<link rel="import" href="..\..\bower_components/iron-icons/av-icons.html">
+
+<dom-module id="enrichment-issued-bookstatus-card">
+  <template>
+    <style>
+    #total {
+    width: 100%;
+    background-color: red;
+    height: 30px;
+    }
+    #completed {
+    /*width: 0%;*/
+    height: 30px;
+    background-color: green;
+    }
+    </style>
+    <div>
+        <h5>{{assesmenttype}} - {{activity}} - {{status}} </h5>
+        
+        <ul>
+          <template is="dom-repeat" items="{{paramarr}}">
+          <li>{{item.param}}-{{item.flag}} 
+          <iron-icon icon="av:stop" style="fill: green;" hidden$="{{item.gflag}}">
+          </iron-icon>
+          <iron-icon icon="av:stop" style="fill: red;" hidden$="{{item.rflag}}">
+          </iron-icon>
+          </li>
+          </template>
+        </ul>    
+
+        <h1>Overall Completeness</h1>
+
+        <div id="total">
+          <div id="completed{{activity}}"><b>Completed&nbsp;&nbsp;&nbsp;{{completed}}%</b></div>
+        </div>  
+    </div>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+    Polymer({
+      is: 'enrichment-issued-bookstatus-card',         
+      attached:function(){
+        // alert('ready!'+document.querySelector('#completed'+this.activity)+"  "+this.completed+"  "+this.activity);
+        document.getElementById('completed'+this.activity).style.width=this.completed+"%";
+        document.getElementById('completed'+this.activity).style.height="30px";
+        document.getElementById('completed'+this.activity).style.backgroundColor="green";
+        document.getElementById('completed'+this.activity).style.align="center";
+      }
+    });
+  })();
+  </script>
+</dom-module>

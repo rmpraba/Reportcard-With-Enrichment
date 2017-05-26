@@ -1,0 +1,85 @@
+
+<link rel="import" href="..\..\bower_components/polymer/polymer.html">
+
+<dom-module id="enrichment-studentmap-list">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      /*.card{
+        @apply(--layout-vertical);
+        width: 25%;
+      }*/
+      paper-card{
+        /*height: 100px;*/
+        /*width: 80px;*/
+        /*padding: 5%*/
+      }
+      .container{
+        width: 8%;
+        padding: 1%;
+      }
+
+    </style>
+    <!-- <div class="card">
+      <img src="../../images/studenttosubject.jpg" height="80px" width="80px" on-click="FnClickStudent">
+      {{studentid}}-{{studentname}}
+    </div> -->
+    <!-- <div class="container" on-click="FnClickStudent"> -->
+    <paper-card  on-click="FnClickStudent">
+    <div class="card-content">
+    <img src="../../images/studenttosubject.jpg" height="80px" width="80px" >
+    <div class="cafe-header" width="80px"><span>{{studentname}}</span>
+      <div class="cafe-location cafe-light" width="80px">
+        <span>Grade</span>
+      </div>
+    </div>
+    <div class="cafe-rating" width="80px">
+      {{studentid}}
+    </div>
+    </div>
+    </paper-card>
+    <!-- </div> -->
+    <!-- <div>
+    <paper-dialog id="enrichmentsubjectdialog" modal style="">
+    <paper-dialog-scrollable style="height: 80%;">
+    <template is="dom-repeat" items="{{itemarr}}">
+      <enrichment-bookactivity-mapcard bookname="{{item.book_name}}" subjectid="{{item.subject_id}}" subjectname="{{item.subject_name}}" categoryname="{{item.category_name}}"></enrichment-bookactivity-mapcard>
+    </template>
+    <center>  
+    <div class="submitbutton">
+    <paper-button class="button" on-click="FnAdd">Add</paper-button>
+    <paper-button class="button" on-click="FnCancel">Cancel</paper-button>
+    </center>
+    </div>
+    </paper-dialog-scrollable>
+    </paper-dialog>
+    </div> -->
+    <enrichment-service id="enrichmentservice"></enrichment-service>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'enrichment-studentmap-list',
+      FnClickStudent:function(){
+        // this.$.enrichmentservice.FnFetchBookForStudent(this.studentid);
+        document.querySelector('home-page').setPage('enrichment-individual-assignment');
+        document.querySelector('enrichment-individual-assignment').hidecard=false;
+        document.querySelector('enrichment-individual-assignment').FnSetStudInfo(this.studentid,this.studentname);
+      },
+      // FnToggleDialog:function(){
+      //   this.$.enrichmentsubjectdialog.toggle();
+      // },
+      // FnAdd:function(){
+      //   this.$.enrichmentsubjectdialog.toggle();
+      // },
+      // FnCancel:function(){
+      //   this.$.enrichmentsubjectdialog.toggle();
+      // }
+    });
+  })();
+  </script>
+</dom-module>

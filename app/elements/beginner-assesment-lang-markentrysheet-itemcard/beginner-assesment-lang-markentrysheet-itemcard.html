@@ -58,7 +58,7 @@
         this.callFetchGrade();        
       },
       callService:function(){           
-        this.$.bassesmentservice.callbamarkinsertService(this.studid,"Activity",this.score,(parseInt(this.score)*4),this.grade); 
+        this.$.bassesmentservice.callbamarkinsertService(this.studid,this.studname,"Activity",this.score,(parseInt(this.score)*4),this.grade,1); 
       },
       callFetchGrade:function(){
         this.fetchgradeurl=sessionStorage.getItem("addrinfo")+"/fetchgrade-service"; 

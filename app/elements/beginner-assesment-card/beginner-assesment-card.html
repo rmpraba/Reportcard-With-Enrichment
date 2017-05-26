@@ -36,13 +36,13 @@
     </style>
     <div class='card'>     
     <div class='drop'>      
-         <!--  <paper-dropdown-menu id="academicyear" label="Select academicyear" disabled="{{read}}" required>
-            <paper-menu class="dropdown-content"  on-iron-select="FnSelectacademicyear"  attr-for-selected="value" required>  
-              <template is="dom-repeat" items="{{academicarr}}">
-                <paper-item value="{{item.year}}">{{item.year}}</paper-item>                             
+          <paper-dropdown-menu id="beginnerassesmenttype" label="Select Assesment" disabled="{{read}}" required>
+            <paper-menu class="dropdown-content"  on-iron-select="FnSelectAssesment"  attr-for-selected="value" required>  
+              <template is="dom-repeat" items="{{assesmentarr}}">
+                <paper-item value="{{item.assesment_category_id}}">{{item.assesment_category_name}}</paper-item>                             
               </template>
             </paper-menu>
-          </paper-dropdown-menu> -->
+          </paper-dropdown-menu>
           <paper-dropdown-menu id="grade" label="Select Grade" disabled="{{read}}" required>
             <paper-menu  id="gradenam" class="dropdown-content"  on-iron-select="FnSelectGrade"  attr-for-selected="value" required> 
               <template is="dom-repeat" items="{{gradearr}}">
@@ -62,9 +62,6 @@
               <paper-item value="English">English</paper-item>
               <paper-item value="Mathematics">Mathematics</paper-item>
               <paper-item value="EVS">EVS</paper-item>
-              <!-- <template is="dom-repeat" items="{{subjectarr}}">
-                <paper-item value="{{item.subject_name}}">{{item.subject_name}}</paper-item>
-              </template> -->
             </paper-menu>
           </paper-dropdown-menu>        
      </div>
@@ -76,13 +73,20 @@
   (function() {
     var flag=0;
     'use strict';
-    var gradename,section,term,assesment,subject,academicyear;
+    var gradename,section,term,assesment,subject,academicyear,assesmentname;
     Polymer({
       is: 'beginner-assesment-card',
       ready:function(){
         this.flag=0;
         this.hidesheet=true;
         localStorage.setItem("curr_sess_page","beginner-assesment-card");        
+      },
+      FnSelectAssesment:function(e){
+        assesmentname = e.target.selectedItem.textContent.trim();
+        localStorage.setItem("curr_sess_assesmentname",assesmentname);
+        if(this.flag==1){
+        this.FnServiceCall(); 
+        }
       },
       FnSelectacademicyear:function(e){
         academicyear = e.target.selectedItem.textContent.trim();
@@ -114,19 +118,16 @@
         subject = e.target.selectedItem.textContent.trim();
         localStorage.setItem("curr_sess_subject",subject);
         this.FnServiceCall(); 
-      
       },
       FnServiceCall:function(){
         document.querySelector('beginner-assesment-service').callFetchStudentInfo(gradename,section,subject);
+        // alert(subject);
         if(subject=="English"){
-          // alert("English");
         document.querySelector('beginner-assesment-markentrysheet').setDefaultHeaders();
-        document.querySelector('assesment-sheet-card').setPage('beginner-assesment-markentrysheet');
-          
+        document.querySelector('assesment-sheet-card').setPage('beginner-assesment-markentrysheet');          
         }
         else
         {
-          // alert("others");
         document.querySelector('beginner-assesment-lang-markentrysheet').setDefaultHeaders(); 
         document.querySelector('assesment-sheet-card').setPage('beginner-assesment-lang-markentrysheet');        
         }
@@ -136,7 +137,7 @@
         document.querySelector('#gradenam').selected=-1;
         document.querySelector('#sectionnam').selected=-1;
         document.querySelector('#subjectnam').selected=-1;
-        document.querySelector('#subjectnam').selected=-1;
+        document.querySelector('#beginnerassesmenttype').selected=-1;
         document.querySelector('beginner-assesment-lang-markentrysheet').FnRefresh();
         document.querySelector('beginner-assesment-markentrysheet').FnRefresh();
         this.flag=0;

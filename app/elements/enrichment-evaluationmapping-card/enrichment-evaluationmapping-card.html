@@ -1,0 +1,45 @@
+<link rel="import" href="..\..\bower_components/polymer/polymer.html">
+
+<dom-module id="enrichment-evaluationmapping-card">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      .card{
+        @apply(--layout-horizontal);
+        @apply(--layout-wrap);
+        width: 100%;
+      }
+      enrichment-evaluationmapping-itemcard{
+        width: 20%;
+        background-color: whitesmoke;
+        box-shadow: 1px 1px 1px white;
+        margin-left: 5%;
+        margin-top: 5%;
+      }
+    </style>
+    <h1 align="center">Book store</h1>
+    <div class="card">
+      <template is="dom-repeat" items="{{bookarr}}">
+        <enrichment-evaluationmapping-itemcard gradelevel="{{item.grade_level}}" gradename="{{item.grade_name}}" bookname="{{item.book_name}}" bookid="{{item.id}}" category="{{item.category_name}}" quantity="{{item.quantity}}"></enrichment-evaluationmapping-itemcard>
+      </template>
+    </div>
+    <enrichment-service id="enrichmentservice"></enrichment-service>
+  </template>
+
+  <script>
+  (function() {
+    'use strict';
+    Polymer({
+      is: 'enrichment-evaluationmapping-card',
+      ready:function(){
+        this.$.enrichmentservice.FnFetchAllBooks();
+      },
+      FnRefresh:function(){
+        
+      }
+    });
+  })();
+  </script>
+</dom-module>

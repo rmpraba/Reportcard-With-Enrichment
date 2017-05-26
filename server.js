@@ -9,7 +9,7 @@ var connection = mysql.createConnection({
    host     : 'localhost',
    user     : 'root',
    password : 'admin',
-   database : 'master'
+   database : 'scorecarddb'
    // port: '64091',
    // user: 'adminvRjnewB',
    // password: 'DNrIgJ3-ecwp',
@@ -152,7 +152,10 @@ app.post('/assesmenttype-service',  urlencodedParser,function (req, res)
 {
   var schoolid={"id":req.query.schoolid};
   var assesmentname={"assesment_name":req.query.assesmentname};  
-  connection.query('SELECT * from md_assesment_type where ?',[assesmentname],
+  var qur="SELECT * FROM md_assesment_type_category WHERE assesment_id in(SELECT assesment_id from md_assesment_type where assesment_name='"+req.query.assesmentname+"')";
+  console.log('------------------------------------------------');
+  console.log(qur);
+  connection.query('SELECT * FROM md_assesment_type_category WHERE assesment_id in(SELECT assesment_id from md_assesment_type where ?)',[assesmentname],
     function(err, rows)
     {
     if(!err)
@@ -207,31 +210,31 @@ app.post('/grade-service',  urlencodedParser,function (req, res)
   // var qur="select grade_name from md_grade where grade_id in(select grade_id from mp_teacher_grade where id='"+loggedid+"')";
   if(req.query.roleid=='subject-teacher')
   {
-    var qur="select grade_name from md_grade where grade_id "+
+    var qur="select grade_name,grade_id from md_grade where grade_id "+
   "in(select grade_id from mp_teacher_grade where "+
   "school_id='"+req.query.schoolid+"' and id='"+req.query.loggedid+"' and role_id='"+req.query.roleid+"')";
   }
   else if(req.query.roleid=='class-teacher')
   {
-    var qur="select grade_name from md_grade where grade_id "+
+    var qur="select grade_name,grade_id from md_grade where grade_id "+
     "in(select grade_id from mp_teacher_grade where "+
     "school_id='"+req.query.schoolid+"' and id='"+req.query.loggedid+"' and role_id='"+req.query.roleid+"')";
   }
    else if(req.query.roleid=='co-ordinator')
   {
-    var qur="select grade_name from md_grade where grade_id "+
+    var qur="select grade_name,grade_id from md_grade where grade_id "+
     "in(select grade_id from mp_teacher_grade where "+
     "school_id='"+req.query.schoolid+"' and id='"+req.query.loggedid+"' and role_id='"+req.query.roleid+"')";
   }
   else if(req.query.roleid=='headmistress')
   {
-    var qur="select grade_name from md_grade where grade_id "+
+    var qur="select grade_name,grade_id from md_grade where grade_id "+
     "in(select grade_id from mp_teacher_grade where "+
     "school_id='"+req.query.schoolid+"')";
   }
    else if(req.query.roleid=='principal'||req.query.roleid=='viceprincipal'||req.query.roleid=='headofedn'||req.query.roleid=='management')
   {
-    var qur="select grade_name from md_grade where grade_id "+
+    var qur="select grade_name,grade_id from md_grade where grade_id "+
     "in(select grade_id from mp_teacher_grade where "+
     "school_id='"+req.query.schoolid+"')";
   }
@@ -263,54 +266,69 @@ app.post('/grade-service',  urlencodedParser,function (req, res)
 //fetching section info
 app.post('/section-service',  urlencodedParser,function (req, res)
 {  
-   if(req.query.roleid=='subject-teacher')
+  if(req.query.roleid=='subject-teacher')
   {
     //console.log('1');
-    var qur="select * from md_section where section_id in "+
-    "(select section_id from mp_teacher_grade where "+
-    "school_id='"+req.query.schoolid+"' and role_id='"+req.query.roleid+"' "+
-    "and id='"+req.query.loggedid+"' and grade_id=(select grade_id from md_grade "+
-    "where grade_name='"+req.query.gradename+"')) and school_id='"+req.query.schoolid+"'";
+    // var qur="select * from md_section where section_id in "+
+    // "(select distinct(section_id) from mp_teacher_grade where "+
+    // "school_id='"+req.query.schoolid+"' and role_id='"+req.query.roleid+"' "+
+    // "and id='"+req.query.loggedid+"' and grade_id=(select grade_id from md_grade "+
+    // "where grade_name='"+req.query.gradename+"') and academic_year='"+req.query.academicyear+"') and school_id='"+req.query.schoolid+"' ";
+    var qur="select * from md_section where section_id in (select distinct(tg.section_id) from "+
+    " mp_teacher_grade tg join md_grade g on(tg.grade_id=g.grade_id) where "+
+    " tg.role_id='"+req.query.roleid+"' and tg.id='"+req.query.loggedid+"' and tg.school_id='"+req.query.schoolid+"' and "+ 
+    " tg.academic_year='"+req.query.academicyear+"' and g.grade_name='"+req.query.gradename+"') and school_id='"+req.query.schoolid+"' and "+ 
+    " academic_year='"+req.query.academicyear+"'";
   }
   else if(req.query.roleid=='class-teacher')
   {
     //console.log('2');
-    var qur="select * from md_section where section_id in "+
-    "(select section_id from mp_teacher_grade where "+
-    "school_id='"+req.query.schoolid+"' and role_id='"+req.query.roleid+"' "+
-    "and id='"+req.query.loggedid+"' and grade_id=(select grade_id from md_grade "+
-    "where grade_name='"+req.query.gradename+"')) and school_id='"+req.query.schoolid+"'";
+    // var qur="select * from md_section where section_id in "+
+    // "(select distinct(section_id) from mp_teacher_grade where "+
+    // "school_id='"+req.query.schoolid+"' and role_id='"+req.query.roleid+"' "+
+    // "and id='"+req.query.loggedid+"' and grade_id=(select grade_id from md_grade "+
+    // "where grade_name='"+req.query.gradename+"') and academic_year='"+req.query.academicyear+"') and school_id='"+req.query.schoolid+"' ";
+    var qur="select * from md_section where section_id in (select distinct(tg.section_id) from "+
+    " mp_teacher_grade tg join md_grade g on(tg.grade_id=g.grade_id) where "+
+    " tg.id='"+req.query.loggedid+"' and tg.school_id='"+req.query.schoolid+"' and tg.academic_year='"+req.query.academicyear+"' and "+
+    " g.grade_name='"+req.query.gradename+"') and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"'";
   }
    else if(req.query.roleid=='co-ordinator')
   {
     //console.log('3');
-    var qur="select * from md_section where section_id in "+
-    "(select section_id from mp_teacher_grade where "+
-    "grade_id=(select grade_id from md_grade where "+
-    "school_id='"+req.query.schoolid+"' and grade_name='"+req.query.gradename+"')) and school_id='"+req.query.schoolid+"'";
+    // var qur="select * from md_section where section_id in "+
+    // "(select distinct(section_id) from mp_teacher_grade where "+
+    // "grade_id=(select grade_id from md_grade where "+
+    // "school_id='"+req.query.schoolid+"' and grade_name='"+req.query.gradename+"') and academic_year='"+req.query.academicyear+"') and school_id='"+req.query.schoolid+"'";
+    var qur="select * from md_section where section_id in (select distinct(tg.section_id) from mp_teacher_grade tg join md_grade g on(tg.grade_id=g.grade_id) where "+
+    " tg.school_id='"+req.query.schoolid+"' and tg.academic_year='"+req.query.academicyear+"' and g.grade_name='"+req.query.gradename+"') and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"'";
   }
   else if(req.query.roleid=='headmistress')
   {
     //console.log('4');
-    var qur="select * from md_section where section_id in "+
-    "(select section_id from mp_teacher_grade where "+
-    "grade_id in(select grade_id from mp_teacher_grade where grade_id=(select grade_id from md_grade "+
-    "where grade_name='"+req.query.gradename+"') and "+
-    "school_id='"+req.query.schoolid+"') and school_id='"+req.query.schoolid+"') and school_id='"+req.query.schoolid+"'";
+    // var qur="select * from md_section where section_id in "+
+    // "(select distinct(section_id) from mp_teacher_grade where "+
+    // "grade_id in(select distinct(grade_id) from mp_teacher_grade where grade_id=(select grade_id from md_grade "+
+    // "where grade_name='"+req.query.gradename+"') and "+
+    // "school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"') and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"') and school_id='"+req.query.schoolid+"' ";
+    var qur="select * from md_section where section_id in (select distinct(tg.section_id) from mp_teacher_grade tg join md_grade g on(tg.grade_id=g.grade_id) where "+
+    " tg.school_id='"+req.query.schoolid+"' and tg.academic_year='"+req.query.academicyear+"' and g.grade_name='"+req.query.gradename+"') and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"'";
   }
    else if(req.query.roleid=='principal'||req.query.roleid=='viceprincipal'||req.query.roleid=='headofedn'||req.query.roleid=='management')
   {
+    var qur="select * from md_section where section_id in (select distinct(tg.section_id) from mp_teacher_grade tg join md_grade g on(tg.grade_id=g.grade_id) where "+
+    " tg.school_id='"+req.query.schoolid+"' and tg.academic_year='"+req.query.academicyear+"' and g.grade_name='"+req.query.gradename+"') and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"'";
     //console.log('5');
-    var qur="select * from md_section where section_id in "+
-    "(select section_id from mp_teacher_grade where "+
-    "grade_id in(select grade_id from mp_teacher_grade where grade_id=(select grade_id from md_grade "+
-    "where grade_name='"+req.query.gradename+"') and "+
-    "school_id='"+req.query.schoolid+"') and school_id='"+req.query.schoolid+"') and school_id='"+req.query.schoolid+"'";
+    // var qur="select * from md_section where section_id in "+
+    // "(select distinct(section_id) from mp_teacher_grade where "+
+    // "grade_id in(select distinct(grade_id) from mp_teacher_grade where grade_id=(select grade_id from md_grade "+
+    // "where grade_name='"+req.query.gradename+"') and "+
+    // "school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"') and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"') and school_id='"+req.query.schoolid+"' ";
   }
 
 
   console.log('-------------------section----------------------');
-  //console.log(qur);
+  console.log(qur);
   // var qur="select * from md_section where section_id in(select section_id from mp_teacher_grade where school_id='"+req.query.schoolid+"' and role_id='"+req.query.roleid+"' and id='"+req.query.loggedid+"' and grade_id=(select grade_id from scorecarddb.md_grade where grade_name='"+req.query.gradename+"'))";
   connection.query(qur,
     function(err, rows)
@@ -490,11 +508,25 @@ app.post('/assesment-service',  urlencodedParser,function (req, res)
 });
 app.post('/fetchstudentbeginner-service',  urlencodedParser,function (req, res)
 {
-  var qur="select school_id,id,student_name,class_id  from md_student where  class_id="+
+var qur="select school_id,id,student_name,class_id  from md_student where  class_id="+
 "(select class_id   from mp_grade_section where grade_id=(select grade_id "+
 "from md_grade where grade_name='"+req.query.gradename+"') and section_id=(select "+
-"section_id from md_section where section_name='"+req.query.section+"' and school_id='"+req.query.schoolid+"')) and "+
-"school_id='"+req.query.schoolid+"' and id not in(select student_id from tr_beginner_assesment_marks where class_id=(select class_id  from mp_grade_section where grade_id=(select grade_id from md_grade where grade_name='"+req.query.gradename+"') and section_id=(select section_id from md_section where section_name='"+req.query.section+"' and school_id='"+req.query.schoolid+"')) and school_id='"+req.query.schoolid+"' and subject_id='"+req.query.subject+"')";
+"section_id from md_section where section_name='"+req.query.section+"' and "+
+"school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"') "+
+"and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"') and "+
+"school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' "+
+"and id not in(select student_id from tr_beginner_assesment_marks where "+
+"class_id=(select class_id  from mp_grade_section where grade_id=(select grade_id "+
+"from md_grade where grade_name='"+req.query.gradename+"') and section_id=(select "+
+"section_id from md_section where section_name='"+req.query.section+"' and "+
+"school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"') and "+
+"school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"') and "+
+"school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and "+
+"subject_id='"+req.query.subject+"' and assesment_type='"+req.query.assesmenttype+"')";
+ console.log('--------------------------enrichment stud fetch------------------------------');
+ console.log('--------------------------------------------------------');
+ console.log(qur);
+ console.log('--------------------------------------------------------');
  connection.query(qur,
     function(err, rows)
     {
@@ -505,7 +537,7 @@ app.post('/fetchstudentbeginner-service',  urlencodedParser,function (req, res)
     }
     else
     {
-      console.log(err);
+      console.log('error in this query....'+err);
       res.status(200).json({'returnval': 'fail'});
     }  
 
@@ -802,7 +834,17 @@ app.post('/fetchstudentreportforhealth-service',  urlencodedParser,function (req
 
 app.post('/fetchstudbeginnerreport-service',  urlencodedParser,function (req, res)
 {
-  var qur="select *,(select student_name from md_student where id=student_id) as student_name from tr_beginner_assesment_marks where class_id=(select class_id  from mp_grade_section where grade_id=(select grade_id from md_grade where grade_name='"+req.query.gradename+"') and section_id=(select section_id from md_section where section_name='"+req.query.section+"' and school_id='"+req.query.schoolid+"')) and school_id='"+req.query.schoolid+"' and subject_id='"+req.query.subject+"'";
+  var qur="select *,(select student_name from md_student where id=student_id and school_id='"+req.query.schoolid+"' "+
+  "and academic_year='"+req.query.academicyear+"') as student_name "+
+  "from tr_beginner_assesment_marks where class_id=(select class_id  from mp_grade_section "+
+  "where grade_id=(select grade_id from md_grade where grade_name='"+req.query.gradename+"') "+
+  "and section_id=(select section_id from md_section where section_name='"+req.query.section+"' "+
+  "and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"') and school_id='"+req.query.schoolid+"' "+
+  "and academic_year='"+req.query.academicyear+"') and school_id='"+req.query.schoolid+"' "+
+  "and academic_year='"+req.query.academicyear+"' and "+
+  "subject_id='"+req.query.subject+"' and assesment_type='"+req.query.assesmenttype+"'";
+  console.log('----------------------------------------------------');
+  console.log(qur);
  connection.query(qur,
     function(err, rows)
     {
@@ -969,7 +1011,7 @@ connection.query(qur,
 // fetchmarkexiststudentinfo-service
 
 //Storing marks for assesment
-app.post('/insertbamark-service',  urlencodedParser,function (req, res)
+app.post('/insertbamark-service',urlencodedParser,function (req, res)
 {  
   var response={
          school_id:req.query.schoolid,   
@@ -978,14 +1020,18 @@ app.post('/insertbamark-service',  urlencodedParser,function (req, res)
          class_id:req.query.classid,
          subject_id:req.query.subject,
          student_id:req.query.studentid,
+         student_name:req.query.studentname,
          category_id:req.query.category,
          mark:req.query.mark,
          score:req.query.score,
-         grade:req.query.grade                       
+         grade:req.query.grade,
+         assesment_type:req.query.assesmenttype,
+         grade_id:req.query.gradeid,
+         section_id:req.query.sectionid                       
   }
   var checkqur="SELECT * FROM tr_beginner_assesment_marks WHERE school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' "+
   " and assesment_id='"+req.query.assesmentid+"' and subject_id='"+req.query.subject+"' and category_id='"+req.query.category+"' and "+
-  "class_id='"+req.query.classid+"' and student_id='"+req.query.studentid+"'";
+  "class_id='"+req.query.classid+"' and student_id='"+req.query.studentid+"' and assesment_type='"+req.query.assesmenttype+"'";
   var updatequr="UPDATE tr_beginner_assesment_marks SET ? WHERE school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' "+
   " and assesment_id='"+req.query.assesmentid+"' and subject_id='"+req.query.subject+"' and category_id='"+req.query.category+"' and "+
   "class_id='"+req.query.classid+"' and student_id='"+req.query.studentid+"'";
@@ -8820,6 +8866,471 @@ app.post('/savegradetorolemapping-service',  urlencodedParser,function (req,res)
     }
     else
      res.status(200).json({'returnval': 'no rows'}); 
+  });
+});
+
+app.post('/gradesforenrichment-service',  urlencodedParser,function (req,res)
+  {  
+    var qur="SELECT * from md_school_grade_mapping WHERE school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"'";
+    console.log('------------Enrichment grades-------------');
+   console.log(qur);
+    connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': rows});
+    }
+    else
+     res.status(200).json({'returnval': 'no rows'}); 
+  });
+});
+
+app.post('/gradelevelforenrichment-service',  urlencodedParser,function (req,res)
+  {  
+    var qur="SELECT * from md_grade_rating";
+    console.log('------------Enrichment gradelevels-------------');
+   console.log(qur);
+    connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': rows});
+    }
+    else
+     res.status(200).json({'returnval': 'no rows'}); 
+  });
+});
+
+
+app.post('/subjectforenrichment-service',  urlencodedParser,function (req,res)
+  {  
+    var qur="SELECT distinct(subject_id),subject_name from enrichment_subject_category";
+    console.log('------------Enrichment subjects-------------');
+   console.log(qur);
+    connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': rows});
+    }
+    else
+     res.status(200).json({'returnval': 'no rows'}); 
+  });
+});
+
+app.post('/categoryforenrichment-service',  urlencodedParser,function (req,res)
+  {  
+    var qur="SELECT distinct(category_id),category_name from enrichment_subject_category";
+    console.log('------------Enrichment category-------------');
+   console.log(qur);
+    connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': rows});
+    }
+    else
+     res.status(200).json({'returnval': 'no rows'}); 
+  });
+});
+
+
+app.post('/generatebooksequence-service',  urlencodedParser,function (req,res)
+  {  
+    var qur="SELECT bookactivity_seq FROM sequence";
+    console.log('------------book seq-------------');
+   console.log(qur);
+    connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': rows});
+    }
+    else
+     res.status(200).json({'returnval': 'no rows'}); 
+  });
+});
+
+app.post('/insertbookinfo-service',  urlencodedParser,function (req,res)
+  {  
+    var response={
+         id:req.query.bookid,
+         book_name:req.query.bookname,
+         author_name:req.query.bookauthor,
+         subject_id:req.query.booksubid,
+         subject_name:req.query.booksubname,
+         category_id:req.query.bookcatid,
+         category_name:req.query.bookcatname,
+         grade_id:req.query.bookgradeid,
+         grade_name:req.query.bookgradename,
+         grade_level:req.query.bookgrade,
+         quantity:req.query.bookquantity,
+         category:req.query.category,
+         assesment_type:req.query.assesmenttype
+    };
+    // console.log(response);
+    var qur="INSERT INTO enrichment_booksactivity_master SET ?";
+    console.log('------------book insert-------------');
+    console.log(qur);
+    connection.query(qur,[response],
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': 'Inserted!!'});
+    }
+    else{
+      console.log(err);
+     res.status(200).json({'returnval': 'Not Inserted!!'}); 
+    }
+  });
+});
+
+
+app.post('/updatebooksequence-service',  urlencodedParser,function (req,res)
+  {  
+    var qur="UPDATE sequence SET bookactivity_seq='"+req.query.seq+"'";
+    console.log('------------book seq-------------');
+   console.log(qur);
+    connection.query(qur,
+    function(err, result)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': 'Updated!!'});
+    }
+    else{
+      console.log(err);
+     res.status(200).json({'returnval': 'Not Updated!!'}); 
+    }
+  });
+});
+
+
+app.post('/fetchsubjectcategoryforissue-service',  urlencodedParser,function (req,res)
+  {  
+    var qur="SELECT * FROM enrichment_subject_category WHERE subject_id='"+req.query.subjectid+"'";
+    console.log('------------fetch book category-------------');
+   console.log(qur);
+    connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': rows});
+    }
+    else{
+      console.log(err);
+     res.status(200).json({'returnval': 'no rows'}); 
+    }
+  });
+});
+
+
+app.post('/fetchstudentforissue-service',  urlencodedParser,function (req,res)
+  {  
+    var qur="SELECT * FROM md_student WHERE class_id in(SELECT class_id FROM mp_grade_section WHERE grade_id='"+req.query.gradeid+"' and section_id='"+req.query.sectionid+"' and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"') and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"'";
+    console.log('------------fetch stud for book issuance-------------');
+   console.log(qur);
+    connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': rows});
+    }
+    else{
+      console.log(err);
+     res.status(200).json({'returnval': 'no rows'}); 
+    }
+  });
+});
+
+
+app.post('/fetchbookforstudent-service',  urlencodedParser,function (req,res)
+  {  
+    var qur="SELECT * FROM enrichment_booksactivity_master WHERE grade_level in(SELECT grade FROM tr_beginner_assesment_marks WHERE school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and assesment_type='"+req.query.assesmenttype+"' and grade_id='"+req.query.gradename+"' and section_id='"+req.query.sectionname+"' and subject_id='"+req.query.subjectname+"' and category_id='"+req.query.categoryname+"' and student_id='"+req.query.studentid+"')";
+    console.log('------------fetch stud for book issuance-------------');
+    console.log(qur);
+    connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': rows});
+    }
+    else{
+      console.log(err);
+     res.status(200).json({'returnval': 'no rows'}); 
+    }
+  });
+});
+
+
+app.post('/assignbooktostudent-service',  urlencodedParser,function (req,res)
+  {  
+    var response={
+      school_id:req.query.schoolid,
+      academic_year:req.query.academicyear,
+      student_id:req.query.studentid,
+      student_name:req.query.studentname,
+      assesment_type:req.query.assesmenttype,
+      grade:req.query.gradename,
+      section:req.query.sectionname,
+      subject:req.query.subjectname,
+      category:req.query.categoryname,
+      bookactivity_id:req.query.bookid,
+      bookactivity_name:req.query.bookname,
+      quantity:'1',
+      issued_date:req.query.issuedate,
+      due_date:req.query.duedate,
+      status:'issued'
+    };
+    var qur="INSERT INTO enrichment_bookissuance_details SET ?";
+    console.log('------------insert book info for stud-------------');
+    console.log(qur);
+    connection.query(qur,[response],
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': "Inserted!!"});
+    }
+    else{
+      console.log(err);
+     res.status(200).json({'returnval': 'Not Inserted!!'}); 
+    }
+  });
+});
+
+
+app.post('/fetchissuedbook-service',  urlencodedParser,function (req,res)
+  {  
+    var qur="SELECT * FROM enrichment_bookissuance_details WHERE student_id='"+req.query.studentid+"' and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and status='issued'";
+    console.log('------------fetch issued book -------------');
+    console.log(qur);
+    connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': rows});
+    }
+    else{
+      console.log(err);
+     res.status(200).json({'returnval': 'no rows'}); 
+    }
+  });
+});
+
+app.post('/fetchevaluationparameters-service',  urlencodedParser,function (req,res)
+  {  
+    var qur="SELECT * FROM enrichment_evaluation_parameter_mapping WHERE book_id='"+req.query.bookid+"'";
+    console.log('------------fetch issued book -------------');
+    console.log(qur);
+    connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': rows});
+    }
+    else{
+      console.log(err);
+     res.status(200).json({'returnval': 'no rows'}); 
+    }
+  });
+});
+
+app.post('/updateassesmentstatus-service',  urlencodedParser,function (req,res)
+  {  
+    var response={
+      school_id:req.query.schoolid,
+      academic_year:req.query.academicyear,
+      student_id:req.query.studentid,
+      student_name:req.query.studentname,
+      assesment_type:req.query.assesmenttype,
+      grade:req.query.gradename,
+      section:req.query.sectionname,
+      subject:req.query.subject,
+      category:req.query.category,
+      bookactivity_id:req.query.bookid,
+      bookactivity_name:req.query.bookname,
+      evaluation_date:req.query.returndate,
+      parameter_id:req.query.paramid,
+      parameter_name:req.query.paramname
+    };
+    var qur="INSERT INTO enrichment_assesment_details SET ?";
+    console.log('------------insert assesment -------------');
+    console.log(qur);
+    connection.query(qur,[response],
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': 'Updated!!'});
+    }
+    else{
+      console.log(err);
+     res.status(200).json({'returnval': 'Not Updated!!'}); 
+    }
+  });
+});
+
+app.post('/updatereturnstatus-service',  urlencodedParser,function (req,res)
+  {  
+    var qur="UPDATE enrichment_bookissuance_details SET status='Returned',returned_date='"+req.query.returndate+"' "+
+    " WHERE school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and student_id='"+req.query.studentid+"' and "+
+    " assesment_type='"+req.query.assesmenttype+"' and grade='"+req.query.grade+"' and section='"+req.query.section+"' and subject='"+req.query.subject+"' and "+
+    " category='"+req.query.category+"' and bookactivity_id='"+req.query.bookid+"'";
+    console.log('------------update return status -------------');
+    console.log(qur);
+    connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': 'Updated!!'});
+    }
+    else
+    {
+     console.log(err);
+     res.status(200).json({'returnval': 'Not Updated!!'}); 
+    }
+  });
+});
+
+
+app.post('/fetchperformancemeasures-service',  urlencodedParser,function (req,res)
+  {  
+    var beginnerqur="SELECT assesment_type,student_id,student_name,subject_id,category_id,score,grade FROM tr_beginner_assesment_marks WHERE school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and student_id='"+req.query.studentid+"' group by assesment_type,category_id,student_id,student_name,subject_id,score,grade";
+    // var assignedqur="SELECT * FROM enrichment_bookissuance_details WHERE school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and student_id='"+req.query.studentid+"'";
+    var assignedqur="SELECT * FROM enrichment_bookissuance_details bi join enrichment_evaluation_parameter_mapping m "+
+    " on(bi.bookactivity_id=m.book_id) WHERE school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and student_id='"+req.query.studentid+"'";
+    var assesmentqur="SELECT * FROM enrichment_assesment_details WHERE school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and student_id='"+req.query.studentid+"'";
+    var totalassesment="SELECT * FROM enrichment_evaluation_parameter_mapping";
+
+    console.log('------------fetch perfomance measures -------------');
+    console.log(beginnerqur);
+    console.log('---------------------------------------------------');
+    console.log(assignedqur);
+    console.log('---------------------------------------------------');
+    console.log(assesmentqur);
+    console.log('---------------------------------------------------');
+    console.log(totalassesment);
+    console.log('---------------------------------------------------');
+    var begin=[];
+    var assign=[];
+    var assesment=[];
+    var totalasses=[];
+    connection.query(beginnerqur,function(err, rows)
+    {
+    if(!err)
+    {  
+      begin=rows;
+    connection.query(assignedqur,function(err, rows)
+    {
+    if(!err)
+    {  
+      assign=rows; 
+    connection.query(assesmentqur,function(err, rows)
+    {
+    if(!err)
+    {  
+      assesment=rows;
+    connection.query(totalassesment,function(err, rows)
+    {
+    if(!err)
+    {  
+      totalasses=rows; 
+      res.status(200).json({'beginner': begin,'assigned':assign,'assesment':assesment,'totalassesment':totalasses});
+    }
+    else
+      console.log(err);
+    });
+    }
+    else
+      console.log(err);
+    });
+    }
+    else
+      console.log(err);
+    });
+    }
+    else{
+     console.log(err);
+     res.status(200).json({'returnval': 'no rows'}); 
+    }
+  });
+});
+
+
+app.post('/fetchallbooks-service',  urlencodedParser,function (req,res)
+  {  
+    var qur="SELECT * FROM enrichment_booksactivity_master";
+    console.log('------------fetch issued book -------------');
+    console.log(qur);
+    connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': rows});
+    }
+    else{
+      console.log(err);
+     res.status(200).json({'returnval': 'no rows'}); 
+    }
+  });
+});
+
+
+app.post('/fetchallevaluationparameters-service',  urlencodedParser,function (req,res)
+  {  
+    var qur="SELECT * FROM enrichment_evaluation_parameter";
+    console.log('------------fetch issued book -------------');
+    console.log(qur);
+    connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': rows});
+    }
+    else{
+      console.log(err);
+     res.status(200).json({'returnval': 'no rows'}); 
+    }
+  });
+});
+
+
+app.post('/insertenrichmentparametermapping-service',  urlencodedParser,function (req,res)
+  {  
+    var response={
+      book_id:req.query.bookid,
+      parameter_id:req.query.paramid,
+      parameter_name:req.query.paramname
+    };
+    var qur="INSERT INTO enrichment_evaluation_parameter_mapping SET ?";
+    console.log('------------insert eval param mapping -------------');
+    console.log(qur);
+    connection.query(qur,[response],
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': 'Updated!!'});
+    }
+    else{
+      console.log(err);
+     res.status(200).json({'returnval': 'Not Updated!!'}); 
+    }
   });
 });
 

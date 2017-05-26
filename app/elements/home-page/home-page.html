@@ -21,6 +21,7 @@
 <link rel="import" href="../comparisonreport-card/comparisonreport-card.html">
 <link rel="import" href="../fivetotencomparisonreport-card/fivetotencomparisonreport-card.html">
 <link rel="import" href="../approvalstatus-card/approvalstatus-card.html">
+<link rel="import" href="../enrichmenthome-card/enrichmenthome-card.html">
   <dom-module id="home-page">
   <template>  
   <style>
@@ -81,9 +82,7 @@
         <section data-category="termcoscholasticcategory">
           <term-coscholastic-category></term-coscholastic-category>
         </section>
-        <section data-category="beginnerassesment">
-          <beginner-assesment></beginner-assesment>
-        </section>
+        
         <section data-category="termassesment">
           <term-assesment></term-assesment>
         </section>
@@ -204,6 +203,30 @@
         <section data-category="school-grade-to-role-mapping">
           <school-grade-to-role-mapping></school-grade-to-role-mapping>
         </section>
+        <section data-category="enrichmenthome-card">
+          <enrichmenthome-card></enrichmenthome-card>
+        </section>
+        <section data-category="beginnerassesment">
+          <beginner-assesment></beginner-assesment>
+        </section>
+        <section data-category="books-creation-card">
+          <books-creation-card></books-creation-card>
+        </section>
+        <section data-category="books-mapping-card">
+          <books-mapping-card></books-mapping-card>
+        </section>
+        <section data-category="books-issuance-card">
+          <books-issuance-card></books-issuance-card>
+        </section>
+        <section data-category="enrichment-studentmap-card">
+          <enrichment-studentmap-card></enrichment-studentmap-card>
+        </section>  
+        <section data-category="enrichment-individual-assignment">
+          <enrichment-individual-assignment></enrichment-individual-assignment>
+        </section>  
+        <section data-category="enrichment-evaluationmapping-card">
+          <enrichment-evaluationmapping-card></enrichment-evaluationmapping-card>
+        </section>      
         </iron-pages>
     </div>    
 
@@ -232,6 +255,7 @@
    window.location.href="../index.html";   
   },
   FnHome:function(){ 
+    // alert(localStorage.getItem("curr_sess_page"));
    if(localStorage.getItem("curr_sess_page")=="student-allow-card")
       {
       this.page="teacherhomecard";
@@ -430,11 +454,54 @@
         document.querySelector('teacherhome-card').FnRefresh();
       document.querySelector('coscholastic-assesment-card').FnRefreshcard();
     }
-    if(localStorage.getItem("curr_sess_page")=="beginnerassesment")
+    if(localStorage.getItem("curr_sess_page")=="enrichmenthome-card")
     {      
        this.page="teacherhomecard";
        document.querySelector('teacherhome-card').FnRefresh();
        document.querySelector('beginner-assesment-card').FnRefresh();
+    }
+    if(localStorage.getItem("curr_sess_page")=="enrichment-evaluationmapping-card")
+    {      
+       this.page="enrichmenthome-card";
+       document.querySelector('enrichmenthome-card').FnRefresh();
+       document.querySelector('enrichment-evaluationmapping-card').FnRefresh();
+    }
+    if(localStorage.getItem("curr_sess_page")=="enrichment-individual-assignment")
+    {      
+       this.page="enrichmenthome-card";
+       document.querySelector('enrichmenthome-card').FnRefresh();
+       document.querySelector('enrichment-individual-assignment').FnRefresh();
+    }
+    if(localStorage.getItem("curr_sess_page")=="enrichment-studentmap-card")
+    {      
+       this.page="enrichmenthome-card";
+       document.querySelector('enrichmenthome-card').FnRefresh();
+       // document.querySelector('beginner-assesment-card').FnRefresh();
+    }
+    if(localStorage.getItem("curr_sess_page")=="beginnerassesment")
+    {      
+       this.page="enrichmenthome-card";
+       document.querySelector('enrichmenthome-card').FnRefresh();
+       document.querySelector('beginner-assesment-card').FnRefresh();
+    }
+    if(localStorage.getItem("curr_sess_page")=="books-creation-card")
+    {      
+       this.page="enrichmenthome-card";
+       document.querySelector('enrichmenthome-card').FnRefresh();
+       document.querySelector('books-creation-card').FnRefresh();
+       document.querySelector('books-creation-card').ready();
+    }
+    if(localStorage.getItem("curr_sess_page")=="books-mapping-card")
+    {      
+       this.page="enrichmenthome-card";
+       document.querySelector('enrichmenthome-card').FnRefresh();
+       document.querySelector('books-mapping-card').FnRefresh();
+    }
+    if(localStorage.getItem("curr_sess_page")=="books-issuance-card")
+    {      
+       this.page="enrichmenthome-card";
+       document.querySelector('enrichmenthome-card').FnRefresh();
+       document.querySelector('books-issuance-card').FnRefresh();
     }
     if(localStorage.getItem("curr_sess_page")=="scorecard")
     {
@@ -465,15 +532,15 @@
     if(localStorage.getItem("curr_sess_page")=="beginner-assesment-lang-markentrysheet")
     {
       
-      this.page="teacherhomecard";
-       document.querySelector('teacherhome-card').FnRefresh();
+      this.page="enrichmenthome-card";
+       document.querySelector('enrichmenthome-card').FnRefresh();
        document.querySelector('beginner-assesment-card').FnRefresh();
     }
      if(localStorage.getItem("curr_sess_page")=="beginner-assesment-markentrysheet")
     {
       
-      this.page="teacherhomecard";
-       document.querySelector('teacherhome-card').FnRefresh();
+      this.page="enrichmenthome-card";
+       document.querySelector('enrichmenthome-card').FnRefresh();
        document.querySelector('beginner-assesment-card').FnRefresh();
     }
      if(localStorage.getItem("curr_sess_page")=="consolidatedreport")
