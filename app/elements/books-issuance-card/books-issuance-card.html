@@ -36,35 +36,35 @@
     </style>
     <div class='card'>     
     <div class='drop'>      
-          <paper-dropdown-menu id="booksissuancetype" label="Select Assesment" disabled="{{read}}" required>
-            <paper-menu class="dropdown-content"  on-iron-select="FnSelectAssesment"  attr-for-selected="value" required>  
+          <paper-dropdown-menu id="bbooksissuancetype" label="Select Assesment" disabled="{{read}}" required>
+            <paper-menu class="dropdown-content" id="bbooksissuancetype" on-iron-select="FnSelectAssesment"  attr-for-selected="value" required>  
               <template is="dom-repeat" items="{{assesmentarr}}">
-                <paper-item value="{{item.assesment_category_id}}">{{item.assesment_category_name}}</paper-item>                             
+                <paper-item value="{{item.assesment_category_id}}">{{item.assesment_category_name}}</paper-item>                            
               </template>
             </paper-menu>
           </paper-dropdown-menu>
-          <paper-dropdown-menu id="booksissuancegrade" label="Select Grade" disabled="{{read}}" required>
-            <paper-menu  class="dropdown-content"  on-iron-select="FnSelectGrade"  attr-for-selected="value" required> 
+          <paper-dropdown-menu id="bbooksissuancegrade" label="Select Grade" disabled="{{read}}" required>
+            <paper-menu  class="dropdown-content" id="bbooksissuancegrade" on-iron-select="FnSelectGrade"  attr-for-selected="value" required> 
               <template is="dom-repeat" items="{{gradearr}}">
                 <paper-item value="{{item.grade_id}}">{{item.grade_name}}</paper-item>
               </template>
             </paper-menu>
           </paper-dropdown-menu>
-          <paper-dropdown-menu id="booksissuancesection" label="Select Section" disabled="{{read}}" required>
-            <paper-menu  class="dropdown-content"  on-iron-select="FnSelectSection"  attr-for-selected="value" required>
+          <paper-dropdown-menu id="bbooksissuancesection" label="Select Section" disabled="{{read}}" required>
+            <paper-menu  class="dropdown-content" id="bbooksissuancesection" on-iron-select="FnSelectSection"  attr-for-selected="value" required>
               <template is="dom-repeat" items="{{sectionarr}}">
                 <paper-item value="{{item.section_id}}">{{item.section_name}}</paper-item>
               </template>
             </paper-menu>
           </paper-dropdown-menu>
-          <paper-dropdown-menu id="booksissuancesubject" label="Select Subject" disabled="{{read}}" required>
-            <paper-menu class="dropdown-content"  on-iron-select="FnSelectSubject"  attr-for-selected="value" required> 
+          <paper-dropdown-menu id="bbooksissuancesubject" label="Select Subject" disabled="{{read}}" required>
+            <paper-menu class="dropdown-content" id="bbooksissuancesubject" on-iron-select="FnSelectSubject"  attr-for-selected="value" required> 
             <template is="dom-repeat" items="{{subjectarr}}">
               <paper-item value="{{item.subject_id}}">{{item.subject_name}}</paper-item>
             </template>
             </paper-menu>
           </paper-dropdown-menu>  
-          <paper-dropdown-menu id="booksissuancesubcategory" label="Select Category" disabled="{{read}}" required>
+          <paper-dropdown-menu id="bbooksissuancesubcategory" id="bbooksissuancesubcategory" label="Select Category" disabled="{{read}}" required>
             <paper-menu class="dropdown-content"  on-iron-select="FnSelectCategory"  attr-for-selected="value" required> 
             <template is="dom-repeat" items="{{categoryarr}}">
               <paper-item value="{{item.category_id}}">{{item.category_name}}</paper-item>
@@ -126,10 +126,11 @@
         this.hidecard=false;
       },
       FnRefresh:function(){
-        document.querySelector("#booksissuancetype").selected=-1;
-        document.querySelector("#booksissuancegrade").selected=-1;
-        document.querySelector("#booksissuancesection").selected=-1;
-        document.querySelector("#booksissuancesubject").selected=-1;
+        document.querySelector("#bbooksissuancetype").selected=-1;
+        document.querySelector("#bbooksissuancegrade").selected=-1;
+        document.querySelector("#bbooksissuancesection").selected=-1;
+        document.querySelector("#bbooksissuancesubcategory").selected=-1;
+        document.querySelector("#bbooksissuancesubject").selected=-1;        
         gradename="";
         gradeid="";
         sectionname="";
@@ -139,6 +140,7 @@
         assesment="";
         categoryname="";
         categoryid="";
+        this.hidecard=true;  
       }
     });      
   })();

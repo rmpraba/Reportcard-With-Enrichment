@@ -41,17 +41,22 @@
     'use strict';
     Polymer({
       is: 'enrichment-studentmap-card',
-      FnBookIssue:function(){    
+      FnBookIssue:function(){ 
+        document.querySelector('home-page').setPage('books-issuance-card','');   
+        document.querySelector('books-issuance-card').FnRefresh();
+        
         this.$.beginnerservice.callAssesmentService("Enrichment");
         this.$.beginnerservice.callGradeService();
         this.$.enrichmentservice.subjectforenrichmentService();
-        document.querySelector('home-page').setPage('books-issuance-card','');
       },
       FnBookReturn:function(){
 
       },
       FnBookRead:function(){
 
+      },
+      FnRefresh:function(){
+        document.querySelector('books-issuance-card').FnRefresh();
       }      
     });
   })();
