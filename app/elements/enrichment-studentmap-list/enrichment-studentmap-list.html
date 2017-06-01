@@ -20,6 +20,10 @@
         width: 8%;
         padding: 1%;
       }
+      .card{
+        background-color: white;
+        box-shadow: 3px 3px 2px whitesmoke;
+      }
 
     </style>
     <!-- <div class="card">
@@ -27,19 +31,19 @@
       {{studentid}}-{{studentname}}
     </div> -->
     <!-- <div class="container" on-click="FnClickStudent"> -->
-    <paper-card  on-click="FnClickStudent">
-    <div class="card-content">
+    <div  on-click="FnClickStudent" class="card">
+    <div>
     <img src="../../images/studenttosubject.jpg" height="80px" width="80px" >
-    <div class="cafe-header" width="80px"><span>{{studentname}}</span>
-      <div class="cafe-location cafe-light" width="80px">
+    <div width="80px"><span>{{studentname}}</span>
+      <!-- <div width="80px">
         <span>Grade</span>
-      </div>
+      </div> -->
     </div>
-    <div class="cafe-rating" width="80px">
+    <div width="80px">
       {{studentid}}
     </div>
     </div>
-    </paper-card>
+    </div>
     <!-- </div> -->
     <!-- <div>
     <paper-dialog id="enrichmentsubjectdialog" modal style="">

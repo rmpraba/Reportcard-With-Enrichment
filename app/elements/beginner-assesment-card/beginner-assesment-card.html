@@ -121,16 +121,18 @@
       },
       FnServiceCall:function(){
         document.querySelector('beginner-assesment-service').callFetchStudentInfo(gradename,section,subject);
+        document.querySelector('assesment-sheet-card').setPage('enrichment-dynamic-markentrycard');
         // alert(subject);
-        if(subject=="English"){
-        document.querySelector('beginner-assesment-markentrysheet').setDefaultHeaders();
-        document.querySelector('assesment-sheet-card').setPage('beginner-assesment-markentrysheet');          
-        }
-        else
-        {
-        document.querySelector('beginner-assesment-lang-markentrysheet').setDefaultHeaders(); 
-        document.querySelector('assesment-sheet-card').setPage('beginner-assesment-lang-markentrysheet');        
-        }
+
+        // if(subject=="English"){
+        // document.querySelector('beginner-assesment-markentrysheet').setDefaultHeaders();
+        // document.querySelector('assesment-sheet-card').setPage('beginner-assesment-markentrysheet');          
+        // }
+        // else
+        // {
+        // document.querySelector('beginner-assesment-lang-markentrysheet').setDefaultHeaders(); 
+        // document.querySelector('assesment-sheet-card').setPage('beginner-assesment-lang-markentrysheet');        
+        // }
       },
        FnRefresh:function()
       {

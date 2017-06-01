@@ -44,7 +44,6 @@
       FnBookIssue:function(){ 
         document.querySelector('home-page').setPage('books-issuance-card','');   
         document.querySelector('books-issuance-card').FnRefresh();
-        
         this.$.beginnerservice.callAssesmentService("Enrichment");
         this.$.beginnerservice.callGradeService();
         this.$.enrichmentservice.subjectforenrichmentService();

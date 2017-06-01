@@ -14,7 +14,7 @@ var connection = mysql.createConnection({
    // user: 'adminvRjnewB',
    // password: 'DNrIgJ3-ecwp',
    // database: 'scorecarddb'
- });
+});
 
 
 var bodyParser = require('body-parser'); 

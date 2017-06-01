@@ -29,14 +29,15 @@
         background-color: #f1f1f1;
       }*/
       #itemcard{
-        width: 80%;
+        width: 90%;
         margin-left: 10%;
+        margin-top: 2%;
         @apply(--layout-horizontal);
         @apply(--layout-wrap);
       }
       enrichment-studentmap-list{
         padding: 3%;
-        /*width: 10%;*/
+        width: 12%;
       }
 </style>
     <div>
@@ -44,6 +45,7 @@
       <template is="dom-repeat" items="{{studentarr}}">
         
         <enrichment-studentmap-list studentid="{{item.id}}" studentname="{{item.student_name}}" sno="{{item.sno}}" edit="{{item.editable}}"></enrichment-studentmap-list>
+
         
       </template>
       <!-- <hr> -->
