@@ -1,0 +1,44 @@
+
+<link rel="import" href="..\..\bower_components/polymer/polymer.html">
+
+<dom-module id="enrichment-studentlevel-card">
+  <template>
+    <style></style>
+    <div>
+    <template is="dom-repeat" items="{{booklevelarr}}">
+      <enrichment-booksoption-itemcard bookid="{{item.id}}" bookname="{{item.book_name}}"></enrichment-booksoption-itemcard>
+    </template>
+    <template is="dom-repeat" items="{{studlevelarr}}">
+      <enrichment-studentoption-itemcard studentid="{{item.student_id}}" studentname="{{item.student_name}}"></enrichment-studentoption-itemcard>
+    </template>
+    <paper-button on-click="FnSubmit">Submit</paper-button>
+    <enrichment-service id="enrichmentservice"></enrichment-service>
+    </div>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+    var studarr=[];
+    var bookarr=[];
+    Polymer({
+      is: 'enrichment-studentlevel-card',
+      FnSubmit:function(){
+        for(var i=0;i<studarr.length;i++){
+          for(var j=0;j<bookarr.length;j++){
+            studarr[i].bookname=bookarr[j].bookname;
+            studarr[i].bookid=bookarr[j].bookid;
+          }
+        }
+        // this.$.enrichmentservice.FnSaveBook();
+        this.$.enrichmentservice.FnAssignBookToStudent(studarr);
+      },
+      FnSetStudents:function(stud){
+        studarr=stud;
+      },
+      FnSetBooks:function(book){
+        bookarr=book;
+      }
+    });
+  })();
+  </script>
+</dom-module>

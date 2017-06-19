@@ -226,7 +226,10 @@
         </section>  
         <section data-category="enrichment-evaluationmapping-card">
           <enrichment-evaluationmapping-card></enrichment-evaluationmapping-card>
-        </section>      
+        </section> 
+        <section data-category="enrichment-booksmapping-card">
+          <enrichment-booksmapping-card></enrichment-booksmapping-card>
+        </section>     
         </iron-pages>
     </div>    
 
@@ -465,6 +468,12 @@
        this.page="enrichmenthome-card";
        document.querySelector('enrichmenthome-card').FnRefresh();
        document.querySelector('enrichment-evaluationmapping-card').FnRefresh();
+    }
+    if(localStorage.getItem("curr_sess_page")=="enrichment-booksmapping-card")
+    {      
+       this.page="enrichmenthome-card";
+       document.querySelector('enrichmenthome-card').FnRefresh();
+       document.querySelector('enrichment-booksmapping-card').FnRefresh();
     }
     if(localStorage.getItem("curr_sess_page")=="enrichment-dynamic-markentrycard")
     {      

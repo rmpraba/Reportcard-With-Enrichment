@@ -25,6 +25,10 @@
        <h4 align="center">Evaluation Parameter Mapping</h4>
       </div>
       <div class="card">
+       <paper-button on-click="FnBooksMapping" no ink><img src="../../images/bookmapping.jpg" height="180px" width="180px"></paper-button>
+       <h4 align="center">Books Mapping</h4>
+      </div>
+      <div class="card">
        <paper-button on-click="FnSelectMapping" no ink><img src="../../images/bookissuance.jpg" height="180px" width="180px"></paper-button>
        <h4 align="center">Student Tracking</h4>
       </div>
@@ -47,6 +51,10 @@
       },
       FnEavaluationMapping:function(){
         document.querySelector('home-page').setPage('enrichment-evaluationmapping-card','');
+      },
+      FnBooksMapping:function(){
+        document.querySelector('home-page').setPage('enrichment-booksmapping-card','');
+        document.querySelector('enrichment-booksmapping-card').callService();
       },
       FnRefresh:function(){
 

@@ -209,6 +209,7 @@
          // sessionStorage.setItem("curr_sess_assesmentname",assesmentarr[0].assesment_name);
          document.querySelector('beginner-assesment-card').assesmentarr=assesmentarr;
          document.querySelector('books-issuance-card').assesmentarr=assesmentarr;
+         document.querySelector('enrichment-booksmapping-card').assesmentarr=assesmentarr;
          this.callGradeService();
       },
       callGradeService:function(){
@@ -224,6 +225,7 @@
         // alert(JSON.stringify(e.detail.response.returnval));
           document.querySelector('beginner-assesment-card').gradearr=e.detail.response.returnval;
           document.querySelector('books-issuance-card').gradearr=e.detail.response.returnval;
+          document.querySelector('enrichment-booksmapping-card').gradearr=e.detail.response.returnval;
       },
       callSectionService:function(gradename){        
          this.sectionurl=sessionStorage.getItem("addrinfo")+"/section-service";
@@ -239,6 +241,7 @@
       sectionResponse:function(e){        
          document.querySelector('beginner-assesment-card').sectionarr=e.detail.response.returnval; 
          document.querySelector('books-issuance-card').sectionarr=e.detail.response.returnval; 
+         document.querySelector('enrichment-booksmapping-card').sectionarr=e.detail.response.returnval;
       },
       callSubjectService:function(gradename,section){
          this.subjecturl=sessionStorage.getItem("addrinfo")+"/subject-service";

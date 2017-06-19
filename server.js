@@ -9100,6 +9100,51 @@ app.post('/fetchstudentforissue-service',  urlencodedParser,function (req,res)
   });
 });
 
+app.post('/fetchstudentcategoryforissue-service',  urlencodedParser,function (req,res)
+  {  
+    var qur="SELECT  * FROM enrichment_grade_master WHERE subject_id='"+req.query.subjectid+"'";
+    console.log('------------fetch grade for issuance-------------');
+   console.log(qur);
+    connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': rows});
+    }
+    else{
+      console.log(err);
+     res.status(200).json({'returnval': 'no rows'}); 
+    }
+  });
+});
+
+app.post('/fetchstudentbylevel-service',  urlencodedParser,function (req,res)
+  {  
+    var qur="SELECT  distinct(student_name),student_id FROM tr_beginner_assesment_marks WHERE assesment_type='"+req.query.assesment+"' and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and "+
+    " grade_id='"+req.query.gradeid+"' and section_id='"+req.query.sectionid+"' and subject_id='"+req.query.subjectid+"' and category_id='"+req.query.categoryid+"' and grade='"+req.query.grade+"'";
+    var bookqur="SELECT * FROM enrichment_booksactivity_master WHERE assesment_type='"+req.query.assesment+"' and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and "+
+    " grade_name='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and category_id='"+req.query.categoryid+"' and grade_level='"+req.query.grade+"'";
+    console.log('------------fetch stud for book issuance-------------');
+   console.log(qur);
+   console.log(bookqur);
+    var studarr=[];
+    connection.query(qur,function(err, rows)
+    {
+    if(!err)
+    {    
+      studarr=rows;
+      connection.query(bookqur,function(err, rows){
+      if(!err)
+      res.status(200).json({'studarr':studarr,'returnval': rows});
+      });
+    }
+    else{
+      console.log(err);
+     res.status(200).json({'returnval': 'no rows'}); 
+    }
+  });
+});
 
 app.post('/fetchbookforstudent-service',  urlencodedParser,function (req,res)
   {  
