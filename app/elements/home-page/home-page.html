@@ -255,7 +255,7 @@
    window.location.href="../index.html";   
   },
   FnHome:function(){ 
-    // alert(localStorage.getItem("curr_sess_page"));
+   // alert(localStorage.getItem("curr_sess_page"));
    if(localStorage.getItem("curr_sess_page")=="student-allow-card")
       {
       this.page="teacherhomecard";
@@ -465,6 +465,14 @@
        this.page="enrichmenthome-card";
        document.querySelector('enrichmenthome-card').FnRefresh();
        document.querySelector('enrichment-evaluationmapping-card').FnRefresh();
+    }
+    if(localStorage.getItem("curr_sess_page")=="enrichment-dynamic-markentrycard")
+    {      
+       this.page="enrichmenthome-card";
+       document.querySelector('enrichmenthome-card').FnRefresh();
+       document.querySelector('assesment-sheet-card').setPage("");
+       document.querySelector('beginner-assesment-card').FnRefresh();
+       document.querySelector('enrichment-dynamic-markentrycard').FnRefresh();
     }
     if(localStorage.getItem("curr_sess_page")=="enrichment-individual-assignment")
     {      

@@ -37,7 +37,7 @@
     <div class='card'>     
     <div class='drop'>      
           <paper-dropdown-menu id="beginnerassesmenttype" label="Select Assesment" disabled="{{read}}" required>
-            <paper-menu class="dropdown-content"  on-iron-select="FnSelectAssesment"  attr-for-selected="value" required>  
+            <paper-menu id="beginnerassesmenttypee" class="dropdown-content"  on-iron-select="FnSelectAssesment"  attr-for-selected="value" required>  
               <template is="dom-repeat" items="{{assesmentarr}}">
                 <paper-item value="{{item.assesment_category_id}}">{{item.assesment_category_name}}</paper-item>                             
               </template>
@@ -120,10 +120,12 @@
         this.FnServiceCall(); 
       },
       FnServiceCall:function(){
+        document.querySelector('beginner-assesment-service').FnFetchEnrichmentGrade();
+        document.querySelector('beginner-assesment-service').callFetchInfoForTemplate(gradename,section,subject);
         document.querySelector('beginner-assesment-service').callFetchStudentInfo(gradename,section,subject);
         document.querySelector('assesment-sheet-card').setPage('enrichment-dynamic-markentrycard');
+        document.querySelector('enrichment-dynamic-markentrycard').setDefaultHeaders();
         // alert(subject);
-
         // if(subject=="English"){
         // document.querySelector('beginner-assesment-markentrysheet').setDefaultHeaders();
         // document.querySelector('assesment-sheet-card').setPage('beginner-assesment-markentrysheet');          
@@ -139,9 +141,9 @@
         document.querySelector('#gradenam').selected=-1;
         document.querySelector('#sectionnam').selected=-1;
         document.querySelector('#subjectnam').selected=-1;
-        document.querySelector('#beginnerassesmenttype').selected=-1;
-        document.querySelector('beginner-assesment-lang-markentrysheet').FnRefresh();
-        document.querySelector('beginner-assesment-markentrysheet').FnRefresh();
+        document.querySelector('#beginnerassesmenttypee').selected=-1;
+        document.querySelector('enrichment-dynamic-markentrycard').FnRefresh();
+        document.querySelector('enrichment-dynamic-markentrycard').FnRefresh();
         this.flag=0;
       }      
     });      

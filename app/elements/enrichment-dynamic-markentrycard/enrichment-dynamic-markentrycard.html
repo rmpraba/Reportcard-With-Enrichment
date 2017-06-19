@@ -1,12 +1,3 @@
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
 
 <link rel="import" href="..\..\bower_components/polymer/polymer.html">
 
@@ -16,24 +7,286 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
         display: block;
       }
+      table{
+        width: 60%;
+        border-collapse: collapse;                          
+        margin-left: 1%;
+      }              
+      .studname{
+        width: 30%;
+      }
+      #tb1{
+          width:15%
+        }
+         .button{
+            /*width: 15%;*/
+            background: #252626;
+            color: white;
+            margin-top: 2%;
+            text-transform: none;
+            /*margin-left: 45%;*/
+          }
+      #btn2{
+            /*width: 15%;*/
+            background: #252626;
+            color: white;
+            margin-top: 2%;
+            height: 25px;
+            border-radius: 2px;
+            /*font-weight: bold;*/
+            font-family: Calibri;
+            font-size: 17px;
+          }
+      .btndiv{
+        @apply(--layout-horizontal);
+        margin-left: 45%;
+      }
     </style>
-    <div>Hello from <span>{{foo}}</span></div>
+    <div>
+    <!-- <template is="dom-repeat" items="{{label}}"> -->
+      <center><h1>{{schoolname}}</h1>
+      <h3>Continuous Comprehensive Evaluation -AY-{{academicyear}}</h3>  
+      <h4>{{assesmentname}}  &nbsp;&nbsp;&nbsp; {{grade}} - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{section}} &nbsp;&nbsp; Subject: {{subject}} </h4> 
+      <!-- <table border="1" >   -->
+      <!-- <tr><td></td>
+        <template is="dom-repeat" items="{{titlearr}}">
+          <th colspan="{{item.categorycnt}}" style="text-align: center;">{{item.categoryname}}</th>
+        </template>
+      </tr>  --> 
+      <div>
+      <template is="dom-repeat" items="{{studarr}}">
+      <!-- <tr><td> -->
+      <enrichment-dynamic-markentryitemcard id="edmeic" serialno="{{item.serialno}}" studentname="{{item.student_name}}" studentid="{{item.id}}" hiddenoutinput="{{item.hiddenoutinput}}" category="{{item.category}}" grade="{{item.grade}}" temp="{{temp}}"></enrichment-dynamic-markentryitemcard>
+      <!-- </td></tr> -->
+      </template>  
+      </div>
+      <!-- </table> -->
+      </center> 
+    <!-- </template>      -->
+    </div>
+    <div class="btndiv">
+    <paper-button class="button" id="grade" on-click="FnGenerateGrade">Generate Grade</paper-button>
+    <paper-button class="button" id="save" on-click="FnSave">Save</paper-button>
+    </div>  
+    <beginner-assesment-service id="beginnerservice"></beginner-assesment-service>
   </template>
   <script>
   (function() {
     'use strict';
-
+    var scorearr=[];
+    var gradearr=[];
     Polymer({
       is: 'enrichment-dynamic-markentrycard',
-
-      properties: {
-        foo: {
-          type: String,
-          value: 'enrichment-dynamic-markentrycard',
-          notify: true
+      ready:function(){
+        localStorage.setItem("curr_sess_page","beginner-assesment-lang-markentrysheet");
+        // this.$.componentservice.callcomponentService();        
+      },
+      FnSetGrade:function(arr){
+        gradearr=arr;
+      },
+      FnGenerateGrade:function(e){
+        this.$.beginnerservice.FnFetchBeginnerMarksForGrade();
+      },
+      FnGenerateGradee:function(e){
+        // alert(JSON.stringify(scorearr))
+        var temparr=this.studarr;
+        // alert(temparr.length+" "+scorearr.length);
+        if(this.subject=="English"){
+        if((temparr.length)-2==((scorearr.length)/2)){        
+        var total=0;
+        for(var i=0;i<scorearr.length;i++){
+          // alert(scorearr[i].sub_category_id);
+          if(scorearr[i].sub_category_id=="s1-c1-sub1"){
+            // alert(scorearr[i].value+"  "+total);
+            total=parseFloat(parseFloat(total)+parseFloat(scorearr[i].score)).toFixed(2);
+          }
         }
+        // alert(total);
+        var avg=parseFloat(total/((parseFloat(scorearr.length/2).toFixed(2))-2)).toFixed(2); 
+        // alert(JSON.stringify(temparr));
+        // alert(JSON.stringify(scorearr));
+        for(var i=2;i<(temparr).length;i++){
+        for(var j=0;j<scorearr.length;j++){
+          // alert(temparr[i].id+"  "+scorearr[j].studentid);
+          if(temparr[i].id==scorearr[j].student_id){
+          if(scorearr[j].sub_category_id=="s1-c1-sub1"){
+              // alert(scorearr[j].value+" "+avg);
+              if(parseFloat(scorearr[j].score)>=parseFloat(avg)){
+                // alert('if');
+                temparr[i].speed="greater";
+              }
+              else if(parseFloat(scorearr[j].score)<parseFloat(avg)){
+                // alert('else if');
+                temparr[i].speed="lesser";
+              }
+          }
+          else{
+            temparr[i].comprehension=scorearr[j].score;
+          }
+          }
+        }
+        }        
+        // alert(JSON.stringify(temparr[2]));
+        for(var i=0;i<temparr.length;i++){
+          for(var j=0;j<gradearr.length;j++){
+            if(temparr[i].speed==gradearr[j].type&&((temparr[i].comprehension>=gradearr[j].minimum)&&(temparr[i].comprehension<=gradearr[j].maximum)))
+              temparr[i].grade=gradearr[j].grade;
+          }
+        }
+        // alert(JSON.stringify(temparr));
+        this.studarr=[];
+        // alert(JSON.stringify(temparr));
+        var overall=[];
+        for(var i=0;i<temparr.length;i++){
+          var obj={};
+          obj.school_id=temparr[i].school_id;
+          obj.id=temparr[i].id;
+          obj.student_name=temparr[i].student_name;
+          obj.class_id=temparr[i].class_id;
+          obj.hiddenoutinput=temparr[i].hiddenoutinput;
+          obj.category=temparr[i].category;
+          obj.grade=temparr[i].grade;
+          obj.speed=temparr[i].speed;
+          obj.comprehension=temparr[i].comprehension;
+          overall.push(obj);
+        }
+        this.studarr=overall;
+
+        // alert(JSON.stringify(overall));
+
+        for(var i=0;i<overall.length;i++){
+          for(var j=0;j<overall[i].category.length;j++){
+            for(var k=0;k<scorearr.length;k++){
+              if(overall[i].category[j].studentid==scorearr[k].student_id&&overall[i].category[j].categoryid==scorearr[k].category_id&&overall[i].category[j].subcategoryid==scorearr[k].sub_category_id&&overall[i].category[j].subjectid==scorearr[k].subject_id)
+              {
+                // alert("In");
+                scorearr[k].grade=overall[i].grade;
+              }
+            }
+          }
+        }
+        // alert(JSON.stringify(scorearr));
+        this.FnSetAlreadyEnteredMarks(scorearr);
+        // document.querySelector('beginner-assesment-service').setstudarr(overall);
+        }
+        else{
+        alert('Please complete all student entry!!');
+        }        
+        }
+        else{
+        // alert(JSON.stringify(temparr));
+        if((temparr.length)-2==(scorearr.length)){
+        for(var i=2;i<temparr.length;i++){
+          for(var j=0;j<gradearr.length;j++){
+            for(var k=0;k<temparr[i].category.length;k++){
+            if(((temparr[i].category[k].score>=gradearr[j].minimum)&&(temparr[i].category[k].score<=gradearr[j].maximum)))
+              temparr[i].grade=gradearr[j].grade;
+            }
+          }
+        }
+        // alert(JSON.stringify(temparr));
+        this.studarr=[];
+        // alert(JSON.stringify(temparr));
+        var overall=[];
+        for(var i=0;i<temparr.length;i++){
+          var obj={};
+          obj.school_id=temparr[i].school_id;
+          obj.id=temparr[i].id;
+          obj.student_name=temparr[i].student_name;
+          obj.class_id=temparr[i].class_id;
+          obj.hiddenoutinput=temparr[i].hiddenoutinput;
+          obj.category=temparr[i].category;
+          obj.grade=temparr[i].grade;
+          // obj.speed=temparr[i].speed;
+          // obj.comprehension=temparr[i].comprehension;
+          overall.push(obj);
+        }
+        this.studarr=overall;
+
+        // alert(JSON.stringify(overall));
+
+        for(var i=0;i<overall.length;i++){
+          for(var j=0;j<overall[i].category.length;j++){
+            for(var k=0;k<scorearr.length;k++){
+              if(overall[i].category[j].studentid==scorearr[k].student_id&&overall[i].category[j].categoryid==scorearr[k].category_id&&overall[i].category[j].subcategoryid==scorearr[k].sub_category_id&&overall[i].category[j].subjectid==scorearr[k].subject_id)
+              {
+                // alert("In");
+                scorearr[k].grade=overall[i].grade;
+              }
+            }
+          }
+        }
+        } 
+        }        
+      },
+      FnSave:function(){
+        var temp=[];
+        for(var i=0;i<scorearr.length;i++){
+        var obj={};
+        obj.studentid=scorearr[i].student_id;
+        obj.studentname=scorearr[i].student_name;
+        obj.classid=scorearr[i].class_id;
+        obj.assesmenttype=scorearr[i].assesment_type;
+        obj.gradeid=scorearr[i].grade_id;
+        obj.gradename=scorearr[i].grade_name;
+        obj.subjectid=scorearr[i].subject_id;
+        obj.subjectname=scorearr[i].subject_name;
+        obj.categoryid=scorearr[i].category_id;
+        obj.categoryname=scorearr[i].category_name;
+        obj.subcategoryid=scorearr[i].sub_category_id;
+        obj.subcategoryname=scorearr[i].sub_category_name;
+        obj.value=scorearr[i].score;
+        obj.grade=scorearr[i].grade;
+        temp.push(obj);
+        }
+        this.$.beginnerservice.callbamarkinsertService(temp);
+        // alert(JSON.stringify(scorearr));
+        // alert("Mark entry for this section completed!");
+
+      },
+      setDefaultHeaders:function(){
+        this.schoolname=sessionStorage.getItem("curr_sess_loggedschoolname");
+        this.academicyear=localStorage.getItem("curr_sess_academicyear");
+        this.grade=localStorage.getItem("curr_sess_grade");
+        this.section=localStorage.getItem("curr_sess_section");
+        this.subject=localStorage.getItem("curr_sess_subject");
+        this.assesmentname=localStorage.getItem("curr_sess_assesmentname");
+      },
+      FnRefresh:function()
+      {
+        this.studarr=[];
+        this.label=[];
+      },
+      FnSetInfoArray:function(arr){
+        scorearr=arr;
+        this.FnGenerateGradee();
+      },
+      FnSetAlreadyEnteredMarks:function(arr){
+        var temp=[];
+        for(var i=0;i<arr.length;i++){
+        var obj={};
+        obj.studentid=arr[i].student_id;
+        obj.studentname=arr[i].student_name;
+        obj.classid=arr[i].class_id;
+        obj.assesmenttype=arr[i].assesment_type;
+        obj.gradeid=arr[i].grade_id;
+        obj.gradename=arr[i].grade_name;
+        obj.subjectid=arr[i].subject_id;
+        obj.subjectname=arr[i].subject_name;
+        obj.categoryid=arr[i].category_id;
+        obj.categoryname=arr[i].category_name;
+        obj.subcategoryid=arr[i].sub_category_id;
+        obj.subcategoryname=arr[i].sub_category_name;
+        obj.value=arr[i].score;
+        obj.grade=arr[i].grade;
+        temp.push(obj);
+        }
+        this.temp=temp;
+        // document.querySelector('enrichment-dynamic-markentryitemcard').FnSetInfoArray(temp);
+        // this.$.edmeic.FnSetInfoArray(temp);
       }
     });
   })();
   </script>
 </dom-module>
+
