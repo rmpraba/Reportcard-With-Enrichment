@@ -25,7 +25,7 @@
        <h4 align="center">Evaluation Parameter Mapping</h4>
       </div>
       <div class="card">
-       <paper-button on-click="FnBooksMapping" no ink><img src="../../images/bookmapping.jpg" height="180px" width="180px"></paper-button>
+       <paper-button on-click="FnBooksMapping" no ink><img src="../../images/issue.png" height="180px" width="180px"></paper-button>
        <h4 align="center">Books Mapping</h4>
       </div>
       <div class="card">
@@ -33,11 +33,12 @@
        <h4 align="center">Student Tracking</h4>
       </div>
     </div>
+    <enrichment-service id='enrichmentservice'></enrichment-service>
+    <beginner-assesment-service id='beginnerservice'></beginner-assesment-service>
   </template>
   <script>
   (function() {
     'use strict';
-
     Polymer({
       is: 'enrichmenthome-card',
       FnSelectEvaluation:function(){
@@ -47,7 +48,12 @@
         document.querySelector('home-page').setPage('books-creation-card','');
       },
       FnSelectMapping:function(){
-        document.querySelector('home-page').setPage('enrichment-studentmap-card','');
+        // document.querySelector('home-page').setPage('enrichment-studentmap-card','');
+        document.querySelector('home-page').setPage('books-issuance-card','');   
+        document.querySelector('books-issuance-card').FnRefresh();
+        this.$.beginnerservice.callAssesmentService("Enrichment");
+        this.$.beginnerservice.callGradeService();
+        this.$.enrichmentservice.subjectforenrichmentService();
       },
       FnEavaluationMapping:function(){
         document.querySelector('home-page').setPage('enrichment-evaluationmapping-card','');

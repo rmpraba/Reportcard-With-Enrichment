@@ -51,7 +51,9 @@
         this.studentname=studentname;
         localStorage.setItem("curr_sess_studentid",this.studentid);
         localStorage.setItem("curr_sess_studentname",this.studentname);
-        this.$.enrichmentservice.FnFetchBookForStudent(this.studentid);
+        // this.$.enrichmentservice.FnFetchBookForStudent(this.studentid);
+        document.querySelector('enrichment-activityhome-card').page="enrichment-evaluation-card";
+        this.$.enrichmentservice.FnFetchIssuedBook(localStorage.getItem('curr_sess_studentid'));
       },
       FnRefresh:function(){
         

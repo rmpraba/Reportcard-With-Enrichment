@@ -10,11 +10,14 @@
       :host {
         display: block;
       }
+      paper-tabs{
+        width: 100%;
+      }
     </style>
     <div>
     <div>
       <paper-tabs selected="0" scrollable>
-          <paper-tab on-click="FnAssignment">Book/Activity Assignment</paper-tab>
+          <paper-tab on-click="FnAssignment" hidden>Book/Activity Assignment</paper-tab>
           <paper-tab on-click="FnEvaluation">Book/Activity Evaluation</paper-tab>
           <paper-tab on-click="FnDue">Due Book/Activity</paper-tab>
           <paper-tab on-click="FnPerformance">Performance Chart</paper-tab>

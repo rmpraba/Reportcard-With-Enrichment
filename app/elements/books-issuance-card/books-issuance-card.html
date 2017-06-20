@@ -64,8 +64,8 @@
             </template>
             </paper-menu>
           </paper-dropdown-menu>  
-          <paper-dropdown-menu id="bbooksissuancesubcategoryy" id="bbooksissuancesubcategory" label="Select Category" disabled="{{read}}" required>
-            <paper-menu class="dropdown-content"  on-iron-select="FnSelectCategory"  attr-for-selected="value" required> 
+          <paper-dropdown-menu id="bbooksissuancesubcategoryy" label="Select Category" disabled="{{read}}" required>
+            <paper-menu id="bbooksissuancesubcategory"  class="dropdown-content"  on-iron-select="FnSelectCategory"  attr-for-selected="value" required> 
             <template is="dom-repeat" items="{{categoryarr}}">
               <paper-item value="{{item.category_id}}">{{item.category_name}}</paper-item>
             </template>
