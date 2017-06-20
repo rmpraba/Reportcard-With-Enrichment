@@ -113,8 +113,9 @@
       },
       FnSelectSubject:function(e){
         this.flag=1;
-        document.querySelector('beginner-assesment-markentrysheet').FnRefresh();
-        document.querySelector('beginner-assesment-lang-markentrysheet').FnRefresh();
+        document.querySelector('enrichment-dynamic-markentrycard').FnRefresh();
+        // document.querySelector('enrichment-dynamic-markentryitemcard').FnRefresh();
+        // document.querySelector('enrichment-markentry-input').FnRefresh();
         subject = e.target.selectedItem.textContent.trim();
         localStorage.setItem("curr_sess_subject",subject);
         this.FnServiceCall(); 
@@ -142,7 +143,6 @@
         document.querySelector('#sectionnam').selected=-1;
         document.querySelector('#subjectnam').selected=-1;
         document.querySelector('#beginnerassesmenttypee').selected=-1;
-        document.querySelector('enrichment-dynamic-markentrycard').FnRefresh();
         document.querySelector('enrichment-dynamic-markentrycard').FnRefresh();
         this.flag=0;
       }      

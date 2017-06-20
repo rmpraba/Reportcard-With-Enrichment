@@ -46,7 +46,7 @@
     <!-- <template is="dom-repeat" items="{{label}}"> -->
       <center><h1>{{schoolname}}</h1>
       <h3>Continuous Comprehensive Evaluation -AY-{{academicyear}}</h3>  
-      <h4>{{assesmentname}}  &nbsp;&nbsp;&nbsp; {{grade}} - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{section}} &nbsp;&nbsp; Subject: {{subject}} </h4> 
+      <h4>Assesment: {{assesmentname}}  &nbsp;&nbsp;&nbsp; Grade: {{grade}}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Section: {{section}} &nbsp;&nbsp; Subject: {{subject}} </h4> 
       <!-- <table border="1" >   -->
       <!-- <tr><td></td>
         <template is="dom-repeat" items="{{titlearr}}">
@@ -66,7 +66,7 @@
     </div>
     <div class="btndiv">
     <paper-button class="button" id="grade" on-click="FnGenerateGrade">Generate Grade</paper-button>
-    <paper-button class="button" id="save" on-click="FnSave">Save</paper-button>
+    <paper-button disabled$="{{disablesave}}" class="button" id="save" on-click="FnSave">Save</paper-button>
     </div>  
     <beginner-assesment-service id="beginnerservice"></beginner-assesment-service>
   </template>
@@ -78,6 +78,7 @@
     Polymer({
       is: 'enrichment-dynamic-markentrycard',
       ready:function(){
+        this.disablesave=true;
         localStorage.setItem("curr_sess_page","beginner-assesment-lang-markentrysheet");
         // this.$.componentservice.callcomponentService();        
       },
@@ -86,6 +87,7 @@
       },
       FnGenerateGrade:function(e){
         this.$.beginnerservice.FnFetchBeginnerMarksForGrade();
+        this.disablesave=false;
       },
       FnGenerateGradee:function(e){
         // alert(JSON.stringify(scorearr))
@@ -256,10 +258,13 @@
       {
         this.studarr=[];
         this.label=[];
+        this.temp=[];
+        scorearr=[];
+        this.disablesave=true;
       },
       FnSetInfoArray:function(arr){
         scorearr=arr;
-        this.FnGenerateGradee();
+        // this.FnGenerateGradee();
       },
       FnSetAlreadyEnteredMarks:function(arr){
         var temp=[];
@@ -282,7 +287,7 @@
         temp.push(obj);
         }
         this.temp=temp;
-        // document.querySelector('enrichment-dynamic-markentryitemcard').FnSetInfoArray(temp);
+        
         // this.$.edmeic.FnSetInfoArray(temp);
       }
     });

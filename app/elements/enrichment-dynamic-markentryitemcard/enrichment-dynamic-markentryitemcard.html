@@ -37,7 +37,7 @@
           <enrichment-markentry-input grade="{{grade}}" studentid="{{item.studentid}}" studentname="{{item.studentname}}" classid="{{item.classid}}" assesmenttype="{{item.assesmenttype}}" gradeid="{{item.gradeid}}" gradename="{{item.gradename}}" subjectid="{{item.subjectid}}" subjectname="{{item.subjectname}}" categoryid="{{item.categoryid}}" categoryname="{{item.categoryname}}" subcategoryid="{{item.subcategoryid}}" subcategoryname="{{item.subcategoryname}}" hideinput="{{item.hiddeninput}}" hidelabel="{{item.hiddenlabel}}" score="{{item.score}}"></enrichment-markentry-input>
           </td>
         </template>
-        <td width="5%"><p hidden$="{{hiddenoutinput}}">{{grade}}</p></td>
+        <td width="5%"><p style="text-align: center;" hidden$="{{hiddenoutinput}}">{{grade}}</p></td>
         <td width="5%"><paper-icon-button hidden$="{{hiddenoutinput}}" icon="save" on-click="FnSave"></paper-icon-button></td>
         </tr>
         </table>
@@ -58,6 +58,8 @@
         scorearr=arr;
       },
       FnSave:function(){
+        // alert(JSON.stringify(scorearr));
+        if(scorearr.length>0){
         for(var i=0;i<scorearr.length;i++){
           // alert(scorearr[i].studentid+" "+this.studentid);
           if(scorearr[i].studentid==this.studentid){
@@ -66,6 +68,13 @@
             this.$.beginnerservice.callbamarkinsertService(temp);
           }
         }
+        }
+        else{
+          alert("Please enter the marks!!");
+        }
+      },
+      FnRefresh:function(){
+        scorearr=[];
       }   
     });
   })();

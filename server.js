@@ -9125,7 +9125,7 @@ app.post('/fetchstudentbylevel-service',  urlencodedParser,function (req,res)
     " grade_id='"+req.query.gradeid+"' and section_id='"+req.query.sectionid+"' and subject_id='"+req.query.subjectid+"' and category_id='"+req.query.categoryid+"' and grade='"+req.query.grade+"'";
     var bookqur="SELECT * FROM enrichment_booksactivity_master WHERE assesment_type='"+req.query.assesment+"' and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and "+
     " grade_name='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and category_id='"+req.query.categoryid+"' and grade_level='"+req.query.grade+"'";
-    console.log('------------fetch stud for book issuance-------------');
+   console.log('------------fetch stud for book issuance-------------');
    console.log(qur);
    console.log(bookqur);
     var studarr=[];

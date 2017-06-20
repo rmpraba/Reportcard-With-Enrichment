@@ -178,6 +178,7 @@
       fetchbeginnermarksforgradeResponse:function(e){
         var arr=e.detail.response.returnval;
         document.querySelector('enrichment-dynamic-markentrycard').FnSetInfoArray(arr);
+        document.querySelector('enrichment-dynamic-markentrycard').FnGenerateGradee();
       },
       FnFetchEnrichmentGrade:function(){
         this.fetchenrichmentgradeurl=sessionStorage.getItem("addrinfo")+"/fetchenrichmentgrade-service";
@@ -490,7 +491,7 @@
       },
       callbamarkinsertService:function(arr){
         // alert(JSON.stringify(arr));
-        // count1=count;
+        count1=arr.length;
         this.insertbamarkurl=sessionStorage.getItem("addrinfo")+"/insertbamark-service";
         var obj={"schoolid":"","academicyear":"","assesmentid":"","classid":"","subject":"","studentid":"","category":"","mark":"","score":"","grade":""};
         obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
@@ -519,13 +520,13 @@
         }
       },
       insertbamarkResponse:function(e){
-        alert(e.detail.response.returnval);
-        // count2++;
+        // alert(e.detail.response.returnval);
+        count2++;
         // // alert(count1+"  "+count2);
-        // if(count1==count2){
-        // alert("Inserted!");
-        // count1=0;count2=0;
-        // }
+        if(count1==count2){
+        alert("Saved!!");
+        count1=0;count2=0;
+        }
       },
       callFetchGradeService:function(score){
         this.fetchgradeurl=sessionStorage.getItem("addrinfo")+"/fetchgrade-service"; 
