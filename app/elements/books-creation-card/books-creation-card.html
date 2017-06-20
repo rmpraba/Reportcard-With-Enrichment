@@ -92,7 +92,7 @@
       
       <div>
       <h4>Select Category</h4>
-        <paper-dropdown-menu id="enrichmentbookcreationassesment" label="Select Assesment" disabled="{{read}}" required>
+        <paper-dropdown-menu id="enrichmentbookcreationassesmentt" label="Select Assesment" disabled="{{read}}" required hidden>
             <paper-menu id="enrichmentbookcreationassesment" class="dropdown-content"  on-iron-select="FnSelectAssesment"  attr-for-selected="value" required>  
               <!-- <template is="dom-repeat" items="{{subjectarr}}"> -->
                 <paper-item value="BOY">BOY</paper-item>
@@ -100,23 +100,31 @@
                 <paper-item value="EOY">EOY</paper-item>
               <!-- </template> -->
             </paper-menu>
-        </paper-dropdown-menu>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <paper-checkbox id="enrichmentbook" on-change="FnBook">Book</paper-checkbox>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <paper-checkbox id="enrichmentactivity" on-change="FnActivity">Activity</paper-checkbox>        
+        </paper-dropdown-menu>
+        <paper-checkbox id="createnewenrichment" on-change="FnNew">Create New</paper-checkbox>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <paper-checkbox id="useexistingenrichment" on-change="FnExisting">Search Existing</paper-checkbox> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <paper-checkbox hidden$="{{hidebookactivity}}" id="enrichmentbook" on-change="FnBook">Book</paper-checkbox>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <paper-checkbox hidden$="{{hidebookactivity}}" id="enrichmentactivity" on-change="FnActivity">Activity</paper-checkbox>        
       </div>
       <hr/>
       
       <div class="bookinfocontainer" hidden$="{{hidebookinfocontainer}}">
-      <paper-input label="{{namelabel}}" value="{{bookname}}"></paper-input>
+      <paper-input  label="Book/Activity Name" value="{{value}}" on-keydown="FnSearchBook" hidden$="{{hideoldbookactivity}}"></paper-input>
+      <paper-listbox class="dropdown-content" id="enrichmentsearchbook" on-iron-select="FnSelectBook">
+        <template is="dom-repeat" items="{{itemArray}}" as="item">
+          <paper-item value="{{item.id}}">{{item.itemdes}}</paper-item>
+        </template>
+      </paper-listbox>
+      <paper-input label="{{namelabel}}" value="{{bookname}}" hidden$="{{hidenewbookactivity}}"></paper-input>
       <paper-input label="{{namespeclabel}}" value="{{authorname}}"></paper-input>
-      <paper-dropdown-menu id="enrichmentbookcreationsubject" label="Select Subject" disabled="{{read}}" required>
+      <paper-dropdown-menu id="enrichmentbookcreationsubjectt" label="Select Subject" disabled="{{read}}" required>
             <paper-menu id="enrichmentbookcreationsubject" class="dropdown-content"  on-iron-select="FnSelectSubject"  attr-for-selected="value" required>  
               <template is="dom-repeat" items="{{subjectarr}}">
                 <paper-item value="{{item.subject_id}}">{{item.subject_name}}</paper-item>
               </template>
             </paper-menu>
       </paper-dropdown-menu>
-      <paper-dropdown-menu id="enrichmentbookcreationcategory" label="Select Category" disabled="{{read}}" required>
+      <paper-dropdown-menu id="enrichmentbookcreationcategoryy" label="Select Category" disabled="{{read}}" required>
             <paper-menu id="enrichmentbookcreationcategory" class="dropdown-content"  on-iron-select="FnSelectCategory"  attr-for-selected="value" required>  
               <template is="dom-repeat" items="{{categoryarr}}">
                 <paper-item value="{{item.category_id}}">{{item.category_name}}</paper-item>
@@ -147,6 +155,8 @@
     var categoryname="";
     var categorytype="";
     var assesmenttype="";
+    var bookactivitytype="";
+    var item=[];
     Polymer({
       is: 'books-creation-card',
       ready:function(){
@@ -154,8 +164,128 @@
         this.$.enrichmentservice.gradesforenrichmentService();
         this.$.enrichmentservice.gradelevelforenrichmentService();
         this.$.enrichmentservice.subjectforenrichmentService();
-        this.$.enrichmentservice.categoryforenrichmentService();
         this.hidebookinfocontainer=true;
+        this.hidebookactivity=true;
+        this.hidenewbookactivity=true;
+        this.hideoldbookactivity=true;
+        this.querySelector('#enrichmentsearchbook').style.visibility='hidden';
+      },
+      FnSetBookInfo:function(bookname,author,subid,subname,catid,catname,quantity){
+        this.bookname=bookname;
+        this.authorname=author;
+        document.querySelector('#enrichmentbookcreationsubject').selected=subid;
+        document.querySelector('#enrichmentbookcreationcategory').selected=catid;
+        this.quantity=quantity;
+        subjectid=subid;
+        subjectname=subname;
+        categoryid=catid;
+        categoryname=catname;
+      },
+      callService:function(){
+        this.$.enrichmentservice.FnFetchExistingBook(categorytype);
+      },
+      autocompletearr:function(autocompletearr)
+      {
+        // alert(JSON.stringify(item));
+         item=autocompletearr;
+      },
+      FnSearchBook:function(e){
+      if(e.keyCode==13|| e.keyCode==40)
+      this.querySelector('#enrichmentsearchbook').focus();
+      var arr=[];
+      arr.push({"itemdes":"-----Select-----"});
+      this.querySelector('#enrichmentsearchbook').style.visibility='visible';
+      if(e.keyCode==8){
+        this.itemflag="true";
+        this.itemval="";
+        //alert('yes');
+        var len=(this.value).length;
+        if(len<=1){
+          this.querySelector('#enrichmentsearchbook').style.visibility='hidden';
+          this.itemArray="";
+          this.itemval="";
+        }
+        if(len>1){
+          this.querySelector('#enrichmentsearchbook').style.visibility='visible';
+          var backsubval=(((this.value).substring(0,(len-1))).trim()).toUpperCase();
+          for(var i=0;i<item.length;i++)
+          {
+            // alert(item[i].student_name);
+            var subval=((item[i].book_name).trim()).substring(0,backsubval.length);
+            if((item[i].book_name).toUpperCase().indexOf((this.value).toUpperCase())!=-1)
+            {
+              var obj={"itemdes":"","enquiry_no":""};
+              obj.itemdes=item[i].book_name;
+              obj.id=item[i].id;
+              arr.push(obj);
+            }
+          }
+          this.itemArray=arr;
+        }
+      }
+      if(e.keyCode!=8&& e.keyCode!=16&& e.keyCode!=13 && e.keyCode!=38&&e.keyCode!=40&&e.keyCode!=37&&e.keyCode!=39){
+        if(this.itemflag=="true") {
+          this.itemval = (this.value).toUpperCase()+String.fromCharCode((e.keyCode)).toUpperCase();
+          this.itemflag="false";
+        }
+        else
+        this.itemval = this.value +String.fromCharCode((e.keyCode));
+        if(this.itemval.length>0)
+        {
+          for(var i=0;i<item.length;i++)
+          {
+            // alert((item[i].student_name).trim());
+            var subval=((item[i].book_name).trim()).substring(0,this.itemval.length);
+            // alert((item[i].student_name).toUpperCase().indexOf((this.itemval).toUpperCase()));
+            if((item[i].book_name).toUpperCase().indexOf((this.itemval).toUpperCase())!=-1)
+            {
+              var obj={"itemdes":"","enquiry_no":""};
+              obj.itemdes=item[i].book_name;
+              obj.id=item[i].id;
+              arr.push(obj);
+            }
+          }
+          if(arr.length>0)
+            this.itemArray=arr;
+          else
+          {
+            var obj={"itemdes":"","enquiry_no":""};
+            obj.itemdes="No items found";
+            arr.push(obj);
+            this.itemArray=arr;
+          }
+        }
+      }
+      // alert(JSON.stringify(this.itemArray));
+    },
+    FnSelectBook:function(e){
+    this.querySelector('#enrichmentsearchbook').style.visibility='hidden';
+    var bookname = e.target.selectedItem.textContent.trim();
+    var bookid = e.target.selectedItem.value.trim();
+    localStorage.setItem("curr_sess_bookid",bookid);
+    localStorage.setItem("curr_sess_bookname",bookname);
+    this.itemArray=[];
+    document.querySelector('#enrichmentsearchbook').selected=-1;
+    this.value=bookname;
+    this.$.enrichmentservice.FnFetchSelectedBookInfo(bookid,bookname);
+    },
+      FnNew:function(){
+        this.hidebookactivity=false;
+        if(document.querySelector('#createnewenrichment').checked==true){
+          document.querySelector('#useexistingenrichment').checked=false;
+          bookactivitytype="New";
+          this.hidenewbookactivity=false;
+          this.hideoldbookactivity=true;
+        }
+      },
+      FnExisting:function(){
+        this.hidebookactivity=false;
+        if(document.querySelector('#useexistingenrichment').checked==true){
+          document.querySelector('#createnewenrichment').checked=false;
+          bookactivitytype="Existing";
+          this.hidenewbookactivity=true;
+          this.hideoldbookactivity=false;
+        }
       },
       FnBook:function(){
         this.hidebookinfocontainer=false;
@@ -164,7 +294,9 @@
           categorytype="Book";
           this.namelabel="Book Name";
           this.namespeclabel="Author Name";
-        }
+          if(bookactivitytype=="Existing")
+          this.callService();
+        }        
       },
       FnActivity:function(){
         this.hidebookinfocontainer=false;
@@ -173,6 +305,8 @@
           categorytype="Activity";
           this.namelabel="Activity Name";
           this.namespeclabel="Activity Specification";
+          if(bookactivitytype=="Existing")
+          this.callService();
         }
       },
       FnAllGrade:function(){
@@ -216,6 +350,7 @@
       FnSelectSubject:function(e){
         subjectname=e.target.selectedItem.textContent.trim();
         subjectid=e.target.selectedItem.value.trim();
+        this.$.enrichmentservice.categoryforenrichmentService(subjectid);
       },
       FnSelectCategory:function(e){
         categoryname=e.target.selectedItem.textContent.trim();
@@ -262,6 +397,8 @@
       },
       FnRefresh:function(){
         type="";
+        document.querySelector('#createnewenrichment').checked=false;
+        document.querySelector('#useexistingenrichment').checked=false;
         document.querySelector('#enrichmentallgrade').checked=true;
         document.querySelector('#enrichmentspecgrade').checked=false;
         document.querySelector('#enrichmentbook').checked=false;
@@ -276,6 +413,7 @@
         categorytype="";
         assesmenttype="";
         gradearr=[];
+        // overall=[];
         gradelevelarr=[];
         this.gradearr=[];
         this.gradelevelarr=[];
@@ -284,9 +422,15 @@
         this.quantity="";
         this.gradearr=[];
         this.categoryarr=[];
+        this.value="";
+        this.itemArray=[];
+        bookactivitytype="";
+        this.hidenewbookactivity=true;
+        this.hideoldbookactivity=true;
         document.querySelector('#enrichmentbookcreationsubject').selected=-1;
         document.querySelector('#enrichmentbookcreationcategory').selected=-1;
         document.querySelector('#enrichmentbookcreationassesment').selected=-1;
+        this.ready();
       }
     });
   })();

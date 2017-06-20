@@ -198,6 +198,27 @@
         on-response="fetchstudentbylevelResponse"
         debounce-duration="300"
     >
+    <iron-ajax
+        method="post"
+        id="fetchexistingbooksajax"
+        url="{{fetchexistingbooksurl}}"
+        params="{{fetchexistingbooksparam}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="fetchexistingbooksResponse"
+        debounce-duration="300"
+    >
+    <iron-ajax
+        method="post"
+        id="fetchselectedbookinfoajax"
+        url="{{fetchselectedbookinfourl}}"
+        params="{{fetchselectedbookinfoparam}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="fetchselectedbookinfoResponse"
+        debounce-duration="300"
+    >
+    
   </template>
   <script>
   (function() {
@@ -209,6 +230,32 @@
     var count1=0,count2=0;
     Polymer({
       is: 'enrichment-service',
+      FnFetchExistingBook:function(categorytype){
+        this.fetchexistingbooksurl=sessionStorage.getItem("addrinfo")+"/fetchexistingbooks-service";
+         var obj={};
+         obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+         obj.academicyear=localStorage.getItem("curr_sess_academicyear");  
+         obj.categorytype=categorytype;
+         this.fetchexistingbooksparam= obj;
+         this.$.fetchexistingbooksajax.generateRequest();
+      },
+      fetchexistingbooksResponse:function(e){
+        var arr=e.detail.response.returnval;
+        document.querySelector('books-creation-card').autocompletearr(arr);
+      },
+      FnFetchSelectedBookInfo:function(bookid,bookname){
+        this.fetchselectedbookinfourl=sessionStorage.getItem("addrinfo")+"/fetchselectedbookinfo-service";
+         var obj={};
+         obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+         obj.academicyear=localStorage.getItem("curr_sess_academicyear");  
+         obj.bookid=bookid;
+         this.fetchselectedbookinfoparam= obj;
+         this.$.fetchselectedbookinfoajax.generateRequest();
+      },
+      fetchselectedbookinfoResponse:function(e){
+        var arr=e.detail.response.returnval;
+        document.querySelector('books-creation-card').FnSetBookInfo(arr[0].book_name,arr[0].author_name,arr[0].subject_id,arr[0].subject_name,arr[0].category_id,arr[0].category_name,arr[0].quantity);
+      },
       FnFetchAllBooks:function(){
          this.fetchallbooksurl=sessionStorage.getItem("addrinfo")+"/fetchallbooks-service";
          var obj={};
@@ -290,11 +337,12 @@
         document.querySelector('books-issuance-card').subjectarr=arr;
         document.querySelector('enrichment-booksmapping-card').subjectarr=arr;
       },
-      categoryforenrichmentService:function(){
+      categoryforenrichmentService:function(subjectid){
          this.categoryforenrichmenturl=sessionStorage.getItem("addrinfo")+"/categoryforenrichment-service";
          var obj={};
          obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
          obj.academicyear=localStorage.getItem("curr_sess_academicyear");  
+         obj.subjectid=subjectid;
          this.categoryforenrichmentparam= obj;
          this.$.categoryforenrichmentajax.generateRequest();
       },
@@ -312,14 +360,14 @@
       generatebooksequenceResponse:function(e){
         var arr=e.detail.response.returnval;
         var seq=arr[0].bookactivity_seq;
-        bookseq=parseInt(arr[0].bookactivity_seq)+(bookinfo.length+1);
+        bookseq=parseInt(arr[0].bookactivity_seq)+1;
         this.insertbookinfoService(seq);
       },
       insertbookinfoService:function(seq){        
         count1=bookinfo.length;
         for(var i=0;i<bookinfo.length;i++){
           bookinfo[i].id="BK"+seq;
-          seq++;
+          // seq++;
          this.insertbookinfourl=sessionStorage.getItem("addrinfo")+"/insertbookinfo-service";
          var obj={};
          obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
@@ -342,12 +390,14 @@
         }
       },
       insertbookinfoResponse:function(e){
-        alert(e.detail.response.returnval);
+        // alert(e.detail.response.returnval);
         if(e.detail.response.returnval=='Inserted!!'){
           count2++;
         }
         if(count1==count2){
           this.updatebooksequenceService();
+          count1=0;
+          count2=0;
         }
       },
       updatebooksequenceService:function(){
@@ -359,7 +409,7 @@
       },
       updatebooksequenceResponse:function(e){
         if(e.detail.response.returnval=="Updated!!")
-          alert('Created!!');
+        alert('Created!!');
         document.querySelector('books-creation-card').FnRefresh();
       },
       FnFetchSubjectCategoryForIssue:function(subjectid){

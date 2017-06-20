@@ -8972,7 +8972,7 @@ app.post('/subjectforenrichment-service',  urlencodedParser,function (req,res)
 
 app.post('/categoryforenrichment-service',  urlencodedParser,function (req,res)
   {  
-    var qur="SELECT distinct(category_id),category_name from enrichment_subject_category";
+    var qur="SELECT distinct(category_id),category_name from enrichment_subject_category WHERE subject_id='"+req.query.subjectid+"'";
     console.log('------------Enrichment category-------------');
    console.log(qur);
     connection.query(qur,
@@ -8987,6 +8987,39 @@ app.post('/categoryforenrichment-service',  urlencodedParser,function (req,res)
   });
 });
 
+app.post('/fetchexistingbooks-service',  urlencodedParser,function (req,res)
+  {  
+    var qur="SELECT distinct(id),book_name FROM enrichment_booksactivity_master WHERE school_id='"+req.query.schoolid+"' AND academic_year='"+req.query.academicyear+"' AND category='"+req.query.categorytype+"'";
+    console.log('------------Enrichment books-------------');
+    console.log(qur);
+    connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': rows});
+    }
+    else
+     res.status(200).json({'returnval': 'no rows'}); 
+  });
+});
+
+app.post('/fetchselectedbookinfo-service',  urlencodedParser,function (req,res)
+  {  
+    var qur="SELECT * FROM enrichment_booksactivity_master WHERE school_id='"+req.query.schoolid+"' AND academic_year='"+req.query.academicyear+"' AND id='"+req.query.bookid+"'";
+    console.log('------------Enrichment books-------------');
+   console.log(qur);
+    connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': rows});
+    }
+    else
+     res.status(200).json({'returnval': 'no rows'}); 
+  });
+});
 
 app.post('/generatebooksequence-service',  urlencodedParser,function (req,res)
   {  
@@ -9008,6 +9041,8 @@ app.post('/generatebooksequence-service',  urlencodedParser,function (req,res)
 app.post('/insertbookinfo-service',  urlencodedParser,function (req,res)
   {  
     var response={
+         school_id:req.query.schoolid,
+         academic_year:req.query.academicyear,
          id:req.query.bookid,
          book_name:req.query.bookname,
          author_name:req.query.bookauthor,

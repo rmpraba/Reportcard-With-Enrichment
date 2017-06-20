@@ -18,6 +18,9 @@
     var gradelevel=[];
     Polymer({
       is: 'enrichment-gradelevel-card',
+      ready:function(){
+        gradelevel=[];
+      },
       FnSelectGrade:function(e){
         if(document.querySelector('#enrichmentgradelevel'+this.ratingid).checked==true)
         {
