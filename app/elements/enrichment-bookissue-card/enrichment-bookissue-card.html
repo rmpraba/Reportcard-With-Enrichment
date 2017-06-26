@@ -5,21 +5,25 @@
   <template>
     <style>
       .card{
-        @apply(--layout-horizontal);
-        @apply(--layout-center-justified);
-        width: 80%;
+        @apply(--layout-vertical);
+        /*@apply(--layout-center-justified);*/
+        /*width: 25%;*/
         margin-left: 10%;
+        margin-top: 20%
       }
       enrichment-bookissue-itemcard{
         background-color: white;
-        box-shadow: 3px 3px 2px whitesmoke;
-        width: 20%;
-        margin-left: 3%;
+        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+        /*width: 200%;*/
+        /*margin-left: 3%;*/
+        margin-top: 5%;
+        height: 40%;
       }
     </style>
     <div class="card">
       <template is="dom-repeat" items="{{levelarr}}">
-        <enrichment-bookissue-itemcard grade="{{item.grade}}"></enrichment-bookissue-itemcard>
+        <enrichment-bookissue-itemcard grade="{{item.grade}}" category="{{item.category}}"></enrichment-bookissue-itemcard>
+        <hr>
       </template>
     </div>
   </template>

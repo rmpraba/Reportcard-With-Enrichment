@@ -4,19 +4,21 @@
 <dom-module id="enrichment-bookissue-itemcard">
   <template>
     <style>
-      /*.card{
-        background-color: white;
-        box-shadow: 3px 3px 2px whitesmoke;
-        width: 25%;
-        height: 50%;
-        margin-left: 3%;
-      }*/
       .card{
         text-align: center;
-        height: 150px;
+        /*height: 150px;*/
+        /*width: 150%;*/
+        margin-top: 5%;
+      }
+      b{
+        font-family: Arial, Helvetica, sans-serif;
+        color: #27408B;
       }
     </style>
-    <div class="card" on-click="FnFetchStudents"><b>Level  {{grade}}</b></div>
+    <div class="card" on-click="FnFetchStudents">
+    <div><b>Level {{grade}}</b></div>
+    <div><b>{{category}}</b></div>
+    </div>
     <enrichment-service id="enrichmentservice"></enrichment-service>
   </template>
   <script>

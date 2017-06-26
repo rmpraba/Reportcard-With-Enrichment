@@ -8,26 +8,6 @@
       :host {
         display: block;
       }
-      /*table{
-        border-collapse: collapse;
-        width:80%
-      }
-       #tb1{
-         width:15%
-        }
-        #tb2{
-         width:35%
-        }
-        #tb3{
-         width:10%
-        }
-        #itemcard:nth-child(odd) {
-        background-color: white;
-       
-      }
-      #itemcard:nth-child(even) {
-        background-color: #f1f1f1;
-      }*/
       #itemcard{
         width: 90%;
         margin-left: 10%;
@@ -39,16 +19,12 @@
         padding: 3%;
         width: 12%;
       }
-</style>
+    </style>
     <div>
       <div id='itemcard'>
-      <template is="dom-repeat" items="{{studentarr}}">
-        
+      <template is="dom-repeat" items="{{studentarr}}">    
         <enrichment-studentmap-list studentid="{{item.id}}" studentname="{{item.student_name}}" sno="{{item.sno}}" edit="{{item.editable}}"></enrichment-studentmap-list>
-
-        
       </template>
-      <!-- <hr> -->
       </div>
     </div>
   </template>

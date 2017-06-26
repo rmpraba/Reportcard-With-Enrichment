@@ -17,7 +17,6 @@
       .card{
         @apply(--layout-vertical);
       }
-
       .drop{        
         @apply(--layout-horizontal);
         margin-top:2%;
@@ -32,6 +31,16 @@
       margin-left: 3%;
       --paper-input-container-label: { color: red };
       text-align:center;
+      }
+      .innercard{
+        @apply(--layout-horizontal);
+        width: 100%;
+      }
+      .enrichmentstudentlist{
+        width: 25%;
+      }
+      .enrichmentstudentlevellist{
+        width: 75%;
       }
     </style>
     <div class='card'>     
@@ -64,8 +73,8 @@
             </template>
             </paper-menu>
           </paper-dropdown-menu>  
-          <paper-dropdown-menu id="enrichmentbookmappingcategory" id="enrichmentbookmappingcategoryy" label="Select Category" disabled="{{read}}" required>
-            <paper-menu class="dropdown-content"  on-iron-select="FnSelectCategory"  attr-for-selected="value" required> 
+          <paper-dropdown-menu id="enrichmentbookmappingcategory"  label="Select Category" disabled="{{read}}" required>
+            <paper-menu class="dropdown-content" id="enrichmentbookmappingcategoryy" on-iron-select="FnSelectCategory"  attr-for-selected="value" required> 
             <template is="dom-repeat" items="{{categoryarr}}">
               <paper-item value="{{item.category_id}}">{{item.category_name}}</paper-item>
             </template>
@@ -73,11 +82,13 @@
           </paper-dropdown-menu>      
      </div>
      <hr>
+     <div class="innercard">
      <div class="enrichmentstudentlist" hidden$="{{hidecard}}">
      <enrichment-bookissue-card levelarr="{{levelarr}}"></enrichment-bookissue-card>
      </div>
      <div class="enrichmentstudentlevellist" hidden$="{{hidestudlistcard}}">
      <enrichment-studentlevel-card studlevelarr="{{studlevelarr}}" booklevelarr="{{booklevelarr}}"></enrichment-studentlevel-card>
+     </div>
      </div>
     </div>
     <enrichment-service id="enrichmentservice"></enrichment-service>
@@ -92,6 +103,7 @@
       ready:function(){
       this.hidecard=true;        
       this.hidestudlistcard=true; 
+      this.flag=0;
       },
       callService:function(){
         this.$.bassesmentservice.callAssesmentService("Enrichment");
@@ -101,6 +113,11 @@
       FnSelectAssesment:function(e){
         assesment=e.target.selectedItem.textContent.trim();
         localStorage.setItem("curr_sess_assesmentname",assesment);
+        if(this.flag==1){
+          this.hidecard=true;        
+          this.hidestudlistcard=true; 
+          this.$.enrichmentservice.FnFetchStudentCategoryForIssue(assesment,gradeid,sectionid,subjectid,categoryid);
+        }
       },
       FnSelectSubject:function(e){
         subjectname = e.target.selectedItem.textContent.trim();
@@ -108,28 +125,48 @@
         localStorage.setItem("curr_sess_subjectname",subjectname);
         localStorage.setItem("curr_sess_subjectid",subjectid);
         this.$.enrichmentservice.FnFetchSubjectCategoryForIssue(subjectid);
+        if(this.flag==1){
+          this.hidecard=true;        
+          this.hidestudlistcard=true; 
+          this.$.enrichmentservice.FnFetchStudentCategoryForIssue(assesment,gradeid,sectionid,subjectid,categoryid);
+        }
       },
       FnSelectGrade:function(e){
         gradename = e.target.selectedItem.textContent.trim();
         gradeid = e.target.selectedItem.value.trim();
-        // alert(gradename);
         localStorage.setItem("curr_sess_gradename",gradename);
         localStorage.setItem("curr_sess_grade",gradename);
         localStorage.setItem("curr_sess_gradeid",gradeid);
         this.$.bassesmentservice.callSectionService(gradename);
+        if(this.flag==1){
+          this.hidecard=true;        
+          this.hidestudlistcard=true; 
+          this.$.enrichmentservice.FnFetchStudentCategoryForIssue(assesment,gradeid,sectionid,subjectid,categoryid);
+        }
       },
       FnSelectSection:function(e){
         sectionname = e.target.selectedItem.textContent.trim();
         localStorage.setItem("curr_sess_sectionname",sectionname);
         sectionid = e.target.selectedItem.value.trim();
         localStorage.setItem("curr_sess_sectionid",sectionid);
+        if(this.flag==1)
+        {
+          this.hidecard=true;        
+          this.hidestudlistcard=true; 
+          this.$.enrichmentservice.FnFetchStudentCategoryForIssue(assesment,gradeid,sectionid,subjectid,categoryid);
+        }
       },
       FnSelectCategory:function(e)
       {
+        if(this.flag==1){
+          this.hidecard=true;        
+          this.hidestudlistcard=true; 
+        }
         categoryname = e.target.selectedItem.textContent.trim();
         localStorage.setItem("curr_sess_categoryname",categoryname);
         categoryid = e.target.selectedItem.value.trim();
         localStorage.setItem("curr_sess_categoryid",categoryid);
+        this.flag=1;
         this.$.enrichmentservice.FnFetchStudentCategoryForIssue(assesment,gradeid,sectionid,subjectid,categoryid);
       },
       FnShowList:function(){

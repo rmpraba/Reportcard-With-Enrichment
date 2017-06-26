@@ -482,9 +482,14 @@
       fetchstudentbylevelResponse:function(e){
         var studarr=e.detail.response.studarr;
         var bookarr=e.detail.response.returnval;
+        if(studarr.length>0){
         document.querySelector('enrichment-booksmapping-card').FnShowStudList();
         document.querySelector('enrichment-booksmapping-card').booklevelarr=bookarr;
         document.querySelector('enrichment-booksmapping-card').studlevelarr=studarr;
+        }
+        else{
+        alert('Students not available in this category!!');
+        }
       },
       FnFetchBookForStudent:function(studentid){
         this.fetchbookforstudenturl=sessionStorage.getItem("addrinfo")+"/fetchbookforstudent-service";
@@ -507,6 +512,7 @@
         document.querySelector('enrichment-assignment-card').itemarr=arr;
       },
       FnAssignBookToStudent:function(bookarr){
+        count1=bookarr.length;
         this.assignbooktostudenturl=sessionStorage.getItem("addrinfo")+"/assignbooktostudent-service";
         for(var i=0;i<bookarr.length;i++){
         var obj={}; 
@@ -531,7 +537,13 @@
         }
       },
       assignbooktostudentResponse:function(e){
-        alert(JSON.stringify(e.detail.response.returnval));
+        // alert(JSON.stringify(e.detail.response.returnval));
+        count2++;
+        if(count1==count2){
+          alert('Mapped successfully!!');
+          count1=0;
+          count2=0;
+        }
       },
       FnFetchIssuedBook:function(studentid){
         this.fetchissuedbookurl=sessionStorage.getItem("addrinfo")+"/fetchissuedbook-service";

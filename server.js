@@ -9098,7 +9098,7 @@ app.post('/updatebooksequence-service',  urlencodedParser,function (req,res)
 
 app.post('/fetchsubjectcategoryforissue-service',  urlencodedParser,function (req,res)
   {  
-    var qur="SELECT * FROM enrichment_subject_category WHERE subject_id='"+req.query.subjectid+"'";
+    var qur="SELECT distinct(category_name),category_id FROM enrichment_subject_category WHERE subject_id='"+req.query.subjectid+"'";
     console.log('------------fetch book category-------------');
    console.log(qur);
     connection.query(qur,
@@ -9401,7 +9401,7 @@ app.post('/fetchperformancemeasures-service',  urlencodedParser,function (req,re
 
 app.post('/fetchallbooks-service',  urlencodedParser,function (req,res)
   {  
-    var qur="SELECT * FROM enrichment_booksactivity_master";
+    var qur="SELECT id,book_name,subject_name,category_name,quantity,category FROM enrichment_booksactivity_master group by id,book_name,subject_name,category_name,quantity,category";
     console.log('------------fetch issued book -------------');
     console.log(qur);
     connection.query(qur,
