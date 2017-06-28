@@ -92,6 +92,8 @@
       FnGenerateGradee:function(e){
         // alert(JSON.stringify(scorearr))
         var temparr=this.studarr;
+        // alert(JSON.stringify(temparr))
+        if(localStorage.getItem("curr_sess_assesmentname")=="EBOY"||localStorage.getItem("curr_sess_assesmentname")=="EMOY"||localStorage.getItem("curr_sess_assesmentname")=="EEOY"){
         if(this.subject=="English"){
         if((temparr.length)-2==((scorearr.length)/2)){        
         var total=0;
@@ -100,7 +102,8 @@
             total=parseFloat(parseFloat(total)+parseFloat(scorearr[i].score)).toFixed(2);
           }
         }
-        var avg=parseFloat(total/((parseFloat(scorearr.length/2).toFixed(2))-2)).toFixed(2);
+        var avg=parseFloat(total/(parseFloat(scorearr.length/2).toFixed(2))).toFixed(2);
+        // alert(total+"  "+avg);
         for(var i=2;i<(temparr).length;i++){
         for(var j=0;j<scorearr.length;j++){
           if(temparr[i].id==scorearr[j].student_id){
@@ -120,7 +123,7 @@
         }        
         for(var i=0;i<temparr.length;i++){
           for(var j=0;j<gradearr.length;j++){
-            if(temparr[i].speed==gradearr[j].type&&((temparr[i].comprehension>=gradearr[j].minimum)&&(temparr[i].comprehension<=gradearr[j].maximum)))
+            if(temparr[i].speed==gradearr[j].type&&((parseFloat(temparr[i].comprehension)>=parseFloat(gradearr[j].minimum))&&(parseFloat(temparr[i].comprehension)<=parseFloat(gradearr[j].maximum))&&gradearr[j].assesment_type==localStorage.getItem('curr_sess_assesmentname')))
               temparr[i].grade=gradearr[j].grade;
           }
         }
@@ -156,13 +159,18 @@
         alert('Please complete all student entry!!');
         }        
         }
+        }
         else{
         if((temparr.length)-2==(scorearr.length)){
         for(var i=2;i<temparr.length;i++){
-          for(var j=0;j<gradearr.length;j++){
-            for(var k=0;k<temparr[i].category.length;k++){
-            if(((temparr[i].category[k].score>=gradearr[j].minimum)&&(temparr[i].category[k].score<=gradearr[j].maximum)))
+          for(var k=0;k<temparr[i].category.length;k++){
+          var val=parseFloat((parseFloat(temparr[i].category[k].score)/30)*100).toFixed(2);
+          for(var j=0;j<gradearr.length;j++){              
+            // alert(val+"  "+gradearr[j].minimum+"  "+gradearr[j].maximum+"  "+gradearr[j].assesment_type+"  "+localStorage.getItem('curr_sess_assesmentname')+"  "+gradearr[j].grade);
+            if(((parseFloat(val)>=parseFloat(gradearr[j].minimum))&&(parseFloat(val)<=parseFloat(gradearr[j].maximum)))&&gradearr[j].assesment_type==localStorage.getItem('curr_sess_assesmentname')){
+              // alert("in  "+val+"  "+gradearr[j].minimum+"  "+gradearr[j].maximum+"  "+gradearr[j].assesment_type+"  "+localStorage.getItem('curr_sess_assesmentname')+"  "+gradearr[j].grade);
               temparr[i].grade=gradearr[j].grade;
+            }
             }
           }
         }
@@ -180,6 +188,7 @@
           overall.push(obj);
         }
         this.studarr=overall;
+        // alert(JSON.stringify(overall));
         for(var i=0;i<overall.length;i++){
           for(var j=0;j<overall[i].category.length;j++){
             for(var k=0;k<scorearr.length;k++){
