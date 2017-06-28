@@ -92,33 +92,23 @@
       FnGenerateGradee:function(e){
         // alert(JSON.stringify(scorearr))
         var temparr=this.studarr;
-        // alert(temparr.length+" "+scorearr.length);
         if(this.subject=="English"){
         if((temparr.length)-2==((scorearr.length)/2)){        
         var total=0;
         for(var i=0;i<scorearr.length;i++){
-          // alert(scorearr[i].sub_category_id);
           if(scorearr[i].sub_category_id=="s1-c1-sub1"){
-            // alert(scorearr[i].value+"  "+total);
             total=parseFloat(parseFloat(total)+parseFloat(scorearr[i].score)).toFixed(2);
           }
         }
-        // alert(total);
-        var avg=parseFloat(total/((parseFloat(scorearr.length/2).toFixed(2))-2)).toFixed(2); 
-        // alert(JSON.stringify(temparr));
-        // alert(JSON.stringify(scorearr));
+        var avg=parseFloat(total/((parseFloat(scorearr.length/2).toFixed(2))-2)).toFixed(2);
         for(var i=2;i<(temparr).length;i++){
         for(var j=0;j<scorearr.length;j++){
-          // alert(temparr[i].id+"  "+scorearr[j].studentid);
           if(temparr[i].id==scorearr[j].student_id){
           if(scorearr[j].sub_category_id=="s1-c1-sub1"){
-              // alert(scorearr[j].value+" "+avg);
               if(parseFloat(scorearr[j].score)>=parseFloat(avg)){
-                // alert('if');
                 temparr[i].speed="greater";
               }
               else if(parseFloat(scorearr[j].score)<parseFloat(avg)){
-                // alert('else if');
                 temparr[i].speed="lesser";
               }
           }
@@ -128,16 +118,13 @@
           }
         }
         }        
-        // alert(JSON.stringify(temparr[2]));
         for(var i=0;i<temparr.length;i++){
           for(var j=0;j<gradearr.length;j++){
             if(temparr[i].speed==gradearr[j].type&&((temparr[i].comprehension>=gradearr[j].minimum)&&(temparr[i].comprehension<=gradearr[j].maximum)))
               temparr[i].grade=gradearr[j].grade;
           }
         }
-        // alert(JSON.stringify(temparr));
         this.studarr=[];
-        // alert(JSON.stringify(temparr));
         var overall=[];
         for(var i=0;i<temparr.length;i++){
           var obj={};
@@ -153,30 +140,23 @@
           overall.push(obj);
         }
         this.studarr=overall;
-
-        // alert(JSON.stringify(overall));
-
         for(var i=0;i<overall.length;i++){
           for(var j=0;j<overall[i].category.length;j++){
             for(var k=0;k<scorearr.length;k++){
               if(overall[i].category[j].studentid==scorearr[k].student_id&&overall[i].category[j].categoryid==scorearr[k].category_id&&overall[i].category[j].subcategoryid==scorearr[k].sub_category_id&&overall[i].category[j].subjectid==scorearr[k].subject_id)
               {
-                // alert("In");
                 scorearr[k].grade=overall[i].grade;
               }
             }
           }
         }
-        // alert(JSON.stringify(scorearr));
         this.FnSetAlreadyEnteredMarks(scorearr);
-        // document.querySelector('beginner-assesment-service').setstudarr(overall);
         }
         else{
         alert('Please complete all student entry!!');
         }        
         }
         else{
-        // alert(JSON.stringify(temparr));
         if((temparr.length)-2==(scorearr.length)){
         for(var i=2;i<temparr.length;i++){
           for(var j=0;j<gradearr.length;j++){
@@ -186,9 +166,7 @@
             }
           }
         }
-        // alert(JSON.stringify(temparr));
         this.studarr=[];
-        // alert(JSON.stringify(temparr));
         var overall=[];
         for(var i=0;i<temparr.length;i++){
           var obj={};
@@ -199,20 +177,14 @@
           obj.hiddenoutinput=temparr[i].hiddenoutinput;
           obj.category=temparr[i].category;
           obj.grade=temparr[i].grade;
-          // obj.speed=temparr[i].speed;
-          // obj.comprehension=temparr[i].comprehension;
           overall.push(obj);
         }
         this.studarr=overall;
-
-        // alert(JSON.stringify(overall));
-
         for(var i=0;i<overall.length;i++){
           for(var j=0;j<overall[i].category.length;j++){
             for(var k=0;k<scorearr.length;k++){
               if(overall[i].category[j].studentid==scorearr[k].student_id&&overall[i].category[j].categoryid==scorearr[k].category_id&&overall[i].category[j].subcategoryid==scorearr[k].sub_category_id&&overall[i].category[j].subjectid==scorearr[k].subject_id)
               {
-                // alert("In");
                 scorearr[k].grade=overall[i].grade;
               }
             }

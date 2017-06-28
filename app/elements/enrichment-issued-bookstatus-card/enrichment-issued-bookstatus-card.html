@@ -8,18 +8,31 @@
     #total {
     width: 100%;
     background-color: red;
-    height: 30px;
+    height: 25px;
+    margin-top: 3%;
     }
     #completed {
     /*width: 0%;*/
-    height: 30px;
+    height: 25px;
     background-color: green;
     }
+    b{
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      color: #27408B;
+    }
+    .card{
+      /*background-color: #ffffff;*/
+    /*box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;*/
+    }
     </style>
-    <div>
-        <h5>{{assesmenttype}} - {{activity}} - {{status}} </h5>
-        
-        <ul>
+    <div class="card">
+        <br>
+        <b>{{sno}}) {{assesmenttype}} - {{activity}} - {{status}}  
+        <paper-icon-button hidden$="{{hidemore}}"  icon="icons:expand-more" on-click="FnExpand"></paper-icon-button>
+        <paper-icon-button hidden$="{{hideless}}" icon="icons:expand-less" on-click="FnLess"></paper-icon-button >
+        </b>        
+        <ul hidden$="{{showicon}}">
           <template is="dom-repeat" items="{{paramarr}}">
           <li>{{item.param}}-{{item.flag}} 
           <iron-icon icon="av:stop" style="fill: green;" hidden$="{{item.gflag}}">
@@ -28,13 +41,16 @@
           </iron-icon>
           </li>
           </template>
-        </ul>    
-
-        <h1>Overall Completeness</h1>
-
+        </ul>  
+        <br>  
+        <br>
+        <b>Overall Completeness</b>
+        <br>
         <div id="total">
-          <div id="completed{{activity}}"><b>Completed&nbsp;&nbsp;&nbsp;{{completed}}%</b></div>
-        </div>  
+          <div id="completed{{activity}}"><b style="padding-top: 10px;">Completed&nbsp;&nbsp;&nbsp;{{completed}}%</b></div>
+        </div>
+        <!-- <hr>   -->
+        <br>
     </div>
   </template>
   <script>
@@ -42,10 +58,25 @@
     'use strict';
     Polymer({
       is: 'enrichment-issued-bookstatus-card',         
+      ready:function(){
+        this.showicon=true;
+        this.hideless=true;
+        this.hidemore=false;
+      },
+      FnExpand:function(){
+        this.showicon=false;
+        this.hideless=false;
+        this.hidemore=true;
+      },
+      FnLess:function(){
+        this.showicon=true;
+        this.hideless=true;
+        this.hidemore=false;
+      },
       attached:function(){
         // alert('ready!'+document.querySelector('#completed'+this.activity)+"  "+this.completed+"  "+this.activity);
         document.getElementById('completed'+this.activity).style.width=this.completed+"%";
-        document.getElementById('completed'+this.activity).style.height="30px";
+        document.getElementById('completed'+this.activity).style.height="25px";
         document.getElementById('completed'+this.activity).style.backgroundColor="green";
         document.getElementById('completed'+this.activity).style.align="center";
       }

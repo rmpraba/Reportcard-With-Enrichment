@@ -59,6 +59,7 @@
       },
       FnDue:function(e){
         this.page="enrichment-due-card";
+        this.$.enrichmentservice.FnFetchDueInfo(localStorage.getItem('curr_sess_studentid'));
       },
       FnPerformance:function(e){
         this.page="enrichment-performance-card";

@@ -140,8 +140,7 @@ app.post('/changepassword-service',  urlencodedParser,function (req, res)
     }
     }
     else
-      console.log(err);
-    
+      console.log(err);    
   });
 });
 
@@ -9257,6 +9256,26 @@ app.post('/fetchissuedbook-service',  urlencodedParser,function (req,res)
   });
 });
 
+app.post('/fetchdueinfo-service',  urlencodedParser,function (req,res)
+  {  
+    var qur="SELECT * FROM enrichment_bookissuance_details WHERE student_id='"+req.query.studentid+"' and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"'";
+    console.log('------------fetch issued book -------------');
+    console.log(qur);
+    connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': rows});
+    }
+    else{
+      console.log(err);
+     res.status(200).json({'returnval': 'no rows'}); 
+    }
+  });
+});
+
+
 app.post('/fetchevaluationparameters-service',  urlencodedParser,function (req,res)
   {  
     var qur="SELECT * FROM enrichment_evaluation_parameter_mapping WHERE book_id='"+req.query.bookid+"'";
@@ -9337,7 +9356,7 @@ app.post('/updatereturnstatus-service',  urlencodedParser,function (req,res)
 
 app.post('/fetchperformancemeasures-service',  urlencodedParser,function (req,res)
   {  
-    var beginnerqur="SELECT assesment_type,student_id,student_name,subject_id,category_id,score,grade FROM tr_beginner_assesment_marks WHERE school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and student_id='"+req.query.studentid+"' group by assesment_type,category_id,student_id,student_name,subject_id,score,grade";
+    var beginnerqur="SELECT assesment_type,student_id,student_name,subject_id,category_id,category_name,score,grade FROM tr_beginner_assesment_marks WHERE school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and student_id='"+req.query.studentid+"' group by assesment_type,category_id,student_id,student_name,subject_id,score,grade,category_name";
     // var assignedqur="SELECT * FROM enrichment_bookissuance_details WHERE school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and student_id='"+req.query.studentid+"'";
     var assignedqur="SELECT * FROM enrichment_bookissuance_details bi join enrichment_evaluation_parameter_mapping m "+
     " on(bi.bookactivity_id=m.book_id) WHERE school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and student_id='"+req.query.studentid+"'";

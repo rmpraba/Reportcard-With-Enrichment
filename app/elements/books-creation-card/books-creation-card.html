@@ -4,9 +4,6 @@
 <dom-module id="books-creation-card">
   <template>
     <style>
-      :host {
-        display: block;
-      }
       .container{
         @apply(--layout-horizontal);
         width: 100%;
@@ -36,27 +33,32 @@
         @apply(--layout-vertical);
       }
       .button{
-            width: 10%;
-            background: #252626;
-            color: white;
-            margin-top: 2%;
-            text-transform: none;
-            margin-left: 3%;
+        width: 10%;
+        background: #252626;
+        color: white;
+        margin-top: 2%;
+        text-transform: none;
+        margin-left: 3%;
       }
       #btn2{
-            width: 10%;
-            background: #252626;
-            color: white;
-            margin-top: 2%;
-            height: 40px;
-            border-radius: 2px;
-            font-family: Calibri;
-            font-size: 17px;
+        width: 10%;
+        background: #252626;
+        color: white;
+        margin-top: 2%;
+        height: 40px;
+        border-radius: 2px;
+        font-family: Calibri;
+        font-size: 17px;
+      }
+      h1{
+      font-size: 27px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      color: #27408B;
       }
     </style>
     <h1 align="center">Book Creation</h1>
     <div class="container">
-
     <div class="card1">
       <div class="checkcard">
       <h4>Select Grade</h4>
@@ -75,9 +77,7 @@
       <br/> 
       </template>
       </div>
-      </paper-card>
-      
-      
+      </paper-card>      
       <h4>Select Grade Level</h4>
       <!-- <paper-checkbox on-change="FnGradeLevel">Grade Level</paper-checkbox> -->
       <div class="gradelevelcard">
@@ -88,8 +88,7 @@
       </div>
       </div>
       <br/>
-      <hr/>     
-      
+      <!-- <hr/>            -->
       <div>
       <h4>Select Category</h4>
         <paper-dropdown-menu id="enrichmentbookcreationassesmentt" label="Select Assesment" disabled="{{read}}" required hidden>
@@ -106,8 +105,7 @@
         <paper-checkbox hidden$="{{hidebookactivity}}" id="enrichmentbook" on-change="FnBook">Book</paper-checkbox>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <paper-checkbox hidden$="{{hidebookactivity}}" id="enrichmentactivity" on-change="FnActivity">Activity</paper-checkbox>        
       </div>
-      <hr/>
-      
+      <!-- <hr/> -->
       <div class="bookinfocontainer" hidden$="{{hidebookinfocontainer}}">
       <paper-input  label="Book/Activity Name" value="{{value}}" on-keydown="FnSearchBook" hidden$="{{hideoldbookactivity}}"></paper-input>
       <paper-listbox class="dropdown-content" id="enrichmentsearchbook" on-iron-select="FnSelectBook">
@@ -136,7 +134,6 @@
       <paper-button class="button" id="btn2" on-click="FnSubmit">Submit</paper-button>
       <paper-button class="button" id="btn2" on-click="FnCancel">Cancel</paper-button>
     </div>
-    
     <!-- <div class="card2"> -->
       <!-- <h5>Available Books</h5> -->
     <!-- </div>       -->

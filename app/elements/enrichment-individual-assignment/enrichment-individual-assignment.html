@@ -11,22 +11,30 @@
     }
     .card1{
       width: 25%;
+      margin-top: 5%;
     }
     .card2{
       width: 75%;
+    }
+    .card-content{
+      text-align: center;
+    }
+    b{
+      font-family: Arial, Helvetica, sans-serif;
+      color: #27408B;
     }
     </style>
     <div class="container">
     <div class="card1">
     <paper-card image="../../images/studenttosubject.jpg" on-click="FnClickStudent">
     <div class="card-content">
-    <div class="cafe-header">{{studentname}}
+    <div class="cafe-header"><b>{{studentname}}</b>
       <div class="cafe-location cafe-light">
-        <span>Grade</span>
+        <span><b>Grade</b></span>
       </div>
     </div>
     <div class="cafe-rating">
-      {{studentid}}
+      <b>{{studentid}}</b>
     </div>
     </div>
     </paper-card>

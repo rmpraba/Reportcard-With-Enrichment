@@ -11,9 +11,9 @@
     <div class="container">
       <div id="chartContainer" style="height: 300px; width: 40%;"></div>
       <div style="width: 60%; margin-left: 5%;" id="booksContainer">
-        <h4>Issued Books</h4>
+        <h3>Issued Books</h3>
         <template is="dom-repeat" items="{{activityarr}}">
-        <enrichment-issued-bookstatus-card completed="{{item.completed}}" status="{{item.status}}" assesmenttype="{{item.assesmenttype}}" activity="{{item.activity}}" paramarr="{{item.parameter}}"></enrichment-issued-bookstatus-card>
+        <enrichment-issued-bookstatus-card sno="{{item.sno}}" completed="{{item.completed}}" status="{{item.status}}" assesmenttype="{{item.assesmenttype}}" activity="{{item.activity}}" paramarr="{{item.parameter}}"></enrichment-issued-bookstatus-card>
         </template>
       </div>
     </div>
@@ -26,6 +26,7 @@
     Polymer({
       is: 'enrichment-performance-card',
       FnCompariosionValuePreparation:function(arr){
+        alert(JSON.stringify(arr));
        if(arr.length>0){      
        for(var i=0;i<arr.length;i++)
        {
@@ -33,8 +34,8 @@
         var dataPoints=[];
         var obj={};
         obj.type= "column";
-        obj.name= arr[i].category_id;
-        obj.legendText= arr[i].category_id;
+        obj.name= arr[i].category_name;
+        obj.legendText= arr[i].category_name;
         obj.showInLegend= true;
         var obj1={};
         obj1.label=arr[i].assesment_type;
@@ -126,6 +127,7 @@ FnActivityCompleteness:function(assigned,parameter,assesment){
         var c1=0,c2=0;
         var parameter=[];
         var obj={};
+        obj.sno=i+1;
         obj.activity= assigned[i].bookactivity_name;
         obj.assesmenttype= assigned[i].assesment_type;
         obj.status= assigned[i].status;

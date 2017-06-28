@@ -191,7 +191,14 @@
         categoryname="";
         categoryid="";
         this.hidecard=true;
-        this.hidestudlistcard=true;  
+        this.hidestudlistcard=true; 
+        this.studlevelarr="";
+        this.booklevelarr=""; 
+      },
+      FnTempRefresh:function(){
+        this.hidestudlistcard=true;
+        this.studlevelarr="";
+        this.booklevelarr="";
       },
       FnSetStudents:function(stud){
         document.querySelector('enrichment-studentlevel-card').FnSetBooks(stud);

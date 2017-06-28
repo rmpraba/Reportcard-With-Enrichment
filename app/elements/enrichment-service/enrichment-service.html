@@ -127,6 +127,17 @@
         on-response="fetchissuedbookResponse"
         debounce-duration="300"
     >
+
+    <iron-ajax
+        method="post"
+        id="fetchdueinfoajax"
+        url="{{fetchdueinfourl}}"
+        params="{{fetchdueinfoparam}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="fetchdueinfoResponse"
+        debounce-duration="300"
+    >
     
     <iron-ajax
         method="post"
@@ -489,6 +500,7 @@
         }
         else{
         alert('Students not available in this category!!');
+        document.querySelector('enrichment-booksmapping-card').FnTempRefresh();
         }
       },
       FnFetchBookForStudent:function(studentid){
@@ -563,6 +575,27 @@
         var arr=e.detail.response.returnval;
         // alert(JSON.stringify(arr));
         document.querySelector('enrichment-evaluation-card').itemarr=arr;
+        // document.querySelector('enrichment-due-card').itemarr=arr;
+      },
+      FnFetchDueInfo:function(studentid){
+        this.fetchdueinfourl=sessionStorage.getItem("addrinfo")+"/fetchdueinfo-service";
+        var obj={}; 
+        obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+        obj.academicyear=localStorage.getItem("curr_sess_academicyear");
+        obj.assesmenttype=localStorage.getItem("curr_sess_assesment");
+        obj.gradename=localStorage.getItem("curr_sess_gradename");
+        obj.sectionname=localStorage.getItem("curr_sess_sectionname");
+        obj.subjectname=localStorage.getItem("curr_sess_subjectname");
+        obj.categoryname=localStorage.getItem("curr_sess_categoryname");
+        obj.studentid=studentid;
+        this.fetchdueinfoparam= obj;
+        this.$.fetchdueinfoajax.generateRequest();
+      },
+      fetchdueinfoResponse:function(e){
+        var arr=e.detail.response.returnval;
+        // alert(JSON.stringify(arr));
+        // document.querySelector('enrichment-evaluation-card').itemarr=arr;
+        document.querySelector('enrichment-due-card').itemarr=arr;
       },
       FnUpdateAssesmentStatus:function(paramarr){
         this.updateassesmentstatusurl=sessionStorage.getItem("addrinfo")+"/updateassesmentstatus-service";
