@@ -9524,6 +9524,25 @@ app.post('/fetchenrichmentgrade-service',  urlencodedParser,function (req,res)
   });
 });
 
+
+app.post('/enrichmentsubject-service',  urlencodedParser,function (req,res)
+{  
+    var qur="SELECT distinct(subject_id),subject_name FROM enrichment_subject_mapping where school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and grade_name='"+req.query.gradename+"' and  assesment_type='"+req.query.assesmentname+"'";
+    console.log('------------enrichment_subject_mapping-------------');
+    console.log(qur);
+    connection.query(qur,function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': rows});
+    }
+    else{
+      console.log(err);
+      res.status(200).json({'returnval': 'no rows'}); 
+    }
+  });
+});
+
 var server = app.listen(5000, function () {
 var host = server.address().address
 var port = server.address().port

@@ -58,10 +58,13 @@
             </paper-menu>
           </paper-dropdown-menu>
           <paper-dropdown-menu id="subject" label="Select Subject" disabled="{{read}}" required>
-            <paper-menu id="subjectnam" class="dropdown-content"  on-iron-select="FnSelectSubject"  attr-for-selected="value" required> 
-              <paper-item value="English">English</paper-item>
-              <paper-item value="Mathematics">Mathematics</paper-item>
-              <paper-item value="EVS">EVS</paper-item>
+            <paper-menu id="subjectnam" class="dropdown-content"  on-iron-select="FnSelectSubject"  attr-for-selected="value" required>
+              <template is="dom-repeat" items="{{subjectarr}}">
+                <paper-item value="{{item.subject_id}}">{{item.subject_name}}</paper-item>
+              </template>
+              <!-- <paper-item value="English">English</paper-item> -->
+              <!-- <paper-item value="Mathematics">Mathematics</paper-item> -->
+              <!-- <paper-item value="EVS">EVS</paper-item> -->
             </paper-menu>
           </paper-dropdown-menu>        
      </div>
@@ -85,6 +88,7 @@
         assesmentname = e.target.selectedItem.textContent.trim();
         localStorage.setItem("curr_sess_assesmentname",assesmentname);
         if(this.flag==1){
+        this.$.bassesmentservice.callEnrichmentSubjectService(assesmentname,gradename);    
         this.FnServiceCall(); 
         }
       },
@@ -92,6 +96,7 @@
         academicyear = e.target.selectedItem.textContent.trim();
         localStorage.setItem("curr_sess_academicyear",academicyear);
         if(this.flag==1){
+        this.$.bassesmentservice.callEnrichmentSubjectService(assesmentname,gradename);    
         this.FnServiceCall(); 
         }
       },
@@ -100,13 +105,14 @@
         localStorage.setItem("curr_sess_grade",gradename);
         this.$.bassesmentservice.callSectionService(gradename);
         if(this.flag==1){
+        this.$.bassesmentservice.callEnrichmentSubjectService(assesmentname,gradename);    
         this.FnServiceCall();  
         }        
       },
       FnSelectSection:function(e){        
         section = e.target.selectedItem.textContent.trim();
         localStorage.setItem("curr_sess_section",section); 
-        // this.$.bassesmentservice.callSubjectService(gradename,section);    
+        this.$.bassesmentservice.callEnrichmentSubjectService(assesmentname,gradename);    
         if(this.flag==1){
         this.FnServiceCall();  
         }     

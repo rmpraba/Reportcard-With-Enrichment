@@ -146,7 +146,16 @@
         on-response="fetchbeginnerstudentforreportResponse"
         debounce-duration="300"
     >
-    
+    <iron-ajax        
+        method="post"
+        id="enrichmentsubjectajax"
+        url="{{enrichmentsubjecturl}}"
+        params="{{enrichmentsubjectparam}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="enrichmentsubjectResponse"
+        debounce-duration="300"
+    >
   </template>
   <script>
   (function() {
@@ -161,6 +170,22 @@
     Polymer({
       is: 'beginner-assesment-service',
       ready:function(){
+      },
+      callEnrichmentSubjectService:function(assesmentname,gradename){
+        this.enrichmentsubjecturl=sessionStorage.getItem("addrinfo")+"/enrichmentsubject-service";
+         var obj={"schoolid":"","loggedid":"","gradename":"","roleid":""};
+         obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+         obj.loggedid=sessionStorage.getItem("curr_sess_loggedid");
+         obj.roleid=sessionStorage.getItem("curr_sess_loggedroleid");
+         obj.academicyear=localStorage.getItem("curr_sess_academicyear");
+         obj.gradename=gradename;
+         obj.assesmentname=assesmentname;
+         this.enrichmentsubjectparam= obj;
+         this.$.enrichmentsubjectajax.generateRequest();
+      },
+      enrichmentsubjectResponse:function(e){
+        var arr=e.detail.response.returnval;
+        document.querySelector('beginner-assesment-card').subjectarr=arr;
       },
       FnFetchBeginnerMarksForGrade:function(){
         this.fetchbeginnermarksforgradeurl=sessionStorage.getItem("addrinfo")+"/fetchbeginnermarksforgrade-service";
@@ -491,13 +516,14 @@
       },
       callbamarkinsertService:function(arr){
         // alert(JSON.stringify(arr));
-        count1=arr.length;
+        
         this.insertbamarkurl=sessionStorage.getItem("addrinfo")+"/insertbamark-service";
         var obj={"schoolid":"","academicyear":"","assesmentid":"","classid":"","subject":"","studentid":"","category":"","mark":"","score":"","grade":""};
         obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
         obj.academicyear=localStorage.getItem("curr_sess_academicyear");
         obj.assesmentid=localStorage.getItem("curr_sess_assesmentname");
         for(var i=0;i<arr.length;i++){
+        // count1=arr.length;
         obj.assesmenttype=arr[i].assesmenttype;
         obj.classid=arr[i].classid;
         obj.gradeid=arr[i].gradeid;
@@ -521,13 +547,14 @@
       },
       insertbamarkResponse:function(e){
         // alert(e.detail.response.returnval);
-        count2++;
-        // // alert(count1+"  "+count2);
-        if(count1==count2){
+        // count2++;
         alert("Saved!!");
-        count1=0;
-        count2=0;
-        }
+        // alert(count1+"  "+count2);
+        // if(count1==count2){
+        // alert("Saved!!");
+        // count1=0;
+        // count2=0;
+        // }
       },
       callFetchGradeService:function(score){
         this.fetchgradeurl=sessionStorage.getItem("addrinfo")+"/fetchgrade-service"; 
