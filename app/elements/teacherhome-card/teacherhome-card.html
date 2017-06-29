@@ -11,6 +11,9 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
 <link rel="import" href="../beginner-assesment-service/beginner-assesment-service.html">
 <link rel="import" href="../term-assesment-service/term-assesment-service.html">
 <link rel="import" href="../scorecard-service/scorecard-service.html">
+<link rel="import" href="../student-report-service/student-report-service.html">
+<link rel="import" href="../employee-report-service/employee-report-service.html">
+
 
 
 <dom-module id="teacherhome-card">
@@ -432,6 +435,20 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
                <h4>Role To Grade Mapping</h4>
             </paper-button>
        </div> 
+
+       <div class="card" hidden$="{{empreportdetails}}">
+            <paper-button on-click="FnEmpreportdetails" no ink><img src="../../images/empexcelimg.jpg" height="180px" width="180px">
+               <h4>Employee Report</h4>
+            </paper-button>
+       </div> 
+      
+    
+      <div class="card" hidden$="{{studentsectionreport}}">
+            <paper-button on-click="Fnstudentreport" no ink><img src="../../images/studentreport.jpg" height="180px" width="180px">
+               <h4>Student To Section Report</h4>
+            </paper-button>
+       </div>
+
       
     </div>
  
@@ -480,6 +497,8 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
     <teacher-observation_service id="observerservice"></teacher-observation_service>
     <master-ui-service id="uiservice"></master-ui-service> 
     <mapping-service id="mappingservice"></mapping-service>
+    <employee-report-service id="empservice"></employee-report-service>
+    <student-report-service id="reportservice"></student-report-service>
 
   </template>
   <script>
@@ -515,6 +534,8 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
         this.sectioncreation=true;
         this.gradetosection=true;
         this.roletogrademapping=true;
+        this.empreportdetails=true;
+        this.studentsectionreport=true;
        }, 
 
       FnSelectacademicyear:function(e){  
@@ -618,6 +639,23 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
           this.$.mappingservice.fetchschooltypesforgradetorolemapService();
           this.$.mappingservice.fetchrolesforgradetorolemapService();
          }  
+
+
+         if(localStorage.getItem('curr_sess_loggedassesmenttype')=="empreportdetails") 
+         {          
+          document.querySelector('app-card').setPage('homepage','');
+          document.querySelector('home-page').setPage('employee-report-card','');
+          this.$.empservice.FnSelectemp();
+          this.$.empservice.Selectempschooltype();
+          
+         }  
+         if(localStorage.getItem('curr_sess_loggedassesmenttype')=="studentsectionreport")
+         {
+           document.querySelector('app-card').setPage('homepage','');
+            document.querySelector('home-page').setPage('student-to-section-report',''); 
+            this.$.reportservice.gradeService();
+         } 
+
              this.$.cdialog.close();
          
       },
@@ -718,6 +756,8 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
            this.gradetosection=false;
            this.subjecttostudent=false;
            this.roletogrademapping=false;
+            this.empreportdetails=false;
+           this.studentsectionreport=false;
            }
        if(sessionStorage.getItem("curr_sess_loggedroleid")=='superadmin')
           {
@@ -998,7 +1038,21 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
         localStorage.setItem('curr_sess_loggedassesmenttype','roletogrademapping');
         // this.$.scorecardservice.callGradeService();
         this.$.cdialog.toggle();
-      }
+      },
+      FnEmpreportdetails:function(e){
+         localStorage.setItem('curr_sess_loggedassesmenttype','empreportdetails');
+          document.querySelector('employee-report-card').fnhidden();
+         this.$.cdialog.toggle();
+
+      },
+      Fnstudentreport:function()
+      {
+          //alert("test");
+           localStorage.setItem('curr_sess_loggedassesmenttype','studentsectionreport');
+           document.querySelector('student-to-section-report').Fnrefresh();
+           document.querySelector('student-to-section-report').ready();
+           this.$.cdialog.toggle();
+      },
 
     });
   })();
