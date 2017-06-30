@@ -8,8 +8,8 @@ var dbserver_ip_address = process.env.OPENSHIFT_MYSQL_DB_HOST || '127.0.0.1'
 var connection = mysql.createConnection({
    host     : 'localhost',
    user     : 'root',
-   password : '',
-   database : 'master'
+   password : 'admin',
+   database : 'scorecarddb'
    // port: '64091',
    // user: 'adminvRjnewB',
    // password: 'DNrIgJ3-ecwp',
@@ -9549,7 +9549,7 @@ app.post('/Selectemp-service' ,urlencodedParser,
 
 {  
  /* var qur="select distinct id,(select emp_name from md_employee_creation where emp_id=id and school_id='"+req.query.school_id+"'and academic_year='"+req.query.academic_year+"') as name from mp_teacher_grade where school_id='"+req.query.school_id+"'and academic_year='"+req.query.academic_year+"' and flage='active'";*/
- var qur="select emp_id,emp_name from md_employee_creation where school_id='"+req.query.school_id+"'and academic_year='"+req.query.academic_year+"'";
+ var qur="select emp_id,emp_name from md_employee_creation where school_id='"+req.query.school_id+"' and academic_year='"+req.query.academic_year+"' and flage='active'";
     console.log(qur);
   connection.query(qur,function(err, rows){
     if(!err){
