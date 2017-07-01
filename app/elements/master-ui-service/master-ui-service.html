@@ -1187,6 +1187,7 @@ Generatesectionid:function()
       var res=e.detail.response.returnval; 
     //  alert(JSON.stringify(res));
         document.querySelector('Student-to-section-mapping-card').Studentsection(res);
+        document.querySelector('Student-to-section-mapping-card').sectionsetarr=res;
      },
      fnsetstudentinfo:function(studeninfoarr,stugradeid,schooltype){
        // alert('1');

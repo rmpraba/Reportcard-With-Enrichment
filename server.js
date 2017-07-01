@@ -9,7 +9,7 @@ var connection = mysql.createConnection({
    host     : 'localhost',
    user     : 'root',
    password : '',
-   database : 'master'
+   database : 'reportcard1'
    // port: '64091',
    // user: 'adminvRjnewB',
    // password: 'DNrIgJ3-ecwp',

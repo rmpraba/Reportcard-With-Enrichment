@@ -34,10 +34,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      }
     .subbutton paper-button  
       {
+        position: absolute;
         background-color: #363636;
         color: #ffffff;                
-        width: 30%;
-        margin-left: 14em;
+        margin-left: 49%;
         margin-top: 10em;
       }
       
@@ -163,7 +163,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           position: absolute;
           width: 60%;
       }
-    
+      #allchk
+      {
+            position: absolute;
+          margin-left: -5%;
+          margin-top: -2%;
+      }
+
+      #id11
+      {
+            position: absolute;
+          margin-top: -2%;
+          margin-left: 10%;
+      }
+      #stdchzz
+      {
+            position: absolute;
+          margin-left: 16%;
+          margin-top: -2%
+      }
     </style>    
     
     <div>
@@ -174,7 +192,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div class="section1">
 
           <div class="hrspace" id="allchk">
-              <paper-checkbox id="chk2" on-change="allstudent"></paper-checkbox>  
+              <paper-checkbox id="chkkk2" on-change="allstudent"></paper-checkbox>  
               <label>Select All Student</label>
           </div>
             <div class="hrspace" id="id11">
@@ -231,7 +249,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <table style="border-collapse: collapse;">            
             <tr>
               <th></th>
-              <td style="padding-left: 4%;">
+              <td style="padding-left: 5%;">
                 <template is="dom-repeat" items="{{sectionsetarr}}" as="view">
                   <td id="tdid">{{view.section_id}}</td>
                 </template>
@@ -240,7 +258,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </tr>     
             <tbody>
               <td><h4>{{value}}</h4></td>
-                <td style="width: 80%;">
+                <td width="80%">
                   <table border="0">
                   <tr>
                      <template is="dom-repeat" items="{{sectionsetarr}}" as="s">
@@ -251,7 +269,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                       </template>
                       
                       <td>
-                        <paper-icon-button style="margin-left: 10em;" icon="save" on-click="fnsubmit"></paper-icon-button>
+                        <paper-icon-button icon="save" on-click="fnsubmit"></paper-icon-button>
                       </td>
                    </tr>
                   </table>
@@ -373,8 +391,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       
    Polymer({
       is: 'Student-to-section-mapping-card',
+
       funnstudent:function()
        {
+        
+        chzz.checked=false;
+          chkkk2.checked=false;
         this.$.z.hidden=true;
         this.$.z1.hidden=true;
         this.hidenewtabb=true;
@@ -384,8 +406,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.hideschooltype=true;
           this.hidesetgrade=true;
           this.value="";
-          chzz.checked=false;
-          chk2.checked-false;
           this.hidespecific=true;
           //document.querySelector('#studentselect').selected=-1;
           
@@ -435,7 +455,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.$.z1.hidden=true;
         this.hidenewtabb=false;
         this.$.nextbutton.hidden=false;
-        this.hidegenerateopt=true;
+        //this.hidegenerateopt=true;
         this.$.stdchzz.hidden=false;
         this.$.chzz.hidden=false;
         
@@ -986,7 +1006,8 @@ for(var j=0;j<l.length;j++){
    studentlistarr=arr;
     },
     Studentsection:function(arr){
-     sectionarr=arr; 
+     sectionarr=arr;
+     
      //alert(JSON.stringify(sectionarr));
     },
   /* fnemployeename:function(e){
@@ -1030,14 +1051,14 @@ for(var j=0;j<l.length;j++){
       selectstudentzz:function(e)
       {
         //alert('test');
-
+        this.hidegenerateopt=true;
         if(chzz.checked==true)
       {
           this.hideschooltype=false;
           this.hidesetgrade=false;
-          chk2.checked=false;
+          chkkk2.checked=false;
           this.$.studz.hidden=false;
-          this.hidegenerateopt=true;
+          
           document.querySelector('Student-to-section-mapping-item-card').FnRefresh();
           document.querySelector('#empgradeiddd').selected=-1;
 
@@ -1047,8 +1068,6 @@ for(var j=0;j<l.length;j++){
           this.$.studz.hidden=true; 
          this.hideschooltype=true;
           this.hidesetgrade=true;
-          this.hidegenratebutton=true;
-
       }
       },
 
@@ -1157,7 +1176,7 @@ for(var j=0;j<l.length;j++){
 
     allstudent:function(e)
     {
-      if(chk2.checked==true)
+      if(chkkk2.checked==true)
       {
           this.hideschooltype=false;
           this.hidesetgrade=false;
@@ -1187,8 +1206,7 @@ for(var j=0;j<l.length;j++){
         this.$.uiservice.fnsubmitsection(studentsetarr,schooltype);
         this.itemArray=[];
         this.value="";
-        this.hidespecific=true;
-        this.$.mydialog.toggleDialog();
+        //this.hidespecific=true;
         document.querySelector('specific-student-section-card').studentsectionclean();
 
     },
@@ -1202,14 +1220,11 @@ for(var j=0;j<l.length;j++){
       this.adminno1=adn;
       //alert(this.adminno1);
     },
-/*
-    fnsectionsubmit:function()
-    {
-      alert('testttt');
-      this.$.mydialog.toggleDialog();
-    }
-    */
     
+    fngradechange:function()
+    {
+      document.querySelector('#empgradeiddd').selected=-1; 
+    }
   
    
     }); 
