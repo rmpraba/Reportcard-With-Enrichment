@@ -1105,7 +1105,7 @@
       </iron-ajax>
 
 
-
+<!-- 
       <iron-ajax
             id="selectspecificstudentajax"
             url="{{selectspecificstudenturl}}"
@@ -1136,7 +1136,7 @@
             method="post"
             on-response="previoussectionResponse"
             debounce-duration="300">
-      </iron-ajax>
+      </iron-ajax> -->
 
 
       <demosumbit-card id="service1"></demosumbit-card>
@@ -1187,7 +1187,7 @@ Generatesectionid:function()
       var res=e.detail.response.returnval; 
     //  alert(JSON.stringify(res));
         document.querySelector('Student-to-section-mapping-card').Studentsection(res);
-        document.querySelector('Student-to-section-mapping-card').sectionsetarr=res;
+       // document.querySelector('Student-to-section-mapping-card').sectionsetarr=res;
      },
      fnsetstudentinfo:function(studeninfoarr,stugradeid,schooltype){
        // alert('1');
@@ -3346,9 +3346,9 @@ insertschoolTypename:function(schooltypesarr)
         document.querySelector('working-days-card').scooltypgridval1(res);
      },
 
-       selectspecificstudent:function(admissionnum)
+     /*  selectspecificstudent:function(admissionnum)
      {
-        //alert(admissionnum);
+        
         this.selectspecificstudenturl=sessionStorage.getItem("addrinfo")+"/Fnselectspecific-service";
         var obj={"schl1":"","admissionnum":"","stugradeid":"","academic_year":""}
         obj.schl1=sessionStorage.getItem("curr_sess_loggedschoolid");
@@ -3356,7 +3356,7 @@ insertschoolTypename:function(schooltypesarr)
         
         obj.academic_year="AY-"+localStorage.getItem("curr_sess_academicyear");
         this.selectspecificstudentparam=obj;
-        //alert(JSON.stringify(obj));
+        
         this.$.selectspecificstudentajax.generateRequest();
      },
 
@@ -3364,7 +3364,7 @@ insertschoolTypename:function(schooltypesarr)
      {
    
         var res=e.detail.response.returnval;
-        //alert(JSON.stringify(res));  
+        
         
         document.querySelector('Student-to-section-mapping-card').studentname=res[0].student_name;
         
@@ -3375,7 +3375,7 @@ insertschoolTypename:function(schooltypesarr)
           
 
         document.querySelector('Student-to-section-mapping-card').fnadminno(adminsdas);
-        //alert(adminsdas);
+        
         document.querySelector('Student-to-section-mapping-card').dob=res[0].dob;
         
         document.querySelector('Student-to-section-mapping-card').gender=res[0].gender;
@@ -3383,8 +3383,7 @@ insertschoolTypename:function(schooltypesarr)
   
         fnsubmitsection:function(setsectionarr1,schooltype)
         {
-            //1alert("testing...");
-            //alert(setsectionarr1);
+           
             for(var i=0;i<setsectionarr1.length;i++)
             {
                 var id=setsectionarr1[i].id;
@@ -3407,21 +3406,16 @@ insertschoolTypename:function(schooltypesarr)
                 obj.school_type=schooltype;
                 obj.academic_year=localStorage.getItem("curr_sess_academicyear");
                 this.fnsubmitsectionparam=obj;
-               // alert(JSON.stringify(obj));
+               
                 this.$.fnsubmitsectionajax.generateRequest();
             }
         },
 
         fnsubmitsectionResponse:function(e)
         {
-            //alert('response............');
+            
             var res=e.detail.response.returnval;
-            //alert(JSON.stringify(res));
-
-            /*if(res=='Inserted!' && res=='updated successfully')
-            {
-                document.querySelector('Student-to-section-mapping-card').fnsectionsubmit();
-            }*/   
+             
         },
         previoussection:function(admissionno,gradeid,schooltype)
         {
@@ -3440,11 +3434,11 @@ insertschoolTypename:function(schooltypesarr)
         previoussectionResponse:function(e)
         {
             var res=e.detail.response.returnval;
-            //alert(JSON.stringify(res));
+            
             
               document.querySelector('specific-student-section-card').getprestudent(res);
 
-        }           
+        }           */
     });
   })();
   </script>

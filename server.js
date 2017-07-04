@@ -9,7 +9,7 @@ var connection = mysql.createConnection({
    host     : 'localhost',
    user     : 'root',
    password : '',
-   database : 'reportcard1'
+   database : 'reportcardnew'
 
    // port: '64091',
    // user: 'adminvRjnewB',
@@ -9720,11 +9720,9 @@ app.post('/selectallsection1-service',  urlencodedParser,function (req,res)
       });
 });
 
-app.post('/Fnselectspecific-service',  urlencodedParser,function (req,res)
+/*app.post('/Fnselectspecific-service',  urlencodedParser,function (req,res)
 {
     var qur1="SELECT * from md_admission where admission_no='"+req.query.admissionnum+"'  and school_id='"+req.query.schl1+"' and academic_year='"+req.query.academic_year+"'";  
-
-  //console.log(qur1);
 
   connection.query(qur1,
     function(err, rows)
@@ -9778,7 +9776,7 @@ app.post('/fnsubmitsection-service' , urlencodedParser,function (req, res)
     {
       console.log(rows.length);
      if(rows.length==0){
-     // console.log('1');
+     
      connection.query("INSERT INTO md_student SET ?",[qurr1],
     function(err, rows)
     {
@@ -9811,7 +9809,7 @@ app.post('/fnsubmitsection-service' , urlencodedParser,function (req, res)
 
    var qur="SELECT * from md_student where id='"+req.query.admission_no+"'  and school_id='"+req.query.scholid1+"' and grade_id='"+req.query.grade_id+"'and school_type='"+req.query.school_type+"' and academic_year='"+req.query.academic_year+"'";  
 
-  //console.log(qur);
+  
   connection.query(qur,
     function(err, rows)
     {
@@ -9819,7 +9817,7 @@ app.post('/fnsubmitsection-service' , urlencodedParser,function (req, res)
       {
         if(rows.length>0)
         {
-          //console.log(rows);
+          
           res.status(200).json({'returnval': rows});
         } 
       else 
@@ -9835,7 +9833,7 @@ app.post('/fnsubmitsection-service' , urlencodedParser,function (req, res)
     });
 });
 
-
+*/
 
 var server = app.listen(5000, function () {
 var host = server.address().address
