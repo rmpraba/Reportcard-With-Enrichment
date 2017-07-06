@@ -1105,7 +1105,7 @@
       </iron-ajax>
 
 
-<!-- 
+
       <iron-ajax
             id="selectspecificstudentajax"
             url="{{selectspecificstudenturl}}"
@@ -1136,7 +1136,7 @@
             method="post"
             on-response="previoussectionResponse"
             debounce-duration="300">
-      </iron-ajax> -->
+      </iron-ajax>
 
 
       <demosumbit-card id="service1"></demosumbit-card>
@@ -1187,7 +1187,7 @@ Generatesectionid:function()
       var res=e.detail.response.returnval; 
     //  alert(JSON.stringify(res));
         document.querySelector('Student-to-section-mapping-card').Studentsection(res);
-       // document.querySelector('Student-to-section-mapping-card').sectionsetarr=res;
+       document.querySelector('Student-to-section-mapping-card').sectionsetarr=res;
      },
      fnsetstudentinfo:function(studeninfoarr,stugradeid,schooltype){
        // alert('1');
@@ -3346,7 +3346,7 @@ insertschoolTypename:function(schooltypesarr)
         document.querySelector('working-days-card').scooltypgridval1(res);
      },
 
-     /*  selectspecificstudent:function(admissionnum)
+       selectspecificstudent:function(admissionnum)
      {
         
         this.selectspecificstudenturl=sessionStorage.getItem("addrinfo")+"/Fnselectspecific-service";
@@ -3413,13 +3413,12 @@ insertschoolTypename:function(schooltypesarr)
 
         fnsubmitsectionResponse:function(e)
         {
-            
             var res=e.detail.response.returnval;
+            alert(JSON.stringify(res));
              
         },
         previoussection:function(admissionno,gradeid,schooltype)
         {
-            
             this.previoussectionurl=sessionStorage.getItem("addrinfo")+"/previoussection-service";
                 var obj={"scholid1":"","admission_no":"","academic_year":"","grade_id":"","school_type":""};
                 obj.scholid1=sessionStorage.getItem("curr_sess_loggedschoolid");
@@ -3434,11 +3433,10 @@ insertschoolTypename:function(schooltypesarr)
         previoussectionResponse:function(e)
         {
             var res=e.detail.response.returnval;
-            
-            
+           // alert(JSON.stringify(res));
               document.querySelector('specific-student-section-card').getprestudent(res);
 
-        }           */
+        }           
     });
   })();
   </script>

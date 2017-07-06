@@ -9720,7 +9720,7 @@ app.post('/selectallsection1-service',  urlencodedParser,function (req,res)
       });
 });
 
-/*app.post('/Fnselectspecific-service',  urlencodedParser,function (req,res)
+app.post('/Fnselectspecific-service',  urlencodedParser,function (req,res)
 {
     var qur1="SELECT * from md_admission where admission_no='"+req.query.admissionnum+"'  and school_id='"+req.query.schl1+"' and academic_year='"+req.query.academic_year+"'";  
 
@@ -9833,7 +9833,7 @@ app.post('/fnsubmitsection-service' , urlencodedParser,function (req, res)
     });
 });
 
-*/
+
 
 var server = app.listen(5000, function () {
 var host = server.address().address
