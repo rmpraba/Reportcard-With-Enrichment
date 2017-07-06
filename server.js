@@ -8,8 +8,8 @@ var dbserver_ip_address = process.env.OPENSHIFT_MYSQL_DB_HOST || '127.0.0.1'
 var connection = mysql.createConnection({
    host     : 'localhost',
    user     : 'root',
-   password : '',
-   database : 'reportcardnew'
+   password : 'admin',
+   database : 'scorecarddb'
 
    // port: '64091',
    // user: 'adminvRjnewB',
@@ -357,17 +357,17 @@ app.post('/subject-service',  urlencodedParser,function (req, res)
   {
     var qur="select * from md_subject where subject_id in "+
   "(select subject_id from mp_teacher_grade where "+
-  "school_id='"+req.query.schoolid+"' and id='"+req.query.loggedid+"' and role_id='"+req.query.roleid+"' and "+
+  "school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and id='"+req.query.loggedid+"' and role_id='"+req.query.roleid+"' and "+
   "grade_id=(select grade_id from md_grade where grade_name='"+req.query.gradename+"') and "+
-  "section_id=(select section_id from md_section where section_name='"+req.query.section+"' and school_id='"+req.query.schoolid+"')) "+
-  "and subject_category in('"+req.query.subjectcategory+"')";
+  "section_id=(select section_id from md_section where section_name='"+req.query.section+"' and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"')) "+
+  " and subject_category in('"+req.query.subjectcategory+"')";
   }
   else if(req.query.roleid=='class-teacher')
   {
     var qur="select * from md_subject where subject_id in "+
     "(select subject_id from mp_grade_subject where grade_id "+
     "in(select grade_id from mp_teacher_grade where "+
-    "school_id='"+req.query.schoolid+"' and id='"+req.query.loggedid+"' and role_id='"+req.query.roleid+"') "+
+    "school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and id='"+req.query.loggedid+"' and role_id='"+req.query.roleid+"') "+
     "and subject_category in('"+req.query.subjectcategory+"')) ";
   }
    else if(req.query.roleid=='co-ordinator')
@@ -375,7 +375,7 @@ app.post('/subject-service',  urlencodedParser,function (req, res)
     var qur="select * from md_subject where subject_id in "+
     "(select subject_id from mp_grade_subject where grade_id "+
     "in(select grade_id from mp_teacher_grade where "+
-    "school_id='"+req.query.schoolid+"' and id='"+req.query.loggedid+"' and role_id='"+req.query.roleid+"'))";
+    "school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and id='"+req.query.loggedid+"' and role_id='"+req.query.roleid+"'))";
   }
   else if(req.query.roleid=='headmistress')
   {
@@ -888,9 +888,9 @@ var qur="select * from tr_student_to_subject "+
 "where  class_id="+
 "(select class_id from mp_grade_section where grade_id=(select grade_id "+
 "from md_grade where grade_name='"+req.query.gradename+"') and section_id=(select "+
-"section_id from md_section where section_name='"+req.query.section+"' and school_id='"+req.query.schoolid+"') and "+
+"section_id from md_section where section_name='"+req.query.section+"' and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"') and "+
 "subject_id=(select subject_id from md_subject where subject_name='"+req.query.subject+"') and "+
-"school_id='"+req.query.schoolid+"')";
+"school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"')";
 var qur1="select school_id,student_id as id,student_name,class_id "+
 "from tr_student_to_subject "+
 "where  class_id="+
@@ -902,8 +902,8 @@ var qur1="select school_id,student_id as id,student_name,class_id "+
 var qur2="select school_id,id,student_name,class_id from md_student where  class_id="+
 "(select class_id from mp_grade_section where grade_id=(select grade_id "+
 "from md_grade where grade_name='"+req.query.gradename+"') and section_id=(select "+
-"section_id from md_section where section_name='"+req.query.section+"' and school_id='"+req.query.schoolid+"') and "+
-"school_id='"+req.query.schoolid+"')";
+"section_id from md_section where section_name='"+req.query.section+"' and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"') and "+
+"school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"')";
 
   console.log(qurcheck);
   console.log('............................................'); 
