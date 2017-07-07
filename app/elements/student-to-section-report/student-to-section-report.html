@@ -162,7 +162,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </div>
     </div>
      <div class="studentreport" hidden$="{{studentallreport1}}">
-       <table id="report1" border="1" style="margin-left: 21%;width: 65%;">
+       <table id="studenttosectionreport1" border="1" style="margin-left: 21%;width: 65%;">
         <tr style="text-align: left;">
           <th>SNO</th>
           <th>Student ID</th>
@@ -183,11 +183,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </template>
       </table>
 
-      <input type="button" id="btn1" onclick="tableToExcel('report1', 'Student Section report')" value="Export to Excel">
+      <input type="button" id="btn1" onclick="tableToExcel('studenttosectionreport1', 'Student Section report')" value="Export to Excel">
     </div>
 
     <div class="studentreport" hidden$="{{studentreport1}}">
-       <table id="report1" border="1" style="margin-left: 31%;">
+       <table id="studenttosectionreport2" border="1" style="margin-left: 31%;">
         <tr style="text-align: left;">
           <th>SNO</th>
           <th>Student ID</th>
@@ -209,7 +209,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </template>
       </table>
 
-      <input type="button" id="btn2" onclick="tableToExcel('report1', 'Student Section report')" value="Export to Excel">
+      <input type="button" id="btn2" onclick="tableToExcel('studenttosectionreport2', 'Student Section report')" value="Export to Excel">
     </div>
 
       <student-report-service id="reportservice"></student-report-service>

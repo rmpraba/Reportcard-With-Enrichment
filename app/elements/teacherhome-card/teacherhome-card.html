@@ -783,6 +783,7 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
            }  
         if(sessionStorage.getItem("curr_sess_loggedroleid")=='class-teacher'){  
           this.classteacher=false;
+          this.studentsectionreport=false;
 
           // this.BA=false;        
           // this.TA=false;
@@ -793,16 +794,23 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
           // this.ConsolidatedReport=false;
         }
         if(sessionStorage.getItem("curr_sess_loggedroleid")=="principal"||sessionStorage.getItem("curr_sess_loggedroleid")=="headofedn"||sessionStorage.getItem("curr_sess_loggedroleid")=="headmistress"||sessionStorage.getItem("curr_sess_loggedroleid")=="viceprincipal"){
+          this.empreportdetails=false;
+          this.studentsectionreport=false;
           // this.BA=false;
           // this.TA=false;
           }
         if(sessionStorage.getItem("curr_sess_loggedroleid")=="principal"||sessionStorage.getItem("curr_sess_loggedroleid")=="headofedn"||sessionStorage.getItem("curr_sess_loggedroleid")=="headmistress"||sessionStorage.getItem("curr_sess_loggedroleid")=="viceprincipal"){
 
             this.highlevelcommon=false;
+            this.empreportdetails=false;
+          this.studentsectionreport=false;
           }
           if(sessionStorage.getItem("curr_sess_loggedroleid")=="co-ordinator")
           {
             this.coordinator=false;
+
+            this.empreportdetails=false;
+          this.studentsectionreport=false;
           }
         
       },
