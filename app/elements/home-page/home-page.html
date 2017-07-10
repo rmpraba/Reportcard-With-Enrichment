@@ -236,6 +236,15 @@
         <section data-category="student-to-section-report">
           <student-to-section-report></student-to-section-report>
         </section>  
+        <section data-category="enrichment-comparison-report">
+          <enrichment-comparison-report></enrichment-comparison-report>
+        </section>
+        <section data-category="assesment-comparison-homecard">
+          <assesment-comparison-homecard></assesment-comparison-homecard>
+        </section>
+        <section data-category="enrichment-assesment-comparison">
+          <enrichment-assesment-comparison></enrichment-assesment-comparison>
+        </section>
         </iron-pages>
     </div>    
 
@@ -525,6 +534,24 @@
        this.page="enrichmenthome-card";
        document.querySelector('enrichmenthome-card').FnRefresh();
        document.querySelector('books-issuance-card').FnRefresh();
+    }
+    if(localStorage.getItem("curr_sess_page")=="enrichment-comparison-report")
+    {      
+       this.page="enrichmenthome-card";
+       document.querySelector('enrichmenthome-card').FnRefresh();
+       document.querySelector('enrichment-comparison-report').FnRefresh();
+    }
+    if(localStorage.getItem("curr_sess_page")=="assesment-comparison-homecard")
+    {      
+       this.page="enrichmenthome-card";
+       document.querySelector('enrichmenthome-card').FnRefresh();
+       document.querySelector('assesment-comparison-homecard').FnRefresh();
+    }
+    if(localStorage.getItem("curr_sess_page")=="enrichment-assesment-comparison")
+    {      
+       this.page="enrichmenthome-card";
+       document.querySelector('enrichmenthome-card').FnRefresh();
+       document.querySelector('enrichment-assesment-comparison').FnRefresh();
     }
     if(localStorage.getItem("curr_sess_page")=="scorecard")
     {

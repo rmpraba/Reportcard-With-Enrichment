@@ -26,7 +26,7 @@
     Polymer({
       is: 'enrichment-performance-card',
       FnCompariosionValuePreparation:function(arr){
-        // alert(JSON.stringify(arr));
+       // alert(JSON.stringify(arr));
        if(arr.length>0){      
        for(var i=0;i<arr.length;i++)
        {
@@ -34,21 +34,21 @@
         var dataPoints=[];
         var obj={};
         obj.type= "column";
-        obj.name= arr[i].category_name;
-        obj.legendText= arr[i].category_name;
+        obj.name= arr[i].sub_category_name;
+        obj.legendText= arr[i].sub_category_name;
         obj.showInLegend= true;
         var obj1={};
         obj1.label=arr[i].assesment_type;
-        obj1.y=JSON.parse(parseFloat(parseFloat(arr[i].score)/10).toFixed(1));
+        obj1.y=JSON.parse(parseFloat(parseFloat(arr[i].score)).toFixed(1));
         dataPoints.push(obj1);
         obj.dataPoints=dataPoints;
         for(var j=i+1;j<arr.length;j++)
         {
-           if(arr[i].student_id==arr[j].student_id&&arr[i].category_id==arr[j].category_id)
+           if(arr[i].student_id==arr[j].student_id&&arr[i].category_id==arr[j].category_id&&arr[i].sub_category_id==arr[j].sub_category_id)
            {
             var obj1={};
             obj1.label=arr[j].assesment_type;
-            obj1.y=JSON.parse(parseFloat(parseFloat(arr[j].score)/10).toFixed(1));
+            obj1.y=JSON.parse(parseFloat(parseFloat(arr[j].score)).toFixed(1));
             dataPoints.push(obj1);
             obj.dataPoints=dataPoints;
             arr.splice(j,1);

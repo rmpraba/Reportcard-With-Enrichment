@@ -1,7 +1,7 @@
 
 <link rel="import" href="..\..\bower_components/polymer/polymer.html">
 
-<dom-module id="enrichment-comparision-chart">
+<dom-module id="newstud-enrichment-comparison">
   <template>
     <style>
       .container{
@@ -10,18 +10,18 @@
       .chart{
         width: 100%;
         @apply(--layout-horizontal);
-        margin-top: 5%;
+        margin-top: 35%;
       }
     </style>
     <div class="chart">
     <div class="container" hidden$="{{hideeng}}" style="width: 300;margin-left: 5%;">
-      <div id="chartContainer1" ></div>
+      <div id="nchartContainer1" ></div>
     </div>
     <div class="container" hidden$="{{hidemath}}" style="width: 300;margin-left: 30%;">
-      <div id="chartContainer2" ></div>
+      <div id="nchartContainer2" ></div>
     </div>
     <div class="container" hidden$="{{hideevs}}" style="width: 300;margin-left: 30%;">
-      <div id="chartContainer3" ></div>
+      <div id="nchartContainer3" ></div>
     </div>
     </div>
   </template>
@@ -34,7 +34,7 @@
     var mathschartarr=[];
     var evschartarr=[];
     Polymer({
-      is: 'enrichment-comparision-chart',
+      is: 'newstud-enrichment-comparison',
       ready:function(){
         this.hideeng=true;
         this.hidemath=true;
@@ -187,12 +187,12 @@
        
       },
     FnEnglishOpenChart:function(){
-    var chart = new CanvasJS.Chart("chartContainer1",
+    var chart = new CanvasJS.Chart("nchartContainer1",
     {
       theme: "theme3",
       animationEnabled: true,
       title:{
-        text: "Enrichment Comparision(Overall)",
+        text: "Enrichment Comparision(New)",
         fontSize: 20
       },
       toolTip: {
@@ -223,12 +223,12 @@
     engchartarr=[];
     },
     FnMathsOpenChart:function(){
-    var chart = new CanvasJS.Chart("chartContainer2",
+    var chart = new CanvasJS.Chart("nchartContainer2",
     {
       theme: "theme3",
       animationEnabled: true,
       title:{
-        text: "Enrichment Comparision(Overall)",
+        text: "Enrichment Comparision(New)",
         fontSize: 20
       },
       toolTip: {
@@ -259,12 +259,12 @@
     mathschartarr=[];
     },
     FnEvsOpenChart:function(){
-    var chart = new CanvasJS.Chart("chartContainer3",
+    var chart = new CanvasJS.Chart("nchartContainer3",
     {
       theme: "theme3",
       animationEnabled: true,
       title:{
-        text: "Enrichment Comparision(Overall)",
+        text: "Enrichment Comparision(New)",
         fontSize: 20
       },
       toolTip: {

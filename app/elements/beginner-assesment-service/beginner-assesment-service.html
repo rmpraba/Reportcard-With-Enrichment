@@ -236,6 +236,9 @@
          document.querySelector('beginner-assesment-card').assesmentarr=assesmentarr;
          document.querySelector('books-issuance-card').assesmentarr=assesmentarr;
          document.querySelector('enrichment-booksmapping-card').assesmentarr=assesmentarr;
+         document.querySelector('enrichment-comparison-report').assesmentarr=assesmentarr;
+         
+         document.querySelector('assesment-comparison-homecard').assesmentarr=assesmentarr;
          this.callGradeService();
       },
       callGradeService:function(){
@@ -252,6 +255,8 @@
           document.querySelector('beginner-assesment-card').gradearr=e.detail.response.returnval;
           document.querySelector('books-issuance-card').gradearr=e.detail.response.returnval;
           document.querySelector('enrichment-booksmapping-card').gradearr=e.detail.response.returnval;
+          document.querySelector('enrichment-comparison-report').gradearr=e.detail.response.returnval;
+          document.querySelector('assesment-comparison-homecard').gradearr=e.detail.response.returnval;
       },
       callSectionService:function(gradename){        
          this.sectionurl=sessionStorage.getItem("addrinfo")+"/section-service";
@@ -264,10 +269,13 @@
          this.sectionparam= obj;
          this.$.sectionajax.generateRequest();
       },
-      sectionResponse:function(e){        
+      sectionResponse:function(e){   
+          // alert(JSON.stringify(e.detail.response.returnval));     
          document.querySelector('beginner-assesment-card').sectionarr=e.detail.response.returnval; 
          document.querySelector('books-issuance-card').sectionarr=e.detail.response.returnval; 
          document.querySelector('enrichment-booksmapping-card').sectionarr=e.detail.response.returnval;
+         document.querySelector('enrichment-comparison-report').sectionarr=e.detail.response.returnval;
+         document.querySelector('assesment-comparison-homecard').sectionarr=e.detail.response.returnval;
       },
       callSubjectService:function(gradename,section){
          this.subjecturl=sessionStorage.getItem("addrinfo")+"/subject-service";

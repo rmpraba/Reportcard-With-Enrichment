@@ -14,8 +14,6 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
 <link rel="import" href="../student-report-service/student-report-service.html">
 <link rel="import" href="../employee-report-service/employee-report-service.html">
 
-
-
 <dom-module id="teacherhome-card">
   <template>
     <style>
@@ -299,6 +297,9 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
 
     <div class="card" hidden$="{{Analysis}}">
        <paper-button on-click="FnAnalysiscard" no ink><img src="../../images/analysis.jpg" height="180px" width="180px"></paper-button>
+      </div>
+      <div id="entry" class="card" hidden$="{{BA}}">    
+       <paper-button on-click="FnSelectPreEntryType" no ink><img src="../../images/Enrichment.png" height="180px" width="180px"></paper-button>
       </div>
     </div>
     </div>
@@ -605,6 +606,10 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
          {
           this.$.bassesmentservice.callAssesmentService("Enrichment"); 
           document.querySelector('app-card').setPage('homepage','');
+          if(sessionStorage.getItem("curr_sess_loggedroleid")=="management")
+          document.querySelector('enrichmenthome-card').nonreport=true;
+          else
+          document.querySelector('enrichmenthome-card').nonreport=false;
           document.querySelector('home-page').setPage('enrichmenthome-card','');
           // document.querySelector('home-page').setPage('beginnerassesment','');
          }

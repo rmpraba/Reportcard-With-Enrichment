@@ -1,6 +1,7 @@
 
 <link rel="import" href="..\..\bower_components/polymer/polymer.html">
 <link rel="import" href="..\..\bower_components/paper-button/paper-button.html">
+<link rel="import" href="..\scorecard-service/scorecard-service.html">
 
 <dom-module id="enrichmenthome-card">
   <template>
@@ -8,31 +9,41 @@
       .container{
         @apply(--layout-horizontal);
         @apply(--layout-center-justified);
+        @apply(--layout-wrap);
         width: 100%;
       }
     </style>
     <div class="container">
-      <div id="entry" class="card">    
+      <div id="entry" class="card" hidden$="{{nonreport}}">    
        <paper-button on-click="FnSelectEvaluation" no ink><img src="../../images/Evaluation.png" height="180px" width="180px"></paper-button>
        <h4 align="center">Assesment</h4>
       </div>
-      <div  class="card">
+      <div  class="card" hidden$="{{nonreport}}">
        <paper-button on-click="FnSelectBooksCreation" no ink><img src="../../images/bookss.jpg" height="180px" width="180px"></paper-button>
        <h4 align="center">Book Creation</h4>
       </div>
-       <div class="card">
+       <div class="card" hidden$="{{nonreport}}">
        <paper-button on-click="FnEavaluationMapping" no ink><img src="../../images/questionare.jpg" height="180px" width="180px"></paper-button>
        <h4 align="center">Evaluation Parameter Mapping</h4>
       </div>
-      <div class="card">
+      <div class="card" hidden$="{{nonreport}}">
        <paper-button on-click="FnBooksMapping" no ink><img src="../../images/issue.png" height="180px" width="180px"></paper-button>
        <h4 align="center">Books Mapping</h4>
       </div>
-      <div class="card">
+      <div class="card" hidden$="{{nonreport}}">
        <paper-button on-click="FnSelectMapping" no ink><img src="../../images/bookissuance.jpg" height="180px" width="180px"></paper-button>
        <h4 align="center">Student Tracking</h4>
       </div>
+      <div class="card">
+       <paper-button on-click="FnComparisonReport" no ink><img src="../../images/enrichcompare.png" height="180px" width="180px"></paper-button>
+       <h4 align="center">Enrichment Comparison Report</h4>
+      </div>
+      <div class="card" >
+       <paper-button on-click="FnAssesmentComparison" no ink><img src="../../images/enrichdownload.png" height="180px" width="180px"></paper-button>
+       <h4 align="center">Assesment Reports</h4>
+      </div>
     </div>
+    <scorecard-service id="scorecardservice"></scorecard-service>
     <enrichment-service id='enrichmentservice'></enrichment-service>
     <beginner-assesment-service id='beginnerservice'></beginner-assesment-service>
   </template>
@@ -41,6 +52,12 @@
     'use strict';
     Polymer({
       is: 'enrichmenthome-card',
+      // attached:function(){
+      //   if(sessionStorage.getItem("curr_sess_loggedroleid")=="management")
+      //     this.nonreport=true;
+      //   else
+      //     this.nonreport=false;
+      // },
       FnSelectEvaluation:function(){
         document.querySelector('home-page').setPage('beginnerassesment','');
       },
@@ -61,6 +78,32 @@
       FnBooksMapping:function(){
         document.querySelector('home-page').setPage('enrichment-booksmapping-card','');
         document.querySelector('enrichment-booksmapping-card').callService();
+      },
+      FnComparisonReport:function(){
+        if(sessionStorage.getItem("curr_sess_loggedroleid")=="management")
+          document.querySelector('enrichment-comparison-report').hideschool=false;
+        else
+          document.querySelector('enrichment-comparison-report').hideschool=true;
+        document.querySelector('home-page').setPage('enrichment-comparison-report','');   
+        document.querySelector('enrichment-comparison-report').FnRefresh();
+        
+        this.$.beginnerservice.callAssesmentService("Enrichment");
+        this.$.beginnerservice.callGradeService();
+        this.$.enrichmentservice.subjectforenrichmentService();
+        this.$.scorecardservice.callSchoolService();
+      },
+      FnAssesmentComparison:function(){
+        if(sessionStorage.getItem("curr_sess_loggedroleid")=="management")
+          document.querySelector('assesment-comparison-homecard').hideschool=false;
+        else
+          document.querySelector('assesment-comparison-homecard').hideschool=true;
+        document.querySelector('home-page').setPage('assesment-comparison-homecard','');   
+        document.querySelector('assesment-comparison-homecard').FnRefresh();
+        
+        this.$.beginnerservice.callAssesmentService("Enrichment");
+        this.$.beginnerservice.callGradeService();
+        this.$.enrichmentservice.subjectforenrichmentService();
+        this.$.scorecardservice.callSchoolService();
       },
       FnRefresh:function(){
 

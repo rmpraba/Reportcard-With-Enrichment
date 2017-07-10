@@ -347,6 +347,8 @@
         document.querySelector('books-creation-card').subjectarr=arr;
         document.querySelector('books-issuance-card').subjectarr=arr;
         document.querySelector('enrichment-booksmapping-card').subjectarr=arr;
+        document.querySelector('enrichment-comparison-report').subjectarr=arr;
+        document.querySelector('assesment-comparison-homecard').subjectarr=arr;
       },
       categoryforenrichmentService:function(subjectid){
          this.categoryforenrichmenturl=sessionStorage.getItem("addrinfo")+"/categoryforenrichment-service";
@@ -661,6 +663,9 @@
         var obj={}; 
         obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
         obj.academicyear=localStorage.getItem("curr_sess_academicyear");
+        obj.subjectid=localStorage.getItem("curr_sess_subjectid");
+        obj.categoryid=localStorage.getItem("curr_sess_categoryid");
+        obj.assesment=localStorage.getItem("curr_sess_assesment");
         obj.studentid=studentid;
         this.fetchperformancemeasuresparam= obj;
         this.$.fetchperformancemeasuresajax.generateRequest();
