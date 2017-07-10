@@ -121,10 +121,13 @@ var f;
       is: 'student-list-pass-section-card',
       
      
-      fnsudentGrade:function(e){
+      fnsudentGrade:function(e)
+      {
+        //alert(this.id);
         rr=this.admissinno;
         var count;
         f=this.id;
+
  if(document.querySelector('#'+this.id).checked==true){
       count=0;
          for(var i=0;i<studentcheckinfoarr.length;i++){ 
@@ -306,7 +309,7 @@ var obj={"id":"","school_id":"","gradeid":"","classid":"","academic_year":""};
               document.querySelector('#'+empty).checked=false;           
              }
 
-  var obj={"id":"","student_name":"","dob":"","gender":"","enq_id":"","classid":"",};
+    var obj={"id":"","student_name":"","dob":"","gender":"","enq_id":"","classid":"",};
             obj.id=this.admissinno;
             obj.student_name=this.studentname;
             obj.dob=this.dob;

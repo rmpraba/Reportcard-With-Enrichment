@@ -420,7 +420,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.hidenewtabb=true;
         this.hidegenerateopt=true;
         this.$.studz.hidden=true;  
-        this.hidespecific=true;
         this.hideschooltype=true;
           this.hidesetgrade=true;
           this.value="";
@@ -1040,20 +1039,20 @@ for(var j=0;j<l.length;j++){
         this.$.uiservice.fnretrivestudent(this.stugradeid);
         this.$.uiservice.fngetstudent(this.stugradeid,this.stugradevalue);
         this.$.uiservice.FngetStudentpasssection(this.stugradeid,this.stugradevalue);
-       
+        this.hidespecific=true;
+        this.value="";
         overall=[];
         g=[];
         setarrr=[];
      },
 
 
-
- selectstudentzz:function(e)
+      selectstudentzz:function(e)
       {
         //alert('test');
         this.hidegenerateopt=true;
-        this.$.nextbutton.hidden=true;
-        this.$.prebutton.hidden=true;
+        this.$.z.hidden=true;
+        this.$.z1.hidden=true;
         if(chzz.checked==true)
         {
           this.hideschooltype=false;
@@ -1064,13 +1063,13 @@ for(var j=0;j<l.length;j++){
           document.querySelector('Student-to-section-mapping-item-card').FnRefresh();
           document.querySelector('#empgradeiddd').selected=-1;
 
-      }
-      else
-      {
+        }
+        else
+        {
           this.$.studz.hidden=true; 
          this.hideschooltype=true;
           this.hidesetgrade=true;
-      }
+        }
       },
 
       selectname:function(name1)
@@ -1164,7 +1163,7 @@ for(var j=0;j<l.length;j++){
     this.querySelector('#studentselect').style.visibility='hidden';
     this.student_name = e.target.selectedItem.textContent.trim();
     admission_no = e.target.selectedItem.value;
-    
+    //alert(admission_no);
     this.value=this.student_name;
      this.hidenewtabb=true;
     this.hidespecific=false;
@@ -1172,8 +1171,8 @@ for(var j=0;j<l.length;j++){
     this.$.uiservice.previoussection(admission_no,this.stugradeid,schooltype); 
       this.itemArray=[];
       document.querySelector('#studentselect').selected=-1; 
-      document.querySelector('specific-student-section-card').studentsectionclean();   
-         
+      document.querySelector('specific-student-section-card').studentsectionclean();
+
     },
 
     allstudent:function(e)
@@ -1208,7 +1207,8 @@ for(var j=0;j<l.length;j++){
         this.$.uiservice.fnsubmitsection(studentsetarr,schooltype);
         this.itemArray=[];
         this.value="";
-        //this.hidespecific=true;
+        this.hidespecific=true;
+        this.$.mydialog.toggleDialog();
         document.querySelector('specific-student-section-card').studentsectionclean();
 
     },

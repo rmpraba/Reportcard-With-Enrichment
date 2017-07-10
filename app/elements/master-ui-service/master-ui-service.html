@@ -1441,8 +1441,10 @@ this.tranfersectionurl=sessionStorage.getItem("addrinfo")+"/tranfersection-servi
      //   alert(JSON.stringify(obj));
     this.$.empgetsectionvaluesajax.generateRequest();
      },
-     empgetsectionvaluesResponse:function(e){
+     empgetsectionvaluesResponse:function(e)
+     {
       var res=e.detail.response.returnval;
+      //alert(JSON.stringify(res));
       if(res!='empty'){
       document.querySelector('emp-grade-get-card').empsctionmaping(res);
         
@@ -3414,7 +3416,7 @@ insertschoolTypename:function(schooltypesarr)
         fnsubmitsectionResponse:function(e)
         {
             var res=e.detail.response.returnval;
-            alert(JSON.stringify(res));
+            //alert(JSON.stringify(res));
              
         },
         previoussection:function(admissionno,gradeid,schooltype)
@@ -3433,7 +3435,7 @@ insertschoolTypename:function(schooltypesarr)
         previoussectionResponse:function(e)
         {
             var res=e.detail.response.returnval;
-           // alert(JSON.stringify(res));
+          // alert(JSON.stringify(res));
               document.querySelector('specific-student-section-card').getprestudent(res);
 
         }           

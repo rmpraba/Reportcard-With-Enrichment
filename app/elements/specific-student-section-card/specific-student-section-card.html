@@ -37,8 +37,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <paper-input  hidden  value={{classid}}></paper-input>
           <paper-input hidden  value={{sectionname}}></paper-input>
          
-
-          <paper-checkbox  id="{{id}}" on-change="fnsudentsection">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</paper-checkbox>   
+          <paper-checkbox  id="{{id}}" on-change="fnsudentsectionzzzz">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</paper-checkbox>      
 
                    
   </template>
@@ -57,7 +57,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     Polymer({
       is: 'specific-student-section-card',
 
-      fnsudentsection:function(e)
+      fnsudentsectionzzzz:function(e)
       {
         //alert(this.enqno);
 
@@ -65,9 +65,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
          if(document.querySelector('#'+this.id).checked==true)
         {
 
-          var obj={"student_name":"","gender":"","dob":"","classid":"","grade_id":"","id":"","id1":"","enquiry_no":""}
+          var obj={"student_name":"","gender":"","dob":"","classid":"","grade_id":"","id":"","stdcls":"","enquiry_no":""}
           
-          obj.id1=this.id;
+          obj.stdcls=this.id;
           obj.id=this.enqno;
           obj.student_name=this.studentname;
           obj.enquiry_no=this.id;
@@ -78,7 +78,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
            
           //alert(JSON.stringify(obj));
           studsection.push(obj); 
-          //alert(JSON.stringify(studsection));
+         // alert(JSON.stringify(studsection));
 
           s1=this.id;
           c1=this.classid;
@@ -91,8 +91,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
            if(studsection[i].id==this.enqno)
            {    
-                //alert(studsection[i].classid);
-                //alert(this.classid);
+               // alert(studsection[i].classid);
+               // alert(this.classid);
                    if(studsection[i].classid==this.classid)
                    {
                      var mm=studsection[i].enquiry_no;
@@ -101,11 +101,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     }
                   else if(studsection[i].classid!=this.classid)
                   {
+                   // alert('t');
                     //alert(studsection[i].stdcls);
                     //alert(studsection[i].classid);
-                    var sss=studsection[i].stdcls;
+                    var ssszzz=studsection[i].stdcls;
                     var bb=studsection[i].classid;
-                      document.querySelector('#'+sss).checked=false;
+                      document.querySelector('#'+ssszzz).checked=false;
                       var a1 = pmm.indexOf(bb);
                     for(var g=0;g<pmm.length;g++)
                     {
@@ -121,13 +122,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   }
                    document.querySelector('student-to-section-mapping-card').fnsetsetcion(studsection);
                 }
-
-
       },
       getprestudent:function(arr)
       {
        getstudentarr=arr;
-
+      //alert(JSON.stringify(getstudentarr));
           for(var i=0;i<getstudentarr.length;i++)
           {
             
@@ -137,13 +136,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             var classid=getstudentarr[i].class_id;
             var aid=getstudentarr[i].id;
 
-             var getid=getstudentarr[i].id;
+            var  getid=getstudentarr[i].id;
                 getid=getid.replace(/[^\w\s]/gi, '');
 
                studclassid=classid+getid;
                 //alert(studclassid);
                 
-            document.querySelector('#'+studclassid).checked=true;
+              document.querySelector('#'+studclassid).checked=true;
             if(document.querySelector('#'+studclassid).checked==true)
             {
               var obj1={"studentname":"","gender":"","dob":"","id":"","classid":"","stugradeid":"","stdcls":""}
@@ -155,7 +154,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 obj1.stugradeid=this.stugradeid;
                 obj1.stdcls=studclassid;
                 studsection.push(obj1);
-                
             }
             //getstudentarr.splice(i,1);
           }
@@ -165,14 +163,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       {
         //alert(333);
     //alert(JSON.stringify(studsection));
-
+    
         if(studsection.length!=0)
         {
-            for(var i=0;i<studsection.length;i++){
-                var idz=studsection[i].id1;
-                //alert(idz);
-                 document.querySelector('#'+idz).checked=false;
-               }
+            for(var i=0;i<studsection.length;i++)
+            {
+                //alert(studsection[i].stdcls);
+                var idzzz=studsection[i].stdcls;
+                //alert('call');
+                //alert(idzzz);
+                 document.querySelector('#'+idzzz).checked=false;
+            }
 
                var obj={"studentname":"","gender":"","dob":"","adminno":"","classid":"","stugradeid":""};
                 obj.studentname=this.studentname;
@@ -182,7 +183,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 obj.classid=this.classid;
                 obj.stugradeid=this.stugradeid;
                 getstudentarr.splice(obj);
-               studsection.splice(obj);
+                studsection.splice(obj);
         }
 
       }
