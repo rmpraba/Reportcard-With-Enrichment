@@ -1059,7 +1059,7 @@ for(var j=0;j<l.length;j++){
           this.hidesetgrade=false;
           chkkk2.checked=false;
           this.$.studz.hidden=false;
-          
+          this.hidenewtabb=true;
           document.querySelector('Student-to-section-mapping-item-card').FnRefresh();
           document.querySelector('#empgradeiddd').selected=-1;
 
@@ -1167,8 +1167,8 @@ for(var j=0;j<l.length;j++){
     this.value=this.student_name;
      this.hidenewtabb=true;
     this.hidespecific=false;
-    this.$.uiservice.selectspecificstudent(admission_no);
     this.$.uiservice.previoussection(admission_no,this.stugradeid,schooltype); 
+    this.$.uiservice.selectspecificstudent(admission_no);
       this.itemArray=[];
       document.querySelector('#studentselect').selected=-1; 
       document.querySelector('specific-student-section-card').studentsectionclean();
@@ -1184,6 +1184,7 @@ for(var j=0;j<l.length;j++){
           this.hidegenerateopt=false;
           chzz.checked=false;
           this.$.studz.hidden=true;
+          this.hidespecific=true;
           document.querySelector('Student-to-section-mapping-item-card').FnRefresh();
           document.querySelector('#empgradeiddd').selected=-1;
       }

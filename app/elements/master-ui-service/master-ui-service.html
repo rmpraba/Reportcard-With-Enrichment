@@ -3348,6 +3348,27 @@ insertschoolTypename:function(schooltypesarr)
         document.querySelector('working-days-card').scooltypgridval1(res);
      },
 
+       previoussection:function(admissionno,gradeid,schooltype)
+        {
+            this.previoussectionurl=sessionStorage.getItem("addrinfo")+"/previoussection-service";
+                var obj={"scholid1":"","admission_no":"","academic_year":"","grade_id":"","school_type":""};
+                obj.scholid1=sessionStorage.getItem("curr_sess_loggedschoolid");
+                obj.admission_no=admissionno;
+                obj.grade_id=gradeid;
+                obj.school_type=schooltype;
+                obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+                this.previoussectionparam=obj;
+                //alert(JSON.stringify(obj));
+                this.$.previoussectionajax.generateRequest();
+        },
+        previoussectionResponse:function(e)
+        {
+            var res=e.detail.response.returnval;
+          // alert(JSON.stringify(res));
+              document.querySelector('specific-student-section-card').getprestudent(res);
+
+        },
+
        selectspecificstudent:function(admissionnum)
      {
         
@@ -3418,27 +3439,8 @@ insertschoolTypename:function(schooltypesarr)
             var res=e.detail.response.returnval;
             //alert(JSON.stringify(res));
              
-        },
-        previoussection:function(admissionno,gradeid,schooltype)
-        {
-            this.previoussectionurl=sessionStorage.getItem("addrinfo")+"/previoussection-service";
-                var obj={"scholid1":"","admission_no":"","academic_year":"","grade_id":"","school_type":""};
-                obj.scholid1=sessionStorage.getItem("curr_sess_loggedschoolid");
-                obj.admission_no=admissionno;
-                obj.grade_id=gradeid;
-                obj.school_type=schooltype;
-                obj.academic_year=localStorage.getItem("curr_sess_academicyear");
-                this.previoussectionparam=obj;
-                //alert(JSON.stringify(obj));
-                this.$.previoussectionajax.generateRequest();
-        },
-        previoussectionResponse:function(e)
-        {
-            var res=e.detail.response.returnval;
-          // alert(JSON.stringify(res));
-              document.querySelector('specific-student-section-card').getprestudent(res);
-
-        }           
+        }
+                
     });
   })();
   </script>
