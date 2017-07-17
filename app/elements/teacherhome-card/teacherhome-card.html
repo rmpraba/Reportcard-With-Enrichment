@@ -13,6 +13,7 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
 <link rel="import" href="../scorecard-service/scorecard-service.html">
 <link rel="import" href="../student-report-service/student-report-service.html">
 <link rel="import" href="../employee-report-service/employee-report-service.html">
+<link rel="import" href="../teacher-book-service-card/teacher-book-service-card.html">
 
 <dom-module id="teacherhome-card">
   <template>
@@ -456,9 +457,22 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
             </paper-button>
        </div>
 
-      
+
+       <div class="card" hidden$="{{sectionedit}}">
+            <paper-button on-click="FnSectionedittt" no ink><img src="../../images/sectionedit.jpg" height="180px" width="180px">
+               <h4>Section Update</h4>
+            </paper-button>
+       </div>
     </div>
  
+    <div class="container1">
+      <div class="card" hidden$="{{captureReport}}">
+          <paper-button on-click="CaptureReportads" no ink><img src="../../images/active1.jpg" height="180px" width="180px">
+            <h4>Books</h4>
+          </paper-button>
+       </div>
+    </div>
+       
  
 
     <div class="cdialog">      
@@ -506,6 +520,7 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
     <mapping-service id="mappingservice"></mapping-service>
     <employee-report-service id="empservice"></employee-report-service>
     <student-report-service id="reportservice"></student-report-service>
+    <teacher-book-service-card id="bookservice"></teacher-book-service-card>
 
   </template>
   <script>
@@ -543,6 +558,9 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
         this.roletogrademapping=true;
         this.empreportdetails=true;
         this.studentsectionreport=true;
+        this.sectionedit=true;
+        this.captureReport=true;
+
        }, 
 
       FnSelectacademicyear:function(e){  
@@ -666,6 +684,21 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
             document.querySelector('home-page').setPage('student-to-section-report',''); 
             this.$.reportservice.gradeService();
          } 
+         if(localStorage.getItem('curr_sess_loggedassesmenttype')=="sectionedit")
+         {
+          document.querySelector('app-card').setPage('homepage','');
+          document.querySelector('home-page').setPage('section-edit-card','');
+         }
+
+          if(localStorage.getItem('curr_sess_loggedassesmenttype')=="captureReport") 
+         {
+            //alert('1'); 
+          document.querySelector('app-card').setPage('homepage','');
+          document.querySelector('home-page').setPage('teacher-book-refernce-card','');
+          this.$.bookservice.capterseq();
+            // this.$.bookservice.conceptseq();
+            //this.$.bookservice.getcaptervalue();
+         } 
 
              this.$.cdialog.close();
          
@@ -769,6 +802,8 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
            this.roletogrademapping=false;
             this.empreportdetails=false;
            this.studentsectionreport=false;
+           this.sectionedit=false;
+           this.captureReport=false;
            }
        if(sessionStorage.getItem("curr_sess_loggedroleid")=='superadmin')
           {
@@ -1072,6 +1107,22 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
            document.querySelector('student-to-section-report').ready();
            this.$.cdialog.toggle();
       },
+      FnSectionedittt:function()
+      {
+        localStorage.setItem('curr_sess_loggedassesmenttype','sectionedit');
+        this.$.uiservice.tranfergradeinfo();
+        document.querySelector('section-edit-card').FnRefresh();
+        this.$.cdialog.toggle();
+      },
+
+       CaptureReportads:function(e)
+       {
+          //alert('1');
+           localStorage.setItem('curr_sess_loggedassesmenttype','captureReport');
+           document.querySelector('teacher-book-refernce-card').fnrefresh();
+            this.$.bookservice.teacherbookref1();
+            this.$.cdialog.toggle();   
+        },
 
     });
   })();
