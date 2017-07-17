@@ -6229,7 +6229,7 @@ app.post('/fnempgenerateid-service',  urlencodedParser,function (req,res)
 });
 app.post('/Generatesectionid-service',  urlencodedParser,function (req,res)
 {  
-   var qur="SELECT * FROM sequence";
+   var qur="SELECT * FROM school_sequence where school_id='"+req.query.scholid+"'";
   connection.query(qur,
     function(err, rows)
     {
@@ -6416,8 +6416,8 @@ app.post('/sectioncreationmapping-service' , urlencodedParser,function (req, res
             if(!err)
             {
               var tempseq=parseInt((req.query.classid).substring(3))+1;
-              console.log('-----tempseq------');
-                      connection.query("UPDATE sequence SET sec_sequence='"+tempseq+"'", function (err,result){
+              console.log(tempseq);
+                      connection.query("UPDATE school_sequence SET sec_sequence='"+tempseq+"' where school_id='"+req.query.school_id+"'", function (err,result){
                         if(result.affectedRows>0)
                       res.status(200).json({'returnval': 'Inserted!'});
                     });

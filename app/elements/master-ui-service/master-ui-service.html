@@ -1210,7 +1210,10 @@
 Generatesectionid:function()
        {
         this.Generatesectionidurl=sessionStorage.getItem("addrinfo")+"/Generatesectionid-service";
-       this.$.Generatesectionidajax.generateRequest();
+            var obj={"scholid":""}
+                obj.scholid=sessionStorage.getItem("curr_sess_loggedschoolid");
+        this.Generatesectionidparam=obj;        
+        this.$.Generatesectionidajax.generateRequest();
        },
 
    GeneratesectionidResponse:function(e)
@@ -1218,6 +1221,7 @@ Generatesectionid:function()
       var res=e.detail.response.returnval;  
        //  alert(JSON.stringify(res));
          var m=(res[0].sec_prefix+res[0].sec_sequence);
+         //alert(m);
         document.querySelector('school-section-creation-card').fnclasssection(m);
       },
  
