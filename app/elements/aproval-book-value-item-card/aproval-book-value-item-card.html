@@ -1,0 +1,97 @@
+<link rel="import" href="..\..\bower_components/polymer/polymer.html">
+
+<dom-module id="aproval-book-value-item-card">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+           table
+      {
+            table-layout: fixed;
+          width:403.5%;
+          border-collapse: collapse;
+      }
+       .card
+      {
+        @apply(--layout-horizontal);
+            margin-top: -2em;
+          margin-left: -6%;
+      }
+
+    </style>
+  
+    
+      
+      <!-- <div class="itemcard">
+        <paper-input value="{{capterid}}" hidden></paper-input>
+        <paper-input value="{{conceptid}}" hidden></paper-input>
+       
+      </div>
+
+      <table border="1">
+           <tr>
+             <td><from-book-date-picker hidden$="{{hidecheck1}}" ></from-book-date-picker>
+                <paper-input value={{planneddate}} hidden$="{{hidecheck}}"></paper-input></td>
+             <td> <paper-input value={{concept}}></paper-input></td>
+              <td><paper-input value={{period}} allowed-pattern="[0-9]"></paper-input></td>
+              <td><paper-icon-button   hidden$="{{hidecheck}}" on-click="fnaroveset1" icon="create">
+              </paper-icon-button>
+               <paper-icon-button  hidden$="{{hidecheck1}}" on-click="fnaroveset" icon="save"></paper-icon-button></td>
+
+              
+           </tr>
+       </table> -->
+
+       <div class="card">
+         <!-- <paper-item no ink><h4>{{concept}}</h4></paper-item> -->
+         <paper-button no ink><b>{{concept}}</b></paper-button>
+       </div>
+     
+        <teacher-book-service-card id="bookservice"></teacher-book-service-card>
+    
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'aproval-book-value-item-card',
+
+      fndeletezzzz:function()
+      {
+        this.$.bookservice.deleteconcept(this.capterid);
+      },
+ fnaroveset1:function(e){
+   this.hidecheck=true;
+   this.hidecheck1=false;
+  },
+fnaroveset:function(e){
+// alert(this.conceptid+" "+this.concept+" "+this.period);
+ //alert(this.conceptid)
+   if(this.conceptid==""&&this.concept==""&&this.period==""){
+    //alert("empty");
+    }
+   else if(this.conceptid=="")
+   {
+    //alert('t1');
+    //alert(this.concept+" "+this.period);
+     this.$.bookservice.fnsendconcept(this.concept,this.period);
+     }
+  else{
+    //alert("edit");
+    
+      this.$.bookservice.fnbookupdatevalue(this.conceptid,this.concept,this.period,this.planneddate);
+    }
+
+ this.hidecheck=false;
+ this.hidecheck1=true;
+  
+},
+
+
+      });
+  })();
+  </script>
+</dom-module>
