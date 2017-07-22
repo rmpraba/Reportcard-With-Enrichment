@@ -66,6 +66,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <!-- </table> -->
  <term-assesment-service id="assesmentservice"></term-assesment-service>
  <co-scholastic-service id="coscholasticservice"></co-scholastic-service>
+ <subject-dynamic-service id="subjectservice"></subject-dynamic-service>
   </template>
   <script>
   (function() {
@@ -100,10 +101,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
       else if(this.assesment=="FA1"||this.assesment=="FA2"||this.assesment=="SA1"||this.assesment=="FA3"||this.assesment=="FA4"||this.assesment=="SA2")
       {
-        // alert('yes');
-        // localStorage.setItem('curr_sess_report',1);
-        //localStorage.setItem("curr_sess_assesment","");
         this.$.assesmentservice.callFetchFaStudentInfo();  
+      }
+      else if(this.grade=='Grade-5'||this.grade=='Grade-6'||this.grade=='Grade-7'||this.grade=='Grade-8'||this.grade=='Grade-9'||this.grade=='Grade-10'){
+        // alert('coming');
+        document.querySelector('home-page').setPage('termassesment','');
+        document.querySelector('term-assesment').hiddenpage(); 
+        document.querySelector('term-assesment-sheet-card').setPage('subject-dynamic-markentrycard');
+        document.querySelector('subject-dynamic-markentrycard').FnRefresh();
+        this.$.subjectservice.subjectsubmittedcheckService(this.grade,this.section,this.subject);
       }
       else
       this.$.assesmentservice.fetchimportmark(this.academic,this.term,this.assesment,this.grade,this.section,this.subject);

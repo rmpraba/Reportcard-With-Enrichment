@@ -64,7 +64,7 @@
           <paper-dropdown-menu hidden$="{{hideassesment}}" id="assessment" label="Select Assesment" disabled="{{read}}" required>
             <paper-menu id="assesmentcat1" class="dropdown-content"  on-iron-select="FnSelectAssesment"  attr-for-selected="value" required> 
               <template is="dom-repeat" items="{{assesmentarr}}">
-                <paper-item value="{{item.assesment_cyclename}}">{{item.assesment_cyclename}}</paper-item>      
+                <paper-item value="{{item.assesment_name}}">{{item.assesment_name}}</paper-item>      
               </template>
             </paper-menu>
           </paper-dropdown-menu> 
@@ -82,7 +82,7 @@
           <paper-dropdown-menu id="subject" label="Select Subject" disabled="{{read}}" required>
             <paper-menu id="subjectnam1" class="dropdown-content"  on-iron-select="FnSelectSubject"  attr-for-selected="value" required>   
               <template is="dom-repeat" items="{{subjectarr}}">
-                <paper-item value="{{item.subject_name}}">{{item.subject_name}}</paper-item>
+                <paper-item value="{{item.subject_id}}">{{item.subject_name}}</paper-item>
               </template>
             </paper-menu>
           </paper-dropdown-menu>                
@@ -90,21 +90,23 @@
      </div>
     </div>
     <term-assesment-service id="assesmentservice"></term-assesment-service>
+    <subject-dynamic-service id="subjectservice"></subject-dynamic-service>
   </template>
   <script>
   (function() {
     // var flag=0;
     'use strict';
-    var gradename,section,term,assesment,subject,academicyear,assesmenttype;
+    var gradename,section,term,assesment,subject,academicyear,assesmenttype,subjectid;
     Polymer({
       is: 'term-assesment-card',
       ready:function(){
        this.flag=0;
+       this.hideassesment=false;
       },
       FnHideView:function(){
-         this.flag=0;
+        this.flag=0;
         this.hideassesmenttype=true;
-        this.hideassesment=true;
+        // this.hideassesment=true;
         if(localStorage.getItem('curr_sess_termname')=='term1'){
           this.FA1='FA1';
           this.FA2='FA2';
@@ -123,43 +125,60 @@
           this.callService();       
       },*/
       FnSelectGrade:function(e){
+        document.querySelector('#sectionnam1').selected=-1;
+        document.querySelector('#assesmentcat1').selected=-1;
         document.querySelector('#subjectnam1').selected=-1;
         gradename = e.target.selectedItem.textContent.trim();
-        // alert(gradename);
-        if(gradename=="Grade-1"||gradename=="Grade-2"||gradename=="Grade-3"||gradename=="Grade-4"){
-          // alert('yes');
-          this.hideassesmenttype=true;
-          this.hideassesment=false;
-        }
-        else{
-          // alert('no');
-          this.hideassesmenttype=false;
-          this.hideassesment=true;
-        }
+        // if(gradename=="Grade-1"||gradename=="Grade-2"||gradename=="Grade-3"||gradename=="Grade-4"){
+        //   this.hideassesmenttype=true;
+        //   this.hideassesment=false;
+        // }
+        // else{
+        //   this.hideassesmenttype=false;
+        //   this.hideassesment=true;
+        // }
         localStorage.setItem("curr_sess_grade",gradename);
         this.$.assesmentservice.callSectionService(gradename);
+        this.$.assesmentservice.callAssesmentService(gradename);
         if(this.flag==1)
-          this.callService();
+          document.querySelector('subject-dynamic-markentrycard').studarr=[];
+          // this.callService();
       },
       FnSelectSection:function(e){
+        document.querySelector('#assesmentcat1').selected=-1;
+        document.querySelector('#subjectnam1').selected=-1;
         section = e.target.selectedItem.textContent.trim();
         localStorage.setItem("curr_sess_section",section);
         this.$.assesmentservice.callSubjectService(gradename,section);
         if(this.flag==1)
-          this.callService();
+          document.querySelector('subject-dynamic-markentrycard').studarr=[];
+          // this.callService();
       },      
       FnSelectSubject:function(e){
         this.flag=1;
-        subject = e.target.selectedItem.textContent.trim(); 
+        var sname = e.target.selectedItem.value; 
+        subject=e.target.selectedItem.textContent.trim(); 
+        var inx=sname.indexOf("  ");
+        var pref=sname.substring(0,inx);
+        if(pref=="Second Language"||pref=="Third Language")
+        subjectid=sname.substring((inx+2));
+        else
+        subjectid=sname;
+        // alert("pref:"+pref);
+        // alert("name:"+subjectid);
+        // subject = e.target.selectedItem.textContent.trim(); 
         localStorage.setItem("curr_sess_subject",subject);
+        localStorage.setItem("curr_sess_subjectid",subjectid);
+        localStorage.setItem("curr_sess_languagepref",pref);
         this.callService();       
       },
       FnSelectAssesment:function(e){
-        // document.querySelector('#subjectnam1').selected=-1;
+        document.querySelector('#subjectnam1').selected=-1;
         assesment = e.target.selectedItem.textContent.trim();
         localStorage.setItem("curr_sess_assesment",assesment);
         if(this.flag==1)
-          this.callService();
+          document.querySelector('subject-dynamic-markentrycard').studarr=[];
+          // this.callService();
       },
       FnSelectAssesmentType:function(e){
         assesmenttype = e.target.selectedItem.textContent.trim();
@@ -168,13 +187,8 @@
           this.callService();
       },
       callService:function(){        
-        // document.querySelector('#gradenam1').selected=-1;
-        // document.querySelector('#sectionnam1').selected=-1;
-        // document.querySelector('#assesmentcat1').selected=-1;
-        // document.querySelector('#assestype1').selected=-1;
-        // document.querySelector('#subjectnam1').selected=-1;
-        // alert('calling....');
         this.FnRefresh();
+
         if(gradename=="Grade-1"||gradename=="Grade-2"||gradename=="Grade-3"||gradename=="Grade-4")
         {
 
@@ -223,17 +237,21 @@
         }        
         }
         else if(gradename!="Grade-1"||gradename!="Grade-2"||gradename!="Grade-3"||gradename!="Grade-4")
-        {           
-          this.$.assesmentservice.callFetchFaStudentInfo();           
-          if(assesmenttype=="FA1"||assesmenttype=="FA2"||assesmenttype=="FA3"||assesmenttype=="FA4")
-          {            
+        {
+
+          // this.$.assesmentservice.callFetchFaStudentInfo();           
+          if(assesment=="FA1"||assesment=="FA2"||assesment=="FA3"||assesment=="FA4")
+          { 
+          // alert('coming');            
+          this.$.assesmentservice.callFetchFaStudentInfo();                     
           document.querySelector('cc-fa-fivetoten-card').studarr=[]; 
           document.querySelector('term-assesment-sheet-card').setPage('cc-fa-fivetoten-card');
           document.querySelector('cc-fa-fivetoten-card').setDefaultHeaders(); 
           document.querySelector('cc-fa-fivetoten-card').FnSpinnerrActive(true); 
           }
-          if(assesmenttype=="SA1"||assesmenttype=="SA2")
+          else if(assesment=="SA1"||assesment=="SA2")
           {
+          this.$.assesmentservice.callFetchFaStudentInfo();           
           if((gradename=="Grade-9"||gradename=="Grade-10")&&localStorage.getItem("curr_sess_subject")=="English"){
           document.querySelector('cc-sa-ninetoten-english').studarr=[]; 
           document.querySelector('term-assesment-sheet-card').setPage('cc-sa-ninetoten-english');
@@ -246,6 +264,15 @@
           document.querySelector('cc-sa-fivetoten-card').setDefaultHeaders();
           document.querySelector('cc-sa-fivetoten-card').FnSpinnerrActive(true);  
           }
+          }
+          else{
+          document.querySelector('term-assesment-sheet-card').setPage('subject-dynamic-markentrycard');
+          document.querySelector('subject-dynamic-markentrycard').FnRefresh();
+          // document.querySelector('subject-dynamic-markentryitemcard').FnRefresh();
+          // document.querySelector('subject-dynamic-markentry-input').FnRefresh();
+          this.$.subjectservice.subjectsubmittedcheckService(gradename,section,subject);
+          // this.$.subjectservice.callFetchInfoForSubjectTemplate(gradename,subject);
+          // this.$.subjectservice.callFetchStudentInfo(gradename,section,subject);
           }
         }
       },
@@ -283,16 +310,15 @@
          
           document.querySelector('cc-sa-fivetoten-card').FnRefresh();
           }
-        
-
       },
       FnRefreshcard:function(){
-        
         document.querySelector('#gradenam1').selected=-1;
         document.querySelector('#sectionnam1').selected=-1;
         document.querySelector('#assesmentcat1').selected=-1;
         document.querySelector('#assestype1').selected=-1;
         document.querySelector('#subjectnam1').selected=-1;
+        // document.querySelector('subject-dynamic-markentryitemcard').FnRefresh();
+        // document.querySelector('subject-dynamic-markentry-input').FnRefresh();
         this.flag=0;
       }
 

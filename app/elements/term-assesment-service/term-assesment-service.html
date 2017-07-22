@@ -545,17 +545,26 @@
          this.$.subjectajax.generateRequest();
       },
       subjectResponse:function(e){ 
-          // if(localStorage.getItem("curr_sess_subjectcategory")=="category1")        
-          document.querySelector('term-assesment-card').subjectarr=e.detail.response.returnval;
+          // if(localStorage.getItem("curr_sess_subjectcategory")=="category1") 
+          var arr=e.detail.response.returnval;
+          for(var i=0;i<arr.length;i++){
+            if(arr[i].language_pref=="Second Language"||arr[i].language_pref=="Third Language"){
+                arr[i].subject_id=arr[i].language_pref+"  "+arr[i].subject_id;
+            }
+          }
+          document.querySelector('term-assesment-card').subjectarr=arr;
           // if(localStorage.getItem("curr_sess_subjectcategory")=="category2"||localStorage.getItem("curr_sess_subjectcategory")=="category3"||localStorage.getItem("curr_sess_subjectcategory")=="category4")  
-          document.querySelector('coscholastic-assesment-card').subjectarr=e.detail.response.returnval;  
+          document.querySelector('coscholastic-assesment-card').subjectarr=arr;  
       },
-      callAssesmentService:function(termtype,termname,gradename){
+      callAssesmentService:function(gradename){
          this.assesmenturl=sessionStorage.getItem("addrinfo")+"/assesment-service";
          var obj={"schoolid":"","termtype":"","termname":"","gradename":""};
          obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
-         obj.termtype=termtype;
-         obj.termname=termname;         
+         obj.academicyear=localStorage.getItem("curr_sess_academicyear");
+         obj.termname=localStorage.getItem("curr_sess_termname");
+         obj.gradename=gradename;
+         // obj.termtype=termtype;
+         // obj.termname=termname;         
          this.assesmentparam= obj;
          this.$.assesmentajax.generateRequest();
       },
@@ -1247,8 +1256,8 @@ this.fetchfastudentreporturl=sessionStorage.getItem("addrinfo")+"/fetchfastudent
          obj.grade=localStorage.getItem("curr_sess_grade");;
          obj.section=localStorage.getItem("curr_sess_section");
          obj.subject=localStorage.getItem("curr_sess_subject");
-         obj.category=category;
-         obj.subcategory=subcategory;
+         obj.category=subcategory;
+         // obj.subcategory=subcategory;
          obj.mark=mark;  
          obj.absflag=localStorage.getItem("curr_sess_absflag"); 
          obj.subcatseq=seqno;        
@@ -1664,9 +1673,8 @@ this.fetchfastudentreporturl=sessionStorage.getItem("addrinfo")+"/fetchfastudent
       obj1.loggedid=sessionStorage.getItem("curr_sess_loggedid");
       if(sessionStorage.getItem("curr_sess_loggedrole")=="Co-Ordinator")
       {
-
        obj1.flag=0;
-     }
+      }
       else if(sessionStorage.getItem("curr_sess_loggedrole")=="HeadMistress")
       {
         obj1.flag=1;
@@ -1675,11 +1683,9 @@ this.fetchfastudentreporturl=sessionStorage.getItem("addrinfo")+"/fetchfastudent
       {
         obj1.flag=1;
       }
-      
        this.approvemarkurl=sessionStorage.getItem("addrinfo")+"/approvemark-service";
-        this.approvemarkparam=obj1;
-        this.$.approvemarkajax.generateRequest();  
-
+       this.approvemarkparam=obj1;
+       this.$.approvemarkajax.generateRequest();  
     },
     approvemarkResponse:function(e)
     {
@@ -1687,7 +1693,11 @@ this.fetchfastudentreporturl=sessionStorage.getItem("addrinfo")+"/fetchfastudent
       // alert(JSON.stringify(approvearr));
       if(approvearr!='invalid')
       document.querySelector('approve-one-to-four-card').approvearr=approvearr;
-
+      else
+      {
+        approvearr=[];
+        document.querySelector('approve-one-to-four-card').approvearr=approvearr;
+      }
     },
     fetchimportmark:function(academic,term,assesment,grade,section,subject)
     {

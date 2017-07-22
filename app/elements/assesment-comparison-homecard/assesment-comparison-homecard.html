@@ -43,7 +43,17 @@
       enrichment-comparision-chart{
         /*width: 30%;*/
       }
+          .spinner{
+            margin-left: 50%;            
+          }
+          #spinner{
+            margin: 0;
+            padding: 0;
+            border: none;
+            background-color: transparent;
+          }
     </style>
+    <div class="spinner"><paper-dialog modal id="spinner" entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop><paper-spinner active></paper-spinner></paper-dialog></div>
     <div class='card'>     
     <div class='drop'>  
           <paper-dropdown-menu id="" label="Select School" disabled="{{read}}" required hidden$="{{hideschool}}">
@@ -112,6 +122,8 @@
     
     <enrichment-report-service id="enrichmentreportservice"></enrichment-report-service>
     <beginner-assesment-service id="bassesmentservice"></beginner-assesment-service>
+
+
   </template>
   <script>
   (function() {
@@ -121,7 +133,14 @@
       is: 'assesment-comparison-homecard',
       ready:function(){
       this.hidecard=true;  
-      this.flag=0;       
+      this.flag=0;    
+      this.hideenrichmentexcel=true;   
+      },
+      FnSpinnerActive:function(flag){
+        if(flag==true)
+        this.$.spinner.opened=true;
+        if(flag==false)
+        this.$.spinner.opened=false;
       },
       // attached:function(){
       //   if(sessionStorage.getItem("curr_sess_loggedroleid")=="management")
@@ -142,14 +161,14 @@
         assesment=e.target.selectedItem.textContent.trim();
         localStorage.setItem("curr_sess_assesment",assesment);
         if(this.flag==1)
-          {
+        {
             // document.querySelector("#assescomparebooksissuancetype").selected=-1;
         this.arr=[];
         this.hideenrichmentexcel=true;
         document.querySelector("#assescomparebooksissuancegrade").selected=-1;
         document.querySelector("#assescomparebooksissuancesection").selected=-1;
         document.querySelector("#assescomparebooksissuancesubject").selected=-1;
-          }
+        }
       },
       FnSelectAssesment1:function(e){
         assesment=e.target.selectedItem.textContent.trim();
@@ -167,14 +186,14 @@
         localStorage.setItem("curr_sess_gradeid",gradeid);
         this.$.bassesmentservice.callSectionService(gradename);
         if(this.flag==1)
-          {
+        {
         // document.querySelector("#assescomparebooksissuancetype").selected=-1;
         // document.querySelector("#assescomparebooksissuancegrade").selected=-1;
         this.arr=[];
         this.hideenrichmentexcel=true;
         document.querySelector("#assescomparebooksissuancesection").selected=-1;
         document.querySelector("#assescomparebooksissuancesubject").selected=-1;
-          }
+        }
       },
       FnSelectSection:function(e){
         sectionname = e.target.selectedItem.textContent.trim();
@@ -183,26 +202,28 @@
         localStorage.setItem("curr_sess_sectionid",sectionid);
         this.$.enrichmentreportservice.callFetchEnrichmentStudentCategorySubjectwise();
         if(this.flag==1)
-          {
+        {
             // document.querySelector("#assescomparebooksissuancetype").selected=-1;
         // document.querySelector("#assescomparebooksissuancegrade").selected=-1;
         // document.querySelector("#assescomparebooksissuancesection").selected=-1;
         this.arr=[];
         this.hideenrichmentexcel=true;
         document.querySelector("#assescomparebooksissuancesubject").selected=-1;
-          }
+        }
       },
       FnSelectSubject:function(e){
         this.flag=1;
+        this.hideenrichmentexcel=true;
         subjectname = e.target.selectedItem.textContent.trim();
         subjectid = e.target.selectedItem.value.trim();    
         localStorage.setItem("curr_sess_subjectname",subjectname);
         localStorage.setItem("curr_sess_subjectid",subjectid);
         this.$.enrichmentreportservice.callenrichmentexcelService();
+        this.FnSpinnerActive(true);
         // this.$.enrichmentservice.FnFetchSubjectCategoryForIssue(subjectid);
       },
       FnShowList:function(){
-        this.hideenrichmentchart=false;
+        this.hideenrichmentexcel=false;
       },
       FnRefresh:function(){
         document.querySelector("#assescomparebooksissuanceschoolname").selected=-1;
@@ -219,9 +240,9 @@
         subjectid="";
         academicyear="";
         this.hidecard=true; 
-        this.hideenrichmentchart=true; 
-        this.hidenewenrichmentchart=true; 
-        this.hidepromotedenrichmentchart=true; 
+        this.hideenrichmentexcel=true; 
+        // this.hidenewenrichmentchart=true; 
+        // this.hidepromotedenrichmentchart=true; 
       }
     });      
   })();
