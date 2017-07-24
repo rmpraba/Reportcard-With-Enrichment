@@ -88,16 +88,21 @@
         assesmentname = e.target.selectedItem.textContent.trim();
         localStorage.setItem("curr_sess_assesmentname",assesmentname);
         if(this.flag==1){
+        document.querySelector('enrichment-dynamic-markentrycard').FnRefresh();
+        document.querySelector('#gradenam').selected=-1;
+        document.querySelector('#sectionnam').selected=-1;
+        document.querySelector('#subjectnam').selected=-1;
         this.$.bassesmentservice.callEnrichmentSubjectService(assesmentname,gradename);    
-        this.FnServiceCall(); 
+        // this.FnServiceCall(); 
         }
       },
       FnSelectacademicyear:function(e){
         academicyear = e.target.selectedItem.textContent.trim();
         localStorage.setItem("curr_sess_academicyear",academicyear);
         if(this.flag==1){
+        document.querySelector('enrichment-dynamic-markentrycard').FnRefresh();
         this.$.bassesmentservice.callEnrichmentSubjectService(assesmentname,gradename);    
-        this.FnServiceCall(); 
+        // this.FnServiceCall(); 
         }
       },
       FnSelectGrade:function(e){
@@ -105,8 +110,11 @@
         localStorage.setItem("curr_sess_grade",gradename);
         this.$.bassesmentservice.callSectionService(gradename);
         if(this.flag==1){
+        document.querySelector('enrichment-dynamic-markentrycard').FnRefresh();
+        document.querySelector('#sectionnam').selected=-1;
+        document.querySelector('#subjectnam').selected=-1;
         this.$.bassesmentservice.callEnrichmentSubjectService(assesmentname,gradename);    
-        this.FnServiceCall();  
+        // this.FnServiceCall();  
         }        
       },
       FnSelectSection:function(e){        
@@ -114,7 +122,8 @@
         localStorage.setItem("curr_sess_section",section); 
         this.$.bassesmentservice.callEnrichmentSubjectService(assesmentname,gradename);    
         if(this.flag==1){
-        this.FnServiceCall();  
+        document.querySelector('enrichment-dynamic-markentrycard').FnRefresh();
+        document.querySelector('#subjectnam').selected=-1;
         }     
       },
       FnSelectSubject:function(e){

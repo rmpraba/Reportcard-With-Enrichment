@@ -2662,7 +2662,7 @@ app.post('/fetchworkingdays-service',  urlencodedParser,function (req, res)
 app.post('/updateimportmarkcheck-service' ,  urlencodedParser,function (req, res)
 {
 var qur;
-if(req.query.subject=='Hindi'||req.query.subject=='Kannada'){
+if(req.query.subject=='II Language Hindi'||req.query.subject=='II Language Kannada'){
 qur="SELECT CASE WHEN count1 = count2 THEN 'match' ELSE 'mismatch' END as result FROM(SELECT "+
 "(select count(distinct(student_id)) from tr_term_assesment_marks "+
 "where school_id='"+req.query.schoolid+"' and grade='"+req.query.gradename+"' and section='"+req.query.sectionname+"' "+
@@ -2710,7 +2710,7 @@ var qur;
 console.log(req.query.assesmentid+'  '+req.query.subject);
 if(req.query.assesmentid=="FA1"||req.query.assesmentid=="FA2"||req.query.assesmentid=="SA1"||req.query.assesmentid=="FA3"||req.query.assesmentid=="FA4"||req.query.assesmentid=="SA2"){
 
-if(req.query.subject=='Hindi'||req.query.subject=='Kannada'||req.query.subject=='French'||req.query.subject=='sanskrit'||req.query.subject=='III Language Kannada'||req.query.subject=='III Language Hindi'||req.query.subject=='II Language French'){
+if(req.query.subject=='II Language Hindi'||req.query.subject=='II Language Kannada'||req.query.subject=='French'||req.query.subject=='sanskrit'||req.query.subject=='III Language Kannada'||req.query.subject=='III Language Hindi'||req.query.subject=='II Language French'){
 
   console.log("Language");
 qur="SELECT CASE WHEN count1 = count2 THEN 'match' ELSE 'mismatch' END as result FROM(SELECT "+
@@ -2735,7 +2735,7 @@ qur="SELECT CASE WHEN count1 = count2 THEN 'match' ELSE 'mismatch' END as result
 }
 else
 {
-if(req.query.subject=='Hindi'||req.query.subject=='Kannada'){
+if(req.query.subject=='II Language Hindi'||req.query.subject=='II Language Kannada'){
 qur="SELECT CASE WHEN count1 = count2 THEN 'match' ELSE 'mismatch' END as result FROM(SELECT "+
 "(select count(distinct(student_id)) from tr_coscholastic_assesment_marks "+
 "where school_id='"+req.query.schoolid+"' and grade='"+req.query.gradename+"' and section='"+req.query.sectionname+"' "+
@@ -5030,7 +5030,7 @@ app.post('/fetchgradeseperation-service' ,  urlencodedParser,function (req, res)
 app.post('/updateattendanceimportmarkcheck-service' ,  urlencodedParser,function (req, res)
 {
 var qur;
-if(req.query.subject=='Hindi'||req.query.subject=='Kannada'){
+if(req.query.subject=='II Language Hindi'||req.query.subject=='II Language Kannada'){
 qur="SELECT CASE WHEN count1 = count2 THEN 'match' ELSE 'mismatch' END as result FROM(SELECT "+
 "(select count(distinct(student_id)) from tr_term_assesment_marks "+
 "where school_id='"+req.query.schoolid+"' and grade='"+req.query.gradename+"' and section='"+req.query.sectionname+"' "+

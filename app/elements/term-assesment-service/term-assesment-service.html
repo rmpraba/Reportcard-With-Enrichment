@@ -986,7 +986,7 @@ this.fetchfastudentreporturl=sessionStorage.getItem("addrinfo")+"/fetchfastudent
         document.querySelector('cc-evs-onetofour-card').markarr=overall;
         document.querySelector('cc-evs-onetofour-card').FnSpinnerrActive(false); 
         }
-        if(localStorage.getItem("curr_sess_subject")=="English"||localStorage.getItem("curr_sess_subject")=="Hindi"||localStorage.getItem("curr_sess_subject")=="Kannada"){        
+        if(localStorage.getItem("curr_sess_subject")=="English"||localStorage.getItem("curr_sess_subject")=="II Language Hindi"||localStorage.getItem("curr_sess_subject")=="II Language Kannada"){        
         document.querySelector('cc-eng-onetofour-card').markarr=overall;
         document.querySelector('cc-eng-onetofour-card').FnSpinnerrActive(false); 
         }
@@ -1109,7 +1109,7 @@ this.fetchfastudentreporturl=sessionStorage.getItem("addrinfo")+"/fetchfastudent
         document.querySelector('cc-evs-onetofour-card').FnSpinnerrActive(false); 
         // document.querySelector('cc-evs-onetofour-card').hiddenbutton();
         }
-        if(localStorage.getItem("curr_sess_subject")=="English"||localStorage.getItem("curr_sess_subject")=="Hindi"||localStorage.getItem("curr_sess_subject")=="Kannada"){        
+        if(localStorage.getItem("curr_sess_subject")=="English"||localStorage.getItem("curr_sess_subject")=="II Language Hindi"||localStorage.getItem("curr_sess_subject")=="II Language Kannada"){        
         document.querySelector('cc-eng-onetofour-card').studarr=arr;
         document.querySelector('cc-eng-onetofour-card').FnSpinnerrActive(false); 
         // document.querySelector('cc-eng-onetofour-card').hiddenbutton();
@@ -1829,7 +1829,7 @@ this.fetchfastudentreporturl=sessionStorage.getItem("addrinfo")+"/fetchfastudent
         document.querySelector('cc-evs-onetofour-card').FnResetFlag();
         document.querySelector('approve-one-to-four-card').FnSpinnerrActive(false); 
         }
-        if(localStorage.getItem("curr_sess_importsubject")=="English"||localStorage.getItem("curr_sess_importsubject")=="Hindi"||localStorage.getItem("curr_sess_importsubject")=="Kannada"){   
+        if(localStorage.getItem("curr_sess_importsubject")=="English"||localStorage.getItem("curr_sess_importsubject")=="II Language Hindi"||localStorage.getItem("curr_sess_importsubject")=="II Language Kannada"){   
 
         document.querySelector('term-assesment-sheet-card').setPage('cc-eng-onetofour-card'); 
         document.querySelector('cc-eng-onetofour-card').setDefaultHeaders();         
@@ -1998,7 +1998,7 @@ this.fetchfastudentreporturl=sessionStorage.getItem("addrinfo")+"/fetchfastudent
         // document.querySelector('cc-evs-onetofour-card').markarr=overall;
         document.querySelector('cc-evs-onetofour-card').FnSpinnerrActive(false); 
         }
-        if(localStorage.getItem("curr_sess_subject")=="English"||localStorage.getItem("curr_sess_subject")=="Hindi"||localStorage.getItem("curr_sess_subject")=="Kannada"){        
+        if(localStorage.getItem("curr_sess_subject")=="English"||localStorage.getItem("curr_sess_subject")=="II Language Hindi"||localStorage.getItem("curr_sess_subject")=="II Language Kannada"){        
         // document.querySelector('cc-eng-onetofour-card').markarr=overall;
         document.querySelector('cc-eng-onetofour-card').FnSpinnerrActive(false); 
         }
@@ -2306,7 +2306,7 @@ this.fetchfastudentreporturl=sessionStorage.getItem("addrinfo")+"/fetchfastudent
     deletemarkResponse:function(e){
         alert(e.detail.response.returnval);
         var sub=localStorage.getItem("curr_sess_subject");
-        if(sub=="English"||sub=="Mathematics"||sub=="Computer"||sub=="EVS"||sub=="Hindi"||sub=="Kannada"||sub=="GK")
+        if(sub=="English"||sub=="Mathematics"||sub=="Computer"||sub=="EVS"||sub=="II Language Hindi"||sub=="II Language Kannada"||sub=="GK")
         document.querySelector('term-assesment-card').callService();
         else
         document.querySelector('coscholastic-assesment-card').callService();
@@ -2340,7 +2340,7 @@ this.fetchfastudentreporturl=sessionStorage.getItem("addrinfo")+"/fetchfastudent
         // document.querySelector('cc-evs-onetofour-card').markarr=overall;
         document.querySelector('cc-evs-onetofour-card').FnEnableFlag(false); 
         }
-        if(localStorage.getItem("curr_sess_subject")=="English"||localStorage.getItem("curr_sess_subject")=="Hindi"||localStorage.getItem("curr_sess_subject")=="Kannada"){        
+        if(localStorage.getItem("curr_sess_subject")=="English"||localStorage.getItem("curr_sess_subject")=="II Language Hindi"||localStorage.getItem("curr_sess_subject")=="II Language Kannada"){        
         // document.querySelector('cc-eng-onetofour-card').markarr=overall;
         document.querySelector('cc-eng-onetofour-card').FnEnableFlag(false); 
         }
@@ -2388,7 +2388,7 @@ this.fetchfastudentreporturl=sessionStorage.getItem("addrinfo")+"/fetchfastudent
         // document.querySelector('cc-evs-onetofour-card').markarr=overall;
         document.querySelector('cc-evs-onetofour-card').FnHideApprovebtnFlag(true); 
         }
-        if(localStorage.getItem("curr_sess_subject")=="English"||localStorage.getItem("curr_sess_subject")=="Hindi"||localStorage.getItem("curr_sess_subject")=="Kannada"){        
+        if(localStorage.getItem("curr_sess_subject")=="English"||localStorage.getItem("curr_sess_subject")=="II Language Hindi"||localStorage.getItem("curr_sess_subject")=="II Language Kannada"){        
         // document.querySelector('cc-eng-onetofour-card').markarr=overall;
         document.querySelector('cc-eng-onetofour-card').FnHideApprovebtnFlag(true); 
         }
