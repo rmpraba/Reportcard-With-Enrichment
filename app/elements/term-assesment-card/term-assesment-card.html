@@ -266,13 +266,16 @@
           }
           }
           else{
+          if(localStorage.getItem('curr_sess_report')=='0'){
           document.querySelector('term-assesment-sheet-card').setPage('subject-dynamic-markentrycard');
           document.querySelector('subject-dynamic-markentrycard').FnRefresh();
-          // document.querySelector('subject-dynamic-markentryitemcard').FnRefresh();
-          // document.querySelector('subject-dynamic-markentry-input').FnRefresh();
           this.$.subjectservice.subjectsubmittedcheckService(gradename,section,subject);
-          // this.$.subjectservice.callFetchInfoForSubjectTemplate(gradename,subject);
-          // this.$.subjectservice.callFetchStudentInfo(gradename,section,subject);
+          }
+          if(localStorage.getItem('curr_sess_report')=='1'){
+          document.querySelector('term-assesment-sheet-card').setPage('dynamic-markentry-report');
+          document.querySelector('dynamic-markentry-report').FnRefresh();
+          this.$.subjectservice.FnFetchDynamicallyEnteredMarks(gradename,section,subject);
+          }
           }
         }
       },

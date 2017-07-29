@@ -48,6 +48,7 @@
     <onetofour-scorecard-service id="otfscorecardservice"></onetofour-scorecard-service>
     <scorecard-service id="scorecardservice"></scorecard-service>
     <report-service id="reportservice"></report-service>
+    <reprotcard-newformat-service id="newformatservice"></reprotcard-newformat-service>
   </template>
   <script>
   (function() {
@@ -69,21 +70,33 @@
         }
         else
         {   
-        
+        if(localStorage.getItem('curr_sess_academicyear')=='2016-2017'){
         this.$.scorecardservice.callFetchstudentinfoService(this.studentid);
         this.$.scorecardservice.callFetchsubjectinfoService(this.studentid);
         this.$.otfscorecardservice.callfetchhealthattendanceinfoService(this.studentid);
-        //this.$.scorecardservice.callfetchhealthattendanceinfoService(this.studentid);
         this.$.scorecardservice.callFetchmarkService(this.studentid); 
          this.$.scorecardservice.callfetchcoscholasticmetricsService(this.studentid);  
          this.$.scorecardservice.callfetchcoscholasticinfoService(this.studentid);
-        // this.$.scorecardservice.callFetchmarkService(this.studentid);
-        // this.$.otfscorecardservice.FnFetchHealthinfo(this.studentid); 
-        // this.$.otfscorecardservice.FnFetchArtinfo(this.studentid);
-        // this.$.otfscorecardservice.FnFetchPhysicalinfo(this.studentid);
         document.querySelector('app-card').setPage('homepage','');
         document.querySelector('home-page').setPage('ccefivetotenscorecard',''); 
         document.querySelector('cce-fivetoten-score-card').callImage();
+        }
+        else{
+        if(localStorage.getItem("curr_sess_grade")=="Grade-10"||localStorage.getItem("curr_sess_grade")=="Grade-9"){
+        this.$.newformatservice.fetchstudinfofornewformatService(this.studentid);
+        this.$.newformatservice.fetchnewformatscholasticsubjects1(this.studentid);
+        // this.$.newformatservice.fetchnewformatcoscholasticsubjects1(this.studentid);
+        document.querySelector('app-card').setPage('homepage','');
+        document.querySelector('home-page').setPage('newformat-reportcard-nineten','');
+        }
+        else{
+        this.$.newformatservice.fetchstudinfofornewformatService(this.studentid);
+        this.$.newformatservice.fetchnewformatscholasticsubjects(this.studentid);
+        this.$.newformatservice.fetchnewformatcoscholasticsubjects(this.studentid);
+        document.querySelector('app-card').setPage('homepage','');
+        document.querySelector('home-page').setPage('reprotcard-newformat-threetoeight','');
+        }
+        } 
         }
       }
       if(localStorage.getItem('curr_sess_loggedassesmenttype')=="Analysis"){

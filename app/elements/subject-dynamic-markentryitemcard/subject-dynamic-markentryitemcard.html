@@ -66,12 +66,21 @@
         // alert(JSON.stringify(scorearr));
         if(scorearr.length>0){
         for(var i=0;i<scorearr.length;i++){
+          var t=1;
+          for(var j=0;j<scorearr.length;j++){
+            if(scorearr[i].studentid==scorearr[j].studentid){
+              scorearr[i].categorycnt=t;
+              t++;
+            }
+          }
+        }
+        for(var i=0;i<scorearr.length;i++){
           // alert(scorearr[i].studentid+" "+this.studentid);
           if(scorearr[i].studentid==this.studentid){
             var temp=[];
             temp.push(scorearr[i]);
             // alert(JSON.stringify(temp));
-            this.$.assesmentservice.callinsertfaassesmentmarkService(scorearr[i].studentid,scorearr[i].studentname,scorearr[i].assesmenttype,scorearr[i].categoryname,scorearr[i].value,1,1); 
+            this.$.assesmentservice.callinsertfaassesmentmarkService(scorearr[i].studentid,scorearr[i].studentname,scorearr[i].assesmenttype,scorearr[i].categoryname,scorearr[i].value,1,scorearr[i].categorycnt); 
           }
         }
         }

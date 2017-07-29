@@ -620,6 +620,7 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
           // alert('in');
           document.querySelector('app-card').setPage('homepage','');
           document.querySelector('home-page').setPage('scorecard','');
+          this.$.assesmentservice.callTermService("Term");
          }  
          if(localStorage.getItem('curr_sess_loggedassesmenttype')=="Enrichment") 
          {
