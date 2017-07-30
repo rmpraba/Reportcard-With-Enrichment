@@ -188,6 +188,30 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
         </paper-button>
         </div>
     </div>
+
+    <div class="inner1">
+          <div class="card" hidden$="{{captureReport}}">
+            <paper-button on-click="CaptureReportads" no ink><img src="../../images/active1.jpg" height="180px" width="180px">
+            <h4>Chapter creation</h4>
+            </paper-button>
+          </div>
+          <div class="card" hidden$="{{bookaprval}}">
+            <paper-button on-click="fnbookapruval" no ink><img src="../../images/appruval.jpg" height="180px" width="180px">
+            <h4>Book Apruval Date</h4>
+           </paper-button>
+          </div>
+        <div class="card" hidden$="{{bookclassplan}}">
+          <paper-button on-click="fnbookclassplan" no ink><img src="../../images/classplan.gif" height="180px" width="180px">
+            <h4>class teacher book chapter</h4>
+          </paper-button>
+        </div>  
+        <div class="card" hidden$="{{bookreject}}">
+          <paper-button on-click="fnbookreject" no ink><img src="../../images/reject.jpg" height="180px" width="180px">
+            <h4>Capter Rejection</h4>
+          </paper-button>
+        </div>
+      </div>
+
     </div>
 
     <div class="highlevelcommon" hidden$="{{highlevelcommon}}">
@@ -464,16 +488,7 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
             </paper-button>
        </div>
     </div>
- 
-    <div class="container1">
-      <div class="card" hidden$="{{captureReport}}">
-          <paper-button on-click="CaptureReportads" no ink><img src="../../images/active1.jpg" height="180px" width="180px">
-            <!-- <h4>Books</h4> -->
-            <h4>Book Chapter Creation</h4>
-          </paper-button>
-       </div>
-    </div>
-       
+    
  
 
     <div class="cdialog">      
@@ -561,6 +576,9 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
         this.studentsectionreport=true;
         this.sectionedit=true;
         this.captureReport=true;
+        this.bookaprval=true;
+        this.bookclassplan=true;
+        this.bookreject=true;
 
        }, 
 
@@ -691,15 +709,61 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
           document.querySelector('home-page').setPage('section-edit-card','');
          }
 
-          if(localStorage.getItem('curr_sess_loggedassesmenttype')=="captureReport") 
+         if(localStorage.getItem('curr_sess_loggedassesmenttype')=="captureReport") 
          {
-            //alert('1'); 
+        //   alert('1'); 
           document.querySelector('app-card').setPage('homepage','');
           document.querySelector('home-page').setPage('teacher-book-refernce-card','');
           this.$.bookservice.capterseq();
-            // this.$.bookservice.conceptseq();
-            //this.$.bookservice.getcaptervalue();
+         // this.$.bookservice.conceptseq();
+        //  this.$.bookservice.getcaptervalue();
          } 
+     if(localStorage.getItem('curr_sess_loggedassesmenttype')=="bookapruval")
+         {
+            document.querySelector('teacher-book-approve-card').fnsetval();
+            document.querySelector('teacher-book-approve-card').fnRefresh();
+            document.querySelector('teacher-book-approve-card').fnhide();
+            
+       document.querySelector('app-card').setPage('homepage','');
+        document.querySelector('home-page').setPage('teacher-book-approve-card','');
+      if(sessionStorage.getItem("curr_sess_loggedroleid")=='subject-teacher')
+      {   
+        //alert(2);
+         this.$.bookservice.bookgrade();
+         this.$.bookservice.masterzskill();
+         
+         document.querySelector('teacher-book-approveal-concept-item-card').FnRefresh();
+        }
+      else if(sessionStorage.getItem("curr_sess_loggedroleid")=='co-ordinator'){
+            this.$.bookservice.getappovedcoordinator();
+            this.$.bookservice.masterzskill();
+     }
+     else if(sessionStorage.getItem("curr_sess_loggedroleid")=="principal"||sessionStorage.getItem("curr_sess_loggedroleid")=="headofedn"||sessionStorage.getItem("curr_sess_loggedroleid")=="headmistress"||sessionStorage.getItem("curr_sess_loggedroleid")=="viceprincipal"){
+           this.$.bookservice.masterzskill();
+           this.$.bookservice.bookgrade();
+     
+        } 
+     }    
+     if(localStorage.getItem('curr_sess_loggedassesmenttype')=="classplan")
+     {
+
+      document.querySelector('app-card').setPage('homepage','');
+      document.querySelector('home-page').setPage('class-teacher-book-approve-card','');
+            this.$.bookservice.fnbookplangrade();
+            this.$.bookservice.fnbookplansubject();
+            this.$.bookservice.masterzskill();
+       document.querySelector('class-teacher-book-approve-card').FnRefreshzz();
+
+     }
+   if(localStorage.getItem('curr_sess_loggedassesmenttype')=="bookreject")
+   {
+    document.querySelector('app-card').setPage('homepage','');
+    document.querySelector('home-page').setPage('class-teacher-book-reject-card','');
+    //this.$.bookservice.fnsetrejectbookgrade();
+    //this.$.bookservice.fnsetrejectbooksubject();
+    this.$.bookservice.chaptcompletionstatus();
+    //document.querySelector('class-teacher-book-reject-card').FnRefresh1();
+     }
 
              this.$.cdialog.close();
          
@@ -804,7 +868,6 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
             this.empreportdetails=false;
            this.studentsectionreport=false;
            this.sectionedit=false;
-           this.captureReport=false;
            }
        if(sessionStorage.getItem("curr_sess_loggedroleid")=='superadmin')
           {
@@ -852,6 +915,10 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
 
             this.empreportdetails=false;
           this.studentsectionreport=false;
+           this.bookaprval=false;
+            this.bookclassplan=false;
+            this.bookreject=false;
+            this.captureReport=false;
           }
         
       },
@@ -1116,14 +1183,30 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
         this.$.cdialog.toggle();
       },
 
-       CaptureReportads:function(e)
-       {
-          //alert('1');
+        CaptureReportads:function(e){
+       // alert('1');
            localStorage.setItem('curr_sess_loggedassesmenttype','captureReport');
-           document.querySelector('teacher-book-refernce-card').fnrefresh();
             this.$.bookservice.teacherbookref1();
+            document.querySelector('teacher-book-refernce-card').fnrefresh();
             this.$.cdialog.toggle();   
-        },
+          },
+     
+         fnbookapruval:function(e){
+         localStorage.setItem('curr_sess_loggedassesmenttype','bookapruval');
+         this.$.cdialog.toggle();  
+         },
+        fnbookclassplan:function(e){
+          localStorage.setItem('curr_sess_loggedassesmenttype','classplan');
+         this.$.cdialog.toggle();  
+     
+         },
+
+          fnbookreject:function(e)
+          {
+            localStorage.setItem('curr_sess_loggedassesmenttype','bookreject');
+            this.$.cdialog.toggle();
+          }
+
 
     });
   })();
