@@ -1,0 +1,185 @@
+
+   
+<link rel="import" href="..\..\bower_components/polymer/polymer.html">
+
+<dom-module id="class-teacher-book-reject-item-card">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+       table
+        {   
+          table-layout: fixed;
+          width: 1270px;
+          border-collapse: collapse;
+          margin-left: 19%;
+        }
+
+        .card
+        {
+          @apply(--layout-horizontal);
+        } 
+        p
+        {
+          width: 25%;
+          margin-left: 10%;
+        } 
+        paper-button
+        {
+          text-transform: none;
+          height: 25px;
+        } 
+    </style>
+      <!-- <paper-input value={{captheadid}} hidden></paper-input>
+      <paper-input value={{conceptid}} hidden></paper-input>
+      <paper-input value={{subflag}} hidden></paper-input>
+      <table border="0">
+      <tr style="border-bottom: 1px solid #ccc; line-height: 1.8em;border-color:#6699ff">
+              <td hidden>{{empid}}</td>
+              <td><paper-input value={{concept}}></paper-input></td>
+              <td><paper-input value={{period}}></paper-input></td>
+              <td><paper-textarea value={{skill}}></paper-textarea></td>
+              <td>{{valuez}}</td>
+              <td><paper-textarea  value={{innovation}}></paper-textarea>
+              </td> 
+              <td>{{planneddate}}</td>
+              <td>
+              <paper-input hidden$="{{hideeditvalue}}" value={{completiondate}}></paper-input>
+              <complection-date-picker-card hidden$="{{hidesavevalue}}" ></complection-date-picker-card></td>
+              <td><paper-input value={{remark}}></paper-input></td>
+              <td><paper-input value={{enrichmentsug}}></paper-input></td>
+              <td>
+                <paper-checkbox id={{id}} on-change="fnsetyes">Yes</paper-checkbox></br>
+                <paper-checkbox id={{idz}} on-change="fnsetno">No</paper-checkbox>
+              </td>
+              <td><paper-input value={{blockremark}}></paper-input></td>
+              <td><paper-icon-button  on-click="fnaroveset" hidden$="{{hidesavevalue}}" icon="save"></paper-icon-button>
+              <paper-icon-button  on-click="fnedit" icon="create" hidden$="{{hideeditvalue}}"></paper-icon-button>
+              </td>
+        </tr>
+      </table> -->
+
+      
+      <div class="card">
+        <p hidden>{{gradeid}}</p>
+        <p hidden>{{subjectid}}</p>
+        <p hidden>{{classid}}</p>  
+        <p hidden>{{chapterid}}</p>
+        <p hidden>{{empid}}</p>
+        <p>{{gradename}}</p>
+        <p>{{subjectname}}</p>
+        <p>{{sectionname}}</p>
+        <p>{{chapter_name}}</p>
+        <p>{{empname}}</p>
+        <p><paper-button  id="tb3" on-click="FnView">View</paper-button></p>
+      </div>
+     <teacher-book-service-card id="bookservice"></teacher-book-service-card>
+ <iron-ajax
+        method="post"
+        id="rejectcapterstatusajax"
+        url="{{rejectcapterstatusurl}}"
+        params="{{rejectcapterstatusparam}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="rejectcapterstatusResponse"
+        debounce-duration="300"/>
+   </iron-ajax>
+  </template>
+  <script>
+  (function(){
+    'use strict';
+var skillid;
+var val=[];
+var costatus;
+
+    Polymer({
+      is: 'class-teacher-book-reject-item-card',
+
+      FnView:function(e){
+    
+this.rejectcapterstatusurl=sessionStorage.getItem("addrinfo")+"/fetchclassconcept11-service";
+           var obj={"schoolid":"","academic_year":""};
+           obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+           obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+           obj.subjectid=this.subjectid;
+           obj.gradeid=this.gradeid;
+           obj.sectoinidz=this.classid;
+           obj.chapterid=this.chapterid;
+           obj.empid=this.empid;
+           this.rejectcapterstatusparam=obj;
+           this.$.rejectcapterstatusajax.generateRequest();
+           sessionStorage.setItem("grdeidz",this.gradeid);
+           sessionStorage.setItem("subjectidz",this.subjectid);
+           sessionStorage.setItem("sectionidz",this.classid);
+           localStorage.setItem("curr_sess_capters",this.chapterid); 
+    
+        },
+         rejectcapterstatusResponse:function(e){
+         //alert(JSON.stringify(e.detail.response.returnval));
+          var res=e.detail.response.returnval;
+        var setattr=[];
+             for(var i=0;i<res.length;i++){
+                      var obj={};
+                      obj.conceptid=res[i].concept_id;
+                      obj.concept=res[i].concept;
+                      obj.skill=res[i].skill;
+                      obj.innovation=res[i].innovation;
+                      obj.planned_date=res[i].planning_date;
+                      obj.completion_date=res[i].completion_date;
+                      obj.enrichment_sug=res[i].enrichment_sug;
+                      var id_date=res[i].planning_date;
+                      id_date=id_date.replace(/[^\w\s]/gi, '');
+                      obj.id_date=id_date;
+                      obj.remark=res[i].remark;
+                      obj.period=res[i].period;
+                      obj.valuez=res[i].value;
+                       obj.rowid=i+1;
+                      setattr.push(obj);
+                      }
+
+                      alert(JSON.stringify(setattr));
+  document.querySelector('class-teacher-book-rejection-item-card').mainnarr=setattr; 
+  document.querySelector('class-teacher-book-rejection-item-card').empid=res[0].empid; 
+ document.querySelector('class-teacher-book-rejection-item-card').empname=res[0].empname; 
+    document.querySelector('app-card').setPage('homepage','');
+  document.querySelector('home-page').setPage('class-teacher-book-rejection-item-card','');
+        },
+ /* ready:function(e){
+this.hidesavevalue=true;
+this.hideeditvalue=false;
+  },
+  fnedit:function(e){
+this.hidesavevalue=false;
+this.hideeditvalue=true;
+  },
+
+    fnaroveset:function(e){
+      if(this.empid==""||this.skill==""||this.innovation==""||this.enrichmentsug==""||this.period==""||this.planneddate==""||this.concept==""||this.conceptid==""||this.remark==""||this.valuez==""||this.blockremark==""&&this.blockremark==null){
+       alert("Please Enter The value");
+      }
+    alert(this.empid+" 1"+this.skill+" 2"+this.innovation+" 3"+this.enrichmentsug+"4 "+this.period+"5 "+this.planneddate+"6 "+this.concept+" 7"+this.conceptid+" 8"+this.remark+" 9"+this.valuez+" 10"+this.blockremark);
+ this.$.bookservice.fnfinalreaprovebook(this.empid,this.skill,this.innovation,this.enrichmentsug,this.period,this.planneddate,this.concept,this.conceptid,this.remark,this.valuez,this.blockremark);
+  this.hidesavevalue=true;
+  this.hideeditvalue=false;
+ 
+   },
+    fnsetyes:function(e){
+  if(document.querySelector('#'+this.id).checked==true){
+             costatus='Yes';
+     document.querySelector('#'+this.idz).checked=false;
+      
+           }
+    },
+    fnsetno:function(e){
+      // alert(this.id);
+
+if(document.querySelector('#'+this.idz).checked==true){
+             costatus='No';
+     document.querySelector('#'+this.id).checked=false;
+      }
+   },*/
+ });
+  })();
+  </script>
+</dom-module>

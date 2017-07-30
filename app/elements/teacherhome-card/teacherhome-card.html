@@ -207,6 +207,28 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
         </paper-button>
        </div>
       </div>
+      <div class="inner1" hidden$="{{hideleasonplancontainer}}">
+      <div class="card" hidden$="{{captureReportt}}">
+        <paper-button on-click="CaptureReportads" no ink><img src="../../images/active1.jpg" height="180px" width="180px">
+        <h4>Chapter creation</h4>
+        </paper-button>
+      </div>
+      <div class="card" hidden$="{{bookaprvall}}">
+        <paper-button on-click="fnbookapruval" no ink><img src="../../images/appruval.jpg" height="180px" width="180px">
+        <h4>Book Apruval Date</h4>
+        </paper-button>
+      </div>
+      <div class="card" hidden$="{{bookclassplann}}">
+        <paper-button on-click="fnbookclassplan" no ink><img src="../../images/classplan.gif" height="180px" width="180px">
+        <h4>class teacher book chapter</h4>
+        </paper-button>
+      </div>  
+      <div class="card" hidden$="{{bookrejectt}}">
+        <paper-button on-click="fnbookreject" no ink><img src="../../images/reject.jpg" height="180px" width="180px">
+        <h4>Capter Rejection</h4>
+        </paper-button>
+      </div>
+      </div>
     </div>
     <!-- Co-ordinator options end -->
     <!-- high level common starts-->
@@ -449,9 +471,6 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
     </div>
     <!-- General ssschooladmin master ends-->
     </div>
-   
-       
- 
 
     <div class="cdialog">      
       <paper-dialog id="cdialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation" modal>
@@ -564,6 +583,12 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
         this.homecontainer=true;
         this.rolescontainer=false;
         this.containerview="Master";
+        this.FnHideView();
+      },
+      FnSelectImgLeason:function(){
+        this.homecontainer=true;
+        this.rolescontainer=false;
+        this.containerview="Leasonplan";
         this.FnHideView();
       },
       FnSelectacademicyear:function(e){  
@@ -692,15 +717,61 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
           document.querySelector('home-page').setPage('section-edit-card','');
          }
 
-          if(localStorage.getItem('curr_sess_loggedassesmenttype')=="captureReport") 
+         if(localStorage.getItem('curr_sess_loggedassesmenttype')=="captureReport") 
          {
-            //alert('1'); 
+        //   alert('1'); 
           document.querySelector('app-card').setPage('homepage','');
           document.querySelector('home-page').setPage('teacher-book-refernce-card','');
           this.$.bookservice.capterseq();
-            // this.$.bookservice.conceptseq();
-            //this.$.bookservice.getcaptervalue();
+         // this.$.bookservice.conceptseq();
+        //  this.$.bookservice.getcaptervalue();
          } 
+     if(localStorage.getItem('curr_sess_loggedassesmenttype')=="bookapruval")
+         {
+            document.querySelector('teacher-book-approve-card').fnsetval();
+            document.querySelector('teacher-book-approve-card').fnRefresh();
+            document.querySelector('teacher-book-approve-card').fnhide();
+            
+       document.querySelector('app-card').setPage('homepage','');
+        document.querySelector('home-page').setPage('teacher-book-approve-card','');
+      if(sessionStorage.getItem("curr_sess_loggedroleid")=='subject-teacher')
+      {   
+        //alert(2);
+         this.$.bookservice.bookgrade();
+         this.$.bookservice.masterzskill();
+         
+         document.querySelector('teacher-book-approveal-concept-item-card').FnRefresh();
+        }
+      else if(sessionStorage.getItem("curr_sess_loggedroleid")=='co-ordinator'){
+            this.$.bookservice.getappovedcoordinator();
+            this.$.bookservice.masterzskill();
+     }
+     else if(sessionStorage.getItem("curr_sess_loggedroleid")=="principal"||sessionStorage.getItem("curr_sess_loggedroleid")=="headofedn"||sessionStorage.getItem("curr_sess_loggedroleid")=="headmistress"||sessionStorage.getItem("curr_sess_loggedroleid")=="viceprincipal"){
+           this.$.bookservice.masterzskill();
+           this.$.bookservice.bookgrade();
+     
+        } 
+     }    
+     if(localStorage.getItem('curr_sess_loggedassesmenttype')=="classplan")
+     {
+
+      document.querySelector('app-card').setPage('homepage','');
+      document.querySelector('home-page').setPage('class-teacher-book-approve-card','');
+            this.$.bookservice.fnbookplangrade();
+            this.$.bookservice.fnbookplansubject();
+            this.$.bookservice.masterzskill();
+       document.querySelector('class-teacher-book-approve-card').FnRefreshzz();
+
+     }
+   if(localStorage.getItem('curr_sess_loggedassesmenttype')=="bookreject")
+   {
+    document.querySelector('app-card').setPage('homepage','');
+    document.querySelector('home-page').setPage('class-teacher-book-reject-card','');
+    //this.$.bookservice.fnsetrejectbookgrade();
+    //this.$.bookservice.fnsetrejectbooksubject();
+    this.$.bookservice.chaptcompletionstatus();
+    //document.querySelector('class-teacher-book-reject-card').FnRefresh1();
+     }
 
              this.$.cdialog.close();
          
@@ -788,81 +859,85 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
           // alert(sessionStorage.getItem("curr_sess_loggedroleid")+"  "+this.containerview);
           this.hidemanagementreport=false;
           if(this.containerview=="Reportcard"){
-            // alert('in');
             this.hidereportcardcontainer=false;
             this.hideenrichmentcontainer=true;
             this.hidemasterscontainer=true;
+            this.hideleasonplancontainer=true;
           }
           else if(this.containerview=="Enrichment"){
             this.hidereportcardcontainer=true;
             this.hideenrichmentcontainer=false;
             this.hidemasterscontainer=true;
+            this.hideleasonplancontainer=true;
           }
           else if(this.containerview=="Master"){
             this.hidereportcardcontainer=true;
             this.hideenrichmentcontainer=true;
             this.hidemasterscontainer=false;
+            this.hideleasonplancontainer=true;
+          }
+          else if(this.containerview=="Leasonplan"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=true;
+            this.hideleasonplancontainer=false;
           }
         }
         if(sessionStorage.getItem("curr_sess_loggedroleid")=='schooladmin')
           {
-           // this.createemployee=false;
-           // this.employeetograde=false;
-           // this.categorytoschooltype=false;
-           // this.gradetosubject=false;
-           // this.sectioncreation=false;
-           // this.studentfixed=false;
-           // this.workingdats=false;
-           // this.emptocategory=false;
-           // this.gradetosection=false;
-           // this.subjecttostudent=false;
-           // this.roletogrademapping=false;
-           // this.empreportdetails=false;
-           // this.studentsectionreport=false;
-           // this.sectionedit=false;
-           // this.captureReport=false;
            this.hideschooladmin=false;
            if(this.containerview=="Reportcard"){
             this.hidereportcardcontainer=false;
             this.hideenrichmentcontainer=true;
             this.hidemasterscontainer=true;
-           }
-           else if(this.containerview=="Enrichment"){
-            this.hidereportcardcontainer=true;
-            this.hideenrichmentcontainer=false;
-            this.hidemasterscontainer=true;
-           }
-           else if(this.containerview=="Master"){
-            this.hidereportcardcontainer=true;
-            this.hideenrichmentcontainer=true;
-            this.hidemasterscontainer=false;
-           }
-        }
-        if(sessionStorage.getItem("curr_sess_loggedroleid")=='superadmin')
-          {
-          // this.schooltyptograde=false;
-          // this.createcategory=false;  
-          // this.createschoolz=false; 
-          // this.SchooltypettoGrade=false;
-          // this.createschooltype=false;
-          // this.createsubject=false;
-          // this.createrole=false;
-          // this.creategrade=false;
-          this.hidesuperadmin=false;
-          if(this.containerview=="Reportcard"){
-            this.hidereportcardcontainer=false;
-            this.hideenrichmentcontainer=true;
-            this.hidemasterscontainer=true;
+            this.hideleasonplancontainer=true;
           }
           else if(this.containerview=="Enrichment"){
             this.hidereportcardcontainer=true;
             this.hideenrichmentcontainer=false;
             this.hidemasterscontainer=true;
+            this.hideleasonplancontainer=true;
           }
           else if(this.containerview=="Master"){
             this.hidereportcardcontainer=true;
             this.hideenrichmentcontainer=true;
             this.hidemasterscontainer=false;
+            this.hideleasonplancontainer=true;
+          }
+          else if(this.containerview=="Leasonplan"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=true;
+            this.hideleasonplancontainer=false;
+          }
+        }
+        if(sessionStorage.getItem("curr_sess_loggedroleid")=='superadmin')
+          {
+         
+          this.hidesuperadmin=false;
+          if(this.containerview=="Reportcard"){
+            this.hidereportcardcontainer=false;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=true;
+            this.hideleasonplancontainer=true;
+          }
+          else if(this.containerview=="Enrichment"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=false;
+            this.hidemasterscontainer=true;
+            this.hideleasonplancontainer=true;
+          }
+          else if(this.containerview=="Master"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=false;
+            this.hideleasonplancontainer=true;
+          }
+          else if(this.containerview=="Leasonplan"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=true;
+            this.hideleasonplancontainer=false;
           }
         }   
         if(sessionStorage.getItem("curr_sess_loggedroleid")=='subject-teacher'){
@@ -871,16 +946,25 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
             this.hidereportcardcontainer=false;
             this.hideenrichmentcontainer=true;
             this.hidemasterscontainer=true;
+            this.hideleasonplancontainer=true;
           }
           else if(this.containerview=="Enrichment"){
             this.hidereportcardcontainer=true;
             this.hideenrichmentcontainer=false;
             this.hidemasterscontainer=true;
+            this.hideleasonplancontainer=true;
           }
           else if(this.containerview=="Master"){
             this.hidereportcardcontainer=true;
             this.hideenrichmentcontainer=true;
             this.hidemasterscontainer=false;
+            this.hideleasonplancontainer=true;
+          }
+          else if(this.containerview=="Leasonplan"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=true;
+            this.hideleasonplancontainer=false;
           }
         }  
         if(sessionStorage.getItem("curr_sess_loggedroleid")=='class-teacher'){  
@@ -908,17 +992,26 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
             this.hidereportcardcontainer=false;
             this.hideenrichmentcontainer=true;
             this.hidemasterscontainer=true;
-            }
-            else if(this.containerview=="Enrichment"){
+            this.hideleasonplancontainer=true;
+          }
+          else if(this.containerview=="Enrichment"){
             this.hidereportcardcontainer=true;
             this.hideenrichmentcontainer=false;
             this.hidemasterscontainer=true;
-            }
-            else if(this.containerview=="Master"){
+            this.hideleasonplancontainer=true;
+          }
+          else if(this.containerview=="Master"){
             this.hidereportcardcontainer=true;
             this.hideenrichmentcontainer=true;
             this.hidemasterscontainer=false;
-            }
+            this.hideleasonplancontainer=true;
+          }
+          else if(this.containerview=="Leasonplan"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=true;
+            this.hideleasonplancontainer=false;
+          }
         }
         if(sessionStorage.getItem("curr_sess_loggedroleid")=="co-ordinator")
         {
@@ -927,17 +1020,26 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
             this.hidereportcardcontainer=false;
             this.hideenrichmentcontainer=true;
             this.hidemasterscontainer=true;
-            }
-            else if(this.containerview=="Enrichment"){
+            this.hideleasonplancontainer=true;
+          }
+          else if(this.containerview=="Enrichment"){
             this.hidereportcardcontainer=true;
             this.hideenrichmentcontainer=false;
             this.hidemasterscontainer=true;
-            }
-            else if(this.containerview=="Master"){
+            this.hideleasonplancontainer=true;
+          }
+          else if(this.containerview=="Master"){
             this.hidereportcardcontainer=true;
             this.hideenrichmentcontainer=true;
             this.hidemasterscontainer=false;
-            }
+            this.hideleasonplancontainer=true;
+          }
+          else if(this.containerview=="Leasonplan"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=true;
+            this.hideleasonplancontainer=false;
+          }
         }        
       },
       FnRefresh:function()
@@ -1201,14 +1303,30 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
         this.$.cdialog.toggle();
       },
 
-       CaptureReportads:function(e)
-       {
-          //alert('1');
+        CaptureReportads:function(e){
+       // alert('1');
            localStorage.setItem('curr_sess_loggedassesmenttype','captureReport');
-           document.querySelector('teacher-book-refernce-card').fnrefresh();
             this.$.bookservice.teacherbookref1();
+            document.querySelector('teacher-book-refernce-card').fnrefresh();
             this.$.cdialog.toggle();   
-       }
+          },
+     
+         fnbookapruval:function(e){
+         localStorage.setItem('curr_sess_loggedassesmenttype','bookapruval');
+         this.$.cdialog.toggle();  
+         },
+        fnbookclassplan:function(e){
+          localStorage.setItem('curr_sess_loggedassesmenttype','classplan');
+         this.$.cdialog.toggle();  
+     
+         },
+
+          fnbookreject:function(e)
+          {
+            localStorage.setItem('curr_sess_loggedassesmenttype','bookreject');
+            this.$.cdialog.toggle();
+          }
+
     });
   })();
   </script>

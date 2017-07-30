@@ -1,0 +1,133 @@
+
+   
+<link rel="import" href="..\..\bower_components/polymer/polymer.html">
+
+<dom-module id="skill-capturing-card">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+       table
+      {   table-layout: fixed;
+          width: 1246px;
+          border-collapse: collapse;
+          margin-left: 27%;
+          margin-top: 20%;
+        }
+
+    </style>
+      <paper-input value={{captheadid}} hidden></paper-input>
+      <paper-input value={{conceptid}} hidden></paper-input>
+      <paper-input value={{subflag}} hidden></paper-input>
+      <table border="0">
+        <tr style="border-bottom: 1px solid #ccc; line-height: 1.8em;border-color:#6699ff">
+              <td hidden>{{empid}}</td>
+              <td>{{concept}}</td>
+              <td>{{period}}</td>
+              <td>{{skill}}</td>
+              <td>{{valuez}}</td>
+              <td>{{innovation}}</td> 
+              <td>{{planneddate}}</td>
+              <td>
+                <div>{{completiondate}}</div>
+                  <complection-date-picker-card hidden$="{{hidecheck}}"></complection-date-picker-card>
+             </td>
+              <td>{{remark}}</td>
+              <td>
+              <div>{{enrichmentsug}}</div>
+               <paper-input value={{enrichmentsuggest}} hidden$="{{hidecheck}}"></paper-input>
+              </td>
+              <td>
+                   <div>{{completion}}</div>
+                  <div hidden$="{{hidecheck}}" >
+                        <paper-checkbox  id={{id}} on-change="fnsetyes" checked>Yes</paper-checkbox></br>
+                     <paper-checkbox id={{idz}} on-change="fnsetno">No</paper-checkbox>
+                    
+                  </div>
+              </td>
+              <td>
+               <div hidden$="{{hidecheck}}"><paper-icon-button  on-click="fnaroveset" icon="save"></paper-icon-button>
+               </div>
+              </td>
+        </tr>
+      </table>
+     <teacher-book-service-card id="bookservice"></teacher-book-service-card>
+
+  </template>
+  <script>
+  (function(){
+    'use strict';
+var skillid;
+var val=[];
+var costatus;
+
+    Polymer({
+      is: 'skill-capturing-card',
+  
+    fnaroveset:function(e)
+    {
+       if(this.enrichmentsuggest==""||this.enrichmentsuggest==null)
+       {
+        alert("Please Enter All Fields");
+       }
+       else
+       {
+          //alert(costatus);
+           if(costatus==""||costatus==null){
+              costatus='yes';
+          //alert(this.empid+" "+this.skill+" "+this.innovation+" "+this.enrichmentsuggest+" "+this.period+" "+this.planneddate+" "+this.concept+" "+this.conceptid+" "+this.remark+" "+this.valuez);
+
+           this.$.bookservice.fnfinalbook(costatus,this.empid,this.skill,this.innovation,this.enrichmentsuggest,this.period,this.planneddate,this.concept,this.conceptid,this.remark,this.valuez);
+         document.querySelector('aproval-save-and-edit-book-card').splices();
+                  costatus="";
+              costatus=null;
+      
+        
+           }else
+                
+        alert(this.empid+" "+this.skill+" "+this.innovation+" "+this.enrichmentsuggest+" "+this.period+" "+this.planneddate+" "+this.concept+" "+this.conceptid+" "+this.remark+" "+this.valuez);
+
+           this.$.bookservice.fnfinalbook(costatus,this.empid,this.skill,this.innovation,this.enrichmentsuggest,this.period,this.planneddate,this.concept,this.conceptid,this.remark,this.valuez);
+        document.querySelector('aproval-save-and-edit-book-card').splices();
+         costatus="";
+         costatus=null;
+         
+          }
+         costatus="";
+         costatus=null;
+         alert(costatus);  
+  
+      },
+    fnsetyes:function(e){
+     // alert(this.id);
+      //alert(document.querySelector('#'+this.id).checked);
+ if(document.querySelector('#'+this.id).checked==true){
+             costatus='Yes';
+     document.querySelector('#'+this.idz).checked=false;
+      
+           }
+    },
+    fnsetno:function(e)
+    {
+      // alert(this.id);
+
+      if(document.querySelector('#'+this.idz).checked==true)
+      {
+                   costatus='No';
+           document.querySelector('#'+this.id).checked=false;
+            
+      }
+  
+    },
+
+    dateset:function()
+    {
+      alert('You are allowed to select future date only..!');
+    },
+
+    
+ });
+  })();
+  </script>
+</dom-module>
