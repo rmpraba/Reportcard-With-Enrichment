@@ -285,6 +285,12 @@
   },
   FnHome:function(){ 
    // alert(localStorage.getItem("curr_sess_page"));
+   if(localStorage.getItem("curr_sess_page")=="teacherhomecard"){
+      this.page="teacherhomecard";
+      document.querySelector('teacherhome-card').ready();
+      document.querySelector('teacherhome-card').FnRefresh();
+      document.querySelector('teacherhome-card').FnInitializeContainers();
+   }
    if(localStorage.getItem("curr_sess_page")=="student-allow-card")
       {
       this.page="teacherhomecard";

@@ -18,48 +18,50 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
 <dom-module id="teacherhome-card">
   <template>
     <style>
-      :host   
-      {
-        display: block;   
-      } 
-      paper-button{
-        margin-left: 25%;
-        margin-top: 10%;
-      }
       .container{
         width: 100%;
         @apply(--layout-horizontal);
         @apply(--layout-center-justified);
       }
-       .container1{
-         width: 100%;
+      .homecontainer{
         @apply(--layout-horizontal);
-        margin-left:-3%
         @apply(--layout-center-justified);
+        width: 80%;
+        margin-left: 10%;
       }
-      .card{
+      .imgcard{
         width: 33.3%;
-      }   
-      .container-full{
-        /*background-color: #fefefe;*/
       }
-      .subjectteacher,.classteacher,.coordinator,.highlevelcommon{
-        @apply(--layout-vertical);
-        @apply(--layout-center-justified);
-      }
-      .inner1,.inner2{
-        @apply(--layout-horizontal);
-        @apply(--layout-center-justified);
+      .inner1{
+      @apply(--layout-horizontal);
+      @apply(--layout-center-justified);
+      @apply(--layout-wrap);
       }
     </style>
-    <div class="container-full">
-    <div class="container">
-    <!-- <center> -->
+    <div class="homecontainer" hidden$="{{homecontainer}}">
+      <div class="imgcard">
+       <paper-button on-click="FnSelectImgMaster" no ink><img src="../../images/img-master.png" height="180px" width="180px" style="        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;"></paper-button>
+      </div>
+      <div class="imgcard">
+       <paper-button on-click="FnSelectImgLeason" no ink><img src="../../images/img-leasonplan.png" height="180px" width="180px" style="        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;"></paper-button>
+      </div> 
+      <div class="imgcard">    
+       <paper-button on-click="FnSelectImgReportcard" no ink><img src="../../images/img-reportcard.png" height="180px" width="180px" style="        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;"></paper-button>
+      </div>
+      <div  class="imgcard">
+       <paper-button on-click="FnSelectImgEnrichment" no ink><img src="../../images/img-enrichment.png" height="180px" width="180px" style="        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;"></paper-button>
+      </div>    
+    </div>
+
+    <div class="container" hidden$="{{rolescontainer}}">
+    <!--Subject teacher options start-->
     <div class="subjectteacher" hidden$="{{subjectteacher}}">
-    <div class="inner1">
+    <div class="inner1" hidden$="{{hideenrichmentcontainer}}">
       <div id="entry" class="card" hidden$="{{BA}}">    
        <paper-button on-click="FnSelectPreEntryType" no ink><img src="../../images/Enrichment.png" height="180px" width="180px"></paper-button>
       </div>
+    </div>
+    <div class="inner1" hidden$="{{hidereportcardcontainer}}">
       <div  class="card" hidden$="{{TA}}">
        <paper-button on-click="FnSelectTermType" no ink><img src="../../images/term.png" height="180px" width="180px"></paper-button>
       </div>
@@ -68,13 +70,15 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
       </div>      
     </div>
     </div>
-
-
+    <!--Subject teacher options end-->
+    <!--Class teacher options start-->
     <div class="classteacher" hidden$="{{classteacher}}">
-    <div class="inner1">
+    <div class="inner1" hidden$="{{hideenrichmentcontainer}}">
       <div id="entry" class="card" hidden$="{{BA}}">    
-       <paper-button on-click="FnSelectPreEntryType" no ink><img src="../../images/pre-entry.png" height="180px" width="180px"></paper-button>
+       <paper-button on-click="FnSelectPreEntryType" no ink><img src="../../images/Enrichment.png" height="180px" width="180px"></paper-button>
       </div>
+    </div>
+    <div class="inner1" hidden$="{{hidereportcardcontainer}}">
       <div  class="card" hidden$="{{TA}}">
        <paper-button on-click="FnSelectTermType" no ink><img src="../../images/term.png" height="180px" width="180px"></paper-button>
       </div>
@@ -86,393 +90,366 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
       </div>
       <div class="card" hidden$="{{editinfo}}">
        <paper-button on-click="FnEditInfo" no ink><img src="../../images/edit.jpg" height="180px" width="180px"></paper-button>
-      </div>  
-    </div>
-    <div class="inner2">
+      </div> 
       <div class="card" hidden$="{{comparison}}">
        <paper-button on-click="FnComparison" no ink><img src="../../images/portfolio.jpg" height="180px" width="180px"></paper-button>
-     </div>
-
-     <div class="card" hidden$="{{ConsolidatedReport}}">
+      </div>
+      <div class="card" hidden$="{{ConsolidatedReport}}">
        <paper-button on-click="FnConsolidatedReport" no ink><img src="../../images/consolidation.jpg" height="180px" width="180px"></paper-button>
       </div>
       <div class="card" hidden$="{{dataanalysis}}">
        <paper-button on-click="FnConsolidatedDataAnalysis" no ink><img src="../../images/dataanalysis.jpg" height="180px" width="180px"></paper-button>
-    </div> 
-     <div class="card" hidden$="{{subjecttostudentt}}">
-          <paper-button on-click="SubjectToStudent" no ink><img src="../../images/language.jpg" height="180px" width="180px">
-           <h4>Language Preferences</h4>
-          </paper-button>
+      </div>
+    </div>
+    <div class="inner1" hidden$="{{hidemasterscontainer}}">
+      <div class="card" hidden$="{{subjecttostudentt}}">
+        <paper-button on-click="SubjectToStudent" no ink><img src="../../images/language.jpg" height="180px" width="180px">
+        <h4>Language Preferences</h4>
+        </paper-button>
       </div>
       <div class="card" hidden$="{{emptocategoryy}}">
-          <paper-button on-click="EmptoCategory" no ink><img src="../../images/emptocategory.jpg" height="180px" width="180px">
-              <h4>STUDENTS TRANSFER</h4>
-          </paper-button>
+        <paper-button on-click="EmptoCategory" no ink><img src="../../images/emptocategory.jpg" height="180px" width="180px">
+        <h4>Student Transfer</h4>
+        </paper-button>
+      </div>
+      <div class="card" hidden$="{{studentsectionreportt}}">
+        <paper-button on-click="Fnstudentreport" no ink><img src="../../images/studentreport.jpg" height="180px" width="180px">
+        <h4>Student To Section Report</h4>
+        </paper-button>
       </div>
     </div>
     </div>
-
+    <!-- Class teacher options end-->
     <div class="coordinator" hidden$="{{coordinator}}">
-    <div class="inner1">
-      <div class="card" hidden$="{{GenerateReport}}">
-       <paper-button on-click="FnGenerateReportcard" no ink><img src="../../images/report-icon.gif" height="180px" width="180px"></paper-button>
-      </div>
+    <!-- Co-ordinator options starts -->
+    <div class="inner1" hidden$="{{hideenrichmentcontainer}}">
+     <div id="entry" class="card" hidden$="{{BA}}">    
+       <paper-button on-click="FnSelectPreEntryType" no ink><img src="../../images/Enrichment.png" height="180px" width="180px"></paper-button>
+     </div>
+    </div>
+    <div class="inner1" hidden$="{{hidereportcardcontainer}}">
       <div class="card" hidden$="{{Approve}}">
        <paper-button on-click="FnApprovecard" no ink><img src="../../images/approve.jpg" height="180px" width="180px"></paper-button>
       </div>
       <div class="card" hidden$="{{Approvalstatus}}">
        <paper-button on-click="FnApprovalStatus" no ink><img src="../../images/approvalstatus.jpg" height="180px" width="180px"></paper-button>
-      </div>       
-      <div class="card" hidden$="{{Analysis}}">
-       <paper-button on-click="FnAnalysiscard" no ink><img src="../../images/analysis.jpg" height="180px" width="180px"></paper-button>
-      </div>
-    </div>
-    <div class="inner2">
+      </div> 
       <div class="card" hidden$="{{feecollection}}">
        <paper-button on-click="FnFeeCollection" no ink><img src="../../images/feecollection.jpg" height="180px" width="180px"></paper-button>
+      </div>
+      <div class="card" hidden$="{{GenerateReport}}">
+       <paper-button on-click="FnGenerateReportcard" no ink><img src="../../images/report-icon.gif" height="180px" width="180px"></paper-button>
+      </div>      
+      <div class="card" hidden$="{{Analysis}}">
+       <paper-button on-click="FnAnalysiscard" no ink><img src="../../images/analysis.jpg" height="180px" width="180px"></paper-button>
       </div>
       <div class="card" hidden$="{{dataanalysis}}">
        <paper-button on-click="FnConsolidatedDataAnalysis" no ink><img src="../../images/dataanalysis.jpg" height="180px" width="180px"></paper-button>
       </div>
       <div class="card" hidden$="{{teach_obser}}">
        <paper-button on-click="FnTeacherbserver" no ink><img src="../../images/teacherobservation.png" height="180px" width="180px"></paper-button>
-       </div>
-      <div class="card" hidden$="{{subjecttostudentt}}">
-          <paper-button on-click="SubjectToStudent" no ink><img src="../../images/language.jpg" height="180px" width="180px">
-           <h4>Language Preferences</h4>
-          </paper-button>
       </div>
     </div>
-    <div class="inner1">
+    <div class="inner1" hidden$="{{hidemasterscontainer}}">
+      <div class="card" hidden$="{{subjecttostudentt}}">
+        <paper-button on-click="SubjectToStudent" no ink><img src="../../images/language.jpg" height="180px" width="180px">
+        <h4>Language Preferences</h4>
+        </paper-button>
+      </div>
       <div class="card" hidden$="{{studentfixedd}}">
-            <paper-button on-click="StudentFixed" no ink><img src="../../images/studentfixed.jpg" height="180px" width="180px">
-               <h4>Capacity Allocation</h4>
-            </paper-button>
-       </div>  
-
-        <div class="card" hidden$="{{sectioncreationn}}">
-            <paper-button on-click="SectionCreation" no ink><img src="../../images/sectioncreation.jpg" height="180px" width="180px">
-               <h4>Section Creation</h4>
-            </paper-button>
+        <paper-button on-click="StudentFixed" no ink><img src="../../images/studentfixed.jpg" height="180px" width="180px">
+        <h4>Capacity Allocation</h4>
+        </paper-button>
+      </div>
+      <div class="card" hidden$="{{sectioncreationn}}">
+        <paper-button on-click="SectionCreation" no ink><img src="../../images/sectioncreation.jpg" height="180px" width="180px">
+        <h4>Section Creation</h4>
+        </paper-button>
        </div>
        <div class="card" hidden$="{{gradetosectionn}}">
-            <paper-button on-click="GradeToSection" no ink><img src="../../images/gradetosection.jpg" height="180px" width="180px">
-               <h4>Student to Section mapping</h4>
-            </paper-button>
+        <paper-button on-click="GradeToSection" no ink><img src="../../images/gradetosection.jpg" height="180px" width="180px">
+        <h4>Student to Section mapping</h4>
+        </paper-button>
        </div> 
        <div class="card" hidden$="{{emptocategoryy}}">
-          <paper-button on-click="EmptoCategory" no ink><img src="../../images/emptocategory.jpg" height="180px" width="180px">
-              <h4>STUDENTS TRANSFER</h4>
-          </paper-button>
-      </div>
-    </div>
-    <div class="inner1">
-      <div class="card" hidden$="{{roletogrademappingg}}">
-            <paper-button on-click="FnRoleToGradeMapping" no ink><img src="../../images/rolemap.png" height="180px" width="180px">
-               <h4>Role To Grade Mapping</h4>
-            </paper-button>
-      </div> 
-      <div class="card" hidden$="{{categorytoschooltypee}}">
-          <paper-button on-click="CategorytoSchooltype" no ink><img src="../../images/categorytoschooltype.jpg" height="180px" width="180px">
-              <h4>EMPLOYEE TO SUBJECT MAPPING</h4>
-          </paper-button>
-      </div>
-      <div class="card" hidden$="{{employeetogradee}}">
-            <paper-button on-click="EmployeeToGrade" no ink><img src="../../images/emptograde.jpg" height="180px" width="180px">
-               <h4>Employee To Grade Section Mapping</h4>
-            </paper-button>
-      </div>
-      <div class="card" hidden$="{{workingdatss}}">
-         <paper-button on-click="Workingdays" no ink><img src="../../images/workingdays.jpg" height="180px" width="180px">
-              <h4>Working Days</h4>
+        <paper-button on-click="EmptoCategory" no ink><img src="../../images/emptocategory.jpg" height="180px" width="180px">
+        <h4>Student Transfer</h4>
         </paper-button>
-        </div>
-    </div>
-    </div>
-
-    <div class="highlevelcommon" hidden$="{{highlevelcommon}}">
-    <div class="inner1">
-     <div id="entry" class="card" hidden$="{{BA}}">    
-       <paper-button on-click="FnSelectPreEntryType" no ink><img src="../../images/Enrichment.png" height="180px" width="180px"></paper-button>
-     </div>
-    <div class="card" hidden$="{{ConsolidatedReport}}">
-       <paper-button on-click="FnConsolidatedReport" no ink><img src="../../images/consolidation.jpg" height="180px" width="180px"></paper-button>
-    </div>
-    <div class="card" hidden$="{{Report}}">
-       <paper-button on-click="FnGenerateScorecard" no ink><img src="../../images/scorelogo.jpg" height="180px" width="180px"></paper-button>
-      </div>  
-      <div class="card" hidden$="{{GenerateReport}}">
-       <paper-button on-click="FnGenerateReportcard" no ink><img src="../../images/report-icon.gif" height="180px" width="180px"></paper-button>
-      </div>
-      <div class="card" hidden$="{{Analysis}}">
-       <paper-button on-click="FnAnalysiscard" no ink><img src="../../images/analysis.jpg" height="180px" width="180px"></paper-button>
-      </div>
-        <div class="card" hidden$="{{comparison}}">
-       <paper-button on-click="FnComparison" no ink><img src="../../images/portfolio.jpg" height="180px" width="180px"></paper-button>
-     </div>
-
-    </div>
-    <div class="inner2">
-     <div class="card" hidden$="{{Approvalstatus}}">
-       <paper-button on-click="FnApprovalStatus" no ink><img src="../../images/approvalstatus.jpg" height="180px" width="180px"></paper-button>
-      </div>
-     <div class="card" hidden$="{{teach_obser}}">
-       <paper-button on-click="FnTeacherbserver" no ink><img src="../../images/teacherobservation.png" height="180px" width="180px"></paper-button>
-     </div> 
-     <div class="card" hidden$="{{feecollection}}">
-       <paper-button on-click="FnFeeCollection" no ink><img src="../../images/feecollection.jpg" height="180px" width="180px"></paper-button>
-      </div>
-    <div class="card" hidden$="{{dataanalysis}}">
-       <paper-button on-click="FnConsolidatedDataAnalysis" no ink><img src="../../images/dataanalysis.jpg" height="180px" width="180px"></paper-button>
-    </div> 
-  </div>
-  <div class="inner1">
-     <div class="card" hidden$="{{createemployeee}}">
-        <paper-button on-click="FnCreateEmployee" no ink><img src="../../images/employee.jpg" height="180px" width="180px">
-             <h4> Employee</h4>
-        </paper-button>
-      </div>
-      <div class="card" hidden$="{{categorytoschooltypee}}">
-          <paper-button on-click="CategorytoSchooltype" no ink><img src="../../images/categorytoschooltype.jpg" height="180px" width="180px">
-              <h4>EMPLOYEE TO SUBJECT MAPPING</h4>
-          </paper-button>
-      </div>
-      <div class="card" hidden$="{{employeetogradee}}">
-            <paper-button on-click="EmployeeToGrade" no ink><img src="../../images/emptograde.jpg" height="180px" width="180px">
-               <h4>Employee To Grade Section Mapping</h4>
-            </paper-button>
-      </div> 
-      <div class="card" hidden$="{{roletogrademappingg}}">
-            <paper-button on-click="FnRoleToGradeMapping" no ink><img src="../../images/rolemap.png" height="180px" width="180px">
-               <h4>Role To Grade Mapping</h4>
-            </paper-button>
        </div>
-       <div class="card" hidden$="{{gradetosubjectt}}">
-          <paper-button on-click="GradeToSubject" no ink><img src="../../images/gadetosubject.jpg" height="180px" width="180px">
-            <h4>Grade To Subject Mapping</h4>
-          </paper-button>
-      </div>
-
-  </div>
-  <div class="inner1">
-      <div class="card" hidden$="{{studentfixedd}}">
-            <paper-button on-click="StudentFixed" no ink><img src="../../images/studentfixed.jpg" height="180px" width="180px">
-               <h4>Capacity Allocation</h4>
-            </paper-button>
+       <div class="card" hidden$="{{roletogrademappingg}}">
+        <paper-button on-click="FnRoleToGradeMapping" no ink><img src="../../images/rolemap.png" height="180px" width="180px">
+        <h4>Role To Grade Mapping</h4>
+        </paper-button>
        </div> 
-       <div class="card" hidden$="{{sectioncreationn}}">
-            <paper-button on-click="SectionCreation" no ink><img src="../../images/sectioncreation.jpg" height="180px" width="180px">
-               <h4>Section Creation</h4>
-            </paper-button>
-       </div> 
-       <div class="card" hidden$="{{gradetosectionn}}">
-            <paper-button on-click="GradeToSection" no ink><img src="../../images/gradetosection.jpg" height="180px" width="180px">
-               <h4>Student to Section mapping</h4>
-            </paper-button>
+       <div class="card" hidden$="{{categorytoschooltypee}}">
+         <paper-button on-click="CategorytoSchooltype" no ink><img src="../../images/categorytoschooltype.jpg" height="180px" width="180px">
+         <h4>Employee To Subject Mapping</h4>
+         </paper-button>
+       </div>
+       <div class="card" hidden$="{{employeetogradee}}">
+         <paper-button on-click="EmployeeToGrade" no ink><img src="../../images/emptograde.jpg" height="180px" width="180px">
+         <h4>Employee To Grade Section Mapping</h4>
+         </paper-button>
        </div>
        <div class="card" hidden$="{{workingdatss}}">
          <paper-button on-click="Workingdays" no ink><img src="../../images/workingdays.jpg" height="180px" width="180px">
-              <h4>Working Days</h4>
+         <h4>Working Days</h4>
+         </paper-button>
+       </div>
+       <div class="card" hidden$="{{empreportdetailss}}">
+        <paper-button on-click="FnEmpreportdetails" no ink><img src="../../images/empexcelimg.jpg" height="180px" width="180px">
+        <h4>Employee Report</h4>
         </paper-button>
+       </div> 
+       <div class="card" hidden$="{{studentsectionreportt}}">
+        <paper-button on-click="Fnstudentreport" no ink><img src="../../images/studentreport.jpg" height="180px" width="180px">
+        <h4>Student To Section Report</h4>
+        </paper-button>
+       </div>
       </div>
-
-  </div>
- </div>
-   
-
-
-  
-  <div class="managementreport" hidden$="{{managementreport}}">
-    <div class="inner1">
-    <div class="card" hidden$="{{GeneratemgmtReport}}" style="width: 60%;">
-       <paper-button on-click="FnGeneratemgmtReportcard" no ink><img src="../../images/report-icon.gif" height="180px" width="180px"></paper-button>
     </div>
-
+    <!-- Co-ordinator options end -->
+    <!-- high level common starts-->
+    <div class="highlevelcommon" hidden$="{{highlevelcommon}}">
+    <div class="inner1" hidden$="{{hideenrichmentcontainer}}">
+     <div id="entry" class="card" hidden$="{{BA}}">    
+       <paper-button on-click="FnSelectPreEntryType" no ink><img src="../../images/Enrichment.png" height="180px" width="180px"></paper-button>
+     </div>
+    </div>
+    <div class="inner1" hidden$="{{hidereportcardcontainer}}">
+    <div class="card" hidden$="{{Approvalstatus}}">
+      <paper-button on-click="FnApprovalStatus" no ink><img src="../../images/approvalstatus.jpg" height="180px" width="180px"></paper-button>
+    </div>
     <div class="card" hidden$="{{ConsolidatedReport}}">
-       <paper-button on-click="FnConsolidatedReport" no ink><img src="../../images/consolidation.jpg" height="180px" width="180px"></paper-button>
+      <paper-button on-click="FnConsolidatedReport" no ink><img src="../../images/consolidation.jpg" height="180px" width="180px"></paper-button>
     </div>
-
-    <div class="card" hidden$="{{dataanalysis}}">
-       <paper-button on-click="FnConsolidatedDataAnalysis" no ink><img src="../../images/dataanalysis.jpg" height="180px" width="180px"></paper-button>
-    </div> 
-
+    <div class="card" hidden$="{{Report}}">
+      <paper-button on-click="FnGenerateScorecard" no ink><img src="../../images/scorelogo.jpg" height="180px" width="180px"></paper-button>
+    </div>  
+    <div class="card" hidden$="{{GenerateReport}}">
+      <paper-button on-click="FnGenerateReportcard" no ink><img src="../../images/report-icon.gif" height="180px" width="180px"></paper-button>
+    </div>
     <div class="card" hidden$="{{Analysis}}">
-       <paper-button on-click="FnAnalysiscard" no ink><img src="../../images/analysis.jpg" height="180px" width="180px"></paper-button>
+      <paper-button on-click="FnAnalysiscard" no ink><img src="../../images/analysis.jpg" height="180px" width="180px"></paper-button>
       </div>
+    <div class="card" hidden$="{{comparison}}">
+      <paper-button on-click="FnComparison" no ink><img src="../../images/portfolio.jpg" height="180px" width="180px"></paper-button>
+    </div>
+    <div class="card" hidden$="{{teach_obser}}">
+      <paper-button on-click="FnTeacherbserver" no ink><img src="../../images/teacherobservation.png" height="180px" width="180px"></paper-button>
+    </div> 
+    <div class="card" hidden$="{{feecollection}}">
+     <paper-button on-click="FnFeeCollection" no ink><img src="../../images/feecollection.jpg" height="180px" width="180px"></paper-button>
+    </div>
+    <div class="card" hidden$="{{dataanalysis}}">
+      <paper-button on-click="FnConsolidatedDataAnalysis" no ink><img src="../../images/dataanalysis.jpg" height="180px" width="180px"></paper-button>
+    </div>
+    </div>
+    <div class="inner1" hidden$="{{hidemasterscontainer}}">
+    <div class="card" hidden$="{{createemployeee}}">
+      <paper-button on-click="FnCreateEmployee" no ink><img src="../../images/employee.jpg" height="180px" width="180px">
+      <h4> Employee</h4>
+      </paper-button>
+    </div>
+    <div class="card" hidden$="{{categorytoschooltypee}}">
+      <paper-button on-click="CategorytoSchooltype" no ink><img src="../../images/categorytoschooltype.jpg" height="180px" width="180px">
+      <h4>EMPLOYEE TO SUBJECT MAPPING</h4>
+      </paper-button>
+    </div>
+    <div class="card" hidden$="{{employeetogradee}}">
+      <paper-button on-click="EmployeeToGrade" no ink><img src="../../images/emptograde.jpg" height="180px" width="180px">
+      <h4>Employee To Grade Section Mapping</h4>
+      </paper-button>
+    </div> 
+    <div class="card" hidden$="{{roletogrademappingg}}">
+      <paper-button on-click="FnRoleToGradeMapping" no ink><img src="../../images/rolemap.png" height="180px" width="180px">
+      <h4>Role To Grade Mapping</h4>
+      </paper-button>
+    </div>
+    <div class="card" hidden$="{{gradetosubjectt}}">
+      <paper-button on-click="GradeToSubject" no ink><img src="../../images/gadetosubject.jpg" height="180px" width="180px">
+      <h4>Grade To Subject Mapping</h4>
+      </paper-button>
+    </div>
+    <div class="card" hidden$="{{studentfixedd}}">
+      <paper-button on-click="StudentFixed" no ink><img src="../../images/studentfixed.jpg" height="180px" width="180px">
+      <h4>Capacity Allocation</h4>
+      </paper-button>
+    </div> 
+    <div class="card" hidden$="{{sectioncreationn}}">
+      <paper-button on-click="SectionCreation" no ink><img src="../../images/sectioncreation.jpg" height="180px" width="180px">
+      <h4>Section Creation</h4>
+      </paper-button>
+    </div> 
+    <div class="card" hidden$="{{gradetosectionn}}">
+      <paper-button on-click="GradeToSection" no ink><img src="../../images/gradetosection.jpg" height="180px" width="180px">
+      <h4>Student to Section mapping</h4>
+      </paper-button>
+    </div>
+    <div class="card" hidden$="{{workingdatss}}">
+      <paper-button on-click="Workingdays" no ink><img src="../../images/workingdays.jpg" height="180px" width="180px">
+      <h4>Working Days</h4>
+      </paper-button>
+    </div>
+    <div class="card" hidden$="{{empreportdetailss}}">
+      <paper-button on-click="FnEmpreportdetails" no ink><img src="../../images/empexcelimg.jpg" height="180px" width="180px">
+      <h4>Employee Report</h4>
+      </paper-button>
+    </div>    
+    <div class="card" hidden$="{{studentsectionreportt}}">
+      <paper-button on-click="Fnstudentreport" no ink><img src="../../images/studentreport.jpg" height="180px" width="180px">
+      <h4>Student To Section Report</h4>
+      </paper-button>
+    </div>
+    </div>
+    </div>
+    <!-- high level common ends-->
+    <!-- Management options start-->
+    <div class="managementreport" hidden$="{{hidemanagementreport}}">
+    <div class="inner1" hidden$="{{hideenrichmentcontainer}}">
       <div id="entry" class="card" hidden$="{{BA}}">    
        <paper-button on-click="FnSelectPreEntryType" no ink><img src="../../images/Enrichment.png" height="180px" width="180px"></paper-button>
       </div>
     </div>
+    <div class="inner1" hidden$="{{hidereportcardcontainer}}">
+    <div class="card" hidden$="{{GeneratemgmtReportt}}" >
+      <paper-button on-click="FnGeneratemgmtReportcard" no ink><img src="../../images/report-icon.gif" height="180px" width="180px"></paper-button>
     </div>
-
-   </div>
-
-     <div class="container1">
-  
-      <div  class="card" hidden$="{{createschoolz}}">
-        <paper-button on-click="FnCreateschool" no ink><img src="../../images/school.jpg" height="180px" width="180px">
-          <h4>School Creation</h4>
-        </paper-button>
-      </div>
-
-      <div class="card" hidden$="{{createschooltype}}">
-        <paper-button on-click="FnCreateSchooltype" no ink><img src="../../images/schooltype.jpg" height="180px" width="180px">
-          <h4>School Type</h4>
-        </paper-button>
-      </div>
-
-      <div class="card" hidden$="{{createcategory}}">
-        <paper-button on-click="FnCreateCategory" no ink><img src="../../images/category.jpg" height="180px" width="180px">
-          <h4>Category</h4>
-        </paper-button>
-      </div>
-
-      <div class="card" hidden$="{{creategrade}}">
-        <paper-button on-click="FnCreategrade" no ink><img src="../../images/grade.jpg" height="180px" width="180px">
-          <h4>Grade</h4>
-        </paper-button>
-      </div>
+    <div class="card" hidden$="{{ConsolidatedReportt}}">
+      <paper-button on-click="FnConsolidatedReport" no ink><img src="../../images/consolidation.jpg" height="180px" width="180px"></paper-button>
     </div>
-
-
-    <div class="container1">
-
-      <div class="card" hidden$="{{createrole}}">
-        <paper-button on-click="FnCreateRole" no ink><img src="../../images/role.png" height="180px" width="180px">
-          <h4>Role</h4>
-        </paper-button>
-      </div>
-
-      <div class="card" hidden$="{{createsubject}}">
-        <paper-button on-click="FnCreatesubject" no ink><img src="../../images/subject.jpg" height="180px" width="180px">
-          <h4>Subjects</h4>
-        </paper-button>
-      </div> 
-
-      <div class="card" hidden$="{{SchooltypettoGrade}}">
-        <paper-button on-click="SchoolTypeToGrade" no ink><img src="../../images/schooltoschoolType.jpg" height="180px" width="180px">  <h4>School to School Type</h4>
-        </paper-button>
-      </div>
-
-       <div class="card" hidden$="{{schooltyptograde}}">
-            <paper-button on-click="SchooltypToGrade" no ink><img src="../../images/schooltyptograde.jpg" height="180px" width="180px">
-               <h4>School type to Grade</h4>
-            </paper-button>
-       </div>
-
-       <div class="card" hidden$="{{SectionPreiods}}">
-        <paper-button on-click="SectionPreiodss" no ink><img src="../../images/sectionperiod.png" height="180px" width="180px">  <h4>Section Periods</h4>
-        </paper-button>
-      </div>
+    <div class="card" hidden$="{{dataanalysiss}}">
+      <paper-button on-click="FnConsolidatedDataAnalysis" no ink><img src="../../images/dataanalysis.jpg" height="180px" width="180px"></paper-button>
     </div>
-
-     <div class="container1">       
-      <div class="card" hidden$="{{createemployee}}">
-        <paper-button on-click="FnCreateEmployee" no ink><img src="../../images/employee.jpg" height="180px" width="180px">
-             <h4> Employee</h4>
-        </paper-button>
-      </div>
-
-      <div class="card" hidden$="{{categorytoschooltype}}">
-          <paper-button on-click="CategorytoSchooltype" no ink><img src="../../images/categorytoschooltype.jpg" height="180px" width="180px">
-              <h4>EMPLOYEE TO SUBJECT MAPPING</h4>
-          </paper-button>
-      </div>
-
-      <div class="card" hidden$="{{studentfixed}}">
-            <paper-button on-click="StudentFixed" no ink><img src="../../images/studentfixed.jpg" height="180px" width="180px">
-               <h4>Capacity Allocation</h4>
-            </paper-button>
-       </div>  
-
-        <div class="card" hidden$="{{sectioncreation}}">
-            <paper-button on-click="SectionCreation" no ink><img src="../../images/sectioncreation.jpg" height="180px" width="180px">
-               <h4>Section Creation</h4>
-            </paper-button>
-       </div>   
-
-       <div class="card" hidden$="{{employeetograde}}">
-            <paper-button on-click="EmployeeToGrade" no ink><img src="../../images/emptograde.jpg" height="180px" width="180px">
-               <h4>Employee To Grade Section Mapping</h4>
-            </paper-button>
-      </div> 
+    <div class="card" hidden$="{{Analysiss}}">
+      <paper-button on-click="FnAnalysiscard" no ink><img src="../../images/analysis.jpg" height="180px" width="180px"></paper-button>
+    </div>  
     </div>
-
-    <div class="container1">
-       
-       <div class="card" hidden$="{{gradetosubject}}">
-          <paper-button on-click="GradeToSubject" no ink><img src="../../images/gadetosubject.jpg" height="180px" width="180px">
-            <h4>Grade To Subject Mapping</h4>
-          </paper-button>
-      </div>
-
-
-      <div class="card" hidden$="{{subjecttostudent}}">
-          <paper-button on-click="SubjectToStudent" no ink><img src="../../images/language.jpg" height="180px" width="180px">
-           <h4>Language Preferences</h4>
-          </paper-button>
-      </div>
-      
-
-       <div class="card" hidden$="{{emptocategory}}">
-          <paper-button on-click="EmptoCategory" no ink><img src="../../images/emptocategory.jpg" height="180px" width="180px">
-              <h4>STUDENTS TRANSFER</h4>
-          </paper-button>
-      </div>
-
-      
-      
-      <div class="card" hidden$="{{gradetosection}}">
-            <paper-button on-click="GradeToSection" no ink><img src="../../images/gradetosection.jpg" height="180px" width="180px">
-               <h4>Student to Section mapping</h4>
-            </paper-button>
-       </div> 
-      </div>
-      
-
-      <div class="container1">
-        <div class="card" hidden$="{{workingdats}}">
-         <paper-button on-click="Workingdays" no ink><img src="../../images/workingdays.jpg" height="180px" width="180px">
-              <h4>Working Days</h4>
-        </paper-button>
-      </div>   
-      
-        
-        <div class="card" hidden$="{{roletogrademapping}}">
-            <paper-button on-click="FnRoleToGradeMapping" no ink><img src="../../images/rolemap.png" height="180px" width="180px">
-               <h4>Role To Grade Mapping</h4>
-            </paper-button>
-       </div> 
-
-       <div class="card" hidden$="{{empreportdetails}}">
-            <paper-button on-click="FnEmpreportdetails" no ink><img src="../../images/empexcelimg.jpg" height="180px" width="180px">
-               <h4>Employee Report</h4>
-            </paper-button>
-       </div> 
-      
-    
-      <div class="card" hidden$="{{studentsectionreport}}">
-            <paper-button on-click="Fnstudentreport" no ink><img src="../../images/studentreport.jpg" height="180px" width="180px">
-               <h4>Student To Section Report</h4>
-            </paper-button>
-       </div>
-
-
-       <div class="card" hidden$="{{sectionedit}}">
-            <paper-button on-click="FnSectionedittt" no ink><img src="../../images/sectionedit.jpg" height="180px" width="180px">
-               <h4>Section Update</h4>
-            </paper-button>
-       </div>
     </div>
- 
-    <div class="container1">
-      <div class="card" hidden$="{{captureReport}}">
-          <paper-button on-click="CaptureReportads" no ink><img src="../../images/active1.jpg" height="180px" width="180px">
-            <!-- <h4>Books</h4> -->
-            <h4>Book Chapter Creation</h4>
-          </paper-button>
-       </div>
+    <!-- Management options end-->
+    <!-- General superadmin master starts-->
+    <div class="superadmin" hidden$="{{hidesuperadmin}}">
+    <div class="inner1" hidden$="{{hidemasterscontainer}}">
+    <div  class="card" hidden$="{{hcreateschoolz}}">
+      <paper-button on-click="FnCreateschool" no ink><img src="../../images/school.jpg" height="180px" width="180px">
+      <h4>School Creation</h4>
+      </paper-button>
     </div>
+    <div class="card" hidden$="{{hcreateschooltype}}">
+      <paper-button on-click="FnCreateSchooltype" no ink><img src="../../images/schooltype.jpg" height="180px" width="180px">
+      <h4>School Type</h4>
+      </paper-button>
+    </div>
+    <div class="card" hidden$="{{hcreatecategory}}">
+      <paper-button on-click="FnCreateCategory" no ink><img src="../../images/category.jpg" height="180px" width="180px">
+      <h4>Category</h4>
+      </paper-button>
+    </div>
+    <div class="card" hidden$="{{hcreategrade}}">
+      <paper-button on-click="FnCreategrade" no ink><img src="../../images/grade.jpg" height="180px" width="180px">
+      <h4>Grade</h4>
+      </paper-button>
+    </div>
+    <div class="card" hidden$="{{hcreaterole}}">
+      <paper-button on-click="FnCreateRole" no ink><img src="../../images/role.png" height="180px" width="180px">
+      <h4>Role</h4>
+      </paper-button>
+    </div>
+    <div class="card" hidden$="{{hcreatesubject}}">
+      <paper-button on-click="FnCreatesubject" no ink><img src="../../images/subject.jpg" height="180px" width="180px">
+      <h4>Subjects</h4>
+      </paper-button>
+    </div> 
+    <div class="card" hidden$="{{hSchooltypettoGrade}}">
+      <paper-button on-click="SchoolTypeToGrade" no ink><img src="../../images/schooltoschoolType.jpg" height="180px" width="180px">  <h4>School to School Type</h4>
+      </paper-button>
+    </div>
+    <div class="card" hidden$="{{hschooltyptograde}}">
+      <paper-button on-click="SchooltypToGrade" no ink><img src="../../images/schooltyptograde.jpg" height="180px" width="180px">
+      <h4>School type to Grade</h4>
+      </paper-button>
+    </div>
+    </div>
+    </div>
+    <!-- General ssuperadmin master ends-->
+    <!-- General sschooladmin master starts-->
+    <div class="schooladmin" hidden$="{{hideschooladmin}}">
+    <div class="inner1" hidden$="{{hidemasterscontainer}}">
+    <div class="card" hidden$="{{createemployeee}}">
+      <paper-button on-click="FnCreateEmployee" no ink><img src="../../images/employee.jpg" height="180px" width="180px">
+      <h4> Employee</h4>
+      </paper-button>
+    </div>
+    <div class="card" hidden$="{{categorytoschooltypee}}">
+      <paper-button on-click="CategorytoSchooltype" no ink><img src="../../images/categorytoschooltype.jpg" height="180px" width="180px">
+      <h4>Employee to Subject Mapping</h4>
+      </paper-button>
+    </div>
+    <div class="card" hidden$="{{studentfixedd}}">
+      <paper-button on-click="StudentFixed" no ink><img src="../../images/studentfixed.jpg" height="180px" width="180px">
+      <h4>Capacity Allocation</h4>
+      </paper-button>
+    </div>  
+    <div class="card" hidden$="{{sectioncreationn}}">
+      <paper-button on-click="SectionCreation" no ink><img src="../../images/sectioncreation.jpg" height="180px" width="180px">
+      <h4>Section Creation</h4>
+      </paper-button>
+    </div>   
+    <div class="card" hidden$="{{employeetogradee}}">
+      <paper-button on-click="EmployeeToGrade" no ink><img src="../../images/emptograde.jpg" height="180px" width="180px">
+      <h4>Employee To Grade Section Mapping</h4>
+      </paper-button>
+    </div> 
+    <div class="card" hidden$="{{gradetosubjectt}}">
+      <paper-button on-click="GradeToSubject" no ink><img src="../../images/gadetosubject.jpg" height="180px" width="180px">
+      <h4>Grade To Subject Mapping</h4>
+      </paper-button>
+    </div>
+    <div class="card" hidden$="{{subjecttostudentt}}">
+      <paper-button on-click="SubjectToStudent" no ink><img src="../../images/language.jpg" height="180px" width="180px">
+      <h4>Language Preferences</h4>
+      </paper-button>
+    </div>  
+    <div class="card" hidden$="{{emptocategoryy}}">
+      <paper-button on-click="EmptoCategory" no ink><img src="../../images/emptocategory.jpg" height="180px" width="180px">
+      <h4>Student Transfer</h4>
+      </paper-button>
+    </div>
+    <div class="card" hidden$="{{gradetosectionn}}">
+      <paper-button on-click="GradeToSection" no ink><img src="../../images/gradetosection.jpg" height="180px" width="180px">
+      <h4>Student To Section Mapping</h4>
+      </paper-button>
+    </div> 
+    <div class="card" hidden$="{{workingdatss}}">
+      <paper-button on-click="Workingdays" no ink><img src="../../images/workingdays.jpg" height="180px" width="180px">
+      <h4>Working Days</h4>
+      </paper-button>
+    </div>   
+    <div class="card" hidden$="{{roletogrademappingg}}">
+      <paper-button on-click="FnRoleToGradeMapping" no ink><img src="../../images/rolemap.png" height="180px" width="180px">
+      <h4>Role To Grade Mapping</h4>
+      </paper-button>
+    </div> 
+    <div class="card" hidden$="{{empreportdetailss}}">
+      <paper-button on-click="FnEmpreportdetails" no ink><img src="../../images/empexcelimg.jpg" height="180px" width="180px">
+      <h4>Employee Report</h4>
+      </paper-button>
+    </div> 
+    <div class="card" hidden$="{{studentsectionreportt}}">
+      <paper-button on-click="Fnstudentreport" no ink><img src="../../images/studentreport.jpg" height="180px" width="180px">
+      <h4>Student To Section Report</h4>
+      </paper-button>
+    </div>
+    <div class="card" hidden$="{{sectioneditt}}">
+      <paper-button on-click="FnSectionedittt" no ink><img src="../../images/sectionedit.jpg" height="180px" width="180px">
+      <h4>Section Update</h4>
+      </paper-button>
+    </div>
+    </div>
+    </div>
+    <!-- General ssschooladmin master ends-->
+    </div>
+   
        
  
 
@@ -511,8 +488,6 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
       </paper-dialog>
     </div>
    
-
-    </div>
     <term-assesment-service id="assesmentservice"></term-assesment-service>
     <beginner-assesment-service id="bassesmentservice"></beginner-assesment-service>
     <scorecard-service id="scorecardservice"></scorecard-service>
@@ -531,39 +506,66 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
     Polymer({
       is: 'teacherhome-card',
       ready:function(){
+        this.hidesuperadmin=true;
+        this.hideschooladmin=true;
+        this.rolescontainer=true;
+        this.homecontainer=false;
         this.subjectteacher=true;
         this.classteacher=true;
         this.coordinator=true;
         this.highlevelcommon=true;
-        this.createschooltype=true;
-        this.createsubject=true;
-        this.createrole=true;
-        this.managementreport=true;
-        this.SectionPreiods=true;
-        this.GeneratemgmtReport=true;
-         this.studentfixed=true;
-        this.schooltyptograde=true;
-        this.createschoolz=true; 
-        this.createcategory=true;
-        this.createemployee=true;
-        this.creategrade=true;
-        this.workingdats=true;
-        this.SchooltypettoGrade=true;
-        this.employeetograde=true;
-        this.emptocategory=true;
-        this.categorytoschooltype=true;
-        this.gradetosubject=true;
-        this.subjecttostudent=true;
-        this.sectioncreation=true;
-        this.gradetosection=true;
-        this.roletogrademapping=true;
-        this.empreportdetails=true;
-        this.studentsectionreport=true;
-        this.sectionedit=true;
-        this.captureReport=true;
-
-       }, 
-
+        this.hidemanagementreport=true;
+        // this.createschooltype=true;
+        // this.createsubject=true;
+        // this.createrole=true;
+        // this.managementreport=true;
+        // this.SectionPreiods=true;
+        // this.GeneratemgmtReport=true;
+        // this.studentfixed=true;
+        // this.schooltyptograde=true;
+        // this.createschoolz=true; 
+        // this.createcategory=true;
+        // this.createemployee=true;
+        // this.creategrade=true;
+        // this.workingdats=true;
+        // this.SchooltypettoGrade=true;
+        // this.employeetograde=true;
+        // this.emptocategory=true;
+        // this.categorytoschooltype=true;
+        // this.gradetosubject=true;
+        // this.subjecttostudent=true;
+        // this.sectioncreation=true;
+        // this.gradetosection=true;
+        // this.roletogrademapping=true;
+        // this.empreportdetails=true;
+        // this.studentsectionreport=true;
+        // this.sectionedit=true;
+        // this.captureReport=true;
+        this.containerview=true;
+      },
+      FnInitializeContainers:function(){
+        this.homecontainer=false;
+        this.rolescontainer=true;
+      }, 
+      FnSelectImgReportcard:function(){
+        this.homecontainer=true;
+        this.rolescontainer=false;
+        this.containerview="Reportcard";
+        this.FnHideView();
+      },
+      FnSelectImgEnrichment:function(){
+        this.homecontainer=true;
+        this.rolescontainer=false;
+        this.containerview="Enrichment";
+        this.FnHideView();
+      },
+      FnSelectImgMaster:function(){
+        // alert('in');
+        this.homecontainer=true;
+        this.rolescontainer=false;
+        this.containerview="Master";
+        this.FnHideView();
+      },
       FnSelectacademicyear:function(e){  
         academicyear = e.target.selectedItem.value.trim();
         // alert(localStorage.getItem('curr_sess_loggedassesmenttype'));
@@ -782,77 +784,161 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
         this.$.assesmentservice.callApproveService();   
       },
       FnHideView:function(){ 
-
         if(sessionStorage.getItem("curr_sess_loggedroleid")=='management'){
-          this.managementreport=false;
-          this.GeneratemgmtReport=false;
+          // alert(sessionStorage.getItem("curr_sess_loggedroleid")+"  "+this.containerview);
+          this.hidemanagementreport=false;
+          if(this.containerview=="Reportcard"){
+            // alert('in');
+            this.hidereportcardcontainer=false;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=true;
           }
+          else if(this.containerview=="Enrichment"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=false;
+            this.hidemasterscontainer=true;
+          }
+          else if(this.containerview=="Master"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=false;
+          }
+        }
         if(sessionStorage.getItem("curr_sess_loggedroleid")=='schooladmin')
           {
-           this.createemployee=false;
-           this.employeetograde=false;
-           this.categorytoschooltype=false;
-           this.gradetosubject=false;
-           this.sectioncreation=false;
-           this.studentfixed=false;
-           this.workingdats=false;
-           this.emptocategory=false;
-           this.gradetosection=false;
-           this.subjecttostudent=false;
-           this.roletogrademapping=false;
-            this.empreportdetails=false;
-           this.studentsectionreport=false;
-           this.sectionedit=false;
-           this.captureReport=false;
+           // this.createemployee=false;
+           // this.employeetograde=false;
+           // this.categorytoschooltype=false;
+           // this.gradetosubject=false;
+           // this.sectioncreation=false;
+           // this.studentfixed=false;
+           // this.workingdats=false;
+           // this.emptocategory=false;
+           // this.gradetosection=false;
+           // this.subjecttostudent=false;
+           // this.roletogrademapping=false;
+           // this.empreportdetails=false;
+           // this.studentsectionreport=false;
+           // this.sectionedit=false;
+           // this.captureReport=false;
+           this.hideschooladmin=false;
+           if(this.containerview=="Reportcard"){
+            this.hidereportcardcontainer=false;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=true;
            }
-       if(sessionStorage.getItem("curr_sess_loggedroleid")=='superadmin')
+           else if(this.containerview=="Enrichment"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=false;
+            this.hidemasterscontainer=true;
+           }
+           else if(this.containerview=="Master"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=false;
+           }
+        }
+        if(sessionStorage.getItem("curr_sess_loggedroleid")=='superadmin')
           {
-          this.schooltyptograde=false;
-          this.createcategory=false;  
-          this.createschoolz=false; 
-          this.SchooltypettoGrade=false;
-          this.createschooltype=false;
-          this.createsubject=false;
-          this.createrole=false;
-          this.creategrade=false;
+          // this.schooltyptograde=false;
+          // this.createcategory=false;  
+          // this.createschoolz=false; 
+          // this.SchooltypettoGrade=false;
+          // this.createschooltype=false;
+          // this.createsubject=false;
+          // this.createrole=false;
+          // this.creategrade=false;
+          this.hidesuperadmin=false;
+          if(this.containerview=="Reportcard"){
+            this.hidereportcardcontainer=false;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=true;
           }
-     
-
+          else if(this.containerview=="Enrichment"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=false;
+            this.hidemasterscontainer=true;
+          }
+          else if(this.containerview=="Master"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=false;
+          }
+        }   
         if(sessionStorage.getItem("curr_sess_loggedroleid")=='subject-teacher'){
           this.subjectteacher=false;
-           }  
+          if(this.containerview=="Reportcard"){
+            this.hidereportcardcontainer=false;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=true;
+          }
+          else if(this.containerview=="Enrichment"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=false;
+            this.hidemasterscontainer=true;
+          }
+          else if(this.containerview=="Master"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=false;
+          }
+        }  
         if(sessionStorage.getItem("curr_sess_loggedroleid")=='class-teacher'){  
           this.classteacher=false;
-          this.studentsectionreport=false;
-
-          // this.BA=false;        
-          // this.TA=false;
-          // this.GenerateReport=false;
-          // this.Report=false;
-          // this.comparison=false;
-          // this.editinfo=false;
-          // this.ConsolidatedReport=false;
+          // alert(this.containerview);
+          if(this.containerview=="Reportcard"){
+            this.hidereportcardcontainer=false;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=true;
+          }
+          else if(this.containerview=="Enrichment"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=false;
+            this.hidemasterscontainer=true;
+          }
+          else if(this.containerview=="Master"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=false;
+          }
         }
         if(sessionStorage.getItem("curr_sess_loggedroleid")=="principal"||sessionStorage.getItem("curr_sess_loggedroleid")=="headofedn"||sessionStorage.getItem("curr_sess_loggedroleid")=="headmistress"||sessionStorage.getItem("curr_sess_loggedroleid")=="viceprincipal"){
-          this.empreportdetails=false;
-          this.studentsectionreport=false;
-          // this.BA=false;
-          // this.TA=false;
-          }
-        if(sessionStorage.getItem("curr_sess_loggedroleid")=="principal"||sessionStorage.getItem("curr_sess_loggedroleid")=="headofedn"||sessionStorage.getItem("curr_sess_loggedroleid")=="headmistress"||sessionStorage.getItem("curr_sess_loggedroleid")=="viceprincipal"){
-
             this.highlevelcommon=false;
-            this.empreportdetails=false;
-          this.studentsectionreport=false;
-          }
-          if(sessionStorage.getItem("curr_sess_loggedroleid")=="co-ordinator")
-          {
+            if(this.containerview=="Reportcard"){
+            this.hidereportcardcontainer=false;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=true;
+            }
+            else if(this.containerview=="Enrichment"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=false;
+            this.hidemasterscontainer=true;
+            }
+            else if(this.containerview=="Master"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=false;
+            }
+        }
+        if(sessionStorage.getItem("curr_sess_loggedroleid")=="co-ordinator")
+        {
             this.coordinator=false;
-
-            this.empreportdetails=false;
-          this.studentsectionreport=false;
-          }
-        
+            if(this.containerview=="Reportcard"){
+            this.hidereportcardcontainer=false;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=true;
+            }
+            else if(this.containerview=="Enrichment"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=false;
+            this.hidemasterscontainer=true;
+            }
+            else if(this.containerview=="Master"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=false;
+            }
+        }        
       },
       FnRefresh:function()
       {
