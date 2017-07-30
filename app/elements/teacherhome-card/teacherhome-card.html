@@ -974,16 +974,25 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
             this.hidereportcardcontainer=false;
             this.hideenrichmentcontainer=true;
             this.hidemasterscontainer=true;
+            this.hideleasonplancontainer=true;
           }
           else if(this.containerview=="Enrichment"){
             this.hidereportcardcontainer=true;
             this.hideenrichmentcontainer=false;
             this.hidemasterscontainer=true;
+            this.hideleasonplancontainer=true;
           }
           else if(this.containerview=="Master"){
             this.hidereportcardcontainer=true;
             this.hideenrichmentcontainer=true;
             this.hidemasterscontainer=false;
+            this.hideleasonplancontainer=true;
+          }
+          else if(this.containerview=="Leasonplan"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=true;
+            this.hideleasonplancontainer=false;
           }
         }
         if(sessionStorage.getItem("curr_sess_loggedroleid")=="principal"||sessionStorage.getItem("curr_sess_loggedroleid")=="headofedn"||sessionStorage.getItem("curr_sess_loggedroleid")=="headmistress"||sessionStorage.getItem("curr_sess_loggedroleid")=="viceprincipal"){
