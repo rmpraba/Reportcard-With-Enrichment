@@ -92,7 +92,7 @@
       FnGenerateGradee:function(e){
         // alert(JSON.stringify(scorearr))
         var temparr=this.studarr;
-        // alert(JSON.stringify(temparr))
+        // alert(JSON.stringify(gradearr))
         if(localStorage.getItem("curr_sess_assesmentname")=="EBOY"||localStorage.getItem("curr_sess_assesmentname")=="EMOY"||localStorage.getItem("curr_sess_assesmentname")=="EEOY"){
         if(this.subject=="English"){
         if((temparr.length)-2==((scorearr.length)/2)){        
@@ -125,6 +125,8 @@
           for(var j=0;j<gradearr.length;j++){
             if(temparr[i].speed==gradearr[j].type&&((parseFloat(temparr[i].comprehension)>=parseFloat(gradearr[j].minimum))&&(parseFloat(temparr[i].comprehension)<=parseFloat(gradearr[j].maximum))&&gradearr[j].assesment_type==localStorage.getItem('curr_sess_assesmentname')))
               temparr[i].grade=gradearr[j].grade;
+              temparr[i].level=gradearr[j].category;
+              // alert(temparr[i].level+"   "+gradearr[j].category);
           }
         }
         this.studarr=[];
@@ -138,6 +140,7 @@
           obj.hiddenoutinput=temparr[i].hiddenoutinput;
           obj.category=temparr[i].category;
           obj.grade=temparr[i].grade;
+          obj.level=temparr[i].level;
           obj.speed=temparr[i].speed;
           obj.comprehension=temparr[i].comprehension;
           overall.push(obj);
@@ -149,6 +152,7 @@
               if(overall[i].category[j].studentid==scorearr[k].student_id&&overall[i].category[j].categoryid==scorearr[k].category_id&&overall[i].category[j].subcategoryid==scorearr[k].sub_category_id&&overall[i].category[j].subjectid==scorearr[k].subject_id)
               {
                 scorearr[k].grade=overall[i].grade;
+                scorearr[k].level=overall[i].level;
               }
             }
           }
@@ -166,10 +170,11 @@
           for(var k=0;k<temparr[i].category.length;k++){
           var val=parseFloat((parseFloat(temparr[i].category[k].score)/30)*100).toFixed(2);
           for(var j=0;j<gradearr.length;j++){              
-            // alert(val+"  "+gradearr[j].minimum+"  "+gradearr[j].maximum+"  "+gradearr[j].assesment_type+"  "+localStorage.getItem('curr_sess_assesmentname')+"  "+gradearr[j].grade);
             if(((parseFloat(val)>=parseFloat(gradearr[j].minimum))&&(parseFloat(val)<=parseFloat(gradearr[j].maximum)))&&gradearr[j].assesment_type==localStorage.getItem('curr_sess_assesmentname')){
-              // alert("in  "+val+"  "+gradearr[j].minimum+"  "+gradearr[j].maximum+"  "+gradearr[j].assesment_type+"  "+localStorage.getItem('curr_sess_assesmentname')+"  "+gradearr[j].grade);
+              // alert(JSON.stringify(gradearr[j]));
+              // alert("category..."+gradearr[j].grade+"..."+gradearr[j].category);
               temparr[i].grade=gradearr[j].grade;
+              temparr[i].level=gradearr[j].category;
             }
             }
           }
@@ -185,6 +190,7 @@
           obj.hiddenoutinput=temparr[i].hiddenoutinput;
           obj.category=temparr[i].category;
           obj.grade=temparr[i].grade;
+          obj.level=temparr[i].level;
           overall.push(obj);
         }
         this.studarr=overall;
@@ -195,6 +201,7 @@
               if(overall[i].category[j].studentid==scorearr[k].student_id&&overall[i].category[j].categoryid==scorearr[k].category_id&&overall[i].category[j].subcategoryid==scorearr[k].sub_category_id&&overall[i].category[j].subjectid==scorearr[k].subject_id)
               {
                 scorearr[k].grade=overall[i].grade;
+                scorearr[k].level=overall[i].level;
               }
             }
           }
@@ -220,6 +227,7 @@
         obj.subcategoryname=scorearr[i].sub_category_name;
         obj.value=scorearr[i].score;
         obj.grade=scorearr[i].grade;
+        obj.level=scorearr[i].level;
         temp.push(obj);
         }
         this.$.beginnerservice.callbamarkinsertService(temp);
@@ -265,6 +273,7 @@
         obj.subcategoryname=arr[i].sub_category_name;
         obj.value=arr[i].score;
         obj.grade=arr[i].grade;
+        obj.level=arr[i].level;
         temp.push(obj);
         }
         this.temp=temp;

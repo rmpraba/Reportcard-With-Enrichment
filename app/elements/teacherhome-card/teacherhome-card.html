@@ -65,7 +65,7 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
       </div>
       <div class="card" hidden$="{{GenerateReport}}">
        <paper-button on-click="FnGenerateReportcard" no ink><img src="../../images/report-icon.gif" height="180px" width="180px"></paper-button>
-      </div>
+      </div>      
     </div>
     </div>
 
@@ -638,6 +638,7 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
           // alert('in');
           document.querySelector('app-card').setPage('homepage','');
           document.querySelector('home-page').setPage('scorecard','');
+          this.$.assesmentservice.callTermService("Term");
          }  
          if(localStorage.getItem('curr_sess_loggedassesmenttype')=="Enrichment") 
          {
@@ -687,8 +688,6 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
           this.$.mappingservice.fetchschooltypesforgradetorolemapService();
           this.$.mappingservice.fetchrolesforgradetorolemapService();
          }  
-
-
          if(localStorage.getItem('curr_sess_loggedassesmenttype')=="empreportdetails") 
          {          
           document.querySelector('app-card').setPage('homepage','');
@@ -814,7 +813,7 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
       {
         var termname = e.target.selectedItem.textContent.trim();  
         localStorage.setItem('curr_sess_termname',termname);  
-        this.$.assesmentservice.callAssesmentService("Term",termname,"");               
+        // this.$.assesmentservice.callAssesmentService("Term",termname,"");               
         this.$.assesmentservice.callGradeService();   
         
         if(localStorage.getItem('curr_sess_report')=="1")
@@ -1189,6 +1188,7 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
             this.$.bookservice.teacherbookref1();
             document.querySelector('teacher-book-refernce-card').fnrefresh();
             this.$.cdialog.toggle();   
+<<<<<<< HEAD
           },
      
          fnbookapruval:function(e){
@@ -1206,7 +1206,6 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
             localStorage.setItem('curr_sess_loggedassesmenttype','bookreject');
             this.$.cdialog.toggle();
           }
-
 
     });
   })();

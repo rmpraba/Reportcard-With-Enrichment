@@ -251,6 +251,7 @@
         <section data-category="teacher-book-refernce-card">
           <teacher-book-refernce-card></teacher-book-refernce-card>
         </section>
+<<<<<<< HEAD
            <section data-category="teacher-book-chapter-refernce-card">
            <teacher-book-chapter-refernce-card></teacher-book-chapter-refernce-card>
          </section>
@@ -271,18 +272,21 @@
           </section>
         <section data-category="class-teacher-book-rejection-item-card">
           <class-teacher-book-rejection-item-card></class-teacher-book-rejection-item-card>
+        </section>        
+        <section data-category="teacher-book-chapter-refernce-card">
+          <teacher-book-chapter-refernce-card></teacher-book-chapter-refernce-card>
         </section>
-        
-        
+        <section data-category="reprotcard-newformat-threetoeight">
+          <reprotcard-newformat-threetoeight></reprotcard-newformat-threetoeight>
+        </section>
+        <section data-category="newformat-reportcard-nineten">
+          <newformat-reportcard-nineten></newformat-reportcard-nineten>
+        </section>
         </iron-pages>
-    </div>    
-
+    </div>   
     <div class="footer"></div>
-
   </div>
-
-  </template>
-  
+  </template> 
   <script>
   Polymer({
   is: "home-page",
@@ -432,6 +436,13 @@
       document.querySelector('teacherhome-card').FnRefresh();
       document.querySelector('term-assesment-card').FnRefreshcard();
       document.querySelector('cc-gk-onetofour-card').FnRefresh();      
+    }
+    if(localStorage.getItem("curr_sess_page")=="subject-dynamic-markentrycard")
+    {
+      this.page="teacherhomecard";
+      document.querySelector('teacherhome-card').FnRefresh();
+      document.querySelector('term-assesment-card').FnRefreshcard();
+      document.querySelector('subject-dynamic-markentrycard').FnRefresh();      
     }
     if(localStorage.getItem("curr_sess_page")=="cs-personalitydevelopment-card")
     {
@@ -603,6 +614,24 @@
       document.querySelector('cce-generate-score-card').FnRefresh();
       document.querySelector('cce-fivetoten-score-card').FnRefresh();      
     }
+    if(localStorage.getItem("curr_sess_page")=="reprotcard-newformat-threetoeight")
+    {
+      // this.page="teacherhomecard";
+      this.page="scorecard";
+      localStorage.setItem("curr_sess_page",this.page);
+      document.querySelector('teacherhome-card').FnRefresh();
+      // document.querySelector('cce-generate-score-card').FnRefresh();
+      document.querySelector('reprotcard-newformat-threetoeight').FnRefresh();      
+    }
+    if(localStorage.getItem("curr_sess_page")=="newformat-reportcard-nineten")
+    {
+      // this.page="teacherhomecard";
+      this.page="scorecard";
+      localStorage.setItem("curr_sess_page",this.page);
+      document.querySelector('teacherhome-card').FnRefresh();
+      // document.querySelector('cce-generate-score-card').FnRefresh();
+      document.querySelector('newformat-reportcard-nineten').FnRefresh();      
+    }
     if(localStorage.getItem("curr_sess_page")=="approveassesment")
     {
       this.page="teacherhomecard";
@@ -723,6 +752,13 @@
       document.querySelector('teacherhome-card').FnRefresh();
       document.querySelector('term-assesment-card').FnRefreshcard();  
       document.querySelector('cc-fa-fivetoten-card').FnRefresh();    
+    }
+    if(localStorage.getItem("curr_sess_page")=="dynamic-markentry-report")
+    {
+      this.page="teacherhomecard";
+      document.querySelector('teacherhome-card').FnRefresh();
+      document.querySelector('term-assesment-card').FnRefreshcard();  
+      document.querySelector('dynamic-markentry-report').FnRefresh();    
     }
      if(localStorage.getItem("curr_sess_page")=="cc-sa-fivetoten-card")
     {

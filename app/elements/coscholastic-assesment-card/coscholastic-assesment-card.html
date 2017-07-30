@@ -43,7 +43,7 @@
      <div class='drop'>
 
           <paper-dropdown-menu id="grade" label="Select Grade" disabled="{{read}}" required>
-            <paper-menu  id="gradenam2"class="dropdown-content"  on-iron-select="FnSelectGrade"  attr-for-selected="value" required>     
+            <paper-menu  id="gradenam2" class="dropdown-content"  on-iron-select="FnSelectGrade"  attr-for-selected="value" required>     
               <template is="dom-repeat" items="{{gradearr}}">
                 <paper-item value="{{item.grade_name}}">{{item.grade_name}}</paper-item>
               </template>
