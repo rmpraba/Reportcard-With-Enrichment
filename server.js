@@ -10620,9 +10620,7 @@ console.log(qur);
 
 app.post('/fetchconcept-service',  urlencodedParser,function (req,res)
   {  
-    
-
-<<<<<<< HEAD
+  
  
   var qur1="SELECT * FROM md_chapter where capter_id='"+req.query.chapterid+"'";
    //var qur2="SELECT * FROM md_skill where capter_id='"+req.query.chapterid+"' order by concept_id";
@@ -10667,33 +10665,6 @@ app.post('/fetchconcept-service',  urlencodedParser,function (req,res)
 });
 
 
-app.post('/fetchsubjectseq-service',  urlencodedParser,function (req,res)
-{  
-  
-  var qur="SELECT * FROM md_skill capter_id='"+req.query.capter_id+"'";
-=======
-app.post('/fnschoolgradeset-service',  urlencodedParser,function (req,res)
-{  
-  var e={school_id:req.query.schoolid};
-  // console.log(e);
-  var qur="SELECT * FROM md_grade";
->>>>>>> origin/master
-  connection.query(qur,
-    function(err, rows)
-    {
-    if(!err)
-    { 
-      //console.log(JSON.stringify(rows));   
-      res.status(200).json({'returnval': rows});
-    }
-    else
-    {
-      //console.log(err);
-      res.status(200).json({'returnval': 'fail'});
-    }  
-
-  });
-});
 
 
 app.post('/bookapprvvalsubject-service',urlencodedParser,function (req,res)
@@ -10716,7 +10687,7 @@ app.post('/bookapprvvalsubject-service',urlencodedParser,function (req,res)
   });
 });
 
-<<<<<<< HEAD
+
 
 app.post('/fnsetcoskill-service' , urlencodedParser,function (req, res)
 {  
@@ -11193,7 +11164,7 @@ console.log("****************");
   });
 });
 
-=======
+
 app.post('/fetchstudinfofornewformat-service',  urlencodedParser,function (req,res)
 {  
   var qur="SELECT * FROM md_admission WHERE school_id='"+req.query.schoolid+"' AND academic_year='"+req.query.academicyear+"' AND admission_no='"+req.query.studentid+"'";
