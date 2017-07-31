@@ -206,6 +206,10 @@
      var valuearr=[];
     Polymer({
       is: 'aproval-book-innovatiosn-item-card',
+      ready:function(){
+        this.remark="";
+        this.innovation="";
+      },
     fnsubmit:function(e){
      //this.$.bookservice.fnpassinsetconcept(conarr);
      this.$.dzfsd.toggle();

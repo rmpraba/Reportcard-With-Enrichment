@@ -456,7 +456,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       fnsetcaptureResponse:function(e){
        var res=e.detail.response.returnval;
-        alert(JSON.stringify(res));
+        alert(res);
           this.capterseq();
           this.getcaptervalue();   
       },
@@ -551,7 +551,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       {
 
          var res=e.detail.response.returnval;
-          alert(JSON.stringify(res));
+          alert(res);
             if(res=="Inserted")
             {
               //alert("Inserted");
@@ -762,6 +762,10 @@ var res3=e.detail.response.valuearr;
 var res2=[];
 var adcarr=[];
 
+// alert(JSON.stringify(res1));
+// alert(JSON.stringify(res));
+// alert(JSON.stringify(res3));
+
         var a=[];
         var overall=[];
        for(var k=0;k<res.length;k++)
@@ -855,6 +859,8 @@ for(var i=0;i<overall.length;i++){
             }
         }
       }
+      // alert(JSON.stringify(res2));
+      // alert(JSON.stringify(temp));
         if(flag==0)
         document.querySelector('teacher-book-approve-card').overallarr1=res2;
         else
@@ -1167,7 +1173,7 @@ for(var i=0;i<overall.length;i++){
          chapterstatusResponse:function(e)
          {
             var res=e.detail.response.returnval;
-            alert(JSON.stringify(res));
+            // alert(JSON.stringify(res));
             document.querySelector('class-teacher-book-reject-card').fullstatusarr=res;
          },
 

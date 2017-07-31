@@ -11,7 +11,6 @@ var connection = mysql.createConnection({
    password : 'admin',
    database : 'scorecarddb'
 
-
   // port     : '62631',
   // user     : 'adminM1qnV1d',
   // password : 'HC2bIf7Sk2LD',
@@ -10639,18 +10638,13 @@ app.post('/fetchconcept-service',  urlencodedParser,function (req,res)
      chapterarr=rows;
     connection.query(qur2,function(err, rows){
     if(!err)
-    {  
-    
-      //console.log(rows);
+    { //console.log(rows);
      skillarr=rows;
      
     connection.query(qur3,function(err, rows){
-    if(!err)
-    { 
-   
+    if(!err){ 
     if(rows.length>0)
-    {
-      //console.log(rows);
+    {//console.log(rows);
      valuearr=rows;
      }
     else
@@ -10658,9 +10652,18 @@ app.post('/fetchconcept-service',  urlencodedParser,function (req,res)
     valuearr="empty";
     }
   res.status(200).json({'chapterarr': chapterarr,'skillarr':skillarr,'valuearr':valuearr});
-    }});}});}
+    }
     else
+console.log(err);
+  });}
+    else
+console.log(err);
+  });}
+
+    else{
+      console.log(err);
      res.status(200).json({'returnval': 'no rows'}); 
+    }
   });
 });
 
