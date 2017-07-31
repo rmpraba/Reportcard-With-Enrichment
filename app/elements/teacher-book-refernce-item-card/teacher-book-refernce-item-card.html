@@ -48,9 +48,7 @@
     'use strict';
     var arr=[];
     Polymer({
-      is: 'teacher-book-refernce-item-card',
-
-  
+   is: 'teacher-book-refernce-item-card',
    passsetcapter:function(e)
    {
      document.querySelector('teacher-book-chapter-refernce-card').capthead=this.capter;
@@ -60,8 +58,7 @@
      document.querySelector('home-page').setPage('teacher-book-chapter-refernce-card','');
      localStorage.setItem("curr_sess_capters",this.capterid); 
      this.$.bookservice.fngetconceptvalue();
-    },
-  
+    } 
     
     });
   })();
