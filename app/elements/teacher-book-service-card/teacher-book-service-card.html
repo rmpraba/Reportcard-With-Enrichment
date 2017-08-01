@@ -844,6 +844,8 @@ for(var i=0;i<overall.length;i++){
                obj.concept_id="";  
                obj.concept="";   
                obj.capter_id=""; 
+               obj.innovation="";  
+               obj.remark="";  
                obj.planning_date="empty" 
                obj.rowidz="";
                obj.hidecheck=true; 
@@ -944,7 +946,7 @@ for(var i=0;i<overall.length;i++){
         obj.flag="active";
         obj.conc_date=arr[i].conceptid+localStorage.getItem("localsess_from_service")
         this.fnsetcoskillparam=obj;
-       //alert(JSON.stringify(obj));
+        alert(JSON.stringify(obj));
         this.$.fnsetcoskillajax.generateRequest();
        }
    },
