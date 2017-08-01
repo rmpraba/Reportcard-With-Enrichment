@@ -6,16 +6,15 @@ var fs = require('fs');
 
 var dbserver_ip_address = process.env.OPENSHIFT_MYSQL_DB_HOST || '127.0.0.1'
 var connection = mysql.createConnection({
-   host     : 'localhost',
-   user     : 'root',
-   password : '',
-   database : 'reportcard1'
+   // host     : 'localhost',
+   // user     : 'root',
+   // password : 'admin',
+   // database : 'scorecarddb'
 
-
-  // port     : '62631',
-  // user     : 'adminM1qnV1d',
-  // password : 'HC2bIf7Sk2LD',
-  // database : 'scorecarddb'
+  port     : '62631',
+  user     : 'adminM1qnV1d',
+  password : 'HC2bIf7Sk2LD',
+  database : 'scorecarddb'
 });
 
 var bodyParser = require('body-parser'); 
@@ -10639,18 +10638,13 @@ app.post('/fetchconcept-service',  urlencodedParser,function (req,res)
      chapterarr=rows;
     connection.query(qur2,function(err, rows){
     if(!err)
-    {  
-    
-      //console.log(rows);
+    { //console.log(rows);
      skillarr=rows;
      
     connection.query(qur3,function(err, rows){
-    if(!err)
-    { 
-   
+    if(!err){ 
     if(rows.length>0)
-    {
-      //console.log(rows);
+    {//console.log(rows);
      valuearr=rows;
      }
     else
@@ -10658,9 +10652,18 @@ app.post('/fetchconcept-service',  urlencodedParser,function (req,res)
     valuearr="empty";
     }
   res.status(200).json({'chapterarr': chapterarr,'skillarr':skillarr,'valuearr':valuearr});
-    }});}});}
+    }
     else
+console.log(err);
+  });}
+    else
+console.log(err);
+  });}
+
+    else{
+      console.log(err);
      res.status(200).json({'returnval': 'no rows'}); 
+    }
   });
 });
 
