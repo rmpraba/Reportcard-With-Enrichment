@@ -85,7 +85,17 @@
              </td>
              <td>
                 <paper-input hidden$="{{hidecheck}}" value="{{planneddate}}"></paper-input>
-                <from-book-date-picker hidden$="{{hidecheck1}}"></from-book-date-picker>
+      <div class="card"  hidden$="{{hidecheck1}}">
+          <paper-input label=" planing date" class="btn" on-click="FnShowDialog" raised value="{{showdate}}"></paper-input>
+           <paper-dialog id="dialog" class="paper-date-picker-dialog" modal on-iron-overlay-closed="FnDismissDialog">
+          <paper-date-picker id="picker" date="{{date}}"></paper-date-picker>
+         <div class="buttons">
+           <paper-button dialog-dismiss>Cancel</paper-button>
+           <paper-button dialog-confirm>OK</paper-button>
+        </div>
+        </paper-dialog>
+      </div>
+      <dialog-page id="ID_Show_Dialog"></dialog-page>
               </td>
              <td>
                 <paper-button on-click="lsnskill">
@@ -206,10 +216,49 @@
      var valuearr=[];
     Polymer({
       is: 'aproval-book-innovatiosn-item-card',
-      ready:function(){
+    ready:function()
+        {
         this.remark="";
         this.innovation="";
-      },
+        this.showdate=moment(new Date()).format('L');
+        localStorage.setItem("localsess_last_service",this.showdate);
+        },
+   FnShowDialog:function(){
+    this.date=new Date();
+    this.$.dialog.toggle();
+  },
+fndates:function(e){
+    this.showdate=moment(new Date()).format('L');
+    localStorage.setItem("localsess_last_service",this.showdate);
+  
+},
+  FnDismissDialog:function(e)
+  { 
+    if(e.detail.confirmed)
+     {
+      var pickdate=moment(this.$.picker.date).format('L');
+      var dd1=new Date();
+      var dd2=new Date(pickdate);
+      var days=parseInt((dd1 - dd2) / (1000 * 60 * 60 * 24));
+          if(days>0)
+          {
+            document.querySelector('aproval-book-innovatiosn-item-card').setdate();
+          }
+          else
+          {
+            this.showdate = moment(this.$.picker.date).format('L');
+              localStorage.setItem("localsess_from_service",this.showdate);
+          }      
+      }
+    },
+    FnClear:function(){
+      this.showdate = moment(new Date()).format('L');
+    },
+    
+
+
+
+
     fnsubmit:function(e){
      //this.$.bookservice.fnpassinsetconcept(conarr);
      this.$.dzfsd.toggle();
@@ -270,7 +319,9 @@
           alert("Please Enter All Fields");
           this.hidecheck1=false;
         this.hidecheck=true;
-        
+           this.showdate=moment(new Date()).format('L');
+        localStorage.setItem("localsess_last_service",this.showdate);
+    
       }
         else if(this.planneddate=="empty" && this.innovation==""&& this.remark=="")
       {
@@ -280,7 +331,10 @@
         this.$.bookservice.fnsetcoskill(conarr,this.period,this.skill,this.innovation,this.remark,this.rowid,this.valuez); 
         this.hidecheck1=true;
         this.hidecheck=false;  
-        this.planneddate="";     
+        this.planneddate=""; 
+           this.showdate=moment(new Date()).format('L');
+        localStorage.setItem("localsess_last_service",this.showdate);
+        
       } 
         else if(this.planneddate=="empty" && this.remark=="")
       {
@@ -290,7 +344,10 @@
         this.$.bookservice.fnsetcoskill(conarr,this.period,this.skill,this.innovation,this.remark,this.rowid,this.valuez); 
         this.hidecheck1=true;
         this.hidecheck=false;  
-        this.planneddate="";     
+        this.planneddate=""; 
+           this.showdate=moment(new Date()).format('L');
+        localStorage.setItem("localsess_last_service",this.showdate);
+        
       } 
       else if(this.planneddate=="empty" && this.innovation=="")
       {
@@ -300,7 +357,10 @@
         this.$.bookservice.fnsetcoskill(conarr,this.period,this.skill,this.innovation,this.remark,this.rowid,this.valuez); 
         this.hidecheck1=true;
         this.hidecheck=false;  
-        this.planneddate="";     
+        this.planneddate=""; 
+           this.showdate=moment(new Date()).format('L');
+        localStorage.setItem("localsess_last_service",this.showdate);
+        
       }
         else if(this.planneddate=="empty")
       {
@@ -311,6 +371,9 @@
         this.hidecheck1=true;
         this.hidecheck=false;  
         this.planneddate="";     
+           this.showdate=moment(new Date()).format('L');
+          localStorage.setItem("localsess_last_service",this.showdate);
+    
       }
 
       /*else if(this.planneddate=="empty"||this.innovation==null||this.innovation=="")
