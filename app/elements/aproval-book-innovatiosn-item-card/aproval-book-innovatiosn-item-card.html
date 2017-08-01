@@ -144,7 +144,7 @@
     </paper-dialog>
 
      <paper-dialog id="skilldialog" modal>
-          <paper-textarea  label="Skill"  readonly$="{{skillvaluezs}}" value="{{skill}}"></paper-textarea>
+          <paper-textarea  label="Skill" value="{{skill}}"></paper-textarea>
           <center style="margin-top: 14%;">
             <paper-button  on-click="skillsave" style="color:white;background-color:black">Save</paper-button>
             <paper-button style="color:white;background-color:black" on-click="skillclose" >Close</paper-button>
@@ -153,7 +153,7 @@
 
 
      <paper-dialog id="valuedialog" modal>
-          <paper-textarea label="Value" readonly$="{{skillvaluezs}}" value="{{valuez}}"></paper-textarea>
+          <paper-textarea label="Value" value="{{valuez}}"></paper-textarea>
           <center style="margin-top: 14%;">
             <paper-button  on-click="valuesave" style="color:white;background-color:black">Save</paper-button>
             <paper-button style="color:white;background-color:black" on-click="valueclose" >Close</paper-button>
@@ -161,7 +161,7 @@
       </paper-dialog>
 
       <paper-dialog id="innovationdialog" modal>
-          <paper-textarea label="Innovation" readonly$="{{innovattionvaluezs}}" value="{{innovation}}"></paper-textarea>
+          <paper-textarea label="Innovation"  value="{{innovation}}"></paper-textarea>
           <center style="margin-top: 14%;">
             <paper-button  on-click="innovatsave" style="color:white;background-color:black">Save</paper-button>
             <paper-button style="color:white;background-color:black" on-click="innovatclose" >Close</paper-button>
@@ -169,7 +169,7 @@
       </paper-dialog>
 
       <paper-dialog id="remarkdialog" modal>
-          <paper-textarea label="Remarks" value="{{remark}}"></paper-textarea>
+          <paper-textarea label="Remarks" value={{remark}}></paper-textarea>
           <center style="margin-top: 14%;">
             <paper-button  on-click="remarksave" style="color:white;background-color:black">Save</paper-button>
             <paper-button style="color:white;background-color:black" on-click="remarkclose" >Close</paper-button>
@@ -185,7 +185,7 @@
         on-response="fngetconceptcheckResponse"
         debounce-duration="300" />
        </iron-ajax>
-          <iron-ajax
+      <iron-ajax
         method="post"
         id="fngetbookvaluezajax"
         url="{{fngetbookvaluezurl}}"
@@ -257,17 +257,39 @@
     {
       //alert(3);
       this.skillvaluezs=true;
+      alert(this.innovation);
+      alert(this.remark);
 
-      if(this.period==""|| this.period==null|| this.skill=="" || this.skill==null || this.valuez=="" || this.valuez==null)
+      if(this.period==""|| this.period==null|| this.skill=="" || this.skill==null || this.valuez==""||this.valuez==null)
       {
           alert("Please Enter All Fields");
           this.hidecheck1=false;
         this.hidecheck=true;
         
       }
-      else if(this.planneddate=="empty")
+        else if(this.planneddate=="empty" && this.innovation==""&& this.remark=="")
       {
-          //alert("save");
+          alert("save4");
+        //alert(JSON.stringify(conarr));
+        //alert(this.period+""+this.skill+""+this.innovation+""+this.remark+""+this.rowid+""+this.valuez);
+        this.$.bookservice.fnsetcoskill(conarr,this.period,this.skill,this.innovation,this.remark,this.rowid,this.valuez); 
+        this.hidecheck1=true;
+        this.hidecheck=false;  
+        this.planneddate="";     
+      } 
+        else if(this.planneddate=="empty" && this.remark=="")
+      {
+          alert("save2");
+        //alert(JSON.stringify(conarr));
+        //alert(this.period+""+this.skill+""+this.innovation+""+this.remark+""+this.rowid+""+this.valuez);
+        this.$.bookservice.fnsetcoskill(conarr,this.period,this.skill,this.innovation,this.remark,this.rowid,this.valuez); 
+        this.hidecheck1=true;
+        this.hidecheck=false;  
+        this.planneddate="";     
+      } 
+      else if(this.planneddate=="empty" && this.innovation=="")
+      {
+          alert("save3");
         //alert(JSON.stringify(conarr));
         //alert(this.period+""+this.skill+""+this.innovation+""+this.remark+""+this.rowid+""+this.valuez);
         this.$.bookservice.fnsetcoskill(conarr,this.period,this.skill,this.innovation,this.remark,this.rowid,this.valuez); 
@@ -275,9 +297,30 @@
         this.hidecheck=false;  
         this.planneddate="";     
       }
+        else if(this.planneddate=="empty")
+      {
+          alert("save1");
+        //alert(JSON.stringify(conarr));
+        //alert(this.period+""+this.skill+""+this.innovation+""+this.remark+""+this.rowid+""+this.valuez);
+        this.$.bookservice.fnsetcoskill(conarr,this.period,this.skill,this.innovation,this.remark,this.rowid,this.valuez); 
+        this.hidecheck1=true;
+        this.hidecheck=false;  
+        this.planneddate="";     
+      }
+
+      /*else if(this.planneddate=="empty"||this.innovation==null||this.innovation=="")
+      {
+          alert("save3");
+        //alert(JSON.stringify(conarr));
+        //alert(this.period+""+this.skill+""+this.innovation+""+this.remark+""+this.rowid+""+this.valuez);
+        this.$.bookservice.fnsetcoskill(conarr,this.period,this.skill,this.innovation,this.remark,this.rowid,this.valuez); 
+        this.hidecheck1=true;
+        this.hidecheck=false;  
+        this.planneddate="";     
+      }*/
       else
       {
-        //alert("edit");
+        alert("edit");
         // alert(JSON.stringify(conarr));
 
         this.$.bookservice.fnbookeditskill(this.period,this.skill,this.innovation,this.remark,this.planneddate,this.rowidz,this.valuez);

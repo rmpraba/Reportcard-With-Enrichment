@@ -10460,17 +10460,18 @@ app.post('/fngetconceptvalue-service',  urlencodedParser,function (req,res)
 
 
 app.post('/fnsendconcept-service' ,  urlencodedParser,function (req, res)
-
 {  
     var response={ 
        concept_id:req.query.concept_id,
        concept:req.query.concept,
        capter_id:req.query.capter_id,
        flag:req.query.flag, 
-    }; 
-
-
-    var qqq="SELECT * FROM md_concept WHERE concept_id='"+req.query.concept_id+"' and concept='"+req.query.concept+"'";
+       grade_id:req.query.grade_id,
+       subject_id:req.query.subject_id,
+       school_id:req.query.school_id,
+       academic_year:req.query.academic_year,
+      }; 
+     var qqq="SELECT * FROM md_concept WHERE concept_id='"+req.query.concept_id+"' and concept='"+req.query.concept+"'";
      
      console.log(qqq);
     console.log(response);
@@ -10504,14 +10505,13 @@ app.post('/fnsendconcept-service' ,  urlencodedParser,function (req, res)
       res.status(200).json({'returnval': 'Already Exit'});
     }
   });
-});
+});    
 
 
 app.post('/fnbookupdatevalue-service',  urlencodedParser,function (req, res)
-{  
-   /* var obj={"capter_id":"","concept":"","concept_id":"","showdate":""};
-   */
-    var qur="update md_concept set  concept='"+req.query.concept+"' where capter_id='"+req.query.capter_id+"' and concept_id='"+req.query.concept_id+"'";
+{ 
+     
+    var qur="update md_concept set  concept='"+req.query.concept+"' where capter_id='"+req.query.capter_id+"' and concept_id='"+req.query.concept_id+"' and grade_id='"+req.query.grade_id+"' and subject_id='"+req.query.subject_id+"' and school_id='"+req.query.school_id+"'and academic_year='"+req.query.academic_year+"'";
 
     console.log("----------- coceppt edit-------------");
     console.log(qur);
