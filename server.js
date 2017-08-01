@@ -10470,7 +10470,7 @@ app.post('/fnsendconcept-service' ,  urlencodedParser,function (req, res)
     }; 
 
 
-    var qqq="SELECT * FROM md_concept WHERE concept_id='"+req.query.concept_id+"' and concept='"+req.query.concept+"'";
+    var qqq="SELECT * FROM md_concept WHERE concept_id='"+req.query.concept_id+"' or concept='"+req.query.concept+"'";
      
      console.log(qqq);
     console.log(response);

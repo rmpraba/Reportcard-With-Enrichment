@@ -67,37 +67,41 @@ var costatus;
   
     fnaroveset:function(e)
     {
-       if(this.enrichmentsuggest==""||this.enrichmentsuggest==null)
+       /*if(this.enrichmentsuggest==""||this.enrichmentsuggest==null)
        {
         alert("Please Enter All Fields");
-       }
-       else
-       {
+       }*/
+
+      /* if
+       {*/
           //alert(costatus);
-           if(costatus==""||costatus==null){
-              costatus='yes';
-          //alert(this.empid+" "+this.skill+" "+this.innovation+" "+this.enrichmentsuggest+" "+this.period+" "+this.planneddate+" "+this.concept+" "+this.conceptid+" "+this.remark+" "+this.valuez);
+           if(costatus==""||costatus==null)
+           {
+                  costatus='yes';
+              //alert(this.empid+" "+this.skill+" "+this.innovation+" "+this.enrichmentsuggest+" "+this.period+" "+this.planneddate+" "+this.concept+" "+this.conceptid+" "+this.remark+" "+this.valuez);
 
-           this.$.bookservice.fnfinalbook(costatus,this.empid,this.skill,this.innovation,this.enrichmentsuggest,this.period,this.planneddate,this.concept,this.conceptid,this.remark,this.valuez);
-         document.querySelector('aproval-save-and-edit-book-card').splices();
-                  costatus="";
-              costatus=null;
-      
-        
-           }else
-                
-        alert(this.empid+" "+this.skill+" "+this.innovation+" "+this.enrichmentsuggest+" "+this.period+" "+this.planneddate+" "+this.concept+" "+this.conceptid+" "+this.remark+" "+this.valuez);
+               this.$.bookservice.fnfinalbook(costatus,this.empid,this.skill,this.innovation,this.enrichmentsuggest,this.period,this.planneddate,this.concept,this.conceptid,this.remark,this.valuez);
+             document.querySelector('aproval-save-and-edit-book-card').splices();
+                      costatus="";
+                  costatus=null;
+           }
+           else
+           {
+               //alert(this.empid+" "+this.skill+" "+this.innovation+" "+this.enrichmentsuggest+" "+this.period+" "+this.planneddate+" "+this.concept+" "+this.conceptid+" "+this.remark+" "+this.valuez);
 
-           this.$.bookservice.fnfinalbook(costatus,this.empid,this.skill,this.innovation,this.enrichmentsuggest,this.period,this.planneddate,this.concept,this.conceptid,this.remark,this.valuez);
-        document.querySelector('aproval-save-and-edit-book-card').splices();
-         costatus="";
-         costatus=null;
-         
-          }
-         costatus="";
-         costatus=null;
-         alert(costatus);  
-  
+               this.$.bookservice.fnfinalbook(costatus,this.empid,this.skill,this.innovation,this.enrichmentsuggest,this.period,this.planneddate,this.concept,this.conceptid,this.remark,this.valuez);
+                document.querySelector('aproval-save-and-edit-book-card').splices();
+                costatus="";
+                costatus=null;
+            }
+
+          /*}*/
+
+               costatus="";
+               costatus=null;
+               id.checked=false;
+               idz.checked=false;
+               //alert(costatus);  
       },
     fnsetyes:function(e){
      // alert(this.id);

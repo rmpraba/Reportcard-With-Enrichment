@@ -81,7 +81,7 @@
                   </template>
               </td>
              <td>
-                <paper-input value="{{period}}" allowed-pattern="[0-9]"></paper-input>
+                <paper-input style="width: 60%;" value="{{period}}" allowed-pattern="[0-9]"></paper-input>
              </td>
              <td>
                 <paper-input hidden$="{{hidecheck}}" value="{{planneddate}}"></paper-input>
@@ -258,7 +258,7 @@
       //alert(3);
       this.skillvaluezs=true;
 
-      if(this.period==""|| this.period==null|| this.skill=="" || this.skill==null || this.valuez=="" || this.valuez==null)
+      if(this.period==""|| this.period==null|| this.skill=="" || this.skill==null || this.valuez=="" || this.valuez==null || this.planneddate=="" || this.planneddate==null)
       {
           alert("Please Enter All Fields");
           this.hidecheck1=false;

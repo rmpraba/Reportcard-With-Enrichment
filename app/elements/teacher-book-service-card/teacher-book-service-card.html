@@ -456,7 +456,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       fnsetcaptureResponse:function(e){
        var res=e.detail.response.returnval;
-        alert(JSON.stringify(res));
+        //alert(JSON.stringify(res));
+        alert('Inserted');
           this.capterseq();
           this.getcaptervalue();   
       },
@@ -521,7 +522,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         for(var l=0;l<res.length;l++)
         {
             temp1.push(res[l]);
-            if(l!=0&&l%4==0)
+            if(l!=0&&l%3==0)
             {
                 overallzz.push(temp1);
                 temp1=[];
@@ -551,12 +552,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       {
 
          var res=e.detail.response.returnval;
-          alert(JSON.stringify(res));
+          //alert(JSON.stringify(res));
             if(res=="Inserted")
             {
-              //alert("Inserted");
+              alert('Inserted');
               this.conceptseq(); 
               this.fngetconceptvalue();
+            }
+            else if(res=='Already Exit')
+            {
+              alert('Already Exit');
             }
             
       },
