@@ -6,15 +6,15 @@ var fs = require('fs');
 
 var dbserver_ip_address = process.env.OPENSHIFT_MYSQL_DB_HOST || '127.0.0.1'
 var connection = mysql.createConnection({
-   // host     : 'localhost',
-   // user     : 'root',
-   // password : 'admin',
-   // database : 'scorecarddb'
+   host     : 'localhost',
+   user     : 'root',
+   password : '',
+   database : 'reportcard1'
 
-  port     : '62631',
+/*  port     : '62631',
   user     : 'adminM1qnV1d',
   password : 'HC2bIf7Sk2LD',
-  database : 'scorecarddb'
+  database : 'scorecarddb'*/
 });
 
 var bodyParser = require('body-parser'); 
@@ -10469,7 +10469,7 @@ app.post('/fnsendconcept-service' ,  urlencodedParser,function (req, res)
     }; 
 
 
-    var qqq="SELECT * FROM md_concept WHERE concept_id='"+req.query.concept_id+"' or concept='"+req.query.concept+"'";
+    var qqq="SELECT * FROM md_concept WHERE concept_id='"+req.query.concept_id+"' and concept='"+req.query.concept+"' and capter_id='"+req.query.capter_id+"'";
      
      console.log(qqq);
     console.log(response);
