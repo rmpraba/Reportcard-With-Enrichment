@@ -273,7 +273,6 @@
           alert("Please Enter All Fields");
           this.hidecheck1=false;
         this.hidecheck=true;
-        
       }
       else if(this.planneddate=="empty")
       {
@@ -290,14 +289,12 @@
         //alert("edit");
         // alert(JSON.stringify(conarr));
 
-        this.$.bookservice.fnbookeditskill(this.period,this.skill,this.innovation,this.remark,this.planneddate,this.rowidz,this.valuez);
+            this.$.bookservice.fnbookeditskill(this.period,this.skill,this.innovation,this.remark,this.planneddate,this.rowidz,this.valuez);
       }
        /* this.hidecheck1=true;
         this.hidecheck=false; */
         
         document.querySelector('concept-check-card').fnclean();
-        this.conceptjhkhzz="";
-
   },
 
     fngetconceptz:function(e){
@@ -311,7 +308,7 @@
     fngetinchaptvaluevalue:function(e){
     this.fngetbookvaluezurl=sessionStorage.getItem("addrinfo")+"/fngetconceptvalue111-service";
                var obj={};
-               obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+                 obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
                obj.academic_year=localStorage.getItem("curr_sess_academicyear");
                obj.capter_id=localStorage.getItem("curr_sess_capters");
                obj.period=this.period;
