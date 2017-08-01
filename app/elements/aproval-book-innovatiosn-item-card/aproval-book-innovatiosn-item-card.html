@@ -81,7 +81,7 @@
                   </template>
               </td>
              <td>
-                <paper-input value="{{period}}" allowed-pattern="[0-9]"></paper-input>
+                <paper-input style="width: 60%;" value="{{period}}" allowed-pattern="[0-9]"></paper-input>
              </td>
              <td>
                 <paper-input hidden$="{{hidecheck}}" value="{{planneddate}}"></paper-input>
@@ -206,6 +206,10 @@
      var valuearr=[];
     Polymer({
       is: 'aproval-book-innovatiosn-item-card',
+      ready:function(){
+        this.remark="";
+        this.innovation="";
+      },
     fnsubmit:function(e){
      //this.$.bookservice.fnpassinsetconcept(conarr);
      this.$.dzfsd.toggle();
@@ -260,8 +264,9 @@
       alert(this.innovation);
       alert(this.remark);
 
-      if(this.period==""|| this.period==null|| this.skill=="" || this.skill==null || this.valuez==""||this.valuez==null)
-      {
+
+      if(this.period==""|| this.period==null|| this.skill=="" || this.skill==null || this.valuez=="" || this.valuez==null)
+     {
           alert("Please Enter All Fields");
           this.hidecheck1=false;
         this.hidecheck=true;
@@ -301,7 +306,7 @@
       {
           alert("save1");
         //alert(JSON.stringify(conarr));
-        //alert(this.period+""+this.skill+""+this.innovation+""+this.remark+""+this.rowid+""+this.valuez);
+        // alert(this.period+""+this.skill+""+this.innovation+""+this.remark+""+this.rowid+""+this.valuez);
         this.$.bookservice.fnsetcoskill(conarr,this.period,this.skill,this.innovation,this.remark,this.rowid,this.valuez); 
         this.hidecheck1=true;
         this.hidecheck=false;  
