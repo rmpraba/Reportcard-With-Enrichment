@@ -103,12 +103,12 @@
                 </paper-button>  
              </td>
              <td>
-                <paper-icon-button   hidden$="{{hidecheck1}}" icon="add" on-click="fngetconceptz1" style="color:#6699ff;position: absolute;margin-left: 6%;margin-top: -1%;"></paper-icon-button>
+                <paper-icon-button   hidden$="{{hidecheck1}}" icon="add" on-click="fngetconceptz1" style="color:#6699ff;position: absolute;margin-left: 6%;margin-top: -2%;"></paper-icon-button>
                 <!-- <paper-button on-click="lsnvalue">
                   <h4>{{valuez}}</h4>
                 </paper-button> -->
                   <template is="dom-repeat" items="{{mainarr}}" as="ry">
-                    <h4 style="margin-left: -11%;width: 35%;">{{ry.valuename}}</h4>
+                    <h4 style="margin-left: 10%;width: 39%;">{{ry.valuename}}</h4>
                   </template>
 
             </td>
@@ -411,7 +411,7 @@ fndates:function(e){
                  }
                 }
                  this.valuearrz=res;
-               alert(JSON.stringify(this.valuearrz));
+               //alert(JSON.stringify(this.valuearrz));
 },
     fngetconceptcheck:function(e)
     {

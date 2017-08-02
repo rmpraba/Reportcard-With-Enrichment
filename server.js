@@ -10619,7 +10619,7 @@ console.log(qur);
 
 app.post('/fetchconcept-service',  urlencodedParser,function (req,res)
 
-  {  
+{  
    var qur1="SELECT * FROM md_chapter where capter_id='"+req.query.chapterid+"'and subjectid='"+req.query.subjectid+"' and gradeid='"+req.query.gradeid+"' and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' "; 
 
 
@@ -10627,12 +10627,6 @@ app.post('/fetchconcept-service',  urlencodedParser,function (req,res)
 
   var qur3="SELECT * FROM md_book_value  where capter_id='"+req.query.chapterid+"' ";
 
-  { 
-
-   var qur1="SELECT * FROM md_chapter where capter_id='"+req.query.chapterid+"'and subjectid='"+req.query.subjectid+"' and gradeid='"+req.query.gradeid+"' and school_id='"+req.query.schoolid+"' and  academic_year='"+req.query.academic_year+"'";
-   var qur2="SELECT concept_id as conceptid,planning_date,rowid,period,value,skill,innovation,remark,flag,(select  concept from md_concept  where  concept_id=conceptid)  as conceptname FROM `md_skill` WHERE  capter_id='"+req.query.chapterid+"'and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and school_id='"+req.query.schoolid+"' and  academic_year='"+req.query.academic_year+"'";
-
-   var qur3="SELECT * FROM md_book_value  where capter_id='"+req.query.chapterid+"'and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' ";
 
     console.log(qur1);
     console.log(qur2);
@@ -10816,6 +10810,7 @@ app.post('/fnsetbookvale-service' , urlencodedParser,function (req, res)
     }
     else
     {
+      console.log(err);
       res.status(200).json({'returnval': 'Not Inserted!'});
     }
     });
