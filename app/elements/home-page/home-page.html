@@ -278,6 +278,12 @@
         <section data-category="newformat-reportcard-nineten">
           <newformat-reportcard-nineten></newformat-reportcard-nineten>
         </section>
+        <section data-category="incomplete-chapter-report">
+          <incomplete-chapter-report></incomplete-chapter-report>
+        </section>
+        <section data-category="curriculam-report">
+          <curriculam-report></curriculam-report>
+        </section>
         </iron-pages>
     </div>   
     <div class="footer"></div>
@@ -919,6 +925,18 @@
       {
         document.querySelector('app-card').setPage('homepage','');
         document.querySelector('home-page').setPage('class-teacher-book-reject-card','');
+      }
+      
+
+      if(localStorage.getItem("curr_sess_page")=="incomplete-chapter-report")
+      {
+        this.page="teacherhomecard";
+        document.querySelector('teacherhome-card').FnRefresh();
+      }
+      if(localStorage.getItem("curr_sess_page")=="curriculam-report")
+      {
+        this.page="teacherhomecard";
+        document.querySelector('teacherhome-card').FnRefresh();
       }
 
   },

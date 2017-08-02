@@ -171,7 +171,7 @@
       </paper-dialog>
 
       <paper-dialog id="innovationdialog" modal>
-          <paper-input label="Innovation"  value="{{innovation}}"></paper-input>
+          <paper-textarea label="Innovation"  value="{{innovation}}"></paper-textarea>
           <center style="margin-top: 14%;">
             <paper-button  on-click="innovatsave" style="color:white;background-color:black">Save</paper-button>
             <paper-button style="color:white;background-color:black" on-click="innovatclose" >Close</paper-button>
@@ -179,7 +179,7 @@
       </paper-dialog>
 
       <paper-dialog id="remarkdialog" modal>
-          <paper-input label="Remarks" value="{{remark}}"></paper-input>
+          <paper-textarea label="Remarks" value="{{remark}}"></paper-textarea>
           <center style="margin-top: 14%;">
             <paper-button  on-click="remarksave" style="color:white;background-color:black">Save</paper-button>
             <paper-button style="color:white;background-color:black" on-click="remarkclose" >Close</paper-button>
@@ -309,7 +309,7 @@ fndates:function(e){
     fnsavebook:function(e)
     {
       //alert(3);
-      this.skillvaluezs=true;
+      //this.skillvaluezs=true;
       
       //alert(this.remark);
       //alert(this.innovation);
@@ -327,7 +327,7 @@ fndates:function(e){
      
      else if(this.planneddate=="empty")
       {
-          alert("save1");
+          //alert("save1");
         //alert(JSON.stringify(conarr));
         // alert(this.period+""+this.skill+""+this.innovation+""+this.remark+""+this.rowid+""+this.valuez);
         this.$.bookservice.fnsetcoskill(conarr,this.period,this.skill,this.innovation,this.remark,this.rowid,this.valuez); 
@@ -351,7 +351,7 @@ fndates:function(e){
       }*/
       else
       {
-        alert("edit");
+        //alert("edit");
         // alert(JSON.stringify(conarr));
 
             this.$.bookservice.fnbookeditskill(this.period,this.skill,this.innovation,this.remark,this.planneddate,this.rowidz,this.valuez);
@@ -455,7 +455,6 @@ fndates:function(e){
      fneditbook:function(e){
       this.hidecheck1=false;
       this.hidecheck=true;
-      this.skillvaluezs=false;
       this.innovattionvaluezs=false;
     },
     fnsetpassvalz:function(e){
