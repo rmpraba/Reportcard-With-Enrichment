@@ -272,9 +272,6 @@
         <section data-category="class-teacher-book-rejection-item-card">
           <class-teacher-book-rejection-item-card></class-teacher-book-rejection-item-card>
         </section>        
-        <section data-category="teacher-book-chapter-refernce-card">
-          <teacher-book-chapter-refernce-card></teacher-book-chapter-refernce-card>
-        </section>
         <section data-category="reprotcard-newformat-threetoeight">
           <reprotcard-newformat-threetoeight></reprotcard-newformat-threetoeight>
         </section>
@@ -905,6 +902,25 @@
         this.page="teacherhomecard";
         document.querySelector('teacherhome-card').FnRefresh();
       }
+
+      if(localStorage.getItem("curr_sess_page")=="teacher-book-chapter-refernce-card")
+      {
+        document.querySelector('app-card').setPage('homepage','');
+        document.querySelector('home-page').setPage('teacher-book-refernce-card','');
+      }
+
+      if(localStorage.getItem("curr_sess_page")=="teacher-book-chapter-refernce-card")
+      {
+        document.querySelector('app-card').setPage('homepage','');
+        document.querySelector('home-page').setPage('teacher-book-refernce-card','');
+      }
+
+      if(localStorage.getItem("curr_sess_page")=="class-teacher-book-rejection-item-card")
+      {
+        document.querySelector('app-card').setPage('homepage','');
+        document.querySelector('home-page').setPage('class-teacher-book-reject-card','');
+      }
+
   },
 
   FnsetTitle:function(title){

@@ -316,14 +316,15 @@ fndates:function(e){
       //alert(3);
       this.skillvaluezs=true;
       
-      alert(this.remark);
-      alert(this.innovation);
+      //alert(this.remark);
+      //alert(this.innovation);
 
       if(this.period==""|| this.period==null|| this.skill=="" || this.skill==null)
      {
           alert("Please Enter All Fields");
           this.hidecheck1=false;
         this.hidecheck=true;
+
            this.showdate=moment(new Date()).format('L');
         localStorage.setItem("localsess_last_service",this.showdate);
     
@@ -331,8 +332,8 @@ fndates:function(e){
      
      else if(this.planneddate=="empty")
       {
-          alert("save1");
-          alert(JSON.stringify(valuearr));
+          //alert("save1");
+          //alert(JSON.stringify(valuearr));
           //alert(this.period+""+this.skill+""+this.innovation+""+this.remark+""+this.rowid+""+this.valuez);
         this.$.bookservice.fnsetcoskill(conarr,this.period,this.skill,this.innovation,this.remark,this.rowid);
         this.$.bookservice.fnsetcoskillvalue(valuearr,this.period,this.rowid);
@@ -342,6 +343,8 @@ fndates:function(e){
         this.planneddate="";     
         this.showdate=moment(new Date()).format('L');
         localStorage.setItem("localsess_last_service",this.showdate);
+           document.querySelector('concept-check-card').fnclean();
+        document.querySelector('aproval-book').fnclean1();
          }
 
       /*else if(this.planneddate=="empty"||this.innovation==null||this.innovation=="")
@@ -356,9 +359,8 @@ fndates:function(e){
       }*/
       else
       {
-        alert("edit");
+        //alert("edit");
         // alert(JSON.stringify(conarr));
-
         this.$.bookservice.fnbookeditskill(this.period,this.skill,this.innovation,this.remark,this.planneddate,this.rowidz,this.valuez);
 
       }
@@ -368,7 +370,6 @@ fndates:function(e){
         document.querySelector('aproval-book').fnclean1();
    
         this.conceptjhkhzz="";
-
   },
 
     fngetconceptz:function(e){
@@ -382,7 +383,7 @@ fndates:function(e){
     fngetinchaptvaluevalue:function(e){
     this.fngetbookvaluezurl=sessionStorage.getItem("addrinfo")+"/fngetconceptvalue111-service";
                var obj={};
-               obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+                 obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
                obj.academic_year=localStorage.getItem("curr_sess_academicyear");
                obj.capter_id=localStorage.getItem("curr_sess_capters");
                obj.period=this.period;
