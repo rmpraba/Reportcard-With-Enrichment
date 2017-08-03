@@ -103,9 +103,14 @@
                 </paper-button>  
              </td>
              <td>
-                <paper-button on-click="lsnvalue">
+                <paper-icon-button   hidden$="{{hidecheck1}}" icon="add" on-click="fngetconceptz1" style="color:#6699ff;position: absolute;margin-left: 6%;margin-top: -1%;"></paper-icon-button>
+                <!-- <paper-button on-click="lsnvalue">
                   <h4>{{valuez}}</h4>
-                </paper-button>
+                </paper-button> -->
+                  <template is="dom-repeat" items="{{mainarr}}" as="ry">
+                    <h4 style="margin-left: -11%;width: 35%;">{{ry.valuename}}</h4>
+                  </template>
+
             </td>
             <td>
               <!-- <paper-textarea  readonly$="{{innovattionvaluezs}}" value="{{innovation}}"></paper-textarea> -->
@@ -162,7 +167,7 @@
       </paper-dialog>
 
 
-     <paper-dialog id="valuedialog" modal>
+     <paper-dialog  log id="valuedialog" modal>
           <paper-textarea label="Value" value="{{valuez}}"></paper-textarea>
           <center style="margin-top: 14%;">
             <paper-button  on-click="valuesave" style="color:white;background-color:black">Save</paper-button>
@@ -281,9 +286,9 @@ fndates:function(e){
         temp1.push({"valuename":valuearr[i].valuename});
       }
      }
-     //alert(JSON.stringify(temp1));
-     this.massvalue=[];
-     this.massvalue=temp1;
+      
+     this.mainarr=[];
+     this.mainarr=temp1;
     },
     fnpasparr:function(e){
     conarr=e;
@@ -314,7 +319,7 @@ fndates:function(e){
       alert(this.remark);
       alert(this.innovation);
 
-      if(this.period==""|| this.period==null|| this.skill=="" || this.skill==null || this.valuez=="" || this.valuez==null)
+      if(this.period==""|| this.period==null|| this.skill=="" || this.skill==null)
      {
           alert("Please Enter All Fields");
           this.hidecheck1=false;
@@ -327,16 +332,17 @@ fndates:function(e){
      else if(this.planneddate=="empty")
       {
           alert("save1");
-        //alert(JSON.stringify(conarr));
-        // alert(this.period+""+this.skill+""+this.innovation+""+this.remark+""+this.rowid+""+this.valuez);
-        this.$.bookservice.fnsetcoskill(conarr,this.period,this.skill,this.innovation,this.remark,this.rowid,this.valuez); 
+          alert(JSON.stringify(valuearr));
+          //alert(this.period+""+this.skill+""+this.innovation+""+this.remark+""+this.rowid+""+this.valuez);
+        this.$.bookservice.fnsetcoskill(conarr,this.period,this.skill,this.innovation,this.remark,this.rowid);
+        this.$.bookservice.fnsetcoskillvalue(valuearr,this.period,this.rowid);
+  
         this.hidecheck1=true;
         this.hidecheck=false;  
         this.planneddate="";     
-           this.showdate=moment(new Date()).format('L');
-          localStorage.setItem("localsess_last_service",this.showdate);
-    
-      }
+        this.showdate=moment(new Date()).format('L');
+        localStorage.setItem("localsess_last_service",this.showdate);
+         }
 
       /*else if(this.planneddate=="empty"||this.innovation==null||this.innovation=="")
       {
@@ -354,11 +360,13 @@ fndates:function(e){
         // alert(JSON.stringify(conarr));
 
         this.$.bookservice.fnbookeditskill(this.period,this.skill,this.innovation,this.remark,this.planneddate,this.rowidz,this.valuez);
+
       }
        /* this.hidecheck1=true;
         this.hidecheck=false; */
-        
         document.querySelector('concept-check-card').fnclean();
+        document.querySelector('aproval-book').fnclean1();
+   
         this.conceptjhkhzz="";
 
   },
@@ -403,7 +411,7 @@ fndates:function(e){
                  }
                 }
                  this.valuearrz=res;
-               //  alert(JSON.stringify(this.valuearrz));
+               alert(JSON.stringify(this.valuearrz));
 },
     fngetconceptcheck:function(e)
     {
@@ -477,16 +485,14 @@ fndates:function(e){
       this.$.skilldialog.close();
       this.skill="";
     },
-    lsnvalue:function(e)
-    {
-      this.$.valuedialog.toggle();
-    },
-    valuesave:function(e)
+ 
+
+ /*   valuesave:function(e)
     {
       this.$.valuedialog.toggle();
       //this.skillvaluezs=true;
     },
-    valueclose:function()
+ */   valueclose:function()
     {
       this.$.valuedialog.close();
       this.valuez="";
