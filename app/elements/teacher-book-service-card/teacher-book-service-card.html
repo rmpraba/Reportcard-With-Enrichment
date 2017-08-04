@@ -1315,6 +1315,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                       obj.id_date=id_date;
                       obj.remark=res2[i].remark;
                       obj.period=res2[i].period;
+                      obj.valuez=res2[i].value_name;
                       obj.completion=res2[i].completion;
                       obj.completion_date=res2[i].completion_date;
                       obj.enrichment_sug=res2[i].enrichment_sug;
@@ -1805,13 +1806,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           var temparr1=[];
           for(var i=0;i<res.length;i++)
           {
-            var obj={"subject_name":"","capter":"","concept":"","skill":"","value":"","innovation":"","planning_date":"","period":"","remark":"","sno":""};
+            var obj={"subject_name":"","capter":"","concept":"","skill":"","value_name":"","innovation":"","planning_date":"","period":"","remark":"","sno":""};
 
                 obj.subject_name=res[i].subject_name;
                 obj.capter=res[i].capter;
                 obj.concept=res[i].concept;
                 obj.skill=res[i].skill;
-                obj.value=res[i].value;
+                obj.value_name=res[i].value_name;
                 obj.innovation=res[i].innovation;
                 obj.planning_date=res[i].planning_date;
                 obj.remark=res[i].remark;
