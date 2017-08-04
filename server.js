@@ -11136,13 +11136,15 @@ app.post('/bookvaldel-service' ,  urlencodedParser,function (req, res)
 app.post('/fetchclassconcept-service',  urlencodedParser,function (req,res)
   {  
    var qur1="select   concept_id as conceptid,planning_date,period,conc_date,skill,value,innovation,remark,flag,(select  concept from md_concept  where  concept_id=conceptid)  as conceptname from md_skill where capter_id='"+req.query.chapterid+"' and conc_date not in(select s.conc_date  from final_book_sug s where s.school_id='"+req.query.schoolid+"' and s.academic_year='"+req.query.academic_year+"' and s.subject_id='"+req.query.subjectid+"' and  s.section_id='"+req.query.sectoinid+"' and  s.grade_id='"+req.query.gradeid+"' and s.capter_id='"+req.query.chapterid+"')";
-  
+
+
    var qur2="SELECT distinct id as empid,(select distinct emp_name from md_employee_creation where emp_id=empid and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"') as empname FROM mp_teacher_grade where  school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and class_id='"+req.query.sectoinid+"' ";
 
    var qur3="select * from  final_book_sug where  school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and section_id='"+req.query.sectoinid+"' and capter_id='"+req.query.chapterid+"'";
      var skillarr=[];
      var emparr=[];
      var dbarr=[];
+     console.log("-------------------------skilll--------------------------------");
      console.log(qur1);
    connection.query(qur1,function(err, rows){
     if(!err)
@@ -11481,8 +11483,7 @@ app.post('/fngetrejectsubject-service',  urlencodedParser,function (req,res)
 app.post('/fngetconceptreport-service',  urlencodedParser,function (req, res)
 {
 
-  var qur="select f.capter_id ,f.grade_id,g.grade_name,f.subject_id,s.subject_name,f.section_id,gs.section_id as section_name,ch.capter,e.emp_name,f.emp_id ,f.concept_id,cp.concept,f.skill,f.innovation,f.value,f.remark,f.enrichment_sug,f.planning_date,f.completion_date   from  final_book_sug f  join md_grade g on(g.grade_id=f.grade_id) join md_subject s on(s.subject_id=f.subject_id) join mp_grade_section gs on(gs.class_id=f.section_id) join md_chapter ch on(ch.capter_id=f.capter_id) join   md_employee_creation e on(e.emp_id=f.emp_id)  join  md_concept  cp  on(cp.concept_id=f.concept_id)  where f.school_id='"+req.query.schoolid+"' and f.completion='No' and gs.school_id='"+req.query.schoolid+"' and gs.grade_id=f.grade_id and gs.academic_year='"+req.query.academic_year+"'  and f.academic_year='"+req.query.academic_year+"' and ch.school_id='"+req.query.schoolid+"'";
-
+  var qur="select f.capter_id ,f.section_id,gs.section_id as section_name,ch.capter,e.emp_name,f.emp_id ,f.concept_id,cp.concept,f.skill,f.innovation,f.value,f.remark,f.enrichment_sug,f.planning_date,f.completion_date   from  final_book_sug f  join md_grade g on(g.grade_id=f.grade_id) join md_subject s on(s.subject_id=f.subject_id) join mp_grade_section gs on(gs.class_id=f.section_id) join md_chapter ch on(ch.capter_id=f.capter_id) join   md_employee_creation e on(e.emp_id=f.emp_id)  join  md_concept  cp  on(cp.concept_id=f.concept_id)  where f.school_id='"+req.query.schoolid+"' and f.completion='No' and gs.school_id='"+req.query.schoolid+"' and gs.grade_id=f.grade_id and gs.academic_year='"+req.query.academic_year+"'  and f.academic_year='"+req.query.academic_year+"' and ch.school_id='"+req.query.schoolid+"' and  f.subject_id='"+req.query.subjectid+"' and f.grade_id='"+req.query.gradeid+"'";
   
   console.log('-------------------Chapter Report----------------------');
   console.log(qur);
@@ -11510,7 +11511,7 @@ app.post('/fngetconceptreport-service',  urlencodedParser,function (req, res)
 
 app.post('/fngetcurriculam-service',  urlencodedParser,function (req, res)
 {
-  var qur="select  s.subject_id,s.concept_id,s.capter_id,s.period,s.skill,s.value,s.innovation,s.remark,s.planning_date,ch.capter,cp.concept,b.subject_name from md_skill s join md_chapter ch on(ch.capter_id=s.capter_id) join md_concept cp on(cp.concept_id=s.concept_id) join md_subject b on(b.subject_id=s.subject_id) where s.school_id='"+req.query.schoolid+"' and s.grade_id='"+req.query.gradeid+"'  and s.academic_year='"+req.query.academic_year+"' and ch.school_id='"+req.query.schoolid+"' and ch.academic_year='"+req.query.academic_year+"';"
+  var qur="select  s.subject_id,s.concept_id,s.capter_id,s.period,s.skill,s.innovation,s.remark,s.planning_date,ch.capter,cp.concept,b.subject_name,v.value_name from md_skill s join md_chapter ch on(ch.capter_id=s.capter_id) join md_concept cp on(cp.concept_id=s.concept_id) join md_subject b on(b.subject_id=s.subject_id) join md_book_value v on(v.rowid=s.rowid) where s.school_id='"+req.query.schoolid+"' and s.grade_id='"+req.query.gradeid+"'  and s.academic_year='"+req.query.academic_year+"' and ch.school_id='"+req.query.schoolid+"' and ch.academic_year='"+req.query.academic_year+"' and v.school_id='"+req.query.schoolid+"' and v.grade_id='"+req.query.gradeid+"'  and v.academic_year='"+req.query.academic_year+"'";
   
   console.log('-------------------Chapter Report----------------------');
   console.log(qur);
