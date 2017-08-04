@@ -26,7 +26,9 @@
               <td>{{concept}}</td>
               <td>{{period}}</td>
               <td>{{skill}}</td>
-              <td>{{valuez}}</td>
+              <td><template is="dom-repeat" items="{{mainarr}}" as="st">
+               {{st.valuename}},
+              </template></td>
               <td>{{innovation}}</td> 
               <td>{{planneddate}}</td>
               <td>
@@ -67,23 +69,23 @@ var costatus;
   
     fnaroveset:function(e)
     {
-       
+     //  alert("1")
     
            if(costatus==""||costatus==null)
            {
                   costatus='yes';
-              //alert(this.empid+" "+this.skill+" "+this.innovation+" "+this.enrichmentsuggest+" "+this.period+" "+this.planneddate+" "+this.concept+" "+this.conceptid+" "+this.remark+" "+this.valuez);
-
-               this.$.bookservice.fnfinalbook(costatus,this.empid,this.skill,this.innovation,this.enrichmentsuggest,this.period,this.planneddate,this.concept,this.conceptid,this.remark,this.valuez);
+             /* alert(this.empid+" "+this.skill+" "+this.innovation+" "+this.enrichmentsuggest+" "+this.period+" "+this.planneddate+" "+this.concept+" "+this.conceptid+" "+this.remark+" "+this.mainarr);
+      */
+    this.$.bookservice.fnfinalbook(costatus,this.empid,this.skill,this.innovation,this.enrichmentsuggest,this.period,this.planneddate,this.concept,this.conceptid,this.remark,this.mainarr);
              document.querySelector('aproval-save-and-edit-book-card').splices();
                       costatus="";
                   costatus=null;
            }
            else
            {
-               //alert(this.empid+" "+this.skill+" "+this.innovation+" "+this.enrichmentsuggest+" "+this.period+" "+this.planneddate+" "+this.concept+" "+this.conceptid+" "+this.remark+" "+this.valuez);
-
-               this.$.bookservice.fnfinalbook(costatus,this.empid,this.skill,this.innovation,this.enrichmentsuggest,this.period,this.planneddate,this.concept,this.conceptid,this.remark,this.valuez);
+            /*   alert(this.empid+" "+this.skill+" "+this.innovation+" "+this.enrichmentsuggest+" "+this.period+" "+this.planneddate+" "+this.concept+" "+this.conceptid+" "+this.remark+" "+this.mainarr);
+*/
+               this.$.bookservice.fnfinalbook(costatus,this.empid,this.skill,this.innovation,this.enrichmentsuggest,this.period,this.planneddate,this.concept,this.conceptid,this.remark,this.mainarr);
                 document.querySelector('aproval-save-and-edit-book-card').splices();
                 costatus="";
                 costatus=null;

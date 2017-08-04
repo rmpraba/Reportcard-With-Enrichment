@@ -335,7 +335,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         debounce-duration="300" />
 
 
-         <iron-ajax
+        <!--  <iron-ajax
         method="post"
         id="fetchclassconcept1ajax"
         url="{{fetchclassconcept1url}}"
@@ -343,7 +343,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         handle-as="json"
         content-type="application/json"
         on-response="fetchclassconcept1Response"
-        debounce-duration="300" />
+        debounce-duration="300" /> -->
 
         <iron-ajax
         method="post"
@@ -1250,14 +1250,60 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
 
         fetchclassconceptResponse:function(e){
-          var res=e.detail.response.skillarr;
-          var res1=e.detail.response.emparr;
-          var res2=e.detail.response.dbarr;
-      
-         // alert(JSON.stringify(res));
-          //alert(JSON.stringify(res1));
-          var setattr=[];
-        for(var i=0;i<res2.length;i++){
+
+           var res=e.detail.response.skillarr;
+           var res1=e.detail.response.emparr;
+           var res2=e.detail.response.dbarr;
+           var res3=e.detail.response.valuearr;
+           var setattr=[];
+
+
+
+            var a=[];
+            var overall=[];
+           for(var k=0;k<res2.length;k++)
+           {       
+                  var nameobj={};
+                      nameobj.conceptid=res2[k].concept_id;
+                      nameobj.concept=res2[k].concept;
+                      nameobj.skill=res2[k].skill;
+                      nameobj.innovation=res2[k].innovation;
+                      nameobj.planned_date=res2[k].planning_date;
+                      var id_date=res2[k].planning_date;
+                      id_date=id_date.replace(/[^\w\s]/gi, '');
+                      nameobj.id_date=id_date;
+                      nameobj.remark=res2[k].remark;
+                      nameobj.period=res2[k].period;
+                      nameobj.completion=res2[k].completion;
+                      nameobj.completion_date=res2[k].completion_date;
+                      nameobj.enrichment_sug=res2[k].enrichment_sug;
+                      nameobj.hidecheck=true; 
+                      nameobj.grade_id=sessionStorage.getItem("grdeidz");
+                      nameobj.subject_id=sessionStorage.getItem("subjectidz");
+
+        var obj={"valueid":"","valuename":""};
+            obj.valueid=res2[k].value_id;
+            obj.valuename=res2[k].value_name;
+            a.push(obj);
+           
+           for(var l=k+1;l<res2.length;l++)
+            {
+             if(res2[k].conc_date==res2[l].conc_date)
+                {
+             var obj1={"valueid":"","valuename":""}
+                 obj1.valueid=res2[l].value_id;
+                 obj1.valuename=res2[l].value_name;
+                 a.push(obj1);
+                res2.splice(l,1);
+                 l--;
+               }}
+                nameobj.mainarr=a;
+                setattr.push(nameobj);
+                a=[];
+                 }
+        //    alert(JSON.stringify(setattr));
+
+      /* for(var i=0;i<res2.length;i++){
                     var obj={};
                       obj.conceptid=res2[i].concept_id;
                       obj.concept=res2[i].concept;
@@ -1269,42 +1315,108 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                       obj.id_date=id_date;
                       obj.remark=res2[i].remark;
                       obj.period=res2[i].period;
-                      obj.valuez=res2[i].value;
                       obj.completion=res2[i].completion;
                       obj.completion_date=res2[i].completion_date;
                       obj.enrichment_sug=res2[i].enrichment_sug;
                       obj.hidecheck=true; 
                       obj.grade_id=sessionStorage.getItem("grdeidz");
                       obj.subject_id=sessionStorage.getItem("subjectidz");
-                     setattr.push(obj);
-                      }
-        for(var i=0;i<res.length;i++){
+                      setattr.push(obj);
+                      }*/
+      
+
+            var a1=[];
+            var overall1=[];
+           for(var k=0;k<res3.length;k++)
+           {       
+           var nameobj={};
+             nameobj.planning_date=res3[k].planning_date; 
+             nameobj.rowidz=res3[k].rowid; 
+            
+       var obj={"valueid":"","valuename":""};
+            obj.valueid=res3[k].value_id;
+            obj.valuename=res3[k].value_name;
+            a1.push(obj);
+           
+           for(var l=k+1;l<res3.length;l++)
+            {
+             if(res3[k].rowid==res3[l].rowid)
+                 {
+             if(res3[k].planning_date==res3[l].planning_date)
+                {
+             var obj1={"valueid":"","valuename":""}
+                 obj1.valueid=res3[l].value_id;
+                 obj1.valuename=res3[l].value_name;
+                 a1.push(obj1);
+                res3.splice(l,1);
+                 l--;
+               }}}
+                nameobj.mainarr=a1;
+                overall1.push(nameobj);
+                a1=[];
+                 }
+   var temp1=[];
+
+    for(var n=0;n<res.length;n++){
+        for(var r=0;r<overall1.length;r++){   
+          if(res[n].rowidz==overall1[r].rowidz){
+              if(res[n].planning_date==overall1[r].planning_date){
+         
+             var obj={};   
+              obj.conceptid=res[n].conceptid;
+              obj.planning_date=res[n].planning_date; 
+             obj.concept=res[n].conceptname;
+             obj.period=res[n].period; 
+             obj.skill=res[n].skill; 
+             obj.innovation=res[n].innovation; 
+             obj.remark=res[n].remark;
+             obj.mainarr=overall1[r].mainarr;
+             obj.rowidz=res[n].rowidz;
+             temp1.push(obj);
+             res.splice(n,1);
+             }}}}
+          for(var n=0;n<res.length;n++){
+             var obj={};
+             obj.planning_date=res[n].planning_date;
+             obj.conceptid=res[n].concept_id;
+             obj.concept=res[n].conceptname;
+             obj.period=res[n].period; 
+             obj.skill=res[n].skill; 
+             obj.innovation=res[n].innovation; 
+             obj.remark=res[n].remark;
+             obj.mainarr="";
+             obj.rowidz=res[n].rowidz;
+             temp1.push(obj);
+            }
+
+       /*alert(JSON.stringify(temp1));
+         alert(JSON.stringify(res));*/
+           for(var i=0;i<temp1.length;i++){
                     var obj={};
-                      obj.conceptid=res[i].conceptid;
-                      obj.concept=res[i].conceptname;
-                      obj.skill=res[i].skill;
-                      obj.innovation=res[i].innovation;
-                      obj.planned_date=res[i].planning_date;
-                      var id_date=res[i].planning_date;
+                      obj.conceptid=temp1[i].conceptid;
+                      obj.concept=temp1[i].concept;
+                      obj.skill=temp1[i].skill;
+                      obj.innovation=temp1[i].innovation;
+                      obj.planned_date=temp1[i].planning_date;
+                      var id_date=temp1[i].planning_date;
                       id_date=id_date.replace(/[^\w\s]/gi, '');
                       obj.id_date=id_date;
-                      obj.remark=res[i].remark;
-                      obj.period=res[i].period;
-                      obj.valuez=res[i].value;
+                      obj.remark=temp1[i].remark;
+                      obj.period=temp1[i].period;
+                      obj.mainarr=temp1[i].mainarr;
                       obj.grade_id=sessionStorage.getItem("grdeidz");
                       obj.subject_id=sessionStorage.getItem("subjectidz");
                       obj.rowid=i+1;
                       obj.hidecheck=false; 
                       setattr.push(obj);
                       }
-             
-
-                      //alert(JSON.stringify(setattr));
- document.querySelector('class-teacher-book-approve-card').mainarr=setattr; 
+// alert(JSON.stringify(setattr));
+ document.querySelector('class-teacher-book-approve-card').mainarr1=setattr; 
  document.querySelector('class-teacher-book-approve-card').empid=res1[0].empid; 
  document.querySelector('class-teacher-book-approve-card').empname=res1[0].empname; 
 
-      this.fetchclassconcept1url=sessionStorage.getItem("addrinfo")+"/fnsetz1-service";
+ /*  
+ this.fetchclassconcept1url=sessionStorage.getItem("addrinfo")+"/fnsetz1-service";
             var obj={};
            obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
            obj.academic_year=localStorage.getItem("curr_sess_academicyear");
@@ -1314,14 +1426,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
            obj.sectoinid=sessionStorage.getItem("sectionidz");
            this.fetchclassconcept1param=obj;
            this.$.fetchclassconcept1ajax.generateRequest();
-          
+          */
         },
 
-        fetchclassconcept1Response(e){
+      /*  fetchclassconcept1Response(e){
        var res=e.detail.response.returnval;
        //alert(JSON.stringify(res));
        document.querySelector('aproval-save-and-edit-book-card').fnselbookvalue(res)
-    },
+    },*/
         FnFetchClassConceptService11:function(gradeid,subjectid,chapterid,sectoinidz){
        this.fetchclassconcept11url=sessionStorage.getItem("addrinfo")+"/fetchclassconcept11-service";
      var obj={"schoolid":"","academic_year":"","roleid":"","emp_id":""};
@@ -1334,7 +1446,59 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
            this.fetchclassconcept11param=obj;
            this.$.fetchclassconcept11ajax.generateRequest();
         },
-   fnfinalbook:function(status,empid,skill,innovation,enrichmentsuggest,period,planneddate,concept,conceptid,remark,valuez){
+        fetchclassconcept11Response:function(e){
+
+          var res2=e.detail.response.returnval;
+        var setattr=[];
+               var a=[];
+            var overall=[];
+           for(var k=0;k<res2.length;k++)
+           {       
+                  var nameobj={};
+                      nameobj.conceptid=res2[k].concept_id;
+                      nameobj.concept=res2[k].concept;
+                      nameobj.skill=res2[k].skill;
+                      nameobj.innovation=res2[k].innovation;
+                      nameobj.planned_date=res2[k].planning_date;
+                      var id_date=res2[k].planning_date;
+                      id_date=id_date.replace(/[^\w\s]/gi, '');
+                      nameobj.id_date=id_date;
+                      nameobj.remark=res2[k].remark;
+                      nameobj.period=res2[k].period;
+                      nameobj.completion=res2[k].completion;
+                      nameobj.completion_date=res2[k].completion_date;
+                      nameobj.enrichment_sug=res2[k].enrichment_sug;
+                      nameobj.hidecheck=true; 
+                      nameobj.grade_id=sessionStorage.getItem("grdeidz");
+                      nameobj.subject_id=sessionStorage.getItem("subjectidz");
+
+        var obj={"valueid":"","valuename":""};
+            obj.valueid=res2[k].value_id;
+            obj.valuename=res2[k].value_name;
+            a.push(obj);
+           
+           for(var l=k+1;l<res2.length;l++)
+            {
+             if(res2[k].conc_date==res2[l].conc_date)
+                {
+             var obj1={"valueid":"","valuename":""}
+                 obj1.valueid=res2[l].value_id;
+                 obj1.valuename=res2[l].value_name;
+                 a.push(obj1);
+                res2.splice(l,1);
+                 l--;
+               }}
+                nameobj.mainarr=a;
+                setattr.push(nameobj);
+                a=[];
+                 }
+   document.querySelector('class-teacher-book-rejection-item-card').mainnarr=setattr; 
+  document.querySelector('class-teacher-book-rejection-item-card').empid=res2[0].empid; 
+ document.querySelector('class-teacher-book-rejection-item-card').empname=res2[0].empname;
+        },
+   fnfinalbook:function(status,empid,skill,innovation,enrichmentsuggest,period,planneddate,concept,conceptid,remark,mainarr){
+    alert('3');
+    for(var i=0;i<mainarr.length;i++){
              this.fnfinalbookurl=sessionStorage.getItem("addrinfo")+"/fnfinalbook-service";
            var obj={};
            obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
@@ -1347,6 +1511,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
            obj.empid=empid;
            obj.status=status;
            obj.skill=skill;
+           obj.value_id=mainarr[i].valueid;
+           obj.value_name=mainarr[i].valuename;
            obj.innovation=innovation;
            obj.enrichmentsuggest=enrichmentsuggest;
            obj.planneddate=planneddate;
@@ -1354,11 +1520,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
            obj.concept=concept;
            obj.conceptid=conceptid;
            obj.remark=remark;
-           obj.valuez=valuez;
            obj.conc_date=conceptid+planneddate;
            this.fnfinalbookparam=obj;
            this.$.fnfinalbookajax.generateRequest();
-           // alert(JSON.stringify(obj));
+           alert(JSON.stringify(obj));
+         }
         },
           fnfinalbookResponse:function(e)
           {
@@ -1465,7 +1631,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           document.querySelector('teacher-book-approve-card').chapterarr=e.detail.response.returnval;
         },
 
-          fnfinalreaprovebook:function(empid,skill,innovation,enrichmentsug,period,planneddate,concept,conceptid,remark,valuez)
+          fnfinalreaprovebook:function(empid,skill,innovation,enrichmentsug,period,planneddate,concept,conceptid,remark)
           {
              this.fnfinalbook1url=sessionStorage.getItem("addrinfo")+"/fnfinalbook1-service";
               var obj={};
@@ -1486,10 +1652,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                obj.conceptid=conceptid;
                obj.remark=remark;
                obj.completion='yes';
-               obj.valuez=valuez;
-               this.fnfinalbook1param=obj;
+              this.fnfinalbook1param=obj;
                 //alert("1");
-                //alert(JSON.stringify(obj));
+                alert(JSON.stringify(obj));
               this.$.fnfinalbook1ajax.generateRequest();
         },
         fnfinalbook1Response:function(e)

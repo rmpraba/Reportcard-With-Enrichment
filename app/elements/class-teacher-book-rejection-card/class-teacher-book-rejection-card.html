@@ -13,7 +13,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="class-teacher-book-rejection-card">
   <template>
     <style>
-      :host {
+      :host {   
         display: block;
       }  table
         {   
@@ -47,7 +47,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <td>{{concept}}</td>
               <td>{{period}}</td>
               <td>{{skill}}</td>
-              <td>{{valuez}}</td>
+              <td><template is="dom-repeat" items="{{mainarr}}" as="wf">
+              {{wf.valuename}}
+              </template>
+              </td>
               <td>{{innovation}}</td> 
               <td>{{planneddate}}</td>
               <td>
@@ -98,7 +101,7 @@ var costatus;
 
        // alert(this.empid+" 1"+this.skill+" 2"+this.innovation+" 3"+this.enrichmentsug+"4 "+this.period+"5 "+this.planneddate+"6 "+this.concept+" 7"+this.conceptid+" 8"+this.remark+" 9"+this.valuez);
 
-      this.$.bookservice.fnfinalreaprovebook(this.empid,this.skill,this.innovation,this.enrichmentsug,this.period,this.planneddate,this.concept,this.conceptid,this.remark,this.valuez);
+   this.$.bookservice.fnfinalreaprovebook(this.empid,this.skill,this.innovation,this.enrichmentsug,this.period,this.planneddate,this.concept,this.conceptid,this.remark);
 
       this.hidesavevalue=true;
       this.hideeditvalue=false;

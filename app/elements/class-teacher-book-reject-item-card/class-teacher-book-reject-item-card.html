@@ -9,7 +9,7 @@
         display: block;
       }
        table
-        {   
+        {      
           table-layout: fixed;
           width: 1270px;
           border-collapse: collapse;
@@ -97,7 +97,7 @@ var costatus;
       is: 'class-teacher-book-reject-item-card',
 
       FnView:function(e){
-    
+    alert(1);
 this.rejectcapterstatusurl=sessionStorage.getItem("addrinfo")+"/fetchclassconcept11-service";
            var obj={"schoolid":"","academic_year":""};
            obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
@@ -113,37 +113,64 @@ this.rejectcapterstatusurl=sessionStorage.getItem("addrinfo")+"/fetchclassconcep
            sessionStorage.setItem("subjectidz",this.subjectid);
            sessionStorage.setItem("sectionidz",this.classid);
            localStorage.setItem("curr_sess_capters",this.chapterid); 
+        alert(JSON.stringify(obj));
+    
     
         },
          rejectcapterstatusResponse:function(e){
-         //alert(JSON.stringify(e.detail.response.returnval));
-          var res=e.detail.response.returnval;
+          var res2=e.detail.response.returnval;
         var setattr=[];
-             for(var i=0;i<res.length;i++){
-                      var obj={};
-                      obj.conceptid=res[i].concept_id;
-                      obj.concept=res[i].concept;
-                      obj.skill=res[i].skill;
-                      obj.innovation=res[i].innovation;
-                      obj.planned_date=res[i].planning_date;
-                      obj.completion_date=res[i].completion_date;
-                      obj.enrichment_sug=res[i].enrichment_sug;
-                      var id_date=res[i].planning_date;
+               var a=[];
+            var overall=[];
+           for(var k=0;k<res2.length;k++)
+           {       
+                  var nameobj={};
+                      nameobj.conceptid=res2[k].concept_id;
+                      nameobj.concept=res2[k].concept;
+                      nameobj.skill=res2[k].skill;
+                      nameobj.innovation=res2[k].innovation;
+                      nameobj.planned_date=res2[k].planning_date;
+                      var id_date=res2[k].planning_date;
                       id_date=id_date.replace(/[^\w\s]/gi, '');
-                      obj.id_date=id_date;
-                      obj.remark=res[i].remark;
-                      obj.period=res[i].period;
-                      obj.valuez=res[i].value;
-                       obj.rowid=i+1;
-                      setattr.push(obj);
-                      }
+                      nameobj.id_date=id_date;
+                      nameobj.remark=res2[k].remark;
+                      nameobj.period=res2[k].period;
+                      nameobj.completion=res2[k].completion;
+                      nameobj.completion_date=res2[k].completion_date;
+                      nameobj.enrichment_sug=res2[k].enrichment_sug;
+                      nameobj.hidecheck=true; 
+                      nameobj.grade_id=sessionStorage.getItem("grdeidz");
+                      nameobj.subject_id=sessionStorage.getItem("subjectidz");
 
-                      // alert(JSON.stringify(setattr));
-  document.querySelector('class-teacher-book-rejection-item-card').mainnarr=setattr; 
-  document.querySelector('class-teacher-book-rejection-item-card').empid=res[0].empid; 
- document.querySelector('class-teacher-book-rejection-item-card').empname=res[0].empname; 
+        var obj={"valueid":"","valuename":""};
+            obj.valueid=res2[k].value_id;
+            obj.valuename=res2[k].value_name;
+            a.push(obj);
+           
+           for(var l=k+1;l<res2.length;l++)
+            {
+             if(res2[k].conc_date==res2[l].conc_date)
+                {
+             var obj1={"valueid":"","valuename":""}
+                 obj1.valueid=res2[l].value_id;
+                 obj1.valuename=res2[l].value_name;
+                 a.push(obj1);
+                res2.splice(l,1);
+                 l--;
+               }}
+                nameobj.mainarr=a;
+                setattr.push(nameobj);
+                a=[];
+                 }
+       
+
+                     //  alert(JSON.stringify(setattr));
+  
     document.querySelector('app-card').setPage('homepage','');
-  document.querySelector('home-page').setPage('class-teacher-book-rejection-item-card','');
+   document.querySelector('home-page').setPage('class-teacher-book-rejection-item-card','');
+  document.querySelector('class-teacher-book-rejection-item-card').mainnarr=setattr; 
+  document.querySelector('class-teacher-book-rejection-item-card').empid=res2[0].empid; 
+ document.querySelector('class-teacher-book-rejection-item-card').empname=res2[0].empname; 
         },
  /* ready:function(e){
 this.hidesavevalue=true;
