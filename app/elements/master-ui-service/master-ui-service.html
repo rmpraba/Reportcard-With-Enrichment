@@ -1142,7 +1142,7 @@
         <iron-ajax
             id="gradesectioneditajax"
             url="{{gradesectionediturl}}"
-            params="{{previoussectionparam}}"
+            params="{{gradesectioneditparam}}"
             handle-as="json"
             content-type="application/json"
             method="post"
@@ -3434,9 +3434,8 @@ insertschoolTypename:function(schooltypesarr)
         previoussectionResponse:function(e)
         {
             var res=e.detail.response.returnval;
-          // alert(JSON.stringify(res));
-              document.querySelector('specific-student-section-card').getprestudent(res);
-
+                //alert(JSON.stringify(res));
+            document.querySelector('specific-student-section-card').getprestudent(res);
         },
 
        selectspecificstudent:function(admissionnum)

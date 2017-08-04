@@ -10044,6 +10044,7 @@ app.post('/fnsubmitsection-service' , urlencodedParser,function (req, res)
 app.post('/previoussection-service',  urlencodedParser,function (req,res)
   {
   var qur="SELECT * from md_student where id='"+req.query.admission_no+"'  and school_id='"+req.query.scholid1+"' and grade_id='"+req.query.grade_id+"'and school_type='"+req.query.school_type+"' and academic_year='"+req.query.academic_year+"'";  
+  console.log(qur);
   connection.query(qur,
     function(err, rows)
     {
@@ -10051,7 +10052,7 @@ app.post('/previoussection-service',  urlencodedParser,function (req,res)
       {
         if(rows.length>0)
         {
-          
+         console.log(rows); 
           res.status(200).json({'returnval': rows});
         } 
       else 
@@ -11499,7 +11500,7 @@ app.post('/fngetrejectsubject-service',  urlencodedParser,function (req,res)
 app.post('/fngetconceptreport-service',  urlencodedParser,function (req, res)
 {
 
-  var qur="select f.capter_id ,f.section_id,gs.section_id as section_name,ch.capter,e.emp_name,f.emp_id ,f.concept_id,cp.concept,f.skill,f.innovation,f.value,f.remark,f.enrichment_sug,f.planning_date,f.completion_date   from  final_book_sug f  join md_grade g on(g.grade_id=f.grade_id) join md_subject s on(s.subject_id=f.subject_id) join mp_grade_section gs on(gs.class_id=f.section_id) join md_chapter ch on(ch.capter_id=f.capter_id) join   md_employee_creation e on(e.emp_id=f.emp_id)  join  md_concept  cp  on(cp.concept_id=f.concept_id)  where f.school_id='"+req.query.schoolid+"' and f.completion='No' and gs.school_id='"+req.query.schoolid+"' and gs.grade_id=f.grade_id and gs.academic_year='"+req.query.academic_year+"'  and f.academic_year='"+req.query.academic_year+"' and ch.school_id='"+req.query.schoolid+"' and  f.subject_id='"+req.query.subjectid+"' and f.grade_id='"+req.query.gradeid+"'";
+  var qur="select f.capter_id ,f.section_id,gs.section_id as section_name,ch.capter,e.emp_name,f.emp_id ,f.concept_id,cp.concept,f.skill,f.innovation,f.value_name,f.remark,f.enrichment_sug,f.planning_date,f.completion_date   from  final_book_sug f  join md_grade g on(g.grade_id=f.grade_id) join md_subject s on(s.subject_id=f.subject_id) join mp_grade_section gs on(gs.class_id=f.section_id) join md_chapter ch on(ch.capter_id=f.capter_id) join   md_employee_creation e on(e.emp_id=f.emp_id)  join  md_concept  cp  on(cp.concept_id=f.concept_id)  where f.school_id='"+req.query.schoolid+"' and f.completion='No' and gs.school_id='"+req.query.schoolid+"' and gs.grade_id=f.grade_id and gs.academic_year='"+req.query.academic_year+"'  and f.academic_year='"+req.query.academic_year+"' and ch.school_id='"+req.query.schoolid+"' and  f.subject_id='"+req.query.subjectid+"' and f.grade_id='"+req.query.gradeid+"'";
   
   console.log('-------------------Chapter Report----------------------');
   console.log(qur);

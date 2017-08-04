@@ -10,7 +10,7 @@
       }
        table
       {   table-layout: fixed;
-          width: 1246px;
+          width: 1237px;
           border-collapse: collapse;
           margin-left: 27%;
           margin-top: 20%;
@@ -26,10 +26,10 @@
               <td>{{concept}}</td>
               <td>{{period}}</td>
               <td>{{skill}}</td>
-              <td><template is="dom-repeat" items="{{mainarr}}" as="st">
-               {{st.valuename}},
+              <td style="width: 7%;"><template is="dom-repeat" items="{{mainarr}}" as="st">
+               {{st.valuename}}
               </template></td>
-              <td>{{innovation}}</td> 
+              <td style="padding-left: 2%;">{{innovation}}</td> 
               <td>{{planneddate}}</td>
               <td>
                 <div>{{completiondate}}</div>
@@ -40,7 +40,7 @@
               <div>{{enrichmentsug}}</div>
                <paper-input value={{enrichmentsuggest}} hidden$="{{hidecheck}}"></paper-input>
               </td>
-              <td>
+              <td style="padding-left: 2%;">
                    <div>{{completion}}</div>
                   <div hidden$="{{hidecheck}}" >
                         <paper-checkbox  id={{id}} on-change="fnsetyes" checked>Yes</paper-checkbox></br>

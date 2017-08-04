@@ -126,7 +126,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       getprestudent:function(arr)
       {
        getstudentarr=arr;
-      //alert(JSON.stringify(getstudentarr));
+        //alert(JSON.stringify(getstudentarr));
           for(var i=0;i<getstudentarr.length;i++)
           {
             
@@ -140,7 +140,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 getid=getid.replace(/[^\w\s]/gi, '');
 
                studclassid=classid+getid;
-                //alert(studclassid);
+                alert(studclassid);
                 
               document.querySelector('#'+studclassid).checked=true;
             if(document.querySelector('#'+studclassid).checked==true)
