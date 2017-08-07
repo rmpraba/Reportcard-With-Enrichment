@@ -10,7 +10,7 @@
       }
        table
       {   table-layout: fixed;
-          width: 1246px;
+          width: 1237px;
           border-collapse: collapse;
           margin-left: 27%;
           margin-top: 20%;
@@ -26,8 +26,10 @@
               <td>{{concept}}</td>
               <td>{{period}}</td>
               <td>{{skill}}</td>
-              <td>{{valuez}}</td>
-              <td>{{innovation}}</td> 
+              <td style="width: 7%;"><template is="dom-repeat" items="{{mainarr}}" as="st">
+               {{st.valuename}}
+              </template></td>
+              <td style="padding-left: 2%;">{{innovation}}</td> 
               <td>{{planneddate}}</td>
               <td>
                 <div>{{completiondate}}</div>
@@ -38,7 +40,7 @@
               <div>{{enrichmentsug}}</div>
                <paper-input value={{enrichmentsuggest}} hidden$="{{hidecheck}}"></paper-input>
               </td>
-              <td>
+              <td style="padding-left: 2%;">
                    <div>{{completion}}</div>
                   <div hidden$="{{hidecheck}}" >
                         <paper-checkbox  id={{id}} on-change="fnsetyes" checked>Yes</paper-checkbox></br>
@@ -67,37 +69,33 @@ var costatus;
   
     fnaroveset:function(e)
     {
-       if(this.enrichmentsuggest==""||this.enrichmentsuggest==null)
-       {
-        alert("Please Enter All Fields");
-       }
-       else
-       {
-          //alert(costatus);
-           if(costatus==""||costatus==null){
-              costatus='yes';
-          //alert(this.empid+" "+this.skill+" "+this.innovation+" "+this.enrichmentsuggest+" "+this.period+" "+this.planneddate+" "+this.concept+" "+this.conceptid+" "+this.remark+" "+this.valuez);
+     //  alert("1")
+    
+           if(costatus==""||costatus==null)
+           {
+                  costatus='yes';
+             /* alert(this.empid+" "+this.skill+" "+this.innovation+" "+this.enrichmentsuggest+" "+this.period+" "+this.planneddate+" "+this.concept+" "+this.conceptid+" "+this.remark+" "+this.mainarr);
+      */
+    this.$.bookservice.fnfinalbook(costatus,this.empid,this.skill,this.innovation,this.enrichmentsuggest,this.period,this.planneddate,this.concept,this.conceptid,this.remark,this.mainarr);
+             document.querySelector('aproval-save-and-edit-book-card').splices();
+                      costatus="";
+                  costatus=null;
+           }
+           else
+           {
+            /*   alert(this.empid+" "+this.skill+" "+this.innovation+" "+this.enrichmentsuggest+" "+this.period+" "+this.planneddate+" "+this.concept+" "+this.conceptid+" "+this.remark+" "+this.mainarr);
+*/
+               this.$.bookservice.fnfinalbook(costatus,this.empid,this.skill,this.innovation,this.enrichmentsuggest,this.period,this.planneddate,this.concept,this.conceptid,this.remark,this.mainarr);
+                document.querySelector('aproval-save-and-edit-book-card').splices();
+                costatus="";
+                costatus=null;
+            }
 
-           this.$.bookservice.fnfinalbook(costatus,this.empid,this.skill,this.innovation,this.enrichmentsuggest,this.period,this.planneddate,this.concept,this.conceptid,this.remark,this.valuez);
-         document.querySelector('aproval-save-and-edit-book-card').splices();
-                  costatus="";
-              costatus=null;
-      
-        
-           }else
-                
-        // alert(this.empid+" "+this.skill+" "+this.innovation+" "+this.enrichmentsuggest+" "+this.period+" "+this.planneddate+" "+this.concept+" "+this.conceptid+" "+this.remark+" "+this.valuez);
 
-           this.$.bookservice.fnfinalbook(costatus,this.empid,this.skill,this.innovation,this.enrichmentsuggest,this.period,this.planneddate,this.concept,this.conceptid,this.remark,this.valuez);
-        document.querySelector('aproval-save-and-edit-book-card').splices();
-         costatus="";
-         costatus=null;
-         
-          }
-         costatus="";
-         costatus=null;
-         // alert(costatus);  
-  
+               costatus="";
+               costatus=null;
+               //id.checked=false;
+               //idz.checked=false;
       },
     fnsetyes:function(e){
      // alert(this.id);

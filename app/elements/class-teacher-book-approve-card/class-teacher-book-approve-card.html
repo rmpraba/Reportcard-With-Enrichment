@@ -34,7 +34,7 @@
       {
           table-layout: fixed;
           border-collapse: collapse;
-          width: 94%;
+          width: 97%;
           margin-left: 5%;
           margin-top: 5%;
       }
@@ -69,7 +69,7 @@
      
         <span class="position"> 
          <paper-dropdown-menu  label="Select Section">
-          <paper-menu id="sectionrejectcpt" class="dropdown-content"  on-iron-select="fnsetsection">
+          <paper-menu id="sectconcptwwwww" class="dropdown-content"  on-iron-select="fnsetsection">
               <template is="dom-repeat" items="{{sectionarr}}">
                   <paper-item value="{{item.class_id}}">{{item.section_id}}</paper-item>
               </template>    
@@ -96,8 +96,8 @@
    <table  border="0" class="report1" id="reporttabzzzzz">
         <!-- <tr style="border-bottom: 1px solid #ccc; line-height: 1.8em;border-color:#6699ff"> -->
         <tr>
-          <th>CONCEPT</th>
-          <th>PERIOD NO</th>
+          <th>Concept</th>
+          <th>No Of Period</th>
           <th>Skill</th>
           <th>Value</th>
           <th>Innovation</th>
@@ -107,14 +107,14 @@
           <th>Enrichment Suggestion</th>
           <th>Completion Status</th>
           <th></th>  
-          </tr>    
-          <template is="dom-repeat" items="{{mainarr}}" as="w">
-           <tr>  
-              <skill-capturing-card empname="{{empname}}"  empid="{{empid}}" conceptid="{{w.conceptid}}" concept="{{w.concept}}"   skill="{{w.skill}}"  gradeid="{{w.grade_id}}" subjectid="{{w.subject_id}}" iddate="{{w.id_date}}" id="enrz{{empid}}{{w.rowid}}"
-            idz="enrno{{w.rowid}}" innovation="{{w.innovation}}" remark="{{w.remark}}" planneddate="{{w.planned_date}}" period="{{w.period}}" valuez="{{w.valuez}}" completion="{{w.completion}}"  completiondate="{{w.completion_date}}" enrichmentsug="{{w.enrichment_sug}}" hidecheck="{{w.hidecheck}}" hidecheck1="{{w.hidecheck1}}">
+          </tr>       
+          <template is="dom-repeat" items="{{mainarr1}}" as="w">
+           <tr>      
+               <skill-capturing-card empname="{{empname}}"  empid="{{empid}}" conceptid="{{w.conceptid}}" concept="{{w.concept}}"   skill="{{w.skill}}"  gradeid="{{w.grade_id}}" subjectid="{{w.subject_id}}" iddate="{{w.id_date}}" id="enrz{{empid}}{{w.rowid}}"
+            idz="enrno{{w.rowid}}" innovation="{{w.innovation}}" remark="{{w.remark}}" planneddate="{{w.planned_date}}" period="{{w.period}}" valuez="{{w.valuez}}" completion="{{w.completion}}"  completiondate="{{w.completion_date}}" enrichmentsug="{{w.enrichment_sug}}" mainarr="{{w.mainarr}}" hidecheck="{{w.hidecheck}}" hidecheck1="{{w.hidecheck1}}">
               </skill-capturing-card> 
             </tr>  
-           </template>
+           </template>  
      </table> 
     </div> 
   <teacher-book-service-card id="bookservice"></teacher-book-service-card>
@@ -131,7 +131,7 @@
         sessionStorage.setItem("grdeidz",this.gradeid);
         this.gradename=e.target.selectedItem.textContent.trim();
         document.querySelector('#teachersubzzzz').selected=-1;
-        document.querySelector('#sectionrejectcpt').selected=-1;
+        document.querySelector('#sectconcptwwwww').selected=-1;
         document.querySelector('#teacherapprovechapterzz').selected=-1;
         this.$.reporttabzzzzz.hidden=true;
         this.$.empidzz.hidden=true;
@@ -142,7 +142,7 @@
        sessionStorage.setItem("subjectidz",this.subjectid);
        this.subjectname=e.target.selectedItem.textContent.trim()
        this.$.bookservice.fngetclassbooksubjectvalue(this.gradeid,this.subjectid);
-       document.querySelector('#sectionrejectcpt').selected=-1;
+       document.querySelector('#sectconcptwwwww').selected=-1;
        document.querySelector('#teacherapprovechapterzz').selected=-1;
        this.$.reporttabzzzzz.hidden=true;
        this.$.empidzz.hidden=true;
@@ -152,7 +152,6 @@
      this.sectionidz=e.target.selectedItem.value;
        sessionStorage.setItem("sectionidz",this.sectionidz);
        this.sectionidname=e.target.selectedItem.textContent.trim();
-       document.querySelector('#sectionrejectcpt').selected=-1;
         document.querySelector('#teacherapprovechapterzz').selected=-1;
         this.$.reporttabzzzzz.hidden=true;
         this.$.empidzz.hidden=true;
@@ -169,7 +168,7 @@
      },
      FnRefreshzz:function()
      {
-        document.querySelector('#sectionrejectcpt').selected=-1;
+        document.querySelector('#sectconcptwwwww').selected=-1;
         document.querySelector('#teacherreffzzf').selected=-1;
         document.querySelector('#teachersubzzzz').selected=-1;
         document.querySelector('#teacherapprovechapterzz').selected=-1;

@@ -74,9 +74,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
            position: absolute;
           border: 1px solid grey;
           height: 100px;
-          margin-left: 42em;
+          margin-left: 53.1em;
           min-height: 440px;
-          top: 18.5em !important; 
+          top: 17em !important; 
            
       } 
       .newwwwcarddd
@@ -146,7 +146,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <div class="vertical-row" hidden$="{{hidenewline}}"></div>
           
           <div id="labelhide">
-            <div style="float: left;position: absolute;top: 27%;margin-left: 22%;" id="secondid">
+            <div style="float: left;position: absolute;top: 27%;margin-left: 26%;" id="secondid">
                 <label><h4><b>SECOND LANGUAGES</b></h4></label>
               </div>
               <div style="display: inline-block;position: absolute;margin-left:59%;top: 27%;" id="thirdid">
@@ -160,14 +160,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <thead> 
                 <tr>
                   <td></td> 
-                    <th class="innercard1" style="width: 750px; margin-left: 14em;margin-top: -31em;">
+                    <th class="innercard1" style="width: 850px; margin-left: 19em;margin-top: -31em;">
                       <template is="dom-repeat" items="{{setsubjectarr}}" as="view">
                         <h4>{{view.srtarr}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4>   
                       </template>
                     </th>  
                 </tr>
               </thead>
-              <div class="newwwwcarddd" style="width: 1070px;height: 350px;">
+              <div class="newwwwcarddd" style="width: 1220px;height: 350px;margin-left: 2%;">
                   <template is="dom-repeat" items="{{bigarr}}" as="view">
                     <tr>
                       <td class="outcard">
@@ -178,7 +178,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                           <student-list-mapping-item id="{{s.id}}" studentname="{{view.student_name}}" studentid="{{view.student_id}}" subjectid="{{s.subject_id}}" subjectname="{{s.subject_name}}" langugagepref="{{s.language_pref}}" check="{{s.check}}"></student-list-mapping-item>
                         </template>  
                       </td>        
-                      <td>    
+                      <td style="padding-left: 7em;">    
                         <paper-icon-button id="btn1" icon="save" on-click="fnsubmit"></paper-icon-button>
                         <paper-tooltip for="btn1">Save</paper-tooltip>
                       </td>

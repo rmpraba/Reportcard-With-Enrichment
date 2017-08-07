@@ -192,7 +192,7 @@
             <tr>  
              <template  is="dom-repeat" items="{{overallarr1}}" as="view">
                 <tr>
-             <aproval-book-innovatiosn-item-card rowid="{{view.rowid}}" remark="{{view.remark}}" period="{{view.period}}" planneddate="{{view.planning_date}}" skill="{{view.skill}}" innovation="{{view.innovation}}" iddate="{{view.id_date}}" hidecheck="{{view.hidecheck}}" hidecheck1="{{view.hidecheck1}}" rowidz="{{view.rowidz}}" valuez="{{view.valuez}}" conceptzz="{{view.valuearrr}}" > 
+             <aproval-book-innovatiosn-item-card rowid="{{view.rowid}}" remark="{{view.remark}}" period="{{view.period}}" planneddate="{{view.planning_date}}" skill="{{view.skill}}" innovation="{{view.innovation}}" iddate="{{view.id_date}}" hidecheck="{{view.hidecheck}}" hidecheck1="{{view.hidecheck1}}" rowidz="{{view.rowidz}}" valuez="{{view.valuez}}" conceptzz="{{view.valuearrr}}" mainarr="{{view.mainarr}}" > 
                   </aproval-book-innovatiosn-item-card>
                 </tr> 
               </template>  
@@ -330,7 +330,7 @@
       this.$.bookservice.FnFetchConceptService(this.gradeid,this.subjectid,this.chapterid);
       this.$.zdsasddsasfsa.hidden=false;
       this.$.bookservice.conceptseq();
-       //document.querySelector('aproval-book').fnsetapproveclear();
+      //document.querySelector('from-book-date-picker').fndates();
        //document.querySelector('concept-check-card').fnclean();
        },
   fnselectconcept:function(e){

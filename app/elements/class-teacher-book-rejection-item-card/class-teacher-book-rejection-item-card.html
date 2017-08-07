@@ -17,7 +17,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }  
       .report1
-      {
+      {   
           table-layout: fixed;
           border-collapse: collapse;
           width: 94%;
@@ -28,7 +28,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div>
     <paper-input hidden value={{empid}}></paper-input>
     <paper-input hidden value={{empname}}></paper-input>
-     <paper-icon-button icon="arrow-back" on-click="passset"></paper-icon-button>
+    
+     <!-- <paper-icon-button icon="arrow-back" on-click="passset"></paper-icon-button> -->
 
      <table  border="0" class="report1" id="reporttabzzzzz">
         <!-- <tr style="border-bottom: 1px solid #ccc; line-height: 1.8em;border-color:#6699ff"> -->
@@ -48,7 +49,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <template is="dom-repeat" items="{{mainnarr}}" as="w">
            <tr> 
               <class-teacher-book-rejection-card  completiondate="{{w.completion_date}}"   enrichmentsug="{{w.enrichment_sug}}" empname="{{empname}}"  empid="{{empid}}" conceptid="{{w.conceptid}}" concept="{{w.concept}}"   skill="{{w.skill}}"  gradeid="{{w.grade_id}}" subjectid="{{w.subject_id}}" iddate="{{w.id_date}}" id="enrz{{empid}}{{w.rowid}}"
-              idz="enrno{{w.rowid}}" innovation="{{w.innovation}}" remark="{{w.remark}}" planneddate="{{w.planned_date}}" period="{{w.period}}" valuez="{{w.valuez}}">
+              idz="enrno{{w.rowid}}" innovation="{{w.innovation}}" remark="{{w.remark}}" planneddate="{{w.planned_date}}" mainarr="{{w.mainarr}}" period="{{w.period}}" valuez="{{w.valuez}}">
               </class-teacher-book-rejection-card> 
             </tr>
            </template>
@@ -64,10 +65,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'class-teacher-book-rejection-item-card',
 
      
- passset:function(e){
+ /*passset:function(e){
     document.querySelector('app-card').setPage('homepage','');
     document.querySelector('home-page').setPage('class-teacher-book-reject-card','');
-    },
+    },*/
     });
   })();
   </script>

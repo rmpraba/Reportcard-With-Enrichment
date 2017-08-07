@@ -47,6 +47,11 @@
     this.date=new Date();
     this.$.dialog.toggle();
   },
+fndates:function(e){
+    this.showdate=moment(new Date()).format('L');
+    localStorage.setItem("localsess_last_service",this.showdate);
+  
+},
   FnDismissDialog:function(e)
   { 
     if(e.detail.confirmed)

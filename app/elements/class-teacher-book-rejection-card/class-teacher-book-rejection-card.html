@@ -13,7 +13,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="class-teacher-book-rejection-card">
   <template>
     <style>
-      :host {
+      :host {   
         display: block;
       }  table
         {   
@@ -47,17 +47,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <td>{{concept}}</td>
               <td>{{period}}</td>
               <td>{{skill}}</td>
-              <td>{{valuez}}</td>
+              <td><template is="dom-repeat" items="{{mainarr}}" as="wf">
+              {{wf.valuename}}
+              </template>
+              </td>
               <td>{{innovation}}</td> 
               <td>{{planneddate}}</td>
               <td>
                 <div hidden$="{{hideeditvalue}}">{{completiondate}}</div>
                   <complection-date-picker-card hidden$="{{hidesavevalue}}" ></complection-date-picker-card></td>
-              <td><paper-textarea value={{remark}}></paper-textarea></td>
+              <td><paper-textarea readonly$="{{newremarkszzz}}" value={{remark}}></paper-textarea></td>
               <td>{{enrichmentsug}}</td>
               <td>
                 <paper-checkbox id={{id}} on-change="fnsetyes">Yes</paper-checkbox></br>
-                <paper-checkbox id={{idz}} on-change="fnsetno">No</paper-checkbox>
+                <!-- <paper-checkbox id={{idz}} on-change="fnsetno">No</paper-checkbox> -->
            </td>
               <td><paper-icon-button  on-click="fnaroveset" hidden$="{{hidesavevalue}}" icon="save"></paper-icon-button>
               <paper-icon-button  on-click="fnedit" icon="create" hidden$="{{hideeditvalue}}"></paper-icon-button>
@@ -74,24 +77,34 @@ var costatus;
     Polymer({
       is: 'class-teacher-book-rejection-card',
 
-      ready:function(e){
-this.hidesavevalue=true;
-this.hideeditvalue=false;
+      ready:function(e)
+      {
+        this.hidesavevalue=true;
+        this.hideeditvalue=false;
+        this.newremarkszzz=true;
   },
-  fnedit:function(e){
-this.hidesavevalue=false;
-this.hideeditvalue=true;
+  fnedit:function(e)
+  {
+    this.hidesavevalue=false;
+    this.hideeditvalue=true;
+    this.newremarkszzz=false;
   },
 
-    fnaroveset:function(e){
-      if(this.empid==""||this.skill==""||this.innovation==""||this.enrichmentsug==""||this.period==""||this.planneddate==""||this.concept==""||this.conceptid==""||this.remark==""||this.valuez==""){
+    fnaroveset:function(e)
+    {
+      
+
+      /*if(this.empid==""||this.skill==""||this.innovation==""||this.enrichmentsug==""||this.period==""||this.planneddate==""||this.concept==""||this.conceptid==""||this.remark==""||this.valuez=="")
+      {
        alert("Please Enter The value");
-      }
-   // alert(this.empid+" 1"+this.skill+" 2"+this.innovation+" 3"+this.enrichmentsug+"4 "+this.period+"5 "+this.planneddate+"6 "+this.concept+" 7"+this.conceptid+" 8"+this.remark+" 9"+this.valuez);
- this.$.bookservice.fnfinalreaprovebook(this.empid,this.skill,this.innovation,this.enrichmentsug,this.period,this.planneddate,this.concept,this.conceptid,this.remark,this.valuez);
+      }*/
 
-  this.hidesavevalue=true;
-  this.hideeditvalue=false;
+       // alert(this.empid+" 1"+this.skill+" 2"+this.innovation+" 3"+this.enrichmentsug+"4 "+this.period+"5 "+this.planneddate+"6 "+this.concept+" 7"+this.conceptid+" 8"+this.remark+" 9"+this.valuez);
+
+   this.$.bookservice.fnfinalreaprovebook(this.empid,this.skill,this.innovation,this.enrichmentsug,this.period,this.planneddate,this.concept,this.conceptid,this.remark);
+
+      this.hidesavevalue=true;
+      this.hideeditvalue=false;
     },
     fnsetyes:function(e){
    
@@ -101,14 +114,19 @@ this.hideeditvalue=true;
       
            }
     },
-    fnsetno:function(e){
+    
+    /*fnsetno:function(e)
+    {
       // alert(this.id);
 
-if(document.querySelector('#'+this.idz).checked==true){
+      if(document.querySelector('#'+this.idz).checked==true)
+      {
              costatus='No';
-     document.querySelector('#'+this.id).checked=false;
+        document.querySelector('#'+this.id).checked=false;
       }
-   },
+   },*/
+
+
     });
   })();
   </script>

@@ -272,14 +272,17 @@
         <section data-category="class-teacher-book-rejection-item-card">
           <class-teacher-book-rejection-item-card></class-teacher-book-rejection-item-card>
         </section>        
-        <section data-category="teacher-book-chapter-refernce-card">
-          <teacher-book-chapter-refernce-card></teacher-book-chapter-refernce-card>
-        </section>
         <section data-category="reprotcard-newformat-threetoeight">
           <reprotcard-newformat-threetoeight></reprotcard-newformat-threetoeight>
         </section>
         <section data-category="newformat-reportcard-nineten">
           <newformat-reportcard-nineten></newformat-reportcard-nineten>
+        </section>
+        <section data-category="incomplete-chapter-report">
+          <incomplete-chapter-report></incomplete-chapter-report>
+        </section>
+        <section data-category="curriculam-report">
+          <curriculam-report></curriculam-report>
         </section>
         </iron-pages>
     </div>   
@@ -914,6 +917,37 @@
         this.page="teacherhomecard";
         document.querySelector('teacherhome-card').FnRefresh();
       }
+
+      if(localStorage.getItem("curr_sess_page")=="teacher-book-chapter-refernce-card")
+      {
+        document.querySelector('app-card').setPage('homepage','');
+        document.querySelector('home-page').setPage('teacher-book-refernce-card','');
+      }
+
+      if(localStorage.getItem("curr_sess_page")=="teacher-book-chapter-refernce-card")
+      {
+        document.querySelector('app-card').setPage('homepage','');
+        document.querySelector('home-page').setPage('teacher-book-refernce-card','');
+      }
+
+      if(localStorage.getItem("curr_sess_page")=="class-teacher-book-rejection-item-card")
+      {
+        document.querySelector('app-card').setPage('homepage','');
+        document.querySelector('home-page').setPage('class-teacher-book-reject-card','');
+      }
+      
+
+      if(localStorage.getItem("curr_sess_page")=="incomplete-chapter-report")
+      {
+        this.page="teacherhomecard";
+        document.querySelector('teacherhome-card').FnRefresh();
+      }
+      if(localStorage.getItem("curr_sess_page")=="curriculam-report")
+      {
+        this.page="teacherhomecard";
+        document.querySelector('teacherhome-card').FnRefresh();
+      }
+
   },
 
   FnsetTitle:function(title){

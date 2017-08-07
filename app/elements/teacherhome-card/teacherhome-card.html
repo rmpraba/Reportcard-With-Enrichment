@@ -67,7 +67,14 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
       </div>
       <div class="card" hidden$="{{GenerateReport}}">
        <paper-button on-click="FnGenerateReportcard" no ink><img src="../../images/report-icon.gif" height="180px" width="180px"></paper-button>
-      </div>      
+      </div>  
+    </div>
+    <div class="inner1" hidden$="{{hideleasonplancontainer}}">
+      <div class="card" hidden$="{{bookclassplann}}">
+        <paper-button on-click="fnbookclassplan" no ink><img src="../../images/appruval.jpg" height="180px" width="180px">
+        <h4>Evaluation</h4>
+        </paper-button>
+      </div>     
     </div>
     </div>
     <!--Subject teacher options end-->
@@ -236,6 +243,18 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
         <h4>Incomplete Chapters</h4>
         </paper-button>
       </div>
+      <div class="card" hidden$="{{chapterreport}}">
+        <paper-button on-click="fnchapterreport" no ink><img src="../../images/chapterreport.jpg" height="180px" width="180px">
+        <h4>Incomplete Chapter Report</h4>
+        </paper-button>
+      </div>
+
+      <div class="card" hidden$="{{curriculamreport}}">
+        <paper-button on-click="fncurriculamreport" no ink><img src="../../images/curriculamreport.jpg" height="180px" width="180px">
+        <h4>Curriculam Report</h4>
+        </paper-button>
+      </div>
+
       </div>
     </div>
     <!-- Co-ordinator options end -->
@@ -774,14 +793,25 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
    if(localStorage.getItem('curr_sess_loggedassesmenttype')=="bookreject")
    {
     document.querySelector('app-card').setPage('homepage','');
-    document.querySelector('home-page').setPage('class-teacher-book-reject-card','');
-    //this.$.bookservice.fnsetrejectbookgrade();
-    //this.$.bookservice.fnsetrejectbooksubject();
+    document.querySelector('home-page').setPage('class-teacher-book-reject-card','');    
     this.$.bookservice.chaptcompletionstatus();
     //document.querySelector('class-teacher-book-reject-card').FnRefresh1();
      }
+     if(localStorage.getItem('curr_sess_loggedassesmenttype')=="chapterreport")
+     {
+      document.querySelector('app-card').setPage('homepage','');
+      document.querySelector('home-page').setPage('incomplete-chapter-report','');
+      this.$.bookservice.fnsetrejectbookgrade();
+      this.$.bookservice.fnsetrejectbooksubject();
+     }
+     if(localStorage.getItem('curr_sess_loggedassesmenttype')=="curriculamreport")
+     {
+        document.querySelector('app-card').setPage('homepage','');
+        document.querySelector('home-page').setPage('curriculam-report','');
+        this.$.bookservice.fnsetrejectbookgrade();
+     }
 
-             this.$.cdialog.close();
+          this.$.cdialog.close();
          
       },
       FnSelectPreEntryType:function(){
@@ -1270,9 +1300,7 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
       {
         document.querySelector('app-card').setPage('homepage','');
         document.querySelector('home-page').setPage('schooltypecard','');
-      //  document.querySelector('schooltype-card').ready();
-      
-   
+        //document.querySelector('schooltype-card').ready();
       },
        SchooltypToGrade:function(e)
        {
@@ -1280,7 +1308,6 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
               document.querySelector('home-page').setPage('schooltype-to-grade-card','');
              this.$.uiservice.selectschoolnames();
              document.querySelector('schooltype-to-grade-card').fnschoolgrade();
-      
        },
 
       FnFeeCollection:function(){
@@ -1342,7 +1369,20 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
           {
             localStorage.setItem('curr_sess_loggedassesmenttype','bookreject');
             this.$.cdialog.toggle();
+          },
+          fnchapterreport:function(e)
+          {
+            localStorage.setItem('curr_sess_loggedassesmenttype','chapterreport');
+            document.querySelector('incomplete-chapter-report').FnRefresh();
+            this.$.cdialog.toggle();
+          },
+          fncurriculamreport:function(e)
+          {
+            localStorage.setItem('curr_sess_loggedassesmenttype','curriculamreport');
+            document.querySelector('curriculam-report').Fnrefresh11();
+            this.$.cdialog.toggle();
           }
+
 
     });
   })();
