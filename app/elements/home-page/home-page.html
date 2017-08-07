@@ -327,11 +327,9 @@
   if(localStorage.getItem("curr_sess_page")=="employe-schooltype-to-category-card")
     {
       this.page="teacherhomecard";
-          document.querySelector('teacherhome-card').FnRefresh();
-          document.querySelector('employe-schooltype-to-category-item-card').FnRefresh();
-          document.querySelector('employee-category-item-card').FnRefresh();
- 
- 
+      document.querySelector('teacherhome-card').FnRefresh();
+      document.querySelector('employe-schooltype-to-category-item-card').FnRefresh();
+      document.querySelector('employee-category-item-card').FnRefresh(); 
     }
     if(localStorage.getItem("curr_sess_page")=="Student-to-section-mapping-card")
     {
@@ -343,8 +341,7 @@
     {
       this.page="teacherhomecard";
       document.querySelector('teacherhome-card').FnRefresh();
-      document.querySelector('school-grade-section-creation-card').FnRefresh();
-   
+      document.querySelector('school-grade-section-creation-card').FnRefresh();   
     }
     if(localStorage.getItem("curr_sess_page")=="schooltype-to-grade-card")
     {
@@ -400,7 +397,7 @@
     {
       this.page="teacherhomecard";
       document.querySelector('teacherhome-card').FnRefresh();
-      
+      document.querySelector('teacherhome-card').FnInitializeContainers();      
     }
     if(localStorage.getItem("curr_sess_page")=="grade-creation-card")
     {
@@ -744,14 +741,26 @@
      if(localStorage.getItem("curr_sess_page")=="cs-education-card")
     {
       this.page="teacherhomecard";
-      // this.page="termscholasticcategory";
       document.querySelector('teacherhome-card').FnRefresh();
       document.querySelector('coscholastic-assesment-card').FnRefreshcard();  
       document.querySelector('cs-education-card').FnRefresh();    
     }
+     if(localStorage.getItem("curr_sess_page")=="cs-health-physical-education-card")
+    {
+      this.page="teacherhomecard";
+      document.querySelector('teacherhome-card').FnRefresh();
+      document.querySelector('coscholastic-assesment-card').FnRefreshcard();  
+      document.querySelector('cs-health-physical-education-card').FnRefresh();    
+    }
+    if(localStorage.getItem("curr_sess_page")=="cs-discipline-card")
+    {
+      this.page="teacherhomecard";
+      document.querySelector('teacherhome-card').FnRefresh();
+      document.querySelector('coscholastic-assesment-card').FnRefreshcard();  
+      document.querySelector('cs-discipline-card').FnRefresh();    
+    }
     if(localStorage.getItem("curr_sess_page")=="cc-fa-fivetoten-card")
     {
-
       this.page="teacherhomecard";
       // this.page="termscholasticcategory";
       document.querySelector('teacherhome-card').FnRefresh();
