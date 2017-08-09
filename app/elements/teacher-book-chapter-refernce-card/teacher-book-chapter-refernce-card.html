@@ -138,18 +138,19 @@
                 <h2 style="color:black;margin-top: 2em;margin-left: -1em;"><b>{{capthead}}</b></h2>
             </center>
             <paper-fab  icon="add" mini on-click="fnset"></paper-fab>
+            <paper-button  style="bottom: 155px;left: 79%; color:white;background-color: #ff0066" id="chapedit" on-click="Fnsubchapteredit">SubConcept</paper-button>
         </div>
 
-        <div class="hs-inner">
+        <div class="hs-inner" hidden$="{{subconceptid1}}">
           <table>
              <template is="dom-repeat" items="{{conceptarr}}" as="view">
                 <tr>
                   <template is="dom-repeat" items="{{view}}" as="v">
                     <td>
-                      <div id="itemcarddialog">
+                      <div id="itemcarddialog">  
                         <p>
                           <aproval-book-value-item-card concept="{{v.concept}}" conceptid="{{v.concept_id}}" capterid="{{v.capter_id}}"></aproval-book-value-item-card>
-                        </p>
+                        </p>    
                       </div>    
                     </td>
                   </template>
@@ -157,6 +158,24 @@
               </template>
           </table>  
         </div> 
+      <div class="hs-inner" hidden$="{{subconceptid}}">
+          <table>
+             <template is="dom-repeat" items="{{conceptarr}}" as="view">
+                <tr>
+                  <template is="dom-repeat" items="{{view}}" as="v">
+                    <td>
+                      <div id="itemcarddialog">  
+                        <p>
+                          <sub-concept-value-edit-card concept="{{v.concept}}" conceptid="{{v.concept_id}}" capterid="{{v.capter_id}}"></sub-concept-value-edit-card>
+                        </p>    
+                      </div>    
+                    </td>
+                  </template>
+                </tr>
+              </template>
+          </table>  
+        </div> 
+       
     </paper-card>
 
 
@@ -188,7 +207,15 @@
     Polymer({  
       is: 'teacher-book-chapter-refernce-card',
 
+    ready:function(){
+      this.subconceptid=true;
+      this.subconceptid1=false;
 
+    },
+    Fnsubchapteredit:function(e){
+         this.subconceptid=false;
+        this.subconceptid1=true;
+    },
 
    /* passset:function(e)
     {
@@ -199,7 +226,8 @@
     },*/
     fnset:function(e)
     {
-  
+        this.subconceptid=true;
+        this.subconceptid1=false;
       this.$.bookservice.conceptseq();   
       this.$.newconceptttt.toggle();
     },
@@ -218,7 +246,7 @@
       }
       else
       {
-        //alert(this.captheadid+ " "+this.conceptz+" "+conceptid);
+      //  alert(this.captheadid+ " "+this.conceptz+" "+conceptid);
         this.$.bookservice.fnsendconcept(this.captheadid,this.conceptz);
         this.conceptz="";
         this.$.newconceptttt.toggle();

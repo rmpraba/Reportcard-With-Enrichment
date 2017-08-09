@@ -1,23 +1,20 @@
-
 <link rel="import" href="..\..\bower_components/polymer/polymer.html">
-
 <dom-module id="teacher-book-approve-card">
   <template>
     <style>
-      :host {
+      :host {   
         display: block;
       }
         .collapse-content {
     padding: 15px;
     border: 1px solid #dedede;
-  }   
-    section{
+  }
+  section{
     top: 200px;
     right: 65%;
     width: 327px;
     height: 300px;
    }
-   
    .hs-inner1
    {
     padding: 30px 20px 10px 377px;
@@ -114,7 +111,7 @@
        {
          border-radius: 10px;
        }
-     </style>
+     </style>    
     <center><h2 hidden style="color:#00ccff">{{empnamez}}</h2></center>
      <paper-input hidden value="{{empnamez}}"></paper-input>
        
@@ -179,20 +176,22 @@
         <!--<tr style="border-bottom: 1px solid #ccc; line-height: 1.8em;border-color:#6699ff"> -->
         <tr>
           <th>S.NO</th>
-          <th>CONCEPT</th>
-          <th>NO OF PERIODS</th>
-          <th>DATE</th>
-          <th>SKILL</th>
-          <th>VALUE</th>
-          <th>INNOVATION</th>
-          <th>REMARKS</th>
-          <th></th>
+          <th>Concept</th>
+          <th>Work schdule</th>
+          <th>#Periods</th>
+          <th>Date</th>
+          <th>Skill</th>
+          <th>Value</th>
+          <th>Innovation</th>
+          <th>LR rectification</th>
+          <th>Remarks</th>
+          <th>Correction status</th>
           <!-- <th>Delete</th> -->
         </tr>  
             <tr>  
              <template  is="dom-repeat" items="{{overallarr1}}" as="view">
-                <tr>
-             <aproval-book-innovatiosn-item-card rowid="{{view.rowid}}" remark="{{view.remark}}" period="{{view.period}}" planneddate="{{view.planning_date}}" skill="{{view.skill}}" innovation="{{view.innovation}}" iddate="{{view.id_date}}" hidecheck="{{view.hidecheck}}" hidecheck1="{{view.hidecheck1}}" rowidz="{{view.rowidz}}" valuez="{{view.valuez}}" conceptzz="{{view.valuearrr}}" mainarr="{{view.mainarr}}" > 
+                <tr>   
+             <aproval-book-innovatiosn-item-card rowid="{{view.rowid}}" remark="{{view.remark}}" period="{{view.period}}" planneddate="{{view.planning_date}}" skill="{{view.skill}}" innovation="{{view.innovation}}" iddate="{{view.id_date}}" hidecheck="{{view.hidecheck}}" hidecheck11="{{view.hidecheck11}}"  hidecheck1="{{view.hidecheck1}}"  rowidz="{{view.rowidz}}" valuez="{{view.valuez}}" conceptzz="{{view.valuearrr}}" mainarr="{{view.mainarr}}" subconceptarr1="{{view.suarr}}" skillarrzx="{{view.skillarr}}"  Correction="{{view.Correction}}" lrrectife="{{view.lrrectife}}"> 
                   </aproval-book-innovatiosn-item-card>
                 </tr> 
               </template>  
@@ -209,7 +208,7 @@
       <div  hidden$="{{Conceptbuffidz}}">
       <paper-input label="Which row after??" value="{{periodafter}}"></paper-input>
         <paper-input label="Enter Buffer period" value="{{bufferperiod}}"></paper-input>
-       <!--  <paper-dropdown-menu  label="Select the concept" style="width:100%;margin-left: -1%;"><paper-menu  class="dropdown-content"   on-iron-select="fnselectconcept">
+       <!-- <paper-dropdown-menu  label="Select the concept" style="width:100%;margin-left: -1%;"><paper-menu  class="dropdown-content"   on-iron-select="fnselectconcept">
                  <template is="dom-repeat" items="{{conceptarr}}">
                     <paper-item value="{{item.concept_id}}">{{item.concept}}</paper-item>
                </template>    
