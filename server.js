@@ -6,14 +6,14 @@ var fs = require('fs');
 
 var dbserver_ip_address = process.env.OPENSHIFT_MYSQL_DB_HOST || '127.0.0.1'
 var connection = mysql.createConnection({
-   host     : 'localhost',
-   user     : 'root',
-   password : 'admin',
-   database : 'reportcardnewins'
-  // port     : '62631',
-  // user     : 'adminM1qnV1d',
-  // password : 'HC2bIf7Sk2LD',
-  // database : 'scorecarddb'
+   // host     : 'localhost',
+   // user     : 'root',
+   // password : 'admin',
+   // database : 'reportcardnewins'
+  port     : '62631',
+  user     : 'adminM1qnV1d',
+  password : 'HC2bIf7Sk2LD',
+  database : 'scorecarddb'
 });
 
 var bodyParser = require('body-parser'); 
@@ -11563,8 +11563,6 @@ app.post('/fngetconceptreport-service',  urlencodedParser,function (req, res)
   });
 });
 
-
-
 app.post('/fngetcurriculam-service',  urlencodedParser,function (req, res)
 {
   var qur="select  s.subject_id,s.concept_id,s.capter_id,s.period,s.skill,s.innovation,s.remark,s.planning_date,ch.capter,cp.concept,b.subject_name,v.value_name from md_skill s join md_chapter ch on(ch.capter_id=s.capter_id) join md_concept cp on(cp.concept_id=s.concept_id) join md_subject b on(b.subject_id=s.subject_id) join md_book_value v on(v.rowid=s.rowid) where s.school_id='"+req.query.schoolid+"' and s.grade_id='"+req.query.gradeid+"'  and s.academic_year='"+req.query.academic_year+"' and ch.school_id='"+req.query.schoolid+"' and ch.academic_year='"+req.query.academic_year+"' and v.school_id='"+req.query.schoolid+"' and v.grade_id='"+req.query.gradeid+"'  and v.academic_year='"+req.query.academic_year+"'";
@@ -11591,6 +11589,34 @@ app.post('/fngetcurriculam-service',  urlencodedParser,function (req, res)
   });
 });
 
+app.post('/fetchallstudents-service',  urlencodedParser,function (req, res)
+{
+var qur="select school_id,id,student_name,class_id  from md_student where  class_id="+
+"(select class_id   from mp_grade_section where grade_id=(select grade_id "+
+"from md_grade where grade_name='"+req.query.grade+"') and section_id=(select "+
+"section_id from md_section where section_name='"+req.query.section+"' and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"') and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"') and "+
+"school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and id not in(select student_id from tr_term_attendance where academic_year='"+req.query.academicyear+"' and  grade='"+req.query.grade+"' and  section='"+req.query.section+"' and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"')";
+  
+  console.log('-------------------fetch student for addnewstud----------------------');
+  console.log(qur);
+     connection.query(qur, function(err, rows)
+    {
+    if(!err)
+    {
+    if(rows.length>0)
+    {
+      res.status(200).json({'returnval': rows});
+    }
+    else
+    {
+      console.log(err);
+      res.status(200).json({'returnval': 'invalid'});
+    }
+    }
+    else
+      console.log(err);
+  });
+});
 
 var server = app.listen(5000, function () {
 var host = server.address().address

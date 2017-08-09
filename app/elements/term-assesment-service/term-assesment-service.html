@@ -520,6 +520,7 @@
       },
       gradeResponse:function(e){
          document.querySelector('term-assesment-card').gradearr=e.detail.response.returnval;
+         document.querySelector('addnewstudent-card').gradearr=e.detail.response.returnval;
       },
       callSectionService:function(gradename){        
          this.sectionurl=sessionStorage.getItem("addrinfo")+"/section-service";
@@ -533,7 +534,8 @@
          this.$.sectionajax.generateRequest();
       },
       sectionResponse:function(e){        
-         document.querySelector('term-assesment-card').sectionarr=e.detail.response.returnval; 
+         document.querySelector('term-assesment-card').sectionarr=e.detail.response.returnval;
+         document.querySelector('addnewstudent-card').sectionarr=e.detail.response.returnval; 
       },
       callSubjectService:function(gradename,section){
          this.subjecturl=sessionStorage.getItem("addrinfo")+"/subject-service";

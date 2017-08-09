@@ -43,6 +43,9 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
        <paper-button on-click="FnSelectImgMaster" no ink><img src="../../images/img-master.png" height="180px" width="180px" style="        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;"></paper-button>
       </div>
       <div class="imgcard">
+       <paper-button on-click="FnSelectImgStudent" no ink><img src="../../images/img-student.png" height="180px" width="180px" style="        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;"></paper-button>
+      </div>
+      <div class="imgcard">
        <paper-button on-click="FnSelectImgLeason" no ink><img src="../../images/img-leasonplan.png" height="180px" width="180px" style="        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;"></paper-button>
       </div> 
       <div class="imgcard">    
@@ -128,6 +131,15 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
     </div>
     <!-- Class teacher options end-->
     <div class="coordinator" hidden$="{{coordinator}}">
+    <!-- Student container starts -->
+    <div class="inner1" hidden$="{{hidestudentcontainer}}">
+    <div class="card" hidden$="{{addstudent}}">
+      <paper-button on-click="FnStudent" no ink><img src="../../images/student.jpg" height="180px" width="180px">
+      <h4> Add/Edit/Remove Student</h4>
+      </paper-button>
+    </div>
+    </div>
+    <!-- Student container ends -->
     <!-- Co-ordinator options starts -->
     <div class="inner1" hidden$="{{hideenrichmentcontainer}}">
      <div id="entry" class="card" hidden$="{{BA}}">    
@@ -612,6 +624,12 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
         this.containerview="Master";
         this.FnHideView();
       },
+      FnSelectImgStudent:function(){
+        this.homecontainer=true;
+        this.rolescontainer=false;
+        this.containerview="Student";
+        this.FnHideView();
+      },
       FnSelectImgLeason:function(){
         this.homecontainer=true;
         this.rolescontainer=false;
@@ -659,6 +677,12 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
               this.$.uiservice.fnschoolemployeepersonal();
               //alert('2');
    
+        }
+        if(localStorage.getItem('curr_sess_loggedassesmenttype')=="studentmanagement")
+        {   
+          document.querySelector('app-card').setPage('homepage','');
+          document.querySelector('home-page').setPage('addnewstudent-card','');
+          this.$.assesmentservice.callGradeService();
         }
         if(localStorage.getItem('curr_sess_loggedassesmenttype')=="Term")
         {   
@@ -814,6 +838,12 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
           this.$.cdialog.close();
          
       },
+      FnStudent:function()
+      {
+        localStorage.setItem('curr_sess_loggedassesmenttype','studentmanagement');
+        this.$.assesmentservice.callAcademicService();
+        // this.$.cdialog.toggle(); 
+      },
       FnSelectPreEntryType:function(){
         localStorage.setItem('curr_sess_loggedassesmenttype','Enrichment');
         this.$.bassesmentservice.callAcademicService(); 
@@ -830,6 +860,7 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
         localStorage.setItem('curr_sess_loggedassesmenttype','Term');
         this.$.assesmentservice.callAcademicService();
       },
+
       FnGenerateReportcard:function()
        {
         localStorage.setItem('curr_sess_report','1');
@@ -1255,7 +1286,8 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
         //document.querySelector('new-employee-creation-card').hideupdateemp=true;
         this.$.cdialog.toggle();   
       },
-       Workingdays:function(e)
+
+      Workingdays:function(e)
       {
            document.querySelector('app-card').setPage('homepage','');
            document.querySelector('home-page').setPage('working-days-card','');

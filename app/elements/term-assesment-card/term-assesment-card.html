@@ -12,32 +12,23 @@
 <dom-module id="term-assesment-card">
   <template>
     <style>
-      :host {
+    :host {
         display: block;
-      }
+    }
     
     .card{
         @apply(--layout-vertical);
     }
-
-
     .drop{        
         @apply(--layout-horizontal);
         @apply(--layout-center-justified);
-        /*margin-top: 2%;*/
-        /*margin-left: 10%;*/
         border-bottom: 1px solid #dedede;
-        /*box-shadow: 1px 1px 1px grey;*/
-        /*width: 80%;*/
-        /*margin-left: 10%;*/
     }
     paper-dropdown-menu{
       width: 15%;
       margin-left: 3%;
       --paper-input-container-label: { color: red };
       text-align:center;
-     /* background-color: #eee;
-      border: 1px solid #ccc;*/
     }
     </style>
     <div class='card'>
