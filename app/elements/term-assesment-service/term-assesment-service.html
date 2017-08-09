@@ -621,12 +621,9 @@
         this.fetchfastudentreportparam= obj;         
         this.$.fetchfastudentreportajax.generateRequest();
            document.querySelector('approve-one-to-four-card').FnSpinnerrActive(false); 
-
     }
-
 else
 {
-    //alert('3');
 this.fetchfastudentreporturl=sessionStorage.getItem("addrinfo")+"/fetchfastudentreport-service";
          var obj={"schoolid":"","gradename":"","section":"","subject":"","assesment":"","termname":""};
          obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
@@ -1601,10 +1598,10 @@ this.fetchfastudentreporturl=sessionStorage.getItem("addrinfo")+"/fetchfastudent
         obj.academicyear=localStorage.getItem("curr_sess_academicyear");
         obj.academicyear=localStorage.getItem("curr_sess_academicyear");
          
-        obj.assesmentid=localStorage.getItem("curr_sess_assesmenttype");
+        obj.assesment=localStorage.getItem("curr_sess_assesmenttype");
         obj.termname=localStorage.getItem("curr_sess_termname");
         obj.gradename= localStorage.getItem("curr_sess_grade"); 
-        obj.sectionname=localStorage.getItem("curr_sess_section");    
+        obj.section=localStorage.getItem("curr_sess_section");    
         obj.subject=localStorage.getItem("curr_sess_subject");
         this.updatefaimportmarkurl=sessionStorage.getItem("addrinfo")+"/updatefaimportmark-service";
         this.updatefaimportmarkparam=obj;
@@ -1675,6 +1672,7 @@ this.fetchfastudentreporturl=sessionStorage.getItem("addrinfo")+"/fetchfastudent
       var obj1={"schoolid":"","flag":"","loggedid":""}
       obj1.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
       obj1.loggedid=sessionStorage.getItem("curr_sess_loggedid");
+      obj1.academicyear=localStorage.getItem("curr_sess_academicyear");         
       if(sessionStorage.getItem("curr_sess_loggedrole")=="Co-Ordinator")
       {
        obj1.flag=0;

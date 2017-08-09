@@ -75,8 +75,8 @@
         this.$.scorecardservice.callFetchsubjectinfoService(this.studentid);
         this.$.otfscorecardservice.callfetchhealthattendanceinfoService(this.studentid);
         this.$.scorecardservice.callFetchmarkService(this.studentid); 
-         this.$.scorecardservice.callfetchcoscholasticmetricsService(this.studentid);  
-         this.$.scorecardservice.callfetchcoscholasticinfoService(this.studentid);
+        this.$.scorecardservice.callfetchcoscholasticmetricsService(this.studentid);  
+        this.$.scorecardservice.callfetchcoscholasticinfoService(this.studentid);
         document.querySelector('app-card').setPage('homepage','');
         document.querySelector('home-page').setPage('ccefivetotenscorecard',''); 
         document.querySelector('cce-fivetoten-score-card').callImage();
@@ -85,7 +85,7 @@
         if(localStorage.getItem("curr_sess_grade")=="Grade-10"||localStorage.getItem("curr_sess_grade")=="Grade-9"){
         this.$.newformatservice.fetchstudinfofornewformatService(this.studentid);
         this.$.newformatservice.fetchnewformatscholasticsubjects1(this.studentid);
-        // this.$.newformatservice.fetchnewformatcoscholasticsubjects1(this.studentid);
+        this.$.newformatservice.fetchnewformatcoscholasticsubjects1(this.studentid);
         document.querySelector('app-card').setPage('homepage','');
         document.querySelector('home-page').setPage('newformat-reportcard-nineten','');
         }
@@ -122,26 +122,26 @@
       else
       {
         this.$.otfscorecardservice.callfetchhealthattendanceinfoService(this.studentid);
-          this.$.scorecardservice.callFetchstudentinfoService(this.studentid);
+        this.$.scorecardservice.callFetchstudentinfoService(this.studentid);
         this.$.scorecardservice.callFetchsubjectinfoService(this.studentid);
         this.$.scorecardservice.callFetchmarkService(this.studentid); 
-         this.$.scorecardservice.callfetchcoscholasticmetricsService(this.studentid);  
-         this.$.scorecardservice.callfetchcoscholasticinfoService(this.studentid);
-         this.$.otfscorecardservice.FnFetchfaHealthinfo(this.studentid); 
+        this.$.scorecardservice.callfetchcoscholasticmetricsService(this.studentid);  
+        this.$.scorecardservice.callfetchcoscholasticinfoService(this.studentid);
+        this.$.otfscorecardservice.FnFetchfaHealthinfo(this.studentid); 
         this.$.otfscorecardservice.FnFetchArtinfo(this.studentid);
         this.$.otfscorecardservice.FnFetchPhysicalinfo(this.studentid); 
         // this.$.scorecardservice.callFetchmarkService(this.studentid);
         document.querySelector('app-card').setPage('homepage','');
         document.querySelector('home-page').setPage('fivetotencomparisonreport',''); 
-       // document.querySelector('fivetotencomparisonreport-card').setStudentId(this.studentid);
+        // document.querySelector('fivetotencomparisonreport-card').setStudentId(this.studentid);
       }
       }
        if(localStorage.getItem('curr_sess_loggedassesmenttype')=="Editinfo"){ 
        this.$.assesmentservice.callstudentinfo(this.studentid); 
        this.$.assesmentservice.callstudentparentinfo(this.studentid);            
-        document.querySelector('app-card').setPage('homepage','');
-        document.querySelector('home-page').setPage('studentinfoedit','');
-        document.querySelector('studentinfoedit-card').FnSetStudentId(this.studentid);       
+       document.querySelector('app-card').setPage('homepage','');
+       document.querySelector('home-page').setPage('studentinfoedit','');
+       document.querySelector('studentinfoedit-card').FnSetStudentId(this.studentid);       
       }
       }
     });

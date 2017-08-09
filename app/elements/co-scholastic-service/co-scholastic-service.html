@@ -72,7 +72,6 @@
         on-response="fetchstudentResponse"
         debounce-duration="300"
     >
-
     <iron-ajax
         method="post"
         id="fetchstudentreportforhealthajax"
@@ -83,8 +82,6 @@
         on-response="fetchstudentreportforhealthResponse"
         debounce-duration="300"
     >
-
-
     <iron-ajax
         method="post"
         id="fetchstudentforattendanceajax"
@@ -95,7 +92,6 @@
         on-response="fetchstudentforattendanceResponse"
         debounce-duration="300"
     >
-
     <iron-ajax
         method="post"
         id="fetchstudentreportforattendanceajax"
@@ -106,8 +102,7 @@
         on-response="fetchstudentreportforattendanceResponse"
         debounce-duration="300"
     >
-
-<iron-ajax
+    <iron-ajax
         method="post"
         id="fetchstudentreportforcoscholasticajax"
         url="{{fetchstudentreportforcoscholasticurl}}"
@@ -117,8 +112,6 @@
         on-response="fetchstudentreportforcoscholasticResponse"
         debounce-duration="300"
     >
-
-
     <iron-ajax
         method="post"
         id="fetchexcelreportforcoscholasticajax"
@@ -139,8 +132,7 @@
         on-response="fetchstudentforcoscholasticResponse"
         debounce-duration="300"
     >
-
-     <iron-ajax
+    <iron-ajax
         method="post"
         id="fetchstudentforphysicalajax"
         url="{{fetchstudentforphysicalurl}}"
@@ -150,7 +142,6 @@
         on-response="fetchstudentforphysicalResponse"
         debounce-duration="300"
     >
-
     <iron-ajax
         method="post"
         id="fetchstudentreportforphysicalajax"
@@ -161,10 +152,6 @@
         on-response="fetchstudentreportforphysicalResponse"
         debounce-duration="300"
     >
-
-
-
-
     <iron-ajax
         method="post"
         id="fetchstudentforartverticalsajax"
@@ -175,7 +162,6 @@
         on-response="fetchstudentforartverticalsResponse"
         debounce-duration="300"
     >
-
     <iron-ajax
         method="post"
         id="fetchstudentreportforartverticalsajax"
@@ -186,7 +172,7 @@
         on-response="fetchstudentreportforartverticalsResponse"
         debounce-duration="300"
     >
-   <iron-ajax        
+    <iron-ajax        
         method="post"
         id="fetchlifeskillajax"
         url="{{fetchlifeskillurl}}"
@@ -196,7 +182,7 @@
         on-response="fetchlifeskillResponse"
         debounce-duration="300"
     >
-<iron-ajax        
+    <iron-ajax        
         method="post"
         id="fetchstudentlifeskillajax"
         url="{{fetchstudentlifeskillurl}}"
@@ -216,8 +202,6 @@
         on-response="insertcoassesmentmarkResponse"
         debounce-duration="300"
     >
-
-
     <iron-ajax
         method="post"
         id="insertcosubcategorymarkajax"
@@ -248,7 +232,7 @@
         on-response="inserthealthResponse"
         debounce-duration="300"
     >
-     <iron-ajax
+    <iron-ajax
         method="post"
         id="insertphysicalajax"
         url="{{insertphysicalurl}}"
@@ -258,7 +242,7 @@
         on-response="insertphysicalResponse"
         debounce-duration="300"
     >
-     <iron-ajax
+    <iron-ajax
         method="post"
         id="insertartverticalajax"
         url="{{insertartverticalurl}}"
@@ -288,9 +272,7 @@
         on-response="overallinsertcoassesmentResponse"
         debounce-duration="300"
     >
-
-
-     <iron-ajax        
+    <iron-ajax        
         method="post"
         id="fetchgradeforcoscholasticajax"
         url="{{fetchgradeforcoscholasticurl}}"
@@ -300,8 +282,7 @@
         on-response="fetchgradeforcoscholasticResponse"
         debounce-duration="300"
     >
-    
-  </template>
+    </template>
   <script>
   (function() {
     'use strict';
@@ -409,9 +390,7 @@
           co_grade.push(returnval[i].grade);
         } 
       },
-
-
-       FnFindCoscholasticGrade:function(mark)
+      FnFindCoscholasticGrade:function(mark)
       {        
         for(var i=0;i<co_lower.length;i++)
         {         
@@ -431,6 +410,7 @@
          obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
          obj.gradename=grade;
          obj.section=section;
+         obj.academicyear=localStorage.getItem("curr_sess_academicyear");
          obj.subject=localStorage.getItem("curr_sess_subject");
          obj.termname=localStorage.getItem("curr_sess_termname");
          this.fetchstudentreportforhealthparam= obj;
@@ -449,6 +429,7 @@
          obj.section=hsection;
          obj.subject=localStorage.getItem("curr_sess_subject");
          obj.termname=localStorage.getItem("curr_sess_termname");
+         obj.academicyear=localStorage.getItem("curr_sess_academicyear");
          this.fetchstudentparam= obj;
          // alert(JSON.stringify(obj));
          this.$.fetchstudentajax.generateRequest();
@@ -514,12 +495,14 @@
         else if(localStorage.getItem("curr_sess_subject")=="Health & Physical Activities"){
         document.querySelector('cs-health-physical-education-card').studarr=arr;         
         }         
+        else if(localStorage.getItem("curr_sess_subject")=="Discipline"){
+        document.querySelector('cs-discipline-card').studarr=arr;         
+        } 
       },
       fetchlifeskilldata:function(name,idd)
       {
         this.stdid=idd;
         this.subcat=name;
-
          this.fetchstudentlifeskillurl=sessionStorage.getItem("addrinfo")+"/fetchstudentlifeskill";
          var obj={"schoolid":"","academicyear":"","studid":"","subcategory":""};
          obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
@@ -528,9 +511,7 @@
          obj.studid=this.stdid;
          obj.subcategory=this.subcat;
          this.fetchstudentlifeskillparam= obj;
-         this.$.fetchstudentlifeskillajax.generateRequest();
-
-        
+         this.$.fetchstudentlifeskillajax.generateRequest();        
       },
        fetchstudentlifeskillResponse:function(e)
       {
@@ -555,16 +536,14 @@
         document.querySelector('cs-health-physical-education-item-card').FnSubcategory(categoryarr);
         else  if(cat=="attitude")
         document.querySelector('cs-attitudes-item-card').FnSubcategory(categoryarr);
-        
-        
+        else  if(cat=="discipline")
+        document.querySelector('cs-discipline-itemcard').FnSubcategory(categoryarr);
          this.fetchlifeskillurl=sessionStorage.getItem("addrinfo")+"/fetchlifeskill";
          var obj={"schoolid":"","termtype":""};
          obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
          obj.termtype=this.subcat;        
          this.fetchlifeskillparam= obj;
          this.$.fetchlifeskillajax.generateRequest();
-      
-
       },
       fetchlifeskillResponse:function(e)
       {
@@ -579,6 +558,18 @@
             }
           }
         }
+
+        if(localStorage.getItem("curr_sess_grade")=="Grade-9"||localStorage.getItem("curr_sess_grade")=="Grade-10"){
+          for(var i=0;i<coarr.length;i++){
+            coarr[i].errormessage="Grade's only from A-E";
+          }
+        }
+        else{
+          for(var i=0;i<coarr.length;i++){
+            coarr[i].errormessage="Grade's only from A-C";
+          }
+        }
+
        // alert('za'+JSON.stringify(coarr));
         var cat=sessionStorage.getItem("category");
         // alert(cat);
@@ -599,10 +590,9 @@
         document.querySelector('cs-health-physical-education-item-card').coarr=coarr;
         else  if(cat=="attitude")
         document.querySelector('cs-attitudes-item-card').coarr=coarr;  
-        
-
+        else  if(cat=="discipline")
+        document.querySelector('cs-discipline-itemcard').coarr=coarr; 
       },
-     
       callinsertcoscholasticassesmentmarkService:function(studid,studname,category,subcategory,mark,seq){
          //tempcnt1=count;         
          this.insertcoassesmentmarkurl=sessionStorage.getItem("addrinfo")+"/insertcoassesmentmark-service";
@@ -849,8 +839,7 @@ insertcosubcategorymarkResponse:function(e){
          this.fetchstudentreportforcoscholasticparam= obj;
          // alert(JSON.stringify(obj));
          this.$.fetchstudentreportforcoscholasticajax.generateRequest();
-       }
-        
+       }        
       },
        fetchstudentreportforcoscholasticResponse:function(e)
        {
@@ -968,7 +957,7 @@ insertcosubcategorymarkResponse:function(e){
     }
     
       
-             if(localStorage.getItem("curr_sess_subject")=="Life Skills"){
+        if(localStorage.getItem("curr_sess_subject")=="Life Skills"){
         if(localStorage.getItem("curr_sess_grade")=="Grade-9"||localStorage.getItem("curr_sess_grade")=="Grade-10")
         {
         document.querySelector('coscholastic-assesment-sheet-card').setPage('cs-life-skill-card');
@@ -1032,16 +1021,23 @@ insertcosubcategorymarkResponse:function(e){
         document.querySelector('cs-health-physical-education-card').hidesubtotal=false;
         document.querySelector('cs-health-physical-education-card').setDefaultHeaders(); 
         document.querySelector('cs-health-physical-education-card').markarr=excelcoscholasticoverall;        
-        }        
+        } 
+        if(localStorage.getItem("curr_sess_subject")=="Discipline")
+        {
+        document.querySelector('coscholastic-assesment-sheet-card').setPage('cs-discipline-card');
+        document.querySelector('cs-discipline-card').hidetopheader=true;
+        document.querySelector('cs-discipline-card').hidesubtotal=false;
+        document.querySelector('cs-discipline-card').setDefaultHeaders(); 
+        document.querySelector('cs-discipline-card').markarr=excelcoscholasticoverall;        
+        }       
        },
        fetchstudentforcoscholasticResponse:function(e)
        {
         var arr=e.detail.response.returnval;
         // alert(JSON.stringify(arr));
         //alert(JSON.stringify(coscholasticoverall));
-        for(var j=0;j<coscholasticarr.length;j++)
-          
-    {
+      for(var j=0;j<coscholasticarr.length;j++)    
+      {
       for(var i=0;i<arr.length;i++)
       {
         if(arr[i].student_name==coscholasticarr[j].student_name)
@@ -1051,14 +1047,14 @@ insertcosubcategorymarkResponse:function(e){
       }
     }
 
-    for(var i=0;i<arr.length;i++)
+      for(var i=0;i<arr.length;i++)
       {
         arr[i].serialno=parseInt(this.len)+(i+1);
         coscholasticoverall.push(arr[i]);
           
-        }
+      }
 
-           if(localStorage.getItem("curr_sess_subject")=="Life Skills"){
+      if(localStorage.getItem("curr_sess_subject")=="Life Skills"){
         if(localStorage.getItem("curr_sess_grade")=="Grade-9"||localStorage.getItem("curr_sess_grade")=="Grade-10")
         {
         document.querySelector('coscholastic-assesment-sheet-card').setPage('cs-life-skill-card');
@@ -1109,8 +1105,12 @@ insertcosubcategorymarkResponse:function(e){
         document.querySelector('cs-health-physical-education-card').setDefaultHeaders(); 
         document.querySelector('cs-health-physical-education-card').studarr=coscholasticoverall;        
         }
-      
-        
+        if(localStorage.getItem("curr_sess_subject")=="Discipline")
+        {
+        document.querySelector('coscholastic-assesment-sheet-card').setPage('cs-discipline-card');
+        document.querySelector('cs-discipline-card').setDefaultHeaders(); 
+        document.querySelector('cs-discipline-card').studarr=coscholasticoverall;        
+        }        
        },
 
       callFetchStudentInfoforattendance:function(){
@@ -1309,9 +1309,11 @@ insertcosubcategorymarkResponse:function(e){
         {
          document.querySelector('cs-health-physical-education-card').FnSpinnerrActive(false);          
         }
-    },
-      
-
+        if(localStorage.getItem("curr_sess_subject")=="Discipline")
+        {
+         document.querySelector('cs-discipline-card').FnSpinnerrActive(false);   
+        }
+    }      
     });
   })();
   </script>

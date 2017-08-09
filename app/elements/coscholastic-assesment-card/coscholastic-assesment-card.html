@@ -79,7 +79,6 @@
     Polymer({
       is: 'coscholastic-assesment-card',
       ready:function(){
-       
       },
       callDefaultService:function(){
         this.flag=0; 
@@ -108,11 +107,8 @@
       },
       callService:function(){
         this.FnRefresh();
-        // alert(subject);
-        // this.$.termassesmentservice.callFetchStudentInfo(gradename,section); 
         if(subject=="Health"||subject=="Attendance"||subject=="Physical Education"||subject=="Art Verticals")
         {
-
         } 
         else if(subject=="Art&Craft"||subject=="music"||subject=="dance"||subject=="Personality Development"||subject=="Games")
         {
@@ -126,21 +122,18 @@
          this.$.assesmentservice.callFetchStudentInfoforartverticals(); 
          document.querySelector('coscholastic-assesment-sheet-card').setPage('artverticals-card'); 
         document.querySelector('art-verticals-card').setDefaultHeaders();       
-        
         } 
         if(subject=="Physical Education"){ 
          this.$.assesmentservice.callFetchStudentInfoforphysical();        
         document.querySelector('coscholastic-assesment-sheet-card').setPage('talentidentification-card'); 
         document.querySelector('talentidentification-card').setDefaultHeaders(); 
         }       
-
         if(subject=="Health"){        
         document.querySelector('cce-fivetoten-health-card').studarr=[]; 
-        this.$.assesmentservice.callFetchStudentInfoforhealth(gradename,section);          
-
+        this.$.assesmentservice.callFetchStudentInfoforhealth(gradename,section); 
         document.querySelector('coscholastic-assesment-sheet-card').setPage('cce-fivetoten-health-card'); 
         document.querySelector('cce-fivetoten-health-card').setDefaultHeaders(); 
-        document.querySelector('cce-fivetoten-health-card').FnSpinnerrActive(true); 
+        document.querySelector('cce-fivetoten-health-card').FnSpinnerrActive(true);
         }
         else if(subject=="Attendance"){        
         document.querySelector('attendance-card').studarr=[]; 
@@ -152,182 +145,141 @@
         } 
         else if(subject=="Art&Craft"){   
         document.querySelector('cc-art-craft-onetofour-card').studarr=[];     
-        // this.$.termassesmentservice.callFetchStudentInfo(gradename,section);          
-
         document.querySelector('coscholastic-assesment-sheet-card').setPage('cc-art-craft-onetofour-card');
         document.querySelector('cc-art-craft-onetofour-card').setDefaultHeaders();
         document.querySelector('cc-art-craft-onetofour-card').FnSpinnerrActive(true); 
         }
         else if(subject=="dance"){
         document.querySelector('cc-dance-onetofour-card').studarr=[];       
-        // this.$.termassesmentservice.callFetchStudentInfo(gradename,section);          
-
         document.querySelector('coscholastic-assesment-sheet-card').setPage('cc-dance-onetofour-card');
         document.querySelector('cc-dance-onetofour-card').setDefaultHeaders();
         document.querySelector('cc-dance-onetofour-card').FnSpinnerrActive(true); 
         }
         else if(subject=="music"){ 
-        document.querySelector('cc-music-onetofour-card').studarr=[];    
-        // this.$.termassesmentservice.callFetchStudentInfo(gradename,section);          
-
+        document.querySelector('cc-music-onetofour-card').studarr=[];            
         document.querySelector('coscholastic-assesment-sheet-card').setPage('cc-music-onetofour-card');
         document.querySelector('cc-music-onetofour-card').setDefaultHeaders();
         document.querySelector('cc-music-onetofour-card').FnSpinnerrActive(true); 
         }  
         else if(subject=="Games"){
-        document.querySelector('cs-games-card').studarr=[];    
-        // this.$.termassesmentservice.callFetchStudentInfo(gradename,section);          
-
+        document.querySelector('cs-games-card').studarr=[];             
         document.querySelector('coscholastic-assesment-sheet-card').setPage('cs-games-card');
         document.querySelector('cs-games-card').setDefaultHeaders();
         document.querySelector('cs-games-card').FnSpinnerrActive(true); 
         } 
         else if(subject=="Personality Development"){
-          document.querySelector('cs-personalitydevelopment-card').studarr=[]; 
-        // this.$.termassesmentservice.callFetchStudentInfo(gradename,section);          
-
+        document.querySelector('cs-personalitydevelopment-card').studarr=[]; 
         document.querySelector('cs-personalitydevelopment-card').setDefaultHeaders();                   
         document.querySelector('coscholastic-assesment-sheet-card').setPage('cs-personalitydevelopment-card'); 
         document.querySelector('cs-personalitydevelopment-card').FnSpinnerrActive(true);        
         }      
-        else if(subject=="Life Skills"){
-          
-        // this.$.termassesmentservice.callFetchStudentInfo(gradename,section);          
-
+        else if(subject=="Life Skills"){      
         if(gradename=="Grade-9"||gradename=="Grade-10"){
-          document.querySelector('cs-life-skill-card').studarr=[]; 
+        document.querySelector('cs-life-skill-card').studarr=[]; 
         document.querySelector('cs-life-skill-card').setDefaultHeaders();  
         document.querySelector('coscholastic-assesment-sheet-card').setPage('cs-life-skill-card'); 
         document.querySelector('cs-life-skill-card').FnSpinnerrActive(true);   
         }
         else{
-          document.querySelector('cs-life-skill-card').studarr=[]; 
+        document.querySelector('cs-life-skill-card').studarr=[]; 
         document.querySelector('cs-life-skill-card').setDefaultHeaders();  
         document.querySelector('coscholastic-assesment-sheet-card').setPage('cs-life-skill-card'); 
         }
         }
         else if(subject=="Work Education"){
-          document.querySelector('cs-education-card').studarr=[];
-        // this.$.termassesmentservice.callFetchStudentInfo(gradename,section);          
-
+        document.querySelector('cs-education-card').studarr=[];        
         document.querySelector('cs-education-card').setDefaultHeaders();  
         document.querySelector('coscholastic-assesment-sheet-card').setPage('cs-education-card');
         document.querySelector('cs-education-card').FnSpinnerrActive(true);  
         }
         else if(subject=="Visual & Performing Arts"){
-          document.querySelector('cs-visual-performing-card').studarr=[]; 
-        // this.$.termassesmentservice.callFetchStudentInfo(gradename,section);          
-
+        document.querySelector('cs-visual-performing-card').studarr=[]; 
         document.querySelector('cs-visual-performing-card').setDefaultHeaders();  
         document.querySelector('coscholastic-assesment-sheet-card').setPage('cs-visual-performing-card');
-        document.querySelector('cs-visual-performing-card').FnSpinnerrActive(true);   
+        document.querySelector('cs-visual-performing-card').FnSpinnerrActive(true);
         }
         else if(subject=="Attitudes And values"){
-          document.querySelector('cs-attitudes-card').studarr=[]; 
-        // this.$.termassesmentservice.callFetchStudentInfo(gradename,section);          
-
+        document.querySelector('cs-attitudes-card').studarr=[]; 
         document.querySelector('cs-attitudes-card').setDefaultHeaders();  
         document.querySelector('coscholastic-assesment-sheet-card').setPage('cs-attitudes-card'); 
         document.querySelector('cs-attitudes-card').FnSpinnerrActive(true);   
         }
         else if(subject=="Co-Curricular Activities"){
-          document.querySelector('cs-co-curricular-card').studarr=[];
-        // this.$.termassesmentservice.callFetchStudentInfo(gradename,section);          
-
+        document.querySelector('cs-co-curricular-card').studarr=[];
         document.querySelector('cs-co-curricular-card').setDefaultHeaders();  
         document.querySelector('coscholastic-assesment-sheet-card').setPage('cs-co-curricular-card'); 
         document.querySelector('cs-co-curricular-card').FnSpinnerrActive(true);  
         }
         else if(subject=="Health and Physical Education"){
-          document.querySelector('cs-health-physical-education-card').studarr=[];
-        // this.$.termassesmentservice.callFetchStudentInfo(gradename,section);          
-
+        document.querySelector('cs-health-physical-education-card').studarr=[]; 
         document.querySelector('cs-health-physical-education-card').setDefaultHeaders();  
-        document.querySelector('coscholastic-assesment-sheet-card').setPage('cs-health-physical-education-card'); 
-        
+        document.querySelector('coscholastic-assesment-sheet-card').setPage('cs-health-physical-education-card');        
+        }
+        else if(subject=="Discipline"){
+        document.querySelector('cs-discipline-card').studarr=[]; 
+        document.querySelector('cs-discipline-card').setDefaultHeaders();  
+        document.querySelector('coscholastic-assesment-sheet-card').setPage('cs-discipline-card');
         }
       },
       FnRefresh:function()
       {
-        // document.querySelector('#gradenam2').selected=-1;
-        // document.querySelector('#sectionnam2').selected=-1;
-        // document.querySelector('#subjectnam2').selected=-1;
-
-         // var subj=localStorage.getItem("curr_sess_subject");
-         // var grad=localStorage.getItem("curr_sess_grade");
-         // this.flag=0;
       if(subject=="Health"){         
         document.querySelector('cce-fivetoten-health-card').FnRefresh(); 
         }
         else if(subject=="Attendance"){
         this.$.assesmentservice.callWorkingdaysService();         
-        
         document.querySelector('attendance-card').FnRefresh();  
         } 
         else if(subject=="Art&Craft"){                    
-        
         document.querySelector('cc-art-craft-onetofour-card').FnRefresh();
         }
         else if(subject=="dance"){                   
-        
         document.querySelector('cc-dance-onetofour-card').FnRefresh();
         }
         else if(subject=="music"){                   
-        
         document.querySelector('cc-music-onetofour-card').FnRefresh();
         }  
         else if(subject=="Games"){                   
-        
         document.querySelector('cs-games-card').FnRefresh();
         } 
         else if(subject=="Personality Development"){
-        document.querySelector('cs-personalitydevelopment-card').FnRefresh();                   
-               
+        document.querySelector('cs-personalitydevelopment-card').FnRefresh();     
         }      
         else if(subject=="Life Skills"){
         if(gradename=="Grade-9"||gradename=="Grade-10"){
         document.querySelector('cs-life-skill-card').FnRefresh();  
-        
         }
         else{
         document.querySelector('cs-life-skill-card').FnRefresh();  
-        
         }
         }
         else if(subject=="Work Education"){
         document.querySelector('cs-education-card').FnRefresh();  
-        
-
+        }
+        else if(subject=="Discipline"){
+        document.querySelector('cs-discipline-card').FnRefresh();  
         }
         else if(subject=="Visual & Performing Arts"){
         document.querySelector('cs-visual-performing-card').FnRefresh();  
-        
-
         }
         else if(subject=="Attitudes And values"){
         document.querySelector('cs-attitudes-card').FnRefresh();  
-        
-
         }
         else if(subject=="Co-Curricular Activities"){
         document.querySelector('cs-co-curricular-card').FnRefresh();  
-        
         }
         else if(subject="Health & Physical Activities"){
         document.querySelector('cs-health-physical-education-card').FnRefresh();  
-        
         }
-
       },
       FnRefreshcard:function(){
         document.querySelector('#gradenam2').selected=-1;
         document.querySelector('#sectionnam2').selected=-1;
         document.querySelector('#subjectnam2').selected=-1;
-
-         var subject=localStorage.getItem("curr_sess_subject");
-         var gradename=localStorage.getItem("curr_sess_grade");
-         this.flag=0;
-         this.FnRefresh();
+        var subject=localStorage.getItem("curr_sess_subject");
+        var gradename=localStorage.getItem("curr_sess_grade");
+        this.flag=0;
+        this.FnRefresh();
       }
     });
   })();

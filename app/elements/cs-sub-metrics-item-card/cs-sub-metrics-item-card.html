@@ -4,29 +4,16 @@
 <dom-module id="cs-sub-metrics-item-card">
   <template>
     <style>
-      :host {
-        display: block;
-      }
-      .hrlayout
-      {
-       /* @apply(--layout-horizontal);*/
-      }
       .tb1{
         width:100%;
-
       }
     </style>
-    <!--<tr>
-    <td style="width:12%;"><paper-item>{{submetric}}</paper-item></td>
-    <td style="width: 8%;"><paper-input on-change="Fnsubcategory" value="{{score1}}"></paper-input></td>
-    </tr>     
-    </style>-->
     <table class="tb1">
     <tbody>
     <tr>
      <center>
         <td style="width:50%;"><paper-item>{{submetric}}</paper-item></td>
-        <td style="width:20%;"><paper-input on-change="Fnsubcategory" id="mark" value="{{score1}}"></paper-input></td>
+        <td style="width:20%;"><paper-input auto-validate pattern="[A-E+]" on-change="Fnsubcategory" id="mark" value="{{score1}}" error-message="{{errormessage}}"></paper-input></td>
     </center>
    </tr>
    </tbody>
@@ -35,12 +22,32 @@
   <script>
   (function() {
     'use strict';
-
     Polymer({
-      is: 'cs-sub-metrics-item-card',
+     is: 'cs-sub-metrics-item-card',
+     ready:function(){
+      this.errormessage="Letter's only!";
+     },
      Fnsubcategory:function()
-     {      
-      if(this.score1!=null)
+     {  
+      // alert(localStorage.getItem("curr_sess_grade"));    
+      if(localStorage.getItem("curr_sess_grade")=="Grade-9"||localStorage.getItem("curr_sess_grade")=="Grade-10"){
+      }
+      else{
+        if(this.score1=='A'||this.score1=='B'||this.score1=='C'){
+        }
+        else{
+          this.score1="";
+        }
+      }
+      // if(localStorage.getItem("curr_sess_grade")=="Grade-9"||localStorage.getItem("curr_sess_grade")=="Grade-10"){
+      //   if(this.score1=='A'||this.score1=='B'||this.score1=='C'||this.score1=='D'||this.score1=='E'){
+      //   }
+      //   else{
+      //     // this.errormessage="Letter's only b/w A-E";
+      //     this.score1="";
+      //   }
+      // }
+      if(this.score1!=null||this.score1!="")
       {
       var cat=sessionStorage.getItem("category");
       if(cat=="lifeskill"){
@@ -58,13 +65,14 @@
       else if(cat=="attitude")
       document.querySelector('cs-attitudes-item-card').fnfindsum(this.score1,this.submetric);
       else if(cat=="healthandphysical")
-      document.querySelector('cs-health-physical-education-item-card').fnfindsum(this.score1,this.submetric);     
+      document.querySelector('cs-health-physical-education-item-card').fnfindsum(this.score1,this.submetric);  
+      else if(cat=="discipline")
+      document.querySelector('cs-discipline-itemcard').fnfindsum(this.score1,this.submetric);   
      }
     },
     clearinputdata:function()
     {
-      //alert('come');
-      var x;
+     var x;
      x= document.querySelectorAll("#mark");
      for(var i=0;i<x.length;i++)
      {

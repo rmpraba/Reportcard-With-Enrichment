@@ -65,18 +65,19 @@
       <br><br>
       <div class="tab">
         <table style="border-collapse: collapse;" border="1">
-          <tr><th colspan="2" style="text-align: left;">Co scholastic Areas [on a 3 point A – C grading scale]</th></tr>
-          <tr><th style="text-align: left;">Grade</th><th></th></tr>
+          <tr><th style="text-align: left;">Co scholastic Areas [on a 3 point A – C grading scale]</th><th style="text-align: left;">Grade</th></tr>
           <template is="dom-repeat" items="{{coarr}}">
-          <tr><td>{{item.value}}</td></tr>
+          <tr><td>{{item.subject_id}}</td><td>{{item.grade}}</td></tr>
           </template>
         </table>
       </div>
       <br><br>
       <div class="tab">
       <table style="border-collapse: collapse;" border="1">
-        <tr><th></th><th>Grade</th></tr>
-        <tr><td>Discipline (A – C grading scale)</td><td>{{gradescale}}</td></tr>
+        <tr><th style="text-align: left;">[A - C grading scale]</th><th style="text-align: left;">Grade</th></tr>
+        <template is="dom-repeat" items="{{disarr}}">
+          <tr><td>{{item.subject_id}}</td><td>{{item.grade}}</td></tr>
+        </template>
       </table>
       </div>
       <br><br>
