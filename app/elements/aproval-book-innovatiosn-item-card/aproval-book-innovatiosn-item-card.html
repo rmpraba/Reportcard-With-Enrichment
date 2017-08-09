@@ -75,9 +75,15 @@
             <td style="padding-left: 3%;">{{rowid}}</td>
             
              <td>
-                <paper-icon-button   hidden$="{{hidecheck1}}" icon="add" on-click="fngetconceptz" style="color:#6699ff;position: absolute;margin-left: 6%;margin-top: -1%;"></paper-icon-button>
+                <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetconceptz" style="color:#6699ff;position: absolute;margin-left: 6%;margin-top: -1%;"></paper-icon-button>
                   <template is="dom-repeat" items="{{conceptzz}}" as="r">
                     <h4 style="margin-left: -11%;width: 35%;">{{r.conceptname}}</h4>
+                  </template>
+              </td>
+              <td>
+               <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetsubconcept" style="color:#6699ff;position: absolute;margin-left: 6%;margin-top: -1%;"></paper-icon-button>
+                  <template is="dom-repeat" items="{{subconceptarr1}}" as="rse">
+                    <h4 style="margin-left: -11%;width: 35%;">{{rse.subconceptname}}</h4>
                   </template>
               </td>
              <td>
@@ -98,12 +104,13 @@
       <dialog-page id="ID_Show_Dialog"></dialog-page>
               </td>
              <td>
-                <paper-button on-click="lsnskill">
-                <h4>{{skill}}</h4>
-                </paper-button>  
+                <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetskill" style="color:#6699ff;position: absolute;margin-left: 6%;margin-top: -1%;"></paper-icon-button>
+                  <template is="dom-repeat" items="{{skillarrzx}}" as="r">
+                    <h4 style="margin-left: -11%;width: 35%;">{{r.skillname}}</h4>
+                  </template>
              </td>
              <td>
-                <paper-icon-button   hidden$="{{hidecheck1}}" icon="add" on-click="fngetconceptz1" style="color:#6699ff;position: absolute;margin-left: 6%;margin-top: -2%;"></paper-icon-button>
+                <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetconceptz1" style="color:#6699ff;position: absolute;margin-left: 6%;margin-top: -2%;"></paper-icon-button>
                 <!-- <paper-button on-click="lsnvalue">
                   <h4>{{valuez}}</h4>
                 </paper-button> -->
@@ -117,13 +124,16 @@
               <paper-button on-click="lsninnovation">
                 <h4>{{innovation}}</h4>
               </paper-button>
-            </td> 
+            </td>
+            <td><paper-input value="{{lrrectife}}"></paper-input></td> 
             <td>
               <!-- <paper-input value="{{remark}}"></paper-input> -->
               <paper-button on-click="lsnremark">
                 <h4>{{remark}}</h4>
               </paper-button>
             </td>
+               <td><paper-input value="{{Correctiogfgdgn}}"></paper-input></td> 
+         
               
               <td style="padding-left: 2%;">
                 <paper-icon-button id="saveidd"  hidden$="{{hidecheck1}}"  icon="save" on-click="fnsavebook"></paper-icon-button>
@@ -144,7 +154,7 @@
       <center style="margin-top: 5%;">
           <paper-button on-click="fnsubmit"  style="background-color:black;color:white">Submit</paper-button>
          <paper-button on-click="fnclose" style="background-color:black;color:white">Close</paper-button>
-      </center>
+      </center>  
     </paper-dialog>
 
      <paper-dialog id="dzfsd1xsasa" modal>
@@ -158,23 +168,31 @@
       </center>
     </paper-dialog>
 
-     <paper-dialog id="skilldialog" modal>
-          <paper-textarea  label="Skill" value="{{skill}}"></paper-textarea>
-          <center style="margin-top: 14%;">
-            <paper-button  on-click="skillsave" style="color:white;background-color:black">Save</paper-button>
-            <paper-button style="color:white;background-color:black" on-click="skillclose" >Close</paper-button>
-          </center>
+     <paper-dialog id="fngetdialogid" modal>
+          <h3>Subconcept Name</h3>
+   
+        <template is="dom-repeat" items="{{subconceptarr}}" as="su">
+         <subconcept-dialog-card subconceptid="{{su.sub_concept_id}}" id="VVYJ{{rowid}}{{iddate}}{{su.sub_concept_id}}" subconceptname="{{su.sub_concept_name}}" conceptid="{{su.concept_id}}" concept="{{su.concept}}" rowid="{{rowid}}"></subconcept-dialog-card>
+      </template>     
+      <center style="margin-top: 5%;">
+          <paper-button on-click="subconcept"  style="background-color:black;color:white">Submit</paper-button>
+         <paper-button on-click="subconceptclose" style="background-color:black;color:white">Close</paper-button>
+      </center>
+      </paper-dialog>
+       <paper-dialog id="fngetskilldialogid" modal>
+          <template is="dom-repeat" items="{{skillarrz}}" as="sa">
+         <skill-dialog-card skillid="{{sa.skill_id}}" id="VVYJ{{rowid}}{{iddate}}{{sa.skill_id}}" skillname="{{sa.skill_name}}" check="{{sa.check}}" rowid="{{rowid}}"></skill-dialog-card>
+      </template>  
+      <center style="margin-top: 5%;">
+          <paper-button on-click="skillsave"  style="background-color:black;color:white">Submit</paper-button>
+         <paper-button on-click="skillclose" style="background-color:black;color:white">Close</paper-button>
+      </center>
       </paper-dialog>
 
+     
 
-     <paper-dialog  log id="valuedialog" modal>
-          <paper-textarea label="Value" value="{{valuez}}"></paper-textarea>
-          <center style="margin-top: 14%;">
-            <paper-button  on-click="valuesave" style="color:white;background-color:black">Save</paper-button>
-            <paper-button style="color:white;background-color:black" on-click="valueclose" >Close</paper-button>
-          </center>
-      </paper-dialog>
 
+    
       <paper-dialog id="innovationdialog" modal>
           <paper-textarea label="Innovation"  value="{{innovation}}"></paper-textarea>
           <center style="margin-top: 14%;">
@@ -190,7 +208,8 @@
             <paper-button style="color:white;background-color:black" on-click="remarkclose" >Close</paper-button>
           </center>
       </paper-dialog>
-     <iron-ajax
+      
+       <iron-ajax
         method="post"
         id="fngetconceptcheckajax"
         url="{{fngetconceptcheckurl}}"
@@ -209,8 +228,27 @@
         content-type="application/json"
         on-response="fngetbookvaluezResponse"
         debounce-duration="300" />
+         <iron-ajax
+        method="post"
+        id="fngetsubconceptsajax"
+        url="{{fngetsubconceptsurl}}"
+        params="{{fngetsubconceptsparam}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="fngetsubconceptsResponse"
+        debounce-duration="300" />
+        <iron-ajax
+        method="post"
+        id="fngetskillsajax"
+        url="{{fngetskillsurl}}"
+        params="{{fngetskillsparam}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="fngetskillsResponse"
+        debounce-duration="300" />
        </iron-ajax>
-     <teacher-book-service-card id="bookservice"></teacher-book-service-card>
+         
+<teacher-book-service-card id="bookservice"></teacher-book-service-card>
 
   </template>
   <script>
@@ -219,6 +257,10 @@
      var tempvaluarr=[];
      var conarr=[];
      var valuearr=[];
+     var skarr=[];
+     var setsubarr=[];
+     var subsarrr=[];
+     var trmp=[];
     Polymer({
       is: 'aproval-book-innovatiosn-item-card',
     ready:function()
@@ -283,10 +325,46 @@ fndates:function(e){
         temp1.push({"valuename":valuearr[i].valuename});
       }
      }
-      
+
      this.mainarr=[];
      this.mainarr=temp1;
     },
+    skillsave:function(e){
+     this.$.fngetskilldialogid.toggle();
+        var temp1=[];
+     for(var i=0;i<skarr.length;i++){
+      if(skarr[i].rowid==this.rowid){
+        temp1.push({"skillname":skarr[i].skillname});
+      }
+     }
+     this.skillarrzx=[];
+     this.skillarrzx=temp1;
+    // alert(JSON.stringify(skarr));
+    // alert(JSON.stringify(this.skillarrzx));
+    },
+    subconcept:function(e){
+      this.$.fngetdialogid.toggle();
+   var temp1=[];
+     for(var i=0;i<subsarrr.length;i++){
+      if(subsarrr[i].rowid==this.rowid){
+        temp1.push({"subconceptname":subsarrr[i].subconceptname});
+      }
+     }
+     this.subconceptarr1=[];
+     this.subconceptarr1=temp1;
+     alert(JSON.stringify(subsarrr));
+
+   },
+fnpasssubarr:function(subsarr){
+    subsarrr=subsarr;
+    },
+ fnpassskillarr:function(skillarrr){
+ // alert(1);
+  //alert(JSON.stringify(skillarrr));
+      skarr=skillarrr;
+  //alert(JSON.stringify(skarr));
+  
+     }, 
     fnpasparr:function(e){
     conarr=e;
     // alert(JSON.stringify(conarr));
@@ -310,9 +388,9 @@ fndates:function(e){
     },
     fnsavebook:function(e)
     {
-    
+      if(conarr.length!=0 && valuearr.length!=0 && skarr.length!=0 && subsarrr.length!=0){
 
-      if(this.period==""|| this.period==null|| this.skill=="" || this.skill==null)
+      if(this.period==""|| this.period==null)
      {
           alert("Please Enter All Fields");
           this.hidecheck1=false;
@@ -322,45 +400,40 @@ fndates:function(e){
         localStorage.setItem("localsess_last_service",this.showdate);
     
       }
-     
-     else if(this.planneddate=="empty")
+  else if(this.planneddate=="empty")
       {
- 
-        this.$.bookservice.fnsetcoskill(conarr,this.period,this.skill,this.innovation,this.remark,this.rowid);
-        this.$.bookservice.fnsetcoskillvalue(valuearr,this.period,this.rowid);
+this.$.bookservice.fnsetcoskill(conarr,this.period,this.innovation,this.remark,this.rowid,this.lrrectife,this.Correction);
+this.$.bookservice.fnsetcoskillvalue(valuearr,this.period,this.rowid);
+ this.$.bookservice.fnsetcoskill11(skarr,this.period,this.rowid); 
+  this.$.bookservice.fnsetcoskill12(subsarrr,this.period,this.rowid); 
   
         this.hidecheck1=true;
         this.hidecheck=false;  
         this.planneddate="";     
         this.showdate=moment(new Date()).format('L');
         localStorage.setItem("localsess_last_service",this.showdate);
-           document.querySelector('concept-check-card').fnclean();
+        document.querySelector('concept-check-card').fnclean();
         document.querySelector('aproval-book').fnclean1();
+        document.querySelector('subconcept-dialog-card').fnclean1();
+        document.querySelector('skill-dialog-card').fnclean1();
+        setsubarr=[];
+        trmp=[];
          }
-
-      /*else if(this.planneddate=="empty"||this.innovation==null||this.innovation=="")
+    else
       {
-          alert("save3");
-        //alert(JSON.stringify(conarr));
-        //alert(this.period+""+this.skill+""+this.innovation+""+this.remark+""+this.rowid+""+this.valuez);
-        this.$.bookservice.fnsetcoskill(conarr,this.period,this.skill,this.innovation,this.remark,this.rowid,this.valuez); 
-        this.hidecheck1=true;
-        this.hidecheck=false;  
-        this.planneddate="";     
-      }*/
-      else
-      {
-        //alert("edit");
-        // alert(JSON.stringify(conarr));
-        this.$.bookservice.fnbookeditskill(this.period,this.skill,this.innovation,this.remark,this.planneddate,this.rowidz,this.valuez);
+         this.$.bookservice.fnbookeditskill(this.period,this.innovation,this.remark,this.planneddate,this.rowidz,this.lrrectife,this.Correction);
 
       }
-       /* this.hidecheck1=true;
-        this.hidecheck=false; */
         document.querySelector('concept-check-card').fnclean();
         document.querySelector('aproval-book').fnclean1();
    
         this.conceptjhkhzz="";
+      }
+      else {
+     //   alert("ENTER THE VALUE");
+        alert(this.period+" "+this.innovation+" "+this.remark+" "+this.planneddate+" "+this.rowidz+" "+this.lrrectife+" "+this.Correction);
+          this.$.bookservice.fnbookeditskill(this.period,this.innovation,this.remark,this.planneddate,this.rowidz,this.lrrectife,this.Correction);
+      }
   },
 
     fngetconceptz:function(e){
@@ -371,6 +444,105 @@ fndates:function(e){
        this.$.dzfsd1xsasa.toggle(); 
       this.fngetinchaptvaluevalue();
     },
+
+    fngetsubconcept:function(e){
+      this.$.fngetdialogid.toggle();
+         for(var i=0;i<conarr.length;i++){
+this.fngetsubconceptsurl=sessionStorage.getItem("addrinfo")+"/fngetsubconcepts-service";
+   var obj={};
+ obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+ obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+ obj.capter_id=localStorage.getItem("curr_sess_capters");
+ obj.period=this.period;
+ obj.conceptid=conarr[i].conceptid;
+ obj.conceptname=conarr[i].conceptname;
+ obj.planneddate=this.planneddate;
+ this.fngetsubconceptsparam=obj;
+ //alert(JSON.stringify(obj));
+ this.$.fngetsubconceptsajax.generateRequest();
+}},
+fngetsubconceptsResponse:function(e){
+  
+      var res=e.detail.response.conceptarr;
+      var res3=e.detail.response.dbarr;
+      var res1=e.detail.response.skillarr;
+   
+          for(var i=0;i<res.length;i++){
+              var obj={};
+                obj.sub_concept_id=res[i].sub_concept_id;
+                obj.sub_concept_name=res[i].sub_concept_name;
+                obj.concept =res[i].concept;
+                obj.concept_id=res[i].concept_id;
+        
+                setsubarr.push(obj);
+         
+          }
+            for(var i=0;i<res3.length;i++){
+              var obj={};
+              trmp.push(obj);
+        }
+    
+
+          if(trmp.length==conarr.length){
+             for(var j=0;j<setsubarr.length;j++){
+            var flag=0;
+              for(var i=0;i<res1.length;i++){
+                  
+                  if(setsubarr[j].sub_concept_id==res1[i].sub_concept_id)
+                  {    
+                   flag=1;
+                   setsubarr[j].check=true;   
+                  }
+                 }
+                 if(flag==0){
+                  setsubarr[j].check=false;
+                 }
+                }
+           this.subconceptarr=setsubarr;
+
+   
+          }
+     
+      
+},
+
+    fngetskill:function(e){
+      this.$.fngetskilldialogid.toggle();
+     this.fngetskillsurl=sessionStorage.getItem("addrinfo")+"/fngetskills-service";
+               var obj={};
+                 obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+               obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+               obj.capter_id=localStorage.getItem("curr_sess_capters");
+               obj.period=this.period;
+               obj.planneddate=this.planneddate;
+               this.fngetskillsparam=obj;
+             // alert(JSON.stringify(obj));
+               this.$.fngetskillsajax.generateRequest();
+    
+    },
+fngetskillsResponse:function(e){
+      var res1=e.detail.response.skillarr;
+       var res=e.detail.response.conceptarr;
+       //alert(JSON.stringify(res1));
+       //alert(JSON.stringify(res));
+          for(var j=0;j<res.length;j++){
+            var flag=0;
+              for(var i=0;i<res1.length;i++){
+                  
+                  if(res[j].skill_id==res1[i].skill_id)
+                  {    
+                   flag=1;
+                   res[j].check=true;   
+                  }
+                 }
+                 if(flag==0){
+                  res[j].check=false;
+                 }
+                }
+                 this.skillarrz=res;
+               //alert(JSON.stringify(this.valuearrz));
+},
+
     fngetinchaptvaluevalue:function(e){
     this.fngetbookvaluezurl=sessionStorage.getItem("addrinfo")+"/fngetconceptvalue111-service";
                var obj={};
@@ -418,6 +590,7 @@ fndates:function(e){
         //  alert(JSON.stringify(obj));
            this.$.fngetconceptcheckajax.generateRequest();
           },
+
         fngetconceptcheckResponse:function(e){
           //alert(JSON.stringify(e.detail.response.returnval));
           var res1=e.detail.response.skillarr;
@@ -467,14 +640,12 @@ fndates:function(e){
       this.$.skilldialog.toggle();
       //this.skillvaluezs=true;
     },
-    skillsave:function(e)
+    subconceptclose:function(e){
+     this.$.fngetdialogid.close();
+      },
+     skillclose:function()
     {
-      this.$.skilldialog.toggle();
-    },
-    skillclose:function()
-    {
-      this.$.skilldialog.close();
-      this.skill="";
+    this.$.fngetskilldialogid.close();
     },
  
 

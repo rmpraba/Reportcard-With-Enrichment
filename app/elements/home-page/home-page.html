@@ -284,6 +284,9 @@
         <section data-category="curriculam-report">
           <curriculam-report></curriculam-report>
         </section>
+        <section data-category="sub-concept-value-card">
+          <sub-concept-value-card></sub-concept-value-card>
+        </section>
         </iron-pages>
     </div>   
     <div class="footer"></div>
@@ -926,7 +929,13 @@
         document.querySelector('app-card').setPage('homepage','');
         document.querySelector('home-page').setPage('class-teacher-book-reject-card','');
       }
+        if(localStorage.getItem("curr_sess_page")=="sub-concept-value-card")
+      {
+        document.querySelector('app-card').setPage('homepage','');
+        document.querySelector('home-page').setPage('teacher-book-chapter-refernce-card','');
+      }
       
+
 
       if(localStorage.getItem("curr_sess_page")=="incomplete-chapter-report")
       {
