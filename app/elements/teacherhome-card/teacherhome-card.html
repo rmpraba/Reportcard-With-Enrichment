@@ -42,7 +42,7 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
       <div class="imgcard">
        <paper-button on-click="FnSelectImgMaster" no ink><img src="../../images/img-master.png" height="180px" width="180px" style="        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;"></paper-button>
       </div>
-      <div class="imgcard">
+      <div class="imgcard" hidden>
        <paper-button on-click="FnSelectImgStudent" no ink><img src="../../images/img-student.png" height="180px" width="180px" style="        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;"></paper-button>
       </div>
       <div class="imgcard">
@@ -132,13 +132,13 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
     <!-- Class teacher options end-->
     <div class="coordinator" hidden$="{{coordinator}}">
     <!-- Student container starts -->
-    <div class="inner1" hidden$="{{hidestudentcontainer}}">
+    <!-- <div class="inner1" hidden$="{{hidestudentcontainer}}">
     <div class="card" hidden$="{{addstudent}}">
       <paper-button on-click="FnStudent" no ink><img src="../../images/student.jpg" height="180px" width="180px">
       <h4> Add/Edit/Remove Student</h4>
       </paper-button>
     </div>
-    </div>
+    </div> -->
     <!-- Student container ends -->
     <!-- Co-ordinator options starts -->
     <div class="inner1" hidden$="{{hideenrichmentcontainer}}">
