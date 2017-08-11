@@ -6,14 +6,14 @@ var fs = require('fs');
 
 var dbserver_ip_address = process.env.OPENSHIFT_MYSQL_DB_HOST || '127.0.0.1'
 var connection = mysql.createConnection({
-   // host     : 'localhost',
-   // user     : 'root',
-   // password : 'admin',
-   // database : 'reportcardnewins'
-  port     : '62631',
-  user     : 'adminM1qnV1d',
-  password : 'HC2bIf7Sk2LD',
-  database : 'scorecarddb'
+   host     : 'localhost',
+   user     : 'root',
+   password : 'admin',
+   database : 'reportcardnewins'
+  // port     : '62631',
+  // user     : 'adminM1qnV1d',
+  // password : 'HC2bIf7Sk2LD',
+  // database : 'scorecarddb'
 });
 
 var bodyParser = require('body-parser'); 
@@ -11078,8 +11078,10 @@ app.post('/fngetsubconcepts-service',  urlencodedParser,function (req,res)
      var qur2="SELECT * FROM md_skill where  capter_id='"+req.query.capter_id+"' and  planning_date='"+req.query.planneddate+"' and period='"+req.query.period+"' and concept_id='"+req.query.conceptid+"'";
   
      var qur3="SELECT * FROM md_concept where capter_id='"+req.query.capter_id+"' and concept_id='"+req.query.conceptid+"'";
-   console.log(qur1);
-    console.log(qur2);
+    console.log("-----------------Fecthing subconcepts-----------------");
+    console.log(qur1);
+    console.log("------------------------------------------------------");
+    // console.log(qur2);
     var conceptarr=[];
     var skillarr=[];
     var dbarr=[];
