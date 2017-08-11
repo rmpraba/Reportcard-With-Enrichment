@@ -1532,15 +1532,10 @@ this.tranfersectionurl=sessionStorage.getItem("addrinfo")+"/tranfersection-servi
        },
       fngetempsubjectResponse:function(e){
        var res=e.detail.response.returnval; 
-     //   alert(JSON.stringify(res));
-
-        /*if(res!='invalid'){
-        */  //  alert('1');
-     //  document.querySelector('employe-creation-card').setempsubject(res);
+     //   alert(JSON.stringify(res));   
        document.querySelector('employe-schooltype-to-category-card').setempsubject1(res);
-  
-  /*      }
-  */    },
+       //document.querySelector('employe-schooltype-to-category-card').clsempsubspinr();
+      },
    fngetempsubject1:function(schooltypeid,categoryid,emplangprefernce){ 
        this.fngetempsubject1url=sessionStorage.getItem("addrinfo")+"/fngetempsubject-service";
       var obj={"school_id":"","schooltypeid":"","categoryid":"","academic_year":""};
@@ -3436,7 +3431,10 @@ insertschoolTypename:function(schooltypesarr)
         {
             var res=e.detail.response.returnval;
                 //alert(JSON.stringify(res));
-            document.querySelector('specific-student-section-card').getprestudent(res);
+            if(res!='empty')
+            {
+                document.querySelector('specific-student-section-card').getprestudent(res);
+            }    
         },
 
        selectspecificstudent:function(admissionnum)

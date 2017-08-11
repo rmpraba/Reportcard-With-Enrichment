@@ -53,6 +53,8 @@ if(document.querySelector('#'+this.id).checked==true)
      {
       
       //  document.querySelector('school-grade-to-subject-card').getschootypename(this.schooltypeidxx);
+      document.querySelector('school-grade-to-subject-card').fnrefresh();
+      document.querySelector('schoolcategory-type-item-card').FnRefresh();
           sessionStorage.setItem("curr_sess_loggedschooltype_ids",this.schooltypeidxx);
       
          this.getschooltypeurl=sessionStorage.getItem("addrinfo")+"/getschooltype-service";

@@ -963,12 +963,12 @@ fnbooksubconcepteditResponse:function(e){
         var res5=e.detail.response.subarr;
         var res2=[];
         var adcarr=[];
-      
+      //alert(JSON.stringify(res));
     var a=[];
         var overall=[];
            for(var k=0;k<res.length;k++)
            {       
-           var nameobj={"planning_date":"","period":"","skill":"","innovation":"","remark":""};
+           var nameobj={"planning_date":"","period":"","skill":"","innovation":"","remark":"","Correction":""};
              nameobj.planning_date=res[k].planning_date; 
              nameobj.period=res[k].period; 
              nameobj.skill=res[k].skill; 
@@ -1262,6 +1262,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
             }
           }
             if(flag==0)
+                
             document.querySelector('teacher-book-approve-card').overallarr1=res2;
             else
              document.querySelector('teacher-book-approve-card').overallarr1=temp;   
@@ -1331,6 +1332,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
         obj.flag="active";
         obj.conc_date=arr[i].conceptid+localStorage.getItem("localsess_from_service")
         this.fnsetcoskillparam=obj;
+        //alert(JSON.stringify(obj));
         this.$.fnsetcoskillajax.generateRequest();
        }
    },
@@ -1384,7 +1386,7 @@ fnsetcoskill11:function(skarr,period,rowid)
         obj.conc_date=skarr[i].skillid+localStorage.getItem("localsess_from_service")
         this.fnsetcoskill11param=obj;
         this.$.fnsetcoskill11ajax.generateRequest();
-           alert(JSON.stringify(obj));
+           //alert(JSON.stringify(obj));
       
         }
       },
