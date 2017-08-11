@@ -128,7 +128,7 @@
                   <h4>{{valuez}}</h4>
                 </paper-button> -->
                   <template is="dom-repeat" items="{{mainarr}}" as="ry">
-                    <h4 style="margin-left: 10%;width: 39%;">{{ry.valuename}}</h4>
+                    <h4 style="margin-left: 10%;">{{ry.valuename}}</h4>
                   </template>
 
             </td>
@@ -226,6 +226,7 @@
           </center>
       </paper-dialog>
 
+
       <paper-dialog id="lrrecitificationdialog" modal>
           <paper-textarea label="LR Rectification" value="{{lrrectife}}"></paper-textarea>
           <center style="margin-top: 14%;">
@@ -242,7 +243,7 @@
           </center>
       </paper-dialog>
       
-      
+
        <iron-ajax
         method="post"
         id="fngetconceptcheckajax"
@@ -295,6 +296,8 @@
      var setsubarr=[];
      var subsarrr=[];
      var trmp=[];
+     var len1=0;
+     var len2=0;
     Polymer({
       is: 'aproval-book-innovatiosn-item-card',
     ready:function()
@@ -349,6 +352,7 @@ fndates:function(e){
      // alert(JSON.stringify(temp));
      this.conceptzz=[];
      this.conceptzz=temp;
+
     },
     fnsubmit1:function(e){
      // alert(JSON.stringify(valuearr));
@@ -386,7 +390,7 @@ fndates:function(e){
      }
      this.subconceptarr1=[];
      this.subconceptarr1=temp1;
-     alert(JSON.stringify(subsarrr));
+     // alert(JSON.stringify(subsarrr));
 
    },
 fnpasssubarr:function(subsarr){
@@ -480,65 +484,80 @@ fnpasssubarr:function(subsarr){
     },
 
     fngetsubconcept:function(e){
-      this.$.fngetdialogid.toggle();
-         for(var i=0;i<conarr.length;i++){
-this.fngetsubconceptsurl=sessionStorage.getItem("addrinfo")+"/fngetsubconcepts-service";
-   var obj={};
- obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
- obj.academic_year=localStorage.getItem("curr_sess_academicyear");
- obj.capter_id=localStorage.getItem("curr_sess_capters");
- obj.period=this.period;
- obj.conceptid=conarr[i].conceptid;
- obj.conceptname=conarr[i].conceptname;
- obj.planneddate=this.planneddate;
- this.fngetsubconceptsparam=obj;
- //alert(JSON.stringify(obj));
- this.$.fngetsubconceptsajax.generateRequest();
-}},
+     var localconarr=[];
+     for(var i=0;i<conarr.length;i++){
+      if(this.rowid==conarr[i].rowid)      
+      localconarr.push(conarr[i]);
+     } 
+     this.$.fngetdialogid.toggle();
+     // alert(JSON.stringify(conarr));
+     len1=localconarr.length;
+     for(var i=0;i<localconarr.length;i++){
+     this.fngetsubconceptsurl=sessionStorage.getItem("addrinfo")+"/fngetsubconcepts-service";
+     var obj={};
+     obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+     obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+     obj.capter_id=localStorage.getItem("curr_sess_capters");
+     obj.period=this.period;
+     obj.conceptid=localconarr[i].conceptid;
+     obj.conceptname=localconarr[i].conceptname;
+     obj.planneddate=this.planneddate;
+     this.fngetsubconceptsparam=obj;
+     // alert(JSON.stringify(obj));
+     this.$.fngetsubconceptsajax.generateRequest();
+     }
+},
 fngetsubconceptsResponse:function(e){
   
       var res=e.detail.response.conceptarr;
       var res3=e.detail.response.dbarr;
       var res1=e.detail.response.skillarr;
-   
+      // alert(JSON.stringify(res));
+      var t1=[];
+      var t2=[];
+      len2++;  
           for(var i=0;i<res.length;i++){
               var obj={};
-                obj.sub_concept_id=res[i].sub_concept_id;
-                obj.sub_concept_name=res[i].sub_concept_name;
-                obj.concept =res[i].concept;
-                obj.concept_id=res[i].concept_id;
-        
-                setsubarr.push(obj);
-         
+              obj.sub_concept_id=res[i].sub_concept_id;
+              obj.sub_concept_name=res[i].sub_concept_name;
+              obj.concept =res[i].concept;
+              obj.concept_id=res[i].concept_id;
+              t1.push(obj);
           }
-            for(var i=0;i<res3.length;i++){
+          for(var i=0;i<res3.length;i++){
               var obj={};
               trmp.push(obj);
-        }
-    
-
-          if(trmp.length==conarr.length){
-             for(var j=0;j<setsubarr.length;j++){
-            var flag=0;
-              for(var i=0;i<res1.length;i++){
-                  
-                  if(setsubarr[j].sub_concept_id==res1[i].sub_concept_id)
-                  {    
-                   flag=1;
-                   setsubarr[j].check=true;   
-                  }
-                 }
-                 if(flag==0){
-                  setsubarr[j].check=false;
-                 }
-                }
-           this.subconceptarr=setsubarr;
-
-   
           }
-     
-      
-},
+          for(var i=0;i<t1.length;i++){
+              setsubarr.push(t1[i]);
+          }
+          // alert(len1+" "+len2);
+          if(len1==len2){
+            // alert('coming');
+                // for(var j=0;j<setsubarr.length;j++){
+                // var flag=0;
+                // for(var i=0;i<res1.length;i++){ 
+                //   if(setsubarr[j].sub_concept_id==res1[i].sub_concept_id)
+                //   {    
+                //    flag=1;
+                //    setsubarr[j].check=true;   
+                //   }
+                //  }
+                //  if(flag==0){
+                //   setsubarr[j].check=false;
+                //  }
+                // }
+           this.subconceptarr=[];
+           // alert(JSON.stringify(setsubarr));
+           for(var i=0;i<setsubarr.length;i++){
+            t2.push(setsubarr[i]);
+           }
+           this.subconceptarr=t2;
+           setsubarr=[]; 
+           len1=0;
+           len2=0;  
+          }
+    },
 
     fngetskill:function(e){
       this.$.fngetskilldialogid.toggle();
