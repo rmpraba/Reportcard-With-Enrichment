@@ -48,7 +48,9 @@
     Polymer({
       is: 'employee-category-item-card',
   
-    FnsetGradename:function(e){
+    FnsetGradename:function(e)
+    {
+      document.querySelector('employe-schooltype-to-category-card').newRefresh();
        if(document.querySelector('#'+this.id).checked==true){
                //alert(this.id);
               sessionStorage.setItem("curr_sess_loggedschoolcategory_id",this.schooltypecategoryid);

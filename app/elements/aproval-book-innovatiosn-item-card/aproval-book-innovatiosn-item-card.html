@@ -9,10 +9,10 @@
       table
       {
           table-layout: fixed;
-          width: 1300px;
+          width: 1314px;
           border-collapse: collapse;
-          margin-left: 26%;
-          margin-top: 12%;
+          margin-left: -1%;
+          margin-top: -1%;
       }
      paper-textarea
       {
@@ -70,47 +70,48 @@
            <paper-input value={{conceptid}} hidden></paper-input>
            <paper-input value={{capterid}} hidden></paper-input>
            <paper-input value={{rowidz}} hidden></paper-input>
-        <table border="0">
-           <tr style="border-bottom: 1px solid #ccc; line-height: 1.8em;border-color:#6699ff">
-            <td style="padding-left: 3%;">{{rowid}}</td>
+        <table border="1">
+           <!-- <tr style="border-bottom: 1px solid #ccc; line-height: 1.8em;border-color:#6699ff"> -->
+           <tr>
+            <td style="padding-left: 3%;width: 5.8%;">{{rowid}}</td>
             
-             <td>
-                <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetconceptz" style="color:#6699ff;position: absolute;margin-left: 6%;margin-top: -1%;"></paper-icon-button>
+             <td style="width: 10.5%;padding-left: 2%;">
+                <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetconceptz" style="color:#6699ff;position: absolute;margin-left: 4%;margin-top: -3%;"></paper-icon-button>
                   <template is="dom-repeat" items="{{conceptzz}}" as="r">
                     <h4 style="margin-left: -11%;width: 35%;">{{r.conceptname}}</h4>
                   </template>
               </td>
-              <td>
-               <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetsubconcept" style="color:#6699ff;position: absolute;margin-left: 6%;margin-top: -1%;"></paper-icon-button>
+              <td style="width: 8.98%;padding-left: 2%;">
+               <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetsubconcept" style="color:#6699ff;position: absolute;margin-left: 4%;margin-top: -3%;"></paper-icon-button>
                   <template is="dom-repeat" items="{{subconceptarr1}}" as="rse">
                     <h4 style="margin-left: -11%;width: 35%;">{{rse.subconceptname}}</h4>
                   </template>
               </td>
-             <td>
+             <td style="width: 8.98%;padding-left: 2%;">
                 <paper-input style="width: 60%;" value="{{period}}" allowed-pattern="[0-9]"></paper-input>
              </td>
-             <td>
+             <td style="width: 8.98%;">
                 <paper-input hidden$="{{hidecheck}}" value="{{planneddate}}"></paper-input>
-      <div class="card"  hidden$="{{hidecheck1}}">
-          <paper-input label=" planing date" class="btn" on-click="FnShowDialog" raised value="{{showdate}}"></paper-input>
-           <paper-dialog id="dialog" class="paper-date-picker-dialog" modal on-iron-overlay-closed="FnDismissDialog">
-          <paper-date-picker id="picker" date="{{date}}"></paper-date-picker>
-         <div class="buttons">
-           <paper-button dialog-dismiss>Cancel</paper-button>
-           <paper-button dialog-confirm>OK</paper-button>
-        </div>
-        </paper-dialog>
-      </div>
-      <dialog-page id="ID_Show_Dialog"></dialog-page>
+                <div class="card"  hidden$="{{hidecheck1}}">
+                  <paper-input label=" planing date" class="btn" on-click="FnShowDialog" raised value="{{showdate}}"></paper-input>
+                    <paper-dialog id="dialog" class="paper-date-picker-dialog" modal   on-iron-overlay-closed="FnDismissDialog">
+                      <paper-date-picker id="picker" date="{{date}}"></paper-date-picker>
+                        <div class="buttons">
+                          <paper-button dialog-dismiss>Cancel</paper-button>
+                          <paper-button dialog-confirm>OK</paper-button>
+                        </div>
+                    </paper-dialog>
+                </div>
+                  <dialog-page id="ID_Show_Dialog"></dialog-page>
               </td>
-             <td>
-                <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetskill" style="color:#6699ff;position: absolute;margin-left: 6%;margin-top: -1%;"></paper-icon-button>
+             <td style="width: 8.98%;padding-left: 2%;">
+                <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetskill" style="color:#6699ff;position: absolute;margin-left: 4%;margin-top: -3%;"></paper-icon-button>
                   <template is="dom-repeat" items="{{skillarrzx}}" as="r">
                     <h4 style="margin-left: -11%;width: 35%;">{{r.skillname}}</h4>
                   </template>
              </td>
-             <td>
-                <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetconceptz1" style="color:#6699ff;position: absolute;margin-left: 6%;margin-top: -2%;"></paper-icon-button>
+             <td style="width: 8.98%;padding-left: 2%;">
+                <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetconceptz1" style="color:#6699ff;position: absolute;margin-left: 4%;margin-top: -3%;"></paper-icon-button>
                 <!-- <paper-button on-click="lsnvalue">
                   <h4>{{valuez}}</h4>
                 </paper-button> -->
@@ -119,28 +120,30 @@
                   </template>
 
             </td>
-            <td>
+            <td style="width: 8.98%;padding-left: 2%;">
               <!-- <paper-textarea  readonly$="{{innovattionvaluezs}}" value="{{innovation}}"></paper-textarea> -->
               <paper-button on-click="lsninnovation">
                 <h4>{{innovation}}</h4>
               </paper-button>
             </td>
-            <td><paper-input value="{{lrrectife}}"></paper-input></td> 
-            <td>
+            <td style="width: 8.98%;">
+              <paper-input value="{{lrrectife}}"></paper-input>
+            </td> 
+            <td style="width: 8.98%;padding-left: 2%;">
               <!-- <paper-input value="{{remark}}"></paper-input> -->
               <paper-button on-click="lsnremark">
                 <h4>{{remark}}</h4>
               </paper-button>
             </td>
-               <td><paper-input value="{{Correctiogfgdgn}}"></paper-input></td> 
-         
-              
-              <td style="padding-left: 2%;">
+            <td style="width: 8.98%;">
+              <paper-input value="{{Correctiogfgdgn}}"></paper-input>
+            </td> 
+            <td>
                 <paper-icon-button id="saveidd"  hidden$="{{hidecheck1}}"  icon="save" on-click="fnsavebook"></paper-icon-button>
                 <paper-tooltip for="saveidd">Save</paper-tooltip>
                 <paper-icon-button id="editidd" hidden$="{{hidecheck}}"  icon="create" on-click="fneditbook"></paper-icon-button> 
                 <paper-tooltip for="editidd">Edit</paper-tooltip>
-              </td>
+            </td>
              
            </tr>
        </table>

@@ -112,7 +112,8 @@ section p{
       
        #itemcarddialog
        {
-          width: 81%;
+          min-height: 70px;
+          width: 70px;
           text-align: center;
           display: inline-block;
           @apply(--layout-center);
@@ -131,6 +132,11 @@ section p{
 
     </style>
 
+    <div>
+      <center>
+        <h3>SUB-CONCEPT CREATION</h3>
+      </center>
+    </div>
       <paper-dialog id="subconceptdialogid" modal>
          <paper-input label=" Enter SubConcept" value="{{SubConcept}}" ></paper-input>
          
@@ -138,8 +144,8 @@ section p{
           <paper-button style="color:white;background-color:black" on-click="fnclose1" >Close</paper-button></center>
          
         </paper-dialog>
-<paper-input value="{{setcptid}}"  hidden></paper-input>
-    <paper-card id="newcardd">
+    <paper-input value="{{setcptid}}"  hidden></paper-input>
+      <paper-card id="newcardd">
           <div style="padding-top: 12%;height: 9%;">
           <img src="../../images/book5.jpg">
             <center style="position: absolute;margin-top: -14%;margin-left: 39%;
@@ -188,6 +194,7 @@ section p{
      {
         this.$.bookservice.fnsubconceptvalue(this.subid,this.SubConcept,this.setcptid,this.setconid);
         this.$.subconceptdialogid.toggle();
+        this.SubConcept="";
      },
      fnsetsubsetcon:function(e)
      {

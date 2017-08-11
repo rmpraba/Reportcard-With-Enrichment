@@ -11367,30 +11367,39 @@ app.post('/bookvaldel-service' ,  urlencodedParser,function (req, res)
 
 app.post('/fetchclassconcept-service',  urlencodedParser,function (req,res)
   {  
+  var qur1="select  concept_id as conceptid,planning_date,period,rowid ,conc_date,innovation,remark,flag,(select  concept from md_concept  where  concept_id=conceptid)  as conceptname from md_skill where capter_id='"+req.query.chapterid+"' and conc_date not in(select s.conc_date  from final_book_sug s where s.school_id='"+req.query.schoolid+"' and s.academic_year='"+req.query.academic_year+"' and s.subject_id='"+req.query.subjectid+"' and  s.section_id='"+req.query.sectoinid+"' and  s.grade_id='"+req.query.gradeid+"' and s.capter_id='"+req.query.chapterid+"')"; 
 
-   var qur1="select  concept_id as conceptid,planning_date,period,rowid AS rowidz ,conc_date,skill,value,innovation,remark,flag,(select  concept from md_concept  where  concept_id=conceptid)  as conceptname from md_skill where capter_id='"+req.query.chapterid+"' and conc_date not in(select s.conc_date  from final_book_sug s where s.school_id='"+req.query.schoolid+"' and s.academic_year='"+req.query.academic_year+"' and s.subject_id='"+req.query.subjectid+"' and  s.section_id='"+req.query.sectoinid+"' and  s.grade_id='"+req.query.gradeid+"' and s.capter_id='"+req.query.chapterid+"')"; 
+     var qur2="SELECT distinct id as empid,(select distinct emp_name from md_employee_creation where emp_id=empid and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"') as empname FROM mp_teacher_grade where  school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and class_id='"+req.query.sectoinid+"'";
 
-   var qur2="SELECT distinct id as empid,(select distinct emp_name from md_employee_creation where emp_id=empid and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"') as empname FROM mp_teacher_grade where  school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and class_id='"+req.query.sectoinid+"' ";
+    var qur3="select * from  final_book_sug where  school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and section_id='"+req.query.sectoinid+"' and capter_id='"+req.query.chapterid+"'";
 
-   var qur3="select * from  final_book_sug where  school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and section_id='"+req.query.sectoinid+"' and capter_id='"+req.query.chapterid+"'";
+     var qur4="select * from  md_book_value  where  school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and capter_id='"+req.query.chapterid+"' and conc_date not in(select s.conc_date  from final_book_sug s where s.school_id='"+req.query.schoolid+"' and s.academic_year='"+req.query.academic_year+"' and s.subject_id='"+req.query.subjectid+"' and  s.section_id='"+req.query.sectoinid+"' and  s.grade_id='"+req.query.gradeid+"' and s.capter_id='"+req.query.chapterid+"')";
 
-     var qur4="select * from  md_book_value  where  school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and capter_id='"+req.query.chapterid+"'";
-     var skillarr=[];
+     var qur5="select * from  md_book_sub_concept  where  school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and capter_id='"+req.query.chapterid+"' and conc_date not in(select s.conc_date  from final_book_sub_concept s where s.school_id='"+req.query.schoolid+"' and s.academic_year='"+req.query.academic_year+"' and s.subject_id='"+req.query.subjectid+"' and  s.section_id='"+req.query.sectoinid+"' and  s.grade_id='"+req.query.gradeid+"' and s.capter_id='"+req.query.chapterid+"')";
+
+     var qur6="select * from  md_book_skill  where  school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and capter_id='"+req.query.chapterid+"' and conc_date not in(select s.conc_date  from final_book_skill s where s.school_id='"+req.query.schoolid+"' and s.academic_year='"+req.query.academic_year+"' and s.subject_id='"+req.query.subjectid+"' and  s.section_id='"+req.query.sectoinid+"' and  s.grade_id='"+req.query.gradeid+"' and s.capter_id='"+req.query.chapterid+"')";
+
+     var conceptarr=[];
      var emparr=[];
      var dbarr=[];
      var valuearr=[];
+     var subarr=[];
+     var skillarr=[];
    console.log("===============");
    console.log(qur1);
    console.log(qur2);
    console.log(qur3);
    console.log(qur4);
+   console.log(qur5);
+   console.log(qur6);
+ 
    console.log("===============");
      
 
    connection.query(qur1,function(err, rows){
     if(!err)
     {  
-    skillarr=rows;
+    conceptarr=rows;
    connection.query(qur4,function(err, rows){
     if(!err)
     {  
@@ -11399,15 +11408,27 @@ app.post('/fetchclassconcept-service',  urlencodedParser,function (req,res)
     if(!err)
     {  
     emparr=rows;
+    connection.query(qur5,function(err, rows){
+    if(!err)
+    {  
+    subarr=rows;
+    connection.query(qur6,function(err, rows){
+    if(!err)
+    {  
+    skillarr=rows;
     connection.query(qur3,function(err, rows){
     if(!err)
     { 
     dbarr=rows;
-      res.status(200).json({'skillarr': skillarr,'emparr':emparr,'dbarr':dbarr,'valuearr':valuearr});
+      res.status(200).json({'conceptarr': conceptarr,'emparr':emparr,'dbarr':dbarr,'valuearr':valuearr,'subarr':subarr,'skillarr':skillarr});
     }
     });
     }
     });
+    }
+    });
+    }
+     });
     }
     });
     }
