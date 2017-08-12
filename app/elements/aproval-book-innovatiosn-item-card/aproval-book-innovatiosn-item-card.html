@@ -116,7 +116,7 @@
                   <h4>{{valuez}}</h4>
                 </paper-button> -->
                   <template is="dom-repeat" items="{{mainarr}}" as="ry">
-                    <h4 style="margin-left: 10%;width: 39%;">{{ry.valuename}}</h4>
+                    <h4 style="margin-left: 10%;">{{ry.valuename}}</h4>
                   </template>
 
             </td>
@@ -211,7 +211,6 @@
             <paper-button style="color:white;background-color:black" on-click="remarkclose" >Close</paper-button>
           </center>
       </paper-dialog>
-      
        <iron-ajax
         method="post"
         id="fngetconceptcheckajax"

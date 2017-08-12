@@ -97,6 +97,7 @@
         <!-- <tr style="border-bottom: 1px solid #ccc; line-height: 1.8em;border-color:#6699ff"> -->
         <tr>
           <th>Concept</th>
+          <th>Sub Concept</th>
           <th>No Of Period</th>
           <th>Skill</th>
           <th>Value</th>
@@ -104,14 +105,16 @@
           <th>Planning date</th>
           <th>Completion Date</th>
           <th>Remarks</th>
+          <th>lrrectife</th>
+          <th>Correction</th>
           <th>Enrichment Suggestion</th>
           <th>Completion Status</th>
           <th></th>  
-          </tr>       
+         </tr>       
           <template is="dom-repeat" items="{{mainarr1}}" as="w">
            <tr>        
-               <skill-capturing-card empname="{{empname}}"  empid="{{empid}}" conceptid="{{w.conceptid}}" concept="{{w.concept}}"   skill="{{w.skill}}"  gradeid="{{w.grade_id}}" subjectid="{{w.subject_id}}" iddate="{{w.id_date}}" id="enrz{{empid}}{{w.rowid}}"
-            idz="enrno{{w.rowid}}" innovation="{{w.innovation}}" remark="{{w.remark}}" planneddate="{{w.planned_date}}" period="{{w.period}}" valuez="{{w.valuez}}" completion="{{w.completion}}"  completiondate="{{w.completion_date}}" enrichmentsug="{{w.enrichment_sug}}" mainarr="{{w.mainarr}}" hidecheck="{{w.hidecheck}}" hidecheck1="{{w.hidecheck1}}">
+               <skill-capturing-card empname="{{empname}}"  empid="{{empid}}" conceptid="{{w.conceptid}}" concept="{{w.conceptname}}"   skillarr="{{w.skillarr}}" rowidz="{{w.rowidz}}"  gradeid="{{w.grade_id}}" subjectid="{{w.subject_id}}" iddate="{{w.id_date}}" id="enrz{{empid}}{{w.rowid}}"
+            idz="enrno{{w.rowid}}" innovation="{{w.innovation}}" remark="{{w.remark}}" planneddate="{{w.planned_date}}" period="{{w.period}}" lrrectife="{{w.lrrectife}}" Correction="{{w.Correction}}" completion="{{w.completion}}"  completiondate="{{w.completion_date}}" enrichmentsug="{{w.enrichment_sug}}" mainarr="{{w.mainarr}}" hidecheck="{{w.hidecheck}}" hidecheck1="{{w.hidecheck1}}"  subconceptid="{{w.sub_concept_id}}"  subconceptname="{{w.sub_concept_name}}"  valuuid="{{w.valuuid}}"  skiluid="{{w.skiluid}}" subuid="{{w.subuid}}" conuid="{{w.conuid}}"  hidecheck1="{{w.hidecheck1}}">
               </skill-capturing-card> 
             </tr>  
            </template>  

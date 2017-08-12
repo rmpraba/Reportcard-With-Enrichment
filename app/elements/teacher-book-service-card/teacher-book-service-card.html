@@ -1532,101 +1532,24 @@ fnsetcoskill11:function(skarr,period,rowid)
         },
 
         fetchclassconceptResponse:function(e){
-
            var res=e.detail.response.conceptarr;
            var res1=e.detail.response.emparr;
            var res2=e.detail.response.dbarr;
            var res3=e.detail.response.valuearr;
-           var res4=e.detail.response.subarr;
-           var res5=e.detail.response.skillarr;
+           var res4=e.detail.response.skillarr;
+
+        alert(JSON.stringify(res));
+
            var setattr=[];
-       
-            var a=[];
-            var overall=[];
-       var a=[];
-        var overall=[];
-           for(var k=0;k<res.length;k++)
-           {       
-           var nameobj={"planning_date":"","period":"","skill":"","innovation":"","remark":""};
-             nameobj.planning_date=res[k].planning_date; 
-             nameobj.period=res[k].period; 
-             nameobj.skill=res[k].skill; 
-             nameobj.innovation=res[k].innovation; 
-             nameobj.remark=res[k].remark; 
-             nameobj.rowid=res[k].rowid; 
-             nameobj.rowidz=res[k].rowid; 
-             nameobj.lrrectife=res[k].lrrectife;
-             nameobj.Correction=res[k].Correction;
-           
-
-        var obj={"conceptid":"","conceptname":""};
-            obj.conceptid=res[k].conceptid;
-            obj.conceptname=res[k].conceptname;
-            a.push(obj);
-           
-           for(var l=k+1;l<res.length;l++)
-            {
-                if(res[k].rowid==res[l].rowid)
-                 {
-                 
-          if(res[k].planning_date==res[l].planning_date)
-                {
-            
-                 var obj1={"conceptid":"","conceptname":""}
-                 obj1.conceptid=res[l].conceptid;
-                 obj1.conceptname=res[l].conceptname;
-                 a.push(obj1);
-                res.splice(l,1);
-                 l--;
-               }}}
-                nameobj.valuearrr=a;
-                overall.push(nameobj);
-                a=[];
-                 }
-
-          var b=[];
-        var subarr=[];            
-for(var k=0;k<res4.length;k++)
-           {       
-           var nameobj={};
-             nameobj.planning_date=res4[k].planning_date; 
-             nameobj.period=res4[k].period; 
-            nameobj.rowidz=res4[k].rowid; 
-            
-
-        var obj={"subconceptid":"","subconceptname":""};
-            obj.subconceptid=res4[k].sub_concept_id;
-            obj.subconceptname=res4[k].sub_concept_name;
-            b.push(obj);
-           
-           for(var l=k+1;l<res4.length;l++)
-            {
-                 if(res[k].rowid==res4[l].rowid)
-                 {
-                     if(res4[k].planning_date==res4[l].planning_date)
-                {
-           
-                 var obj1={"subconceptid":"","subconceptname":""}
-                 obj1.subconceptid=res4[l].sub_concept_id;
-                 obj1.subconceptname=res4[l].sub_concept_name;
-                 b.push(obj1);
-                res4.splice(l,1);
-                 l--;
-               }}}
-                nameobj.suarr=b;
-                subarr.push(nameobj);
-                b=[];
-                 }
-   
-            var a1=[];
-            var overall1=[];
+           var a1=[];
+           var overall1=[];
            for(var k=0;k<res3.length;k++)
            {       
            var nameobj={};
              nameobj.planning_date=res3[k].planning_date; 
              nameobj.rowidz=res3[k].rowid; 
-            
-       var obj={"valueid":"","valuename":""};
+             nameobj.valuuid=res3[k].conc_date; 
+         var obj={"valueid":"","valuename":""};
             obj.valueid=res3[k].value_id;
             obj.valuename=res3[k].value_name;
             a1.push(obj);
@@ -1648,6 +1571,9 @@ for(var k=0;k<res4.length;k++)
                 overall1.push(nameobj);
                 a1=[];
                  }
+ alert(JSON.stringify(overall1));
+
+
       var a2=[];
       var overall2=[];
 
@@ -1656,7 +1582,7 @@ for(var k=0;k<res4.length;k++)
            var nameobj={};
              nameobj.planning_date=res4[k].planning_date; 
              nameobj.rowidz=res4[k].rowid; 
-            
+             nameobj.skiluid=res4[k].conc_date; 
        var obj={"skillid":"","skillname":""};
             obj.skillid=res4[k].skill_id;
             obj.skillname=res4[k].skill_name;
@@ -1679,86 +1605,113 @@ for(var k=0;k<res4.length;k++)
                 overall2.push(nameobj);
                 a2=[];
                  }
-   var temp2=[];
- 
+       alert(JSON.stringify(overall2));
+       alert(res.length);
+     var temp2=[];
+   /* for(var r=0;r<overall1.length;r++){
+        for(var n=0;n<res.length;n++){   
+          if(res[n].rowid==overall1[r].rowidz){
+            alert(res[n].planning_date+" "+overall1[r].planning_date);
 
-    for(var n=0;n<overall.length;n++){
-        for(var r=0;r<subarr.length;r++){   
-          if(overall[n].rowidz==overall1[r].rowidz){
-              if(overall[n].planning_date==subarr[r].planning_date){
-            var obj={};   
-             obj.planning_date=overall[n].planning_date; 
-             obj.period=overall[n].period; 
-             obj.innovation=overall[n].innovation; 
-             obj.remark=overall[n].remark;
-             obj.lrrectife=overall[n].lrrectife;
-              obj.Correction=overall[n].Correction;
-             obj.mainarr=overall[n].valuearrr;
-              obj.suarr=subarr[r].suarr;
-             obj.rowidz=res[n].rowidz;
-             temp2.push(obj);
-             overall.splice(n,1);
+              if(res[n].planning_date==overall1[r].planning_date){
+             var nameobj={};
+             nameobj.planning_date=res[n].planning_date; 
+             nameobj.period=res[n].period; 
+             nameobj.concept_id=res[n].concept_id; 
+             nameobj.conceptname=res[n].conceptname; 
+             nameobj.innovation=res[n].innovation; 
+             nameobj.remark=res[n].remark; 
+             nameobj.rowidz=res[n].rowid; 
+             nameobj.lrrectife=res[n].lrrectife;
+             nameobj.Correction=res[n].Correction;
+             nameobj.subuid=res[n].subuid;
+             nameobj.conuid=res[n].conuid;
+             nameobj.sub_concept_id=res[n].sub_concept_id;
+             nameobj.sub_concept_name=res[n].sub_concept_name;
+             nameobj.mainarr=overall1[r].mainarr;
+             nameobj.valuuid=overall1[r].valuuid;
+             temp2.push(nameobj);
+              res.splice(n,1);
              }}}}
-          for(var n=0;n<overall.length;n++){
-             var obj={};
-             obj.planning_date=overall[n].planning_date; 
-             obj.period=overall[n].period; 
-             obj.innovation=overall[n].innovation; 
-             obj.lrrectife=overall[n].lrrectife; 
-             obj.Correction=overall[n].Correction; 
-            
-             obj.remark=overall[n].remark;
-             obj.valuearrr=overall[n].valuearrr;
-             obj.suarr="";
-             obj.rowidz=res[n].rowidz;
-             temp2.push(obj);
-             }
-              obj.Correction=overall[n].Correction;
-        var temp3=[];
-         for(var n=0;n<temp2.length;n++){
-        for(var r=0;r<overall1.length;r++){   
-          if(temp2[n].rowidz==overall1[r].rowidz){
-              if(temp2[n].planning_date==overall1[r].planning_date){
-            var obj={};   
-            obj.planning_date=temp2[n].planning_date; 
-            obj.period=temp2[n].period; 
-               obj.lrrectife=temp2[n].lrrectife;
-             obj.Correction=temp2[n].Correction; 
-             
-             obj.innovation=temp2[n].innovation; 
-             obj.remark=temp2[n].remark;
-             obj.valuearrr=temp2[n].valuearrr;
-             obj.suarr=temp2[n].suarr;
-             obj.mainarr=overall1[n].mainarr;
-             obj.rowidz=res[n].rowidz;
-             temp3.push(obj);
+
+
+
+       alert(JSON.stringify(temp2));
+       alert(temp2.length+""+res.length);
+       alert(JSON.stringify(res));*/
+ 
+  for(var l=0;l<res.length;l++){
+ 
+      for(var r=0;r<overall1.length;r++){
+        for(var n=0;n<res.length;n++){   
+          if(res[n].rowid==overall1[r].rowidz){
+            alert(res[n].planning_date+" "+overall1[r].planning_date);
+             if(res[n].planning_date==overall1[r].planning_date){
+             var nameobj={};
+             nameobj.planning_date=res[n].planning_date; 
+             nameobj.period=res[n].period; 
+             nameobj.concept_id=res[n].concept_id; 
+             nameobj.conceptname=res[n].conceptname; 
+             nameobj.innovation=res[n].innovation; 
+             nameobj.remark=res[n].remark; 
+             nameobj.rowidz=res[n].rowid; 
+             nameobj.lrrectife=res[n].lrrectife;
+             nameobj.Correction=res[n].Correction;
+           //  nameobj.subuid=res[n].subuid;
+           //  nameobj.conuid=res[n].conuid;
+             nameobj.sub_concept_id=res[n].sub_concept_id;
+             nameobj.sub_concept_name=res[n].sub_concept_name;
+             nameobj.mainarr=overall1[r].mainarr;
+           //  nameobj.valuuid=overall1[r].valuuid;
+             temp2.push(nameobj);
+              res.splice(n,1);
+             }}}}
+       
+        }
+        alert(temp2.length);
+         alert(res.length);
+        
+        alert(JSON.stringify(temp2)); 
+      alert(JSON.stringify(res)); 
+var temp1=[];
+  for(var l=0;l<temp2.length;l++){
+   alert('1');
+       for(var r=0;r<overall2.length;r++){
+        for(var n=0;n<temp2.length;n++){   
+          if(temp2[n].rowidz==overall2[r].rowidz){
+              if(temp2[n].planning_date==overall2[r].planning_date){
+             var nameobj={};
+             nameobj.planning_date=temp2[n].planning_date; 
+             nameobj.period=temp2[n].period; 
+             nameobj.innovation=temp2[n].innovation;
+              nameobj.concept_id=temp2[n].concept_id; 
+             nameobj.conceptname=temp2[n].conceptname; 
+              
+             nameobj.remark=temp2[n].remark; 
+             nameobj.rowidz=temp2[n].rowidz; 
+             nameobj.lrrectife=temp2[n].lrrectife;
+             nameobj.Correction=temp2[n].Correction;
+             nameobj.sub_concept_id=temp2[n].sub_concept_id;
+             nameobj.sub_concept_name=temp2[n].sub_concept_name;
+             nameobj.mainarr=temp2[n].mainarr;
+             nameobj.valuuid=temp2[n].valuuid;
+             nameobj.skiluid=overall2[r].skiluid;
+             nameobj.subuid=temp2[n].subuid;
+             nameobj.conuid=temp2[n].conuid;
+             nameobj.skillarr=overall2[r].skillarr;
+             temp1.push(nameobj);
              temp2.splice(n,1);
              }}}}
-               for(var n=0;n<temp3.length;n++){
-        for(var r=0;r<overall2.length;r++){   
-          if(temp3[n].rowidz==overall2[r].rowidz){
-              if(temp3[n].planning_date==overall2[r].planning_date){
-            var obj={};   
-             obj.planning_date=temp3[n].planning_date; 
-             obj.period=temp3[n].period; 
-             obj.innovation=temp3[n].innovation;
-             obj.lrrectife=temp3[n].lrrectife; 
-             obj.Correction=temp3[n].Correction; 
-             obj.remark=temp3[n].remark;
-             obj.valuearrr=temp3[n].valuearrr;
-             obj.suarr=temp3[n].suarr;
-             obj.mainarr=temp3[n].mainarr;
-             obj.skillarr=overall2[r].skillarr;
-             obj.rowidz=temp3[n].rowidz;
-             temp1.push(obj);
-             temp3.splice(n,1);
-             }}}}
-
-         alert(JSON.stringify(temp1));
+       
+         }
+         alert(5);
+   alert(JSON.stringify(temp1));
            for(var i=0;i<temp1.length;i++){
                     var obj={};
                       obj.planned_date=temp1[i].planning_date;
                       obj.innovation=temp1[i].innovation;
+                      obj.conceptid=temp1[i].concept_id;
+                      obj.conceptname=temp1[i].conceptname;
                       var id_date=temp1[i].planning_date;
                       id_date=id_date.replace(/[^\w\s]/gi, '');
                       obj.id_date=id_date;
@@ -1766,12 +1719,17 @@ for(var k=0;k<res4.length;k++)
                       obj.period=temp1[i].period;
                       obj.mainarr=temp1[i].mainarr;
                       obj.skillarr=temp1[i].skillarr;
-                      obj.suarr=temp1[i].suarr;
-                      obj.valuearrr=temp1[i].valuearrr;
                       obj.rowidz=temp1[i].rowidz;
+                      obj.lrrectife=temp1[i].lrrectife;
+                      obj.Correction=temp1[i].Correction;
+                      obj.sub_concept_id=temp1[i].sub_concept_id;
+                      obj.sub_concept_name=temp1[i].sub_concept_name;
+                      obj.valuuid=temp1[i].valuuid;
+                      obj.skiluid=temp1[i].skiluid;
+                      obj.subuid=temp1[i].subuid;
+                      obj.conuid=temp1[i].conuid;
                       obj.grade_id=sessionStorage.getItem("grdeidz");
-                      obj.subject_id=sessionStorage.getItem("subjectidz");
-                      
+                    obj.subject_id=sessionStorage.getItem("subjectidz");
                       obj.rowid=i+1;
                       obj.hidecheck=false; 
                       setattr.push(obj);
