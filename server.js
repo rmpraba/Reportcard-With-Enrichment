@@ -10,10 +10,10 @@ var connection = mysql.createConnection({
    user     : 'root',
    password : '',
 
-   database : 'reportcardnew'
+   database : 'reportcard1'
  
 });
-
+   
 var bodyParser = require('body-parser'); 
 var app = express();
 var logfile;

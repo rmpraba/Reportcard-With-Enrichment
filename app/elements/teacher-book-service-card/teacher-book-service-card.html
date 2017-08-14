@@ -538,7 +538,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         debounce-duration="300" />
         <iron-ajax
         method="post"
-<<<<<<< HEAD
+
         id="fnfinalbookskillajax"
         url="{{fnfinalbookskillurl}}"
         params="{{fnfinalbookskillparam}}"
@@ -554,14 +554,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         handle-as="json"
         content-type="application/json"
         on-response="fnfinalbookvalueResponse"
-=======
+
         id="fnmasterplaninsertajax"
         url="{{fnmasterplaninserturl}}"
         params="{{fnmasterplaninsertparam}}"
         handle-as="json"
         content-type="application/json"
         on-response="fnmasterplaninsertResponse"
->>>>>>> origin/master
+
         debounce-duration="300" />
 
   </template>
@@ -1854,14 +1854,11 @@ fnsetcoskill11:function(skarr,period,rowid)
       var overall4=[];
 
 
-<<<<<<< HEAD
 
-          var b=[];
-        var subarr=[];            
-            for(var k=0;k<res4.length;k++)
-=======
+
+        
         for(var k=0;k<res6.length;k++)
->>>>>>> origin/master
+
            {       
            var nameobj={};
              nameobj.planning_date=res6[k].planning_date; 
@@ -2256,15 +2253,9 @@ for(var r=0;r<overall2.length;r++){
   document.querySelector('class-teacher-book-rejection-item-card').empid=res2[0].empid; 
  document.querySelector('class-teacher-book-rejection-item-card').empname=res2[0].empname;
         },
-<<<<<<< HEAD
-   fnfinalbook:function(status,empid,skill,innovation,enrichmentsuggest,period,planneddate,concept,conceptid,remark,mainarr){
-    //alert('3');
-    for(var i=0;i<mainarr.length;i++){
-             this.fnfinalbookurl=sessionStorage.getItem("addrinfo")+"/fnfinalbook-service";
-           var obj={};
-           obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
-           obj.academic_year=localStorage.getItem("curr_sess_academicyear");
-=======
+
+   
+
    fnfinalbook:function(costatus,empid,innovation,enrichmentsuggest,period,planneddate,concept,conceptid,remark,rowidz,subconceptname,subconceptid,subuid,conuid,Correction,lrrectife){
 
   
@@ -2272,7 +2263,7 @@ for(var r=0;r<overall2.length;r++){
      var obj={};
          obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
          obj.academic_year=localStorage.getItem("curr_sess_academicyear");
->>>>>>> origin/master
+
            obj.chapterid=localStorage.getItem("curr_sess_capters");
            obj.subjectid=sessionStorage.getItem("subjectidz");
            obj.gradeid=sessionStorage.getItem("grdeidz");
