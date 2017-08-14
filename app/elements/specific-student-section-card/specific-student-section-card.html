@@ -38,20 +38,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <paper-input hidden  value={{sectionname}}></paper-input>
          
           <paper-checkbox  id="{{id}}" on-change="fnsudentsectionzzzz">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</paper-checkbox>      
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</paper-checkbox>      
 
                    
   </template>
   <script>
   (function() {
     'use strict';
-    var studsection=[];
-    var getstudentarr=[];
+    var studsectionccarr=[];
+    var getstudentzzzzarr=[];
     var arr=[];
       var pmm=[];
       var s1;
       var c1; 
-      var studclassid;
+    var studclassidccc;
       
       
     Polymer({
@@ -77,35 +77,35 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           obj.grade_id=this.stugradeid;
            
           //alert(JSON.stringify(obj));
-          studsection.push(obj); 
-         // alert(JSON.stringify(studsection));
+          studsectionccarr.push(obj); 
+         // alert(JSON.stringify(studsectionccarr));
 
           s1=this.id;
           c1=this.classid;
                  
           
-        for(var i=0;i<studsection.length;i++)
+        for(var i=0;i<studsectionccarr.length;i++)
         {
-            //alert(studsection[i].id);
+            //alert(studsectionccarr[i].id);
            //alert(this.enqno);
 
-           if(studsection[i].id==this.enqno)
+           if(studsectionccarr[i].id==this.enqno)
            {    
-               // alert(studsection[i].classid);
+               // alert(studsectionccarr[i].classid);
                // alert(this.classid);
-                   if(studsection[i].classid==this.classid)
+                   if(studsectionccarr[i].classid==this.classid)
                    {
-                     var mm=studsection[i].enquiry_no;
+                     var mm=studsectionccarr[i].enquiry_no;
                       document.querySelector('#'+mm).checked=true;
-                     pmm.push(studsection[i].classid);
+                     pmm.push(studsectionccarr[i].classid);
                     }
-                  else if(studsection[i].classid!=this.classid)
+                  else if(studsectionccarr[i].classid!=this.classid)
                   {
                    // alert('t');
-                    //alert(studsection[i].stdcls);
-                    //alert(studsection[i].classid);
-                    var ssszzz=studsection[i].stdcls;
-                    var bb=studsection[i].classid;
+                    //alert(studsectionccarr[i].stdcls);
+                    //alert(studsectionccarr[i].classid);
+                    var ssszzz=studsectionccarr[i].stdcls;
+                    var bb=studsectionccarr[i].classid;
                       document.querySelector('#'+ssszzz).checked=false;
                       var a1 = pmm.indexOf(bb);
                     for(var g=0;g<pmm.length;g++)
@@ -115,35 +115,35 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                           pmm.splice(a1,1);
                       }
                     }
-                      studsection.splice(i,1);
+                      studsectionccarr.splice(i,1);
                     }
                   }
 
                   }
-                   document.querySelector('student-to-section-mapping-card').fnsetsetcion(studsection);
+                   document.querySelector('student-to-section-mapping-card').fnsetsetcion(studsectionccarr);
                 }
       },
       getprestudent:function(arr)
       {
-       getstudentarr=arr;
-        //alert(JSON.stringify(getstudentarr));
-          for(var i=0;i<getstudentarr.length;i++)
+       getstudentzzzzarr=arr;
+       // alert(JSON.stringify(getstudentzzzzarr));
+          for(var i=0;i<getstudentzzzzarr.length;i++)
           {
             
-            var studentname=getstudentarr[i].student_name;
-            var gender=getstudentarr[i].gender;
-            var dob=getstudentarr[i].dob;
-            var classid=getstudentarr[i].class_id;
-            var aid=getstudentarr[i].id;
+            var studentname=getstudentzzzzarr[i].student_name;
+            var gender=getstudentzzzzarr[i].gender;
+            var dob=getstudentzzzzarr[i].dob;
+            var classid=getstudentzzzzarr[i].class_id;
+            var aid=getstudentzzzzarr[i].id;
 
-            var  getid=getstudentarr[i].id;
+            var  getid=getstudentzzzzarr[i].id;
                 getid=getid.replace(/[^\w\s]/gi, '');
-
-               studclassid=classid+getid;
-                alert(studclassid);
+               // alert(getid);
+               studclassidccc=classid+getid;
+                //alert(studclassidccc);
                 
-              document.querySelector('#'+studclassid).checked=true;
-            if(document.querySelector('#'+studclassid).checked==true)
+              document.querySelector('#'+studclassidccc).checked=true;
+            if(document.querySelector('#'+studclassidccc).checked==true)
             {
               var obj1={"studentname":"","gender":"","dob":"","id":"","classid":"","stugradeid":"","stdcls":""}
                 obj1.studentname=studentname;
@@ -151,9 +151,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 obj1.dob=dob;
                 obj1.id=aid;
                 obj1.classid=classid;
-                obj1.stugradeid=this.stugradeid;
-                obj1.stdcls=studclassid;
-                studsection.push(obj1);
+  
+                  obj1.stdcls=studclassidccc;
+                studsectionccarr.push(obj1);
+                //alert(JSON.stringify(studsectionccarr))
             }
             //getstudentarr.splice(i,1);
           }
@@ -162,14 +163,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       studentsectionclean:function(e)
       {
         //alert(333);
-    //alert(JSON.stringify(studsection));
+    //alert(JSON.stringify(studsectionccarr));
     
-        if(studsection.length!=0)
+        if(studsectionccarr.length!=0)
         {
-            for(var i=0;i<studsection.length;i++)
+            for(var i=0;i<studsectionccarr.length;i++)
             {
-                //alert(studsection[i].stdcls);
-                var idzzz=studsection[i].stdcls;
+                //alert(studsectionccarr[i].stdcls);
+                var idzzz=studsectionccarr[i].stdcls;
                 //alert('call');
                 //alert(idzzz);
                  document.querySelector('#'+idzzz).checked=false;
@@ -182,8 +183,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 obj.adminno=this.enqno;
                 obj.classid=this.classid;
                 obj.stugradeid=this.stugradeid;
-                getstudentarr.splice(obj);
-                studsection.splice(obj);
+                getstudentzzzzarr.splice(obj);
+                studsectionccarr.splice(obj);
         }
 
       }

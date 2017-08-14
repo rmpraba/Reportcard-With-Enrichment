@@ -1,0 +1,148 @@
+
+<link rel="import" href="..\..\bower_components/polymer/polymer.html">
+
+<dom-module id="curriculum-plan-conceptapproval-card">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      .position{
+        margin-left:7%   
+   
+      }
+      #tb1{
+        width:15%
+      }
+      #tb2{
+        width:35%
+      }
+      #tb3{
+        width:10%
+      }
+      #itemcard:nth-child(odd) {
+        background-color: white; 
+      }
+      #itemcard:nth-child(even) {
+        background-color: #f1f1f1;
+      }
+      #itemcard{
+        width: 80%;
+        margin-left: 11%;  
+      }
+      .report1
+      {
+        table-layout: fixed;
+        border-collapse: collapse;
+        width: 97%;
+        margin-left: 5%;
+        margin-top: 5%;
+      }
+      paper-dropdown-menu
+      {
+        --paper-input-container-label: { color: red };
+        text-align:center;
+      }
+    </style>
+    <div>
+      <span class="position"> 
+        <paper-dropdown-menu  label="Select the Grade">
+          <paper-menu id="cpapprovalgrade" class="dropdown-content"   on-iron-select="FnSelectGrade">
+            <template is="dom-repeat" items="{{gradearr}}">
+            <paper-item value="{{item.gradeid}}">{{item.gradename}}</paper-item>
+            </template>    
+          </paper-menu>
+        </paper-dropdown-menu>
+      </span>
+      <span class="position"> 
+        <paper-dropdown-menu  label="Select Section">
+          <paper-menu id="cpapprovalsection" class="dropdown-content"  on-iron-select="FnSelectSection">
+            <template is="dom-repeat" items="{{sectionarr}}">
+            <paper-item value="{{item.class_id}}">{{item.section_id}}</paper-item>
+            </template>    
+          </paper-menu>
+        </paper-dropdown-menu>
+      </span>  
+      <span class="position"> 
+        <paper-dropdown-menu  label="Select Subject">
+          <paper-menu id="cpapprovalsubject" class="dropdown-content"   on-iron-select="FnSelectSubject">
+            <template is="dom-repeat" items="{{subjectarr}}">
+            <paper-item value="{{item.subject_id}}">{{item.subject_name}}</paper-item>
+            </template>    
+          </paper-menu>
+        </paper-dropdown-menu>
+      </span>        
+      <span class="position"> 
+        <paper-dropdown-menu  label="Select the chapter">
+          <paper-menu id="cpapprovalchapter" class="dropdown-content"   on-iron-select="FnSelectChapter">
+          <template is="dom-repeat" items="{{chapterarr}}">
+          <paper-item value="{{item.capter_id}}">{{item.capter}}</paper-item>
+          </template>    
+          </paper-menu>
+        </paper-dropdown-menu>
+     </span>   
+    </div>
+    <div hidden$="{{hideapprovalcard}}">
+      Teacher Name: {{name}}
+      <br><br>
+      <!-- <table border="1" style="border-collapse: collapse;"> -->
+      <template is="dom-repeat" items="{{approvearr}}">
+      <curriculum-plan-conceptapproval-itemcard sno="{{item.sno}}" conceptid="{{item.concept_id}}" conceptname="{{item.concept_name}}" subconceptid="{{item.sub_concept_id}}" subconceptname="{{item.sub_concept_name}}" period="{{item.period}}" fromdate="{{item.planned_date_from}}" todate="{{item.planned_to_date}}" skill="{{item.skill}}" value="{{item.value}}" innovation="{{item.innovation}}" lr="{{item.lr_rectification}}" remarks="{{item.remarks}}" correctionstatus="{{item.correction_status}}" completionstatus="{{item.completion_status}}" hideflag="{{item.hideflag}}">          
+        </curriculum-plan-conceptapproval-itemcard>        
+      </template>
+      <!-- </table> -->
+    </div> 
+    <teacher-book-service-card id="bookservice"></teacher-book-service-card>  
+  </template>
+  <script>
+  (function() {
+    'use strict';
+    Polymer({
+      is: 'curriculum-plan-conceptapproval-card',     
+      ready:function(){
+        this.hideapprovalcard=true;
+      } ,
+      FnSelectGrade:function(e){
+        this.gradeid=e.target.selectedItem.value;
+        this.gradename=e.target.selectedItem.textContent.trim();
+        localStorage.setItem("curr_sess_gradeid",this.gradeid);
+        localStorage.setItem("curr_sess_gradename",this.gradename);
+        this.$.bookservice.fngetclassbooksectionvalue(this.gradeid);
+        document.querySelector('#cpapprovalsection').selected=-1;
+        document.querySelector('#cpapprovalsubject').selected=-1;
+        document.querySelector('#cpapprovalchapter').selected=-1;
+      },
+      FnSelectSection:function(e){
+        this.sectionidz=e.target.selectedItem.value;
+        this.sectionidname=e.target.selectedItem.textContent.trim();
+        localStorage.setItem("curr_sess_sectionid",this.sectionidz);
+        localStorage.setItem("curr_sess_sectionname",this.sectionidname);
+        this.$.bookservice.fngetclassbooksubjectvalue(this.gradeid,this.sectionidname);
+        document.querySelector('#cpapprovalsubject').selected=-1;
+        document.querySelector('#cpapprovalchapter').selected=-1;
+      },
+      FnSelectSubject:function(e){
+       this.subjectid=e.target.selectedItem.value;
+       this.subjectname=e.target.selectedItem.textContent.trim();
+       localStorage.setItem("curr_sess_subjectid",this.subjectid);
+       localStorage.setItem("curr_sess_subjectname",this.subjectname);
+       this.$.bookservice.fngetclassbookchaptervalue(this.gradeid,this.sectionidname,this.subjectid);
+       document.querySelector('#cpapprovalchapter').selected=-1;
+      },
+      FnSelectChapter:function(e){
+       this.chapterid=e.target.selectedItem.value;
+       this.chaptername=e.target.selectedItem.textContent.trim();
+       localStorage.setItem("curr_sess_chapterid",this.chapterid); 
+       localStorage.setItem("curr_sess_chaptername",this.chaptername); 
+       this.$.bookservice.fngetclassbookchapterconceptvalue(this.gradeid,this.sectionidz,this.sectionidname,this.subjectid,this.chapterid);
+      },
+      FnRefresh:function(){
+        document.querySelector('#cpapprovalgrade').selected=-1;
+        document.querySelector('#cpapprovalsection').selected=-1;
+        document.querySelector('#cpapprovalsubject').selected=-1;
+        document.querySelector('#cpapprovalchapter').selected=-1;
+      }
+    });
+  })();
+  </script>
+</dom-module>

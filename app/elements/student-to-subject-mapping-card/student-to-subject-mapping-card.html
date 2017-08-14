@@ -255,6 +255,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       this.FnStoStermid=e.target.selectedItem.textContent.trim(); 
        localStorage.setItem("curr_sess_selectedTerms",this.FnStoStermid);
       //alert(this.FnStoStermid);
+      document.querySelector('#rsectionwww').selected=-1;
+      document.querySelector('#rgradewww').selected=-1;
+      this.hidenewsubcat=true;
      },
    fnthidlanginfo:function(arr,arr1){
          fnthidlanginfoarr=arr;
@@ -266,13 +269,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    },
      FnStosGrade:function(e)  
      {     
-         document.querySelector('#rsectionwww').selected=-1;
          this.FnStosGradeid=e.target.selectedItem.textContent.trim();
          this.FnStosGradeid2=e.target.selectedItem.value;
          localStorage.setItem("curr_sess_selectedgrade",this.FnStosGradeid);
          localStorage.setItem("curr_sess_selectedgrade1",this.FnStosGradeid2);
         // alert(this.FnStosGradeid);
-  this.$.uiservice.FnselecttoSection(this.subjectselectid,this.FnStosGradeid,this.FnStoStermid,this.FnStosGradeid2);
+        this.$.uiservice.FnselecttoSection(this.subjectselectid,this.FnStosGradeid,this.FnStoStermid,this.FnStosGradeid2);
+        document.querySelector('#rsectionwww').selected=-1;
+        this.hidenewsubcat=true;
     
       },  
         f12:function(e){
@@ -619,8 +623,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       
      fnsetreclear:function(e){
      // alert("hi");
+     document.querySelector('#rtermmm').selected=-1;
       document.querySelector('#rsectionwww').selected=-1;
-      document.querySelector('#rtermmm').selected=-1;
       document.querySelector('#rgradewww').selected=-1;
    //   document.querySelector('#rtermmm1').selected=-1;
             

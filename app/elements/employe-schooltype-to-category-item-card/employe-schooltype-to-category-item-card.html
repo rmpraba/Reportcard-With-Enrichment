@@ -58,6 +58,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'employe-schooltype-to-category-item-card',
      fnschooltypeget11:function(e)
       {
+        document.querySelector('employe-schooltype-to-category-card').newRefresh();
+        document.querySelector('employee-category-item-card').FnRefresh();
        if(document.querySelector('#'+this.id).checked==true)
          {  
 
