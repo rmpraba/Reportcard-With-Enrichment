@@ -552,9 +552,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         params="{{fnfinalbookvalueparam}}"
         handle-as="json"
         content-type="application/json"
-    on-response="fnfinalbookvalueResponse"
+
+        on-response="fnfinalbookvalueResponse"
           debounce-duration="300" />
-  <iron-ajax
+ 
+
+
+        <iron-ajax
 
         method="post"
         id="fnmasterplaninsertajax"
@@ -577,7 +581,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     Polymer({   
       is: 'teacher-book-service-card',
       fnmasterplaninsert:function(conarr,valuearr,skarr,subarr,period,innovation,remark,rowid,lrrectife,correction){
-   
+        alert('1');
         var overall=[];
         for(var i=0;i<subarr.length;i++){
         var valueid="";
@@ -2170,7 +2174,7 @@ for(var r=0;r<overall2.length;r++){
                       obj.rowid=i+1;
                       obj.hidecheck=false; 
                       setattr.push(obj);
-                      }
+                      }}
 // alert(JSON.stringify(setattr));
  document.querySelector('class-teacher-book-approve-card').mainarr1=setattr; 
  document.querySelector('class-teacher-book-approve-card').empid=res1[0].empid; 
