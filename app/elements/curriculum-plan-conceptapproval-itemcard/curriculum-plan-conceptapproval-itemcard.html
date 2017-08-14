@@ -16,6 +16,7 @@
       <table border="1" style="border-collapse: collapse;">
         <tr>
           <td width="30px">{{sno}}</td>
+          <td hidden>{{rowid}}</td>
           <td hidden>{{conceptid}}</td>
           <td width="150px">{{conceptname}}</td>
           <td hidden>{{subconceptid}}</td>
@@ -126,6 +127,7 @@
       FnSave:function(){
         var obj={};
         obj.sno=this.sno;
+        obj.rowid=this.rowid;
         obj.conceptid=this.conceptid;
         obj.conceptname=this.conceptname;
         obj.subconceptid=this.subconceptid;

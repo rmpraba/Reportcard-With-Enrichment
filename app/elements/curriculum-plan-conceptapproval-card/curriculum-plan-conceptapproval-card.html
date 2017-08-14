@@ -82,7 +82,6 @@
         </paper-dropdown-menu>
      </span>   
     </div>
-  
 
 
      <paper-input value="{{name}}" hidden></paper-input>
@@ -115,6 +114,7 @@
            <tr>         
              <curriculum-plan-conceptapproval-itemcard sno="{{item.sno}}" conceptid="{{item.concept_id}}" conceptname="{{item.concept_name}}" subconceptid="{{item.sub_concept_id}}" subconceptname="{{item.sub_concept_name}}" period="{{item.period}}" fromdate="{{item.planned_date_from}}" todate="{{item.planned_to_date}}" skill="{{item.skill}}" value="{{item.value}}" innovation="{{item.innovation}}" lr="{{item.lr_rectification}}" remarks="{{item.remarks}}" correctionstatus="{{item.correction_status}}" completionstatus="{{item.completion_status}}" hideflag="{{item.hideflag}}">          
             </curriculum-plan-conceptapproval-itemcard>        
+
             </tr>  
            </template>  
      </table> 
@@ -182,6 +182,7 @@
         this.$.clsplnevalttttt.hidden=true;
         this.name="";
         this.$.empidzz.hidden=true;
+        this.approvearr="";
       }
     });
   })();
