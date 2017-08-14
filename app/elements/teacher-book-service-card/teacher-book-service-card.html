@@ -1887,7 +1887,7 @@ fnsetcoskill11:function(skarr,period,rowid)
                 nameobj.skillarr=a4;
                 overall4.push(nameobj);
                 a2=[];
-                 }
+                 }}
        //alert(JSON.stringify(overall4));
 /*var temp4=[];
 
@@ -1954,15 +1954,6 @@ for(var l=0;l<res2.length;l++){
              }}}}
        
            }*/
-
-
-
-
-
-
-
-
-
 
           var a1=[];
            var overall1=[];
@@ -2124,7 +2115,7 @@ for(var l=0;l<res2.length;l++){
 
            }
          
-           alert(JSON.stringify(temp2));
+           //alert(JSON.stringify(temp2));
 for(var r=0;r<overall2.length;r++){
         for(var n=0;n<temp2.length;n++){   
           if(temp2[n].rowidz==overall2[r].rowidz){
@@ -2151,9 +2142,6 @@ for(var r=0;r<overall2.length;r++){
              temp2.splice(n,1);
              }}}}
        
-
-         
-
 
            for(var i=0;i<temp1.length;i++){
                     var obj={};
@@ -2187,8 +2175,6 @@ for(var r=0;r<overall2.length;r++){
  document.querySelector('class-teacher-book-approve-card').mainarr1=setattr; 
  document.querySelector('class-teacher-book-approve-card').empid=res1[0].empid; 
  document.querySelector('class-teacher-book-approve-card').empname=res1[0].empname; 
-
- 
         },
 
  
@@ -2256,10 +2242,10 @@ for(var r=0;r<overall2.length;r++){
         },
 
 
-   fnfinalbook:function(costatus,empid,innovation,enrichmentsuggest,period,planneddate,concept,conceptid,remark,rowidz,subconceptname,subconceptid,subuid,conuid,Correction,lrrectife){
+   fnfinalbook:function(costatus,empid,innovation,enrichmentsuggest,period,planneddate,concept,conceptid,remark,rowidz,subconceptname,subconceptid,subuid,conuid,Correction,lrrectife)
+   {
 
-  
- this.fnfinalbookurl=sessionStorage.getItem("addrinfo")+"/fnfinalbook-service";
+         this.fnfinalbookurl=sessionStorage.getItem("addrinfo")+"/fnfinalbook-service";
      var obj={};
          obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
          obj.academic_year=localStorage.getItem("curr_sess_academicyear");
@@ -2288,7 +2274,7 @@ for(var r=0;r<overall2.length;r++){
           
            this.fnfinalbookparam=obj;
            this.$.fnfinalbookajax.generateRequest();
-          } 
+        
            
          },
           fnfinalbookResponse:function(e)
@@ -2491,7 +2477,7 @@ fnfinalbookvalueResponse:function(e)
                obj.completion='yes';
               this.fnfinalbook1param=obj;
                 //alert("1");
-                alert(JSON.stringify(obj));
+                //alert(JSON.stringify(obj));
               this.$.fnfinalbook1ajax.generateRequest();
         },
         fnfinalbook1Response:function(e)
