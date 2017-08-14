@@ -488,37 +488,36 @@ fnpasssubarr:function(subsarr){
           }
       
          else if(this.planneddate=="empty")
-      {
-        
-      this.$.bookservice.fnsetcoskill(conarr,this.period,this.innovation,this.remark,this.rowid,this.lrrectife,this.correction);
-      this.$.bookservice.fnsetcoskillvalue(valuearr,this.period,this.rowid);
-      this.$.bookservice.fnsetcoskill11(skarr,this.period,this.rowid); 
-      this.$.bookservice.fnsetcoskill12(subsarrr,this.period,this.rowid); 
-      this.$.bookservice.fnmasterplaninsert(conarr,valuearr,skarr,subsarrr,this.period,this.innovation,this.remark,this.rowid,this.lrrectife,this.correction);
+          {
+            
+          this.$.bookservice.fnsetcoskill(conarr,this.period,this.innovation,this.remark,this.rowid,this.lrrectife,this.correction);
+          this.$.bookservice.fnsetcoskillvalue(valuearr,this.period,this.rowid);
+          this.$.bookservice.fnsetcoskill11(skarr,this.period,this.rowid); 
+          this.$.bookservice.fnsetcoskill12(subsarrr,this.period,this.rowid); 
+          this.$.bookservice.fnmasterplaninsert(conarr,valuearr,skarr,subsarrr,this.period,this.innovation,this.remark,this.rowid,this.lrrectife,this.correction);
 
-        this.hidecheck1=true;
-        this.hidecheck=false;  
-        this.planneddate="";     
-        this.showdate=moment(new Date()).format('L');
-        localStorage.setItem("localsess_last_service",this.showdate);
-        document.querySelector('concept-check-card').fnclean();
-        document.querySelector('aproval-book').fnclean1();
-        document.querySelector('subconcept-dialog-card').fnclean1();
-        document.querySelector('skill-dialog-card').fnclean1();
-        setsubarr=[];
-        trmp=[];
-         }
+            this.hidecheck1=true;
+            this.hidecheck=false;  
+            this.planneddate="";     
+            this.showdate=moment(new Date()).format('L');
+            localStorage.setItem("localsess_last_service",this.showdate);
+            document.querySelector('concept-check-card').fnclean();
+            document.querySelector('aproval-book').fnclean1();
+            document.querySelector('subconcept-dialog-card').fnclean1();
+            document.querySelector('skill-dialog-card').fnclean1();
+            setsubarr=[];
+            trmp=[];
+          }
+        }  
  
-    else  {
-          alert('edit');
-             this.$.bookservice.fnbookeditskill(this.period,this.innovation,this.remark,this.planneddate,this.rowidz,this.lrrectife,this.correction);
+      else  
+      {
+         //alert('edit');
+        this.$.bookservice.fnbookeditskill(this.period,this.innovation,this.remark,this.planneddate,this.rowidz,this.lrrectife,this.correction);
 
       }
-         
-   
         this.conceptjhkhzz="";
-      
-     }
+     
   },
 
     fngetconceptz:function(e){

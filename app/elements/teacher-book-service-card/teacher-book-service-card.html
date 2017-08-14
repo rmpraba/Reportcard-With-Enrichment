@@ -648,7 +648,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         obj.remarks=remark;
         obj.correctionstatus=correction;
         this.fnmasterplaninsertparam=obj;
-        alert(JSON.stringify(obj));
+        //alert(JSON.stringify(obj));
         this.$.fnmasterplaninsertajax.generateRequest();      
         }
       },
@@ -1662,6 +1662,7 @@ fnsetcoskill11:function(skarr,period,rowid)
          fngetclassbooksectionvalueResponse:function(e)
          {
             var res1=e.detail.response.sectionarr;
+            alert(JSON.stringify(res1));
             document.querySelector('curriculum-plan-conceptapproval-card').sectionarr=res1;
     
      },
