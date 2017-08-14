@@ -1853,9 +1853,6 @@ fnsetcoskill11:function(skarr,period,rowid)
       var a4=[];
       var overall4=[];
 
-
-
-
           var b=[];
         var subarr=[];            
             for(var k=0;k<res4.length;k++)
@@ -1875,7 +1872,7 @@ fnsetcoskill11:function(skarr,period,rowid)
            for(var l=k+1;l<res6.length;l++)
             {
              if(res6[k].rowid==res6[l].rowid)
-                 {
+             {
              if(res6[k].suid==res6[l].suid)
                 {
              var obj1={"skillid":"","skillname":""}
@@ -2256,13 +2253,12 @@ for(var r=0;r<overall2.length;r++){
  document.querySelector('class-teacher-book-rejection-item-card').empname=res2[0].empname;
         },
 
-   fnfinalbook:function(status,empid,skill,innovation,enrichmentsuggest,period,planneddate,concept,conceptid,remark,mainarr){
-    //alert('3');
-    for(var i=0;i<mainarr.length;i++)
-    {
-            
-        this.fnfinalbookurl=sessionStorage.getItem("addrinfo")+"/fnfinalbook-service";
-        var obj={};
+
+   fnfinalbook:function(costatus,empid,innovation,enrichmentsuggest,period,planneddate,concept,conceptid,remark,rowidz,subconceptname,subconceptid,subuid,conuid,Correction,lrrectife){
+
+  
+ this.fnfinalbookurl=sessionStorage.getItem("addrinfo")+"/fnfinalbook-service";
+     var obj={};
          obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
          obj.academic_year=localStorage.getItem("curr_sess_academicyear");
 
