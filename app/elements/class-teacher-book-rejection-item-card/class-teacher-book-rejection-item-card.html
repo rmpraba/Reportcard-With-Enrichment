@@ -35,6 +35,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <!-- <tr style="border-bottom: 1px solid #ccc; line-height: 1.8em;border-color:#6699ff"> -->
         <tr>
           <th>CONCEPT</th>
+          <th>Sub Concept name</th>
           <th>PERIOD NO</th>
           <th>Skill</th>
           <th>Value</th>
@@ -44,12 +45,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <th>Remarks</th>
           <th>Enrichment Suggestion</th>
           <th>Completion Status</th>
+          <td>Correction Status></td>
            <th></th>  
-          </tr>  
+          </tr> 
+
+         
           <template is="dom-repeat" items="{{mainnarr}}" as="w">
            <tr> 
-              <class-teacher-book-rejection-card  completiondate="{{w.completion_date}}"   enrichmentsug="{{w.enrichment_sug}}" empname="{{empname}}"  empid="{{empid}}" conceptid="{{w.conceptid}}" concept="{{w.concept}}"   skill="{{w.skill}}"  gradeid="{{w.grade_id}}" subjectid="{{w.subject_id}}" iddate="{{w.id_date}}" id="enrz{{empid}}{{w.rowid}}"
-              idz="enrno{{w.rowid}}" innovation="{{w.innovation}}" remark="{{w.remark}}" planneddate="{{w.planned_date}}" mainarr="{{w.mainarr}}" period="{{w.period}}" valuez="{{w.valuez}}">
+              <class-teacher-book-rejection-card  completiondate="{{w.planned_to_date}}"   enrichmentsug="{{w.enrichment_sug}}" empname="{{empname}}"  empid="{{empid}}" conceptid="{{w.conceptid}}" conceptname="{{w.conceptname}}"   skill="{{w.skill}}"  gradeid="{{w.grade_id}}" subjectid="{{w.subject_id}}" rowid="{{w.rowid}}" id="enrz{{w.rowid}"
+              idz="enrno{{w.rowid}}" innovation="{{w.innovation}}" remark="{{w.remarks}}" planneddate="{{w.planned_date_from}}" period="{{w.period}}" value="{{w.value}}" createddate="{{w.created_date}}" correctionstatus="{{w.correction_status}}" lrrectifitcation="{{w.lr_rectifitcation}}" subconceptid="{{w.subconceptid}}" subconceptname="{{w.subconceptname}}" completionstatus="{{w.completion_status}}">
               </class-teacher-book-rejection-card> 
             </tr>
            </template>

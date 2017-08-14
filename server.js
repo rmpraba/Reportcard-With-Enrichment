@@ -9,9 +9,8 @@ var connection = mysql.createConnection({
    host     : 'localhost',
    user     : 'root',
    password : 'admin',
-
    database : 'reportcardnewins'
- 
+
 });
    
 var bodyParser = require('body-parser'); 
@@ -10602,7 +10601,7 @@ app.post('/fnbookupdatevalue-service',  urlencodedParser,function (req, res)
      
     var qur="update md_concept set  concept='"+req.query.concept+"' where capter_id='"+req.query.capter_id+"' and concept_id='"+req.query.concept_id+"' and grade_id='"+req.query.grade_id+"' and subject_id='"+req.query.subject_id+"' and school_id='"+req.query.school_id+"'and academic_year='"+req.query.academic_year+"'";
 
-    console.log("----------- coceppt edit-------------");
+    console.log("----------- concept edit-------------");
     console.log(qur);
 
     connection.query(qur,
@@ -11249,7 +11248,7 @@ app.post('/buffdel-service',  urlencodedParser,function (req, res)
 
 app.post('/fetchclassconcept11-service',  urlencodedParser,function (req,res)
   {
-var qur1="select  emp_id as empid,(select distinct emp_name from md_employee_creation where emp_id=empid and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' ) as empname,skill,innovation,planning_date,completion_date,remark,enrichment_sug,completion,capter_id,concept_id,grade_id,period,section_id,subject_id,concept,value_id,conc_date,value_name from final_book_sug where grade_id='"+req.query.gradeid+"' and  subject_id='"+req.query.subjectid+"' and  section_id='"+req.query.sectoinidz+"' and capter_id='"+req.query.chapterid+"'  and academic_year='"+req.query.academic_year+"' and school_id='"+req.query.schoolid+"' and completion='no'";
+var qur1="select  emp_id as empid,(select distinct emp_name from md_employee_creation where emp_id=empid and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' ) as empname,chapter_id,chapter_name,concept_id,concept_name,sub_concept_id,sub_concept_name,period,planned_date_from,planned_to_date,skill,value,innovation,lr_rectification,remarks,correction_status,completion_status,created_date  from md_curriculum_planning_approval where grade_id='"+req.query.gradeid+"' and  subject_id='"+req.query.subjectid+"' and  section_id='"+req.query.sectoinidz+"' and chapter_id='"+req.query.chapterid+"'  and academic_year='"+req.query.academic_year+"' and school_id='"+req.query.schoolid+"' and completion_status='no'";
       console.log("---------------");
       console.log(qur1);
      console.log("---------------");
@@ -11269,7 +11268,7 @@ var qur1="select  emp_id as empid,(select distinct emp_name from md_employee_cre
 
 app.post('/chapterstatus-service',  urlencodedParser,function (req, res)
 {
- var qur="select distinct(f.capter_id),f.grade_id,g.grade_name,f.subject_id,s.subject_name,f.section_id,gs.section_id as section_name,ch.capter,e.emp_name,f.emp_id from  final_book_sug f  join md_grade g on(g.grade_id=f.grade_id) join md_subject s on(s.subject_id=f.subject_id) join mp_grade_section gs on(gs.class_id=f.section_id) join md_chapter ch on(ch.capter_id=f.capter_id) join   md_employee_creation e on(e.emp_id=f.emp_id) where f.school_id='"+req.query.schoolid+"' and f.completion='No' and gs.school_id='"+req.query.schoolid+"' and gs.grade_id=f.grade_id and gs.academic_year='"+req.query.academic_year+"'and f.academic_year='"+req.query.academic_year+"' and ch.school_id='"+req.query.schoolid+"'"; 
+ var qur="select distinct(f.chapter_id),f.grade_id,g.grade_name,f.subject_id,s.subject_name,f.section_id,gs.section_id as section_name,ch.capter,e.emp_name,f.emp_id from  md_curriculum_planning_approval f  join md_grade g on(g.grade_id=f.grade_id) join md_subject s on(s.subject_id=f.subject_id) join mp_grade_section gs on(gs.class_id=f.section_id) join md_chapter ch on(ch.capter_id=f.chapter_id) join   md_employee_creation e on(e.emp_id=f.emp_id) where f.school_id='"+req.query.schoolid+"' and f.completion_status='No' and gs.school_id='"+req.query.schoolid+"' and gs.grade_id=f.grade_id and gs.academic_year='"+req.query.academic_year+"'and f.academic_year='"+req.query.academic_year+"' and ch.school_id='"+req.query.schoolid+"' and ch.academic_year='"+req.query.academic_year+"' and  e.school_id='"+req.query.schoolid+"' and e.academic_year='"+req.query.academic_year+"'"; 
   console.log('-------------------Chapter completion----------------------');
   console.log(qur);
      connection.query(qur, function(err, rows)
@@ -12134,6 +12133,34 @@ var qur="select school_id,id,student_name,class_id  from md_student where  class
       console.log(err);
   });
 });
+
+
+
+
+app.post('/fnsubconceptsave-service',  urlencodedParser,function (req, res)
+{ 
+     
+    var qur="update md_sub_concept set  sub_concept_name='"+req.query.subconceptname+"' where capter_id='"+req.query.capter_id+"' and concept_id='"+req.query.concept_id+"' and sub_concept_id='"+req.query.subconceptid+"'";
+
+    console.log("----------- sub concept edit-------------");
+    console.log(qur);
+
+    connection.query(qur,
+      function(err, rows)
+      {
+        if(!err)
+        {    
+          res.status(200).json({'returnval': 'Updated'});
+        }
+        else
+        {
+          console.log(err);
+          res.status(200).json({'returnval': 'fail'});
+        }  
+
+  });
+});
+
 
 var server = app.listen(5000, function () {
 var host = server.address().address

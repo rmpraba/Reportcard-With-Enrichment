@@ -31,35 +31,7 @@
           height: 25px;
         } 
     </style>
-      <!-- <paper-input value={{captheadid}} hidden></paper-input>
-      <paper-input value={{conceptid}} hidden></paper-input>
-      <paper-input value={{subflag}} hidden></paper-input>
-      <table border="0">
-      <tr style="border-bottom: 1px solid #ccc; line-height: 1.8em;border-color:#6699ff">
-              <td hidden>{{empid}}</td>
-              <td><paper-input value={{concept}}></paper-input></td>
-              <td><paper-input value={{period}}></paper-input></td>
-              <td><paper-textarea value={{skill}}></paper-textarea></td>
-              <td>{{valuez}}</td>
-              <td><paper-textarea  value={{innovation}}></paper-textarea>
-              </td> 
-              <td>{{planneddate}}</td>
-              <td>
-              <paper-input hidden$="{{hideeditvalue}}" value={{completiondate}}></paper-input>
-              <complection-date-picker-card hidden$="{{hidesavevalue}}" ></complection-date-picker-card></td>
-              <td><paper-input value={{remark}}></paper-input></td>
-              <td><paper-input value={{enrichmentsug}}></paper-input></td>
-              <td>
-                <paper-checkbox id={{id}} on-change="fnsetyes">Yes</paper-checkbox></br>
-                <paper-checkbox id={{idz}} on-change="fnsetno">No</paper-checkbox>
-              </td>
-              <td><paper-input value={{blockremark}}></paper-input></td>
-              <td><paper-icon-button  on-click="fnaroveset" hidden$="{{hidesavevalue}}" icon="save"></paper-icon-button>
-              <paper-icon-button  on-click="fnedit" icon="create" hidden$="{{hideeditvalue}}"></paper-icon-button>
-              </td>
-        </tr>
-      </table> -->
-
+     
       
       <div class="card">
         <p hidden>{{gradeid}}</p>
@@ -119,52 +91,36 @@ this.rejectcapterstatusurl=sessionStorage.getItem("addrinfo")+"/fetchclassconcep
         },
          rejectcapterstatusResponse:function(e){
           var res2=e.detail.response.returnval;
+       //   alert(JSON.stringify(res2));
         var setattr=[];
                var a=[];
             var overall=[];
            for(var k=0;k<res2.length;k++)
-           {       
+           {     
                   var nameobj={};
                       nameobj.conceptid=res2[k].concept_id;
-                      nameobj.concept=res2[k].concept;
+                      nameobj.conceptname=res2[k].concept_name;
+                      nameobj.subconceptid=res2[k].sub_concept_id;
+                      nameobj.subconceptname=res2[k].sub_concept_name;
                       nameobj.skill=res2[k].skill;
+                      nameobj.value=res2[k].value;
+                       nameobj.period=res2[k].period;
+                     
                       nameobj.innovation=res2[k].innovation;
-                      nameobj.planned_date=res2[k].planning_date;
-                      var id_date=res2[k].planning_date;
-                      id_date=id_date.replace(/[^\w\s]/gi, '');
-                      nameobj.id_date=id_date;
-                      nameobj.remark=res2[k].remark;
-                      nameobj.period=res2[k].period;
-                      nameobj.completion=res2[k].completion;
-                      nameobj.completion_date=res2[k].completion_date;
-                      nameobj.enrichment_sug=res2[k].enrichment_sug;
+                      nameobj.lr_rectifitcation=res2[k].lr_rectifitcation;
+                      nameobj.remarks=res2[k].remarks;
+                      nameobj.correction_status=res2[k].correction_status;
+                      nameobj.completion_status=res2[k].completion_status;
+                      //nameobj.created_date=res2[k].created_date;
+                      nameobj.planned_date_from=res2[k].planned_date_from;
+                      nameobj.planned_to_date=res2[k].planned_to_date;
+                       nameobj.rowid=k+1;
                       nameobj.hidecheck=true; 
                       nameobj.grade_id=sessionStorage.getItem("grdeidz");
                       nameobj.subject_id=sessionStorage.getItem("subjectidz");
-
-        var obj={"valueid":"","valuename":""};
-            obj.valueid=res2[k].value_id;
-            obj.valuename=res2[k].value_name;
-            a.push(obj);
-           
-           for(var l=k+1;l<res2.length;l++)
-            {
-             if(res2[k].conc_date==res2[l].conc_date)
-                {
-             var obj1={"valueid":"","valuename":""}
-                 obj1.valueid=res2[l].value_id;
-                 obj1.valuename=res2[l].value_name;
-                 a.push(obj1);
-                res2.splice(l,1);
-                 l--;
-               }}
-                nameobj.mainarr=a;
-                setattr.push(nameobj);
-                a=[];
-                 }
-       
-
-                     //  alert(JSON.stringify(setattr));
+                    setattr.push(nameobj);
+   }
+                       alert(JSON.stringify(setattr));
   
     document.querySelector('app-card').setPage('homepage','');
    document.querySelector('home-page').setPage('class-teacher-book-rejection-item-card','');
@@ -172,40 +128,8 @@ this.rejectcapterstatusurl=sessionStorage.getItem("addrinfo")+"/fetchclassconcep
   document.querySelector('class-teacher-book-rejection-item-card').empid=res2[0].empid; 
  document.querySelector('class-teacher-book-rejection-item-card').empname=res2[0].empname; 
         },
- /* ready:function(e){
-this.hidesavevalue=true;
-this.hideeditvalue=false;
-  },
-  fnedit:function(e){
-this.hidesavevalue=false;
-this.hideeditvalue=true;
-  },
 
-    fnaroveset:function(e){
-      if(this.empid==""||this.skill==""||this.innovation==""||this.enrichmentsug==""||this.period==""||this.planneddate==""||this.concept==""||this.conceptid==""||this.remark==""||this.valuez==""||this.blockremark==""&&this.blockremark==null){
-       alert("Please Enter The value");
-      }
-    alert(this.empid+" 1"+this.skill+" 2"+this.innovation+" 3"+this.enrichmentsug+"4 "+this.period+"5 "+this.planneddate+"6 "+this.concept+" 7"+this.conceptid+" 8"+this.remark+" 9"+this.valuez+" 10"+this.blockremark);
- this.$.bookservice.fnfinalreaprovebook(this.empid,this.skill,this.innovation,this.enrichmentsug,this.period,this.planneddate,this.concept,this.conceptid,this.remark,this.valuez,this.blockremark);
-  this.hidesavevalue=true;
-  this.hideeditvalue=false;
  
-   },
-    fnsetyes:function(e){
-  if(document.querySelector('#'+this.id).checked==true){
-             costatus='Yes';
-     document.querySelector('#'+this.idz).checked=false;
-      
-           }
-    },
-    fnsetno:function(e){
-      // alert(this.id);
-
-if(document.querySelector('#'+this.idz).checked==true){
-             costatus='No';
-     document.querySelector('#'+this.id).checked=false;
-      }
-   },*/
  });
   })();
   </script>
