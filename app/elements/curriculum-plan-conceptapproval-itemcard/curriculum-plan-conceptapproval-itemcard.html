@@ -1,0 +1,89 @@
+
+<link rel="import" href="..\..\bower_components/polymer/polymer.html">
+
+<dom-module id="curriculum-plan-conceptapproval-itemcard">
+  <template>
+    <style>
+    table{
+      width: 1300px;
+    }
+    </style>
+    <div>
+      <table border="1" style="border-collapse: collapse;">
+        <tr>
+          <td width="30px">{{sno}}</td>
+          <td hidden>{{conceptid}}</td>
+          <td width="150px">{{conceptname}}</td>
+          <td hidden>{{subconceptid}}</td>
+          <td width="180px">{{subconceptname}}</td>
+          <td width="15px">{{period}}</td>
+          <td width="70px">{{fromdate}}</td>
+          <td width="70px">{{todate}}</td>
+          <td width="80px">{{skill}}</td>
+          <td width="80px">{{value}}</td>
+          <td width="130px">{{innovation}}</td>
+          <td width="130px">{{lr}}</td>
+          <td width="150px">{{remarks}}</td>
+          <td width="75px">{{correctionstatus}}</td>
+          <td width="75px" hidden$="{{hidetitleflag}}">{{completionstatus}}</td>
+          <td width="75px" hidden$="{{hideflag}}">
+          <paper-checkbox id="cpayes{{subconceptid}}"  on-change="FnYes">Yes</paper-checkbox>
+          <paper-checkbox id="cpano{{subconceptid}}" on-change="FnNo">No</paper-checkbox>
+          </td>
+          <td width="30px" hidden$="{{hidetitleflag}}"></td>
+          <td width="30px" hidden$="{{hideflag}}"><paper-icon-button icon="save" on-click="FnSave"></paper-icon-button></td>
+        </tr>
+      </table>
+    </div>
+    <teacher-book-service-card id="bookservice"></teacher-book-service-card>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'curriculum-plan-conceptapproval-itemcard',
+      FnYes:function(e){
+        if(document.querySelector("#cpayes"+this.subconceptid).checked==true){
+        this.completionstatus="Yes";
+        document.querySelector("#cpano"+this.subconceptid).checked=false;
+        }
+        if(document.querySelector("#cpayes"+this.subconceptid).checked==false)
+        this.completionstatus="";
+      },
+      FnNo:function(e){
+        if(document.querySelector("#cpano"+this.subconceptid).checked==true)
+        {
+        this.completionstatus="No";
+        document.querySelector("#cpayes"+this.subconceptid).checked=false;
+        }
+        if(document.querySelector("#cpano"+this.subconceptid).checked==false)
+        this.completionstatus="";
+      },
+      FnSave:function(){
+        var obj={};
+        obj.sno=this.sno;
+        obj.conceptid=this.conceptid;
+        obj.conceptname=this.conceptname;
+        obj.subconceptid=this.subconceptid;
+        obj.subconceptname=this.subconceptname;
+        obj.period=this.period;
+        obj.planneddatefrom=this.fromdate;
+        obj.plannedtodate=this.todate;
+        obj.skill=this.skill;
+        obj.value=this.value;
+        obj.innovation=this.innovation;
+        obj.lrrectification=this.lr;
+        obj.remarks=this.remarks;
+        obj.correctionstatus=this.correctionstatus;
+        if(document.querySelector("#cpayes"+this.subconceptid).checked==true)
+          obj.completionstatus="Yes";
+        if(document.querySelector("#cpano"+this.subconceptid).checked==true)
+          obj.completionstatus="No";
+        // alert(JSON.stringify(obj));
+        this.$.bookservice.updateapprovalstatusofchapterconcept(obj);           
+      }
+    });
+  })();
+  </script>
+</dom-module>

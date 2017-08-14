@@ -317,7 +317,9 @@
   {
     this.gradeid=e.target.selectedItem.value;
       sessionStorage.setItem("grdeidz",this.gradeid);
-     this.gradename=e.target.selectedItem.textContent.trim()
+     this.gradename=e.target.selectedItem.textContent.trim();
+        localStorage.setItem("curr_sess_gradeid",this.gradeid);
+        localStorage.setItem("curr_sess_gradename",this.gradename);
       this.$.bookservice.bookrefsection(this.gradeid,this.gradename);
       document.querySelector('#teacherrefzz').selected=-1;
         document.querySelector('#teacherapprovechapter').selected=-1;
@@ -326,7 +328,9 @@
      fnselectchapter:function(e){
       this.chapterid=e.target.selectedItem.value;
       this.chaptername=e.target.selectedItem.textContent.trim();
-      localStorage.setItem("curr_sess_capters",this.chapterid); 
+      localStorage.setItem("curr_sess_capters",this.chapterid);
+      localStorage.setItem("curr_sess_chapterid",this.chapterid); 
+      localStorage.setItem("curr_sess_chaptername",this.chaptername); 
       this.$.bookservice.FnFetchConceptService(this.gradeid,this.subjectid,this.chapterid);
       this.$.zdsasddsasfsa.hidden=false;
       this.$.bookservice.conceptseq();
@@ -344,6 +348,8 @@
        this.sectionid=e.target.selectedItem.value;
        this.sectionname=e.target.selectedItem.textContent.trim();
        sessionStorage.setItem("sectoinidz",this.sectionid);
+       localStorage.setItem("curr_sess_sectionid",this.sectionid);
+       localStorage.setItem("curr_sess_sectionname",this.sectionidname);
        this.$.bookservice.bookapprvvalsubject(this.gradeid,this.sectionid);
         document.querySelector('#teacherrefzz').selected=-1;
         },
@@ -358,6 +364,8 @@
        this.subjectid=e.target.selectedItem.value;
        this.subjectname=e.target.selectedItem.textContent.trim();
        sessionStorage.setItem("subjectidz",this.subjectid);
+       localStorage.setItem("curr_sess_subjectid",this.subjectid);
+       localStorage.setItem("curr_sess_subjectname",this.subjectname);
         this.$.bookservice.FnFetchChapterService(this.gradeid,this.subjectid); 
         document.querySelector('#teacherapprovechapter').selected=-1;
         this.$.zdsasddsasfsa.hidden=true;

@@ -136,7 +136,7 @@
               </paper-button>
             </td>
             <td style="width: 8.98%;">
-              <paper-input value="{{Correctiogfgdgn}}"></paper-input>
+              <paper-input value="{{Correction}}"></paper-input>
             </td> 
             <td>
                 <paper-icon-button id="saveidd"  hidden$="{{hidecheck1}}"  icon="save" on-click="fnsavebook"></paper-icon-button>
@@ -191,11 +191,6 @@
          <paper-button on-click="skillclose" style="background-color:black;color:white">Close</paper-button>
       </center>
       </paper-dialog>
-
-     
-
-
-    
       <paper-dialog id="innovationdialog" modal>
           <paper-textarea label="Innovation"  value="{{innovation}}"></paper-textarea>
           <center style="margin-top: 14%;">
@@ -408,11 +403,11 @@ fnpasssubarr:function(subsarr){
       }
   else if(this.planneddate=="empty")
       {
-this.$.bookservice.fnsetcoskill(conarr,this.period,this.innovation,this.remark,this.rowid,this.lrrectife,this.Correction);
-this.$.bookservice.fnsetcoskillvalue(valuearr,this.period,this.rowid);
- this.$.bookservice.fnsetcoskill11(skarr,this.period,this.rowid); 
-  this.$.bookservice.fnsetcoskill12(subsarrr,this.period,this.rowid); 
-  
+      this.$.bookservice.fnsetcoskill(conarr,this.period,this.innovation,this.remark,this.rowid,this.lrrectife,this.Correction);
+      this.$.bookservice.fnsetcoskillvalue(valuearr,this.period,this.rowid);
+      this.$.bookservice.fnsetcoskill11(skarr,this.period,this.rowid); 
+      this.$.bookservice.fnsetcoskill12(subsarrr,this.period,this.rowid); 
+      this.$.bookservice.fnmasterplaninsert(conarr,valuearr,skarr,subsarrr,this.period,this.innovation,this.remark,this.rowid,this.lrrectife,this.Correction);
         this.hidecheck1=true;
         this.hidecheck=false;  
         this.planneddate="";     
