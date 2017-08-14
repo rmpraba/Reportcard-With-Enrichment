@@ -812,7 +812,7 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
       this.$.bookservice.fnbookplangrade();
       this.$.bookservice.fnbookplansubject();
       // this.$.bookservice.masterzskill();
-      document.querySelector('curriculum-plan-conceptapproval-card').FnRefresh();
+      
      }
    if(localStorage.getItem('curr_sess_loggedassesmenttype')=="bookreject")
    {
@@ -1394,6 +1394,7 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
          },
         fnbookclassplan:function(e){
           localStorage.setItem('curr_sess_loggedassesmenttype','classplan');
+          document.querySelector('curriculum-plan-conceptapproval-card').FnRefreshzzz();
          this.$.cdialog.toggle();  
      
          },

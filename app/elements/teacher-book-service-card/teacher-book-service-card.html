@@ -1662,7 +1662,7 @@ fnsetcoskill11:function(skarr,period,rowid)
          fngetclassbooksectionvalueResponse:function(e)
          {
             var res1=e.detail.response.sectionarr;
-            alert(JSON.stringify(res1));
+          //  alert(JSON.stringify(res1));
             document.querySelector('curriculum-plan-conceptapproval-card').sectionarr=res1;
     
      },
@@ -1725,13 +1725,13 @@ fnsetcoskill11:function(skarr,period,rowid)
           fngetclassbookchapterconceptResponse:function(e)
           {
             var res=e.detail.response.chapterarr;
+             var temp=[];
             // alert(JSON.stringify(res));
-            var obj={};
-          
-            obj.hidetitleflag=false;
+           
+           /* obj.hidetitleflag=false;
             obj.hideflag=true;
-            var temp=[];
-            temp.push(obj);
+          
+            temp.push(obj);*/
             for(var i=0;i<res.length;i++){
             res[i].sno=i+1;
             res[i].hidetitleflag=true;
