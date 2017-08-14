@@ -9,11 +9,9 @@ var connection = mysql.createConnection({
    host     : 'localhost',
    user     : 'root',
    password : '',
+
    database : 'reportcardnew'
-  // port     : '62631',
-  // user     : 'adminM1qnV1d',
-  // password : 'HC2bIf7Sk2LD',
-  // database : 'scorecarddb'
+ 
 });
 
 var bodyParser = require('body-parser'); 
@@ -11521,17 +11519,19 @@ app.post('/bookvaldel-service' ,  urlencodedParser,function (req, res)
 
 app.post('/fetchclassconcept-service',  urlencodedParser,function (req,res)
   {  
-   var qur1="SELECT m.conc_date as conuid,s.conc_date as subuid,m.Correction,m.lrrectife,m.innovation, m.remark,m.period, s.planning_date,s.rowid, r.capter_id, s.sub_concept_id,s.sub_concept_name,r.concept_id  ,(select  concept from md_concept  where  concept_id=r.concept_id)  as conceptname FROM md_book_sub_concept s JOIN md_sub_concept r  ON(r.sub_concept_id =s.sub_concept_id)  join md_skill  m ON(r.concept_id =m.concept_id  ) and (s.planning_date=m.planning_date) and (s.rowid=m.rowid) where r.capter_id='"+req.query.chapterid+"' and m.conc_date  not in(select s.conc_date  from final_book_sug s where s.school_id='"+req.query.schoolid+"' and s.academic_year='"+req.query.academic_year+"' and s.subject_id='"+req.query.subjectid+"' and  s.section_id='"+req.query.sectoinid+"' and  s.grade_id='"+req.query.gradeid+"' and s.capter_id='"+req.query.chapterid+"')"; 
+   var qur1="SELECT m.conc_date as conuid,s.conc_date as subuid,m.Correction,m.lrrectife,m.innovation, m.remark,m.period, s.planning_date,s.rowid, r.capter_id, s.sub_concept_id,s.sub_concept_name,r.concept_id  ,(select  concept from md_concept  where  concept_id=r.concept_id)  as conceptname FROM md_book_sub_concept s JOIN md_sub_concept r  ON(r.sub_concept_id =s.sub_concept_id)  join md_skill  m ON(r.concept_id =m.concept_id  ) and (s.planning_date=m.planning_date) and (s.rowid=m.rowid) where r.capter_id='"+req.query.chapterid+"' and s.conc_date  not in(select p.conc_date  from final_book_sug p where p.school_id='"+req.query.schoolid+"' and p.academic_year='"+req.query.academic_year+"' and p.subject_id='"+req.query.subjectid+"' and  p.section_id='"+req.query.sectoinid+"' and  p.grade_id='"+req.query.gradeid+"' and p.capter_id='"+req.query.chapterid+"')"; 
 
     var qur2="SELECT distinct id as empid,(select distinct emp_name from md_employee_creation where emp_id=empid and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"') as empname FROM mp_teacher_grade where  school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and class_id='"+req.query.sectoinid+"'";
 
      var qur3="select * from  final_book_sug where  school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and section_id='"+req.query.sectoinid+"' and capter_id='"+req.query.chapterid+"'";
 
-     var qur4="select * from  md_book_value  where  school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and capter_id='"+req.query.chapterid+"' and conc_date not in(select s.conc_date  from final_book_sug s where s.school_id='"+req.query.schoolid+"' and s.academic_year='"+req.query.academic_year+"' and s.subject_id='"+req.query.subjectid+"' and  s.section_id='"+req.query.sectoinid+"' and  s.grade_id='"+req.query.gradeid+"' and s.capter_id='"+req.query.chapterid+"')";
+     var qur4="select * from  md_book_value  where  school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and capter_id='"+req.query.chapterid+"'";
 
-    /*var qur5="select * from  md_book_sub_concept  where  school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and capter_id='"+req.query.chapterid+"' and conc_date not in(select s.conc_date  from final_book_sub_concept s where s.school_id='"+req.query.schoolid+"' and s.academic_year='"+req.query.academic_year+"' and s.subject_id='"+req.query.subjectid+"' and  s.section_id='"+req.query.sectoinid+"' and  s.grade_id='"+req.query.gradeid+"' and s.capter_id='"+req.query.chapterid+"')";*/
+     var qur5="select * from  md_book_skill  where  school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and capter_id='"+req.query.chapterid+"'";
 
-     var qur5="select * from  md_book_skill  where  school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and capter_id='"+req.query.chapterid+"' and conc_date not in(select s.conc_date  from final_book_skill s where s.school_id='"+req.query.schoolid+"' and s.academic_year='"+req.query.academic_year+"' and s.subject_id='"+req.query.subjectid+"' and  s.section_id='"+req.query.sectoinid+"' and  s.grade_id='"+req.query.gradeid+"' and s.capter_id='"+req.query.chapterid+"')";
+    var qur6="select * from  final_book_value where  school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and section_id='"+req.query.sectoinid+"' and capter_id='"+req.query.chapterid+"'";
+
+    var qur7="select * from  final_book_skill where  school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and section_id='"+req.query.sectoinid+"' and capter_id='"+req.query.chapterid+"'";
 
      var conceptarr=[];
      var emparr=[];
@@ -11539,12 +11539,17 @@ app.post('/fetchclassconcept-service',  urlencodedParser,function (req,res)
      var valuearr=[];
      var subarr=[];
      var skillarr=[];
+     var dbskillarr=[];
+     var dbvaluearr=[];
+
    console.log("===============");
    console.log(qur1);
    console.log(qur2);
    console.log(qur3);
    console.log(qur4);
    console.log(qur5);
+   console.log(qur6);
+   console.log(qur7);
   
  
    console.log("===============");
@@ -11558,10 +11563,19 @@ app.post('/fetchclassconcept-service',  urlencodedParser,function (req,res)
     if(!err)
     {  
     valuearr=rows;
-    connection.query(qur2,function(err, rows){
+    connection.query(qur6,function(err, rows){
+    if(!err)
+    {  
+    dbvaluearr=rows;
+     connection.query(qur7,function(err, rows){
+    if(!err)
+    {  
+    dbskillarr=rows;
+     connection.query(qur2,function(err, rows){
     if(!err)
     {  
     emparr=rows;
+    
     connection.query(qur5,function(err, rows){
     if(!err)
     {  
@@ -11570,13 +11584,17 @@ app.post('/fetchclassconcept-service',  urlencodedParser,function (req,res)
     if(!err)
     { 
     dbarr=rows;
-      res.status(200).json({'conceptarr': conceptarr,'emparr':emparr,'dbarr':dbarr,'valuearr':valuearr,'skillarr':skillarr});
+      res.status(200).json({'conceptarr': conceptarr,'emparr':emparr,'dbarr':dbarr,'valuearr':valuearr,'skillarr':skillarr,'dbskillarr':dbskillarr,'dbvaluearr':dbvaluearr});
     }
     });
     }
     });
     }
     });
+    }
+     });
+    }
+     });
     }
      });
     }
@@ -11619,7 +11637,6 @@ app.post('/fetchclassconcept-service',  urlencodedParser,function (req,res)
          completion:req.query.status,   
          section_id:req.query.sectionid,   
          emp_id:req.query.empid,   
-         skill:req.query.skill,   
          innovation:req.query.innovation,   
          enrichment_sug:req.query.enrichmentsuggest, 
          planning_date:req.query.planneddate,   
@@ -11627,12 +11644,15 @@ app.post('/fetchclassconcept-service',  urlencodedParser,function (req,res)
          concept:req.query.concept,   
          remark:req.query.remark,   
          concept_id:req.query.conceptid,
-         value_id:req.query.value_id,
-         value_name:req.query.value_name,
-         conc_date:req.query.conc_date,
+         conc_date:req.query.subuid,
+         Correction:req.query.Correction,
+         lrrectife:req.query.lrrectife, 
+         rowid:req.query.rowidz,
+         sub_concept_id:req.query.subconceptid,
+         sub_concept_name:req.query.subconceptname,
        }
 
-console.log("----------------");
+console.log("-------concept---------");
 console.log(response);
 console.log("----------------");
 
@@ -11652,6 +11672,82 @@ console.log("----------------");
   });
 });
 
+ app.post('/fnfinalbookskill-service',  urlencodedParser,function (req, res)
+{  
+  var response={
+         school_id:req.query.schoolid,
+         academic_year:req.query.academic_year,
+         subject_id:req.query.subjectid,
+         grade_id:req.query.gradeid,
+         section_id:req.query.sectionid,   
+         emp_id:req.query.empid,   
+         skill_id:req.query.skillid,   
+         skill_name:req.query.skillname,   
+         planning_date:req.query.planneddate,   
+         period:req.query.period,   
+         conc_date:req.query.skiluid,
+         rowid:req.query.rowidz,
+         capter_id:req.query.chapterid,
+         suid:req.query.subuid,
+
+       }
+
+console.log("-------SKill---------");
+console.log(response);
+console.log("----------------");
+
+  connection.query("INSERT INTO final_book_skill set ?",[response],
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': 'succ'});
+    }
+    else
+    {
+      console.log(err);
+      res.status(200).json({'returnval': 'fail'});
+    }  
+
+  });
+});
+ app.post('/fnfinalbookvalue-service',  urlencodedParser,function (req, res)
+{  
+  var response={
+         school_id:req.query.schoolid,
+         academic_year:req.query.academic_year,
+         subject_id:req.query.subjectid,
+         grade_id:req.query.gradeid,
+         capter_id:req.query.chapterid,
+         section_id:req.query.sectionid,   
+         emp_id:req.query.empid,   
+         value_id:req.query.valueid,   
+         value_name:req.query.valuename,   
+         planning_date:req.query.planneddate,   
+         period:req.query.period,   
+         conc_date:req.query.valuuid,
+         rowid:req.query.rowidz,
+         suid:req.query.subuid,
+       }
+console.log("--------value--------");
+console.log(response);
+console.log("----------------");
+
+  connection.query("INSERT INTO final_book_value set ?",[response],
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': 'succ'});
+    }
+    else
+    {
+      console.log(err);
+      res.status(200).json({'returnval': 'fail'});
+    }  
+
+  });
+});
 
 app.post('/fnfinalbook1-service',  urlencodedParser,function (req, res)
 {  

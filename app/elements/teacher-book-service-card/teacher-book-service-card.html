@@ -538,12 +538,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         debounce-duration="300" />
         <iron-ajax
         method="post"
+<<<<<<< HEAD
+        id="fnfinalbookskillajax"
+        url="{{fnfinalbookskillurl}}"
+        params="{{fnfinalbookskillparam}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="fnfinalbookskillResponse"
+        debounce-duration="300" />
+        <iron-ajax
+        method="post"
+        id="fnfinalbookvalueajax"
+        url="{{fnfinalbookvalueurl}}"
+        params="{{fnfinalbookvalueparam}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="fnfinalbookvalueResponse"
+=======
         id="fnmasterplaninsertajax"
         url="{{fnmasterplaninserturl}}"
         params="{{fnmasterplaninsertparam}}"
         handle-as="json"
         content-type="application/json"
         on-response="fnmasterplaninsertResponse"
+>>>>>>> origin/master
         debounce-duration="300" />
 
   </template>
@@ -1788,45 +1806,168 @@ fnsetcoskill11:function(skarr,period,rowid)
            var res2=e.detail.response.dbarr;
            var res3=e.detail.response.valuearr;
            var res4=e.detail.response.skillarr;
+           var res5=e.detail.response.dbvaluearr;
+           var res6=e.detail.response.dbskillarr;
+          var setattr=[];
+   /*   alert(JSON.stringify(res));
+      alert(JSON.stringify(res1));
+      alert(JSON.stringify(res2));
+      alert(JSON.stringify(res3));
+      alert(JSON.stringify(res4));
+      alert(JSON.stringify(res5));
+      alert(JSON.stringify(res6));
+*/
+    var overall3=[];
+    var a3=[]; 
+  for(var k=0;k<res5.length;k++)
+           {       
+        var nameobj={};
+             nameobj.planning_date=res5[k].planning_date; 
+             nameobj.rowidz=res5[k].rowid; 
+             nameobj.valuuid=res5[k].conc_date; 
+             nameobj.suid=res5[k].suid; 
+        var obj={"valueid":"","valuename":""};
+            obj.valueid=res5[k].value_id;
+            obj.valuename=res5[k].value_name;
+            a3.push(obj);
+           
+           for(var l=k+1;l<res5.length;l++)
+            {
+             if(res5[k].rowid==res5[l].rowid)
+                 {
+             if(res5[k].suid==res5[l].suid)
+                {
+             var obj1={"valueid":"","valuename":""}
+                 obj1.valueid=res5[l].value_id;
+                 obj1.valuename=res5[l].value_name;
+                 a3.push(obj1);
+                 res5.splice(l,1);
+                 l--;
+               }}}
+                nameobj.mainarr=a3;
+                overall3.push(nameobj);
+                a3=[];
+                 }
+ 
+      alert(JSON.stringify(overall3));
+      var a4=[];
+      var overall4=[];
 
 
+<<<<<<< HEAD
 
           var b=[];
         var subarr=[];            
             for(var k=0;k<res4.length;k++)
+=======
+        for(var k=0;k<res6.length;k++)
+>>>>>>> origin/master
            {       
            var nameobj={};
-             nameobj.planning_date=res4[k].planning_date; 
-             nameobj.period=res4[k].period; 
-            nameobj.rowidz=res4[k].rowid; 
-            
-
-        var obj={"subconceptid":"","subconceptname":""};
-            obj.subconceptid=res4[k].sub_concept_id;
-            obj.subconceptname=res4[k].sub_concept_name;
-            b.push(obj);
+             nameobj.planning_date=res6[k].planning_date; 
+             nameobj.rowidz=res6[k].rowid; 
+             nameobj.skiluid=res6[k].conc_date; 
+              nameobj.suid=res6[k].suid; 
+       var obj={"skillid":"","skillname":""};
+            obj.skillid=res6[k].skill_id;
+            obj.skillname=res6[k].skill_name;
+            a4.push(obj);
            
-           for(var l=k+1;l<res4.length;l++)
+           for(var l=k+1;l<res6.length;l++)
             {
-                 if(res[k].rowid==res4[l].rowid)
+             if(res6[k].rowid==res6[l].rowid)
                  {
-                     if(res4[k].planning_date==res4[l].planning_date)
+             if(res6[k].suid==res6[l].suid)
                 {
-           
-                 var obj1={"subconceptid":"","subconceptname":""}
-                 obj1.subconceptid=res4[l].sub_concept_id;
-                 obj1.subconceptname=res4[l].sub_concept_name;
-                 b.push(obj1);
-                res4.splice(l,1);
+             var obj1={"skillid":"","skillname":""}
+                 obj1.skillid=res6[l].skill_id;
+                 obj1.skillname=res6[l].skill_name;
+                 a4.push(obj1);
+                res6.splice(l,1);
                  l--;
                }}}
-                nameobj.suarr=b;
-                subarr.push(nameobj);
-                b=[];
+                nameobj.skillarr=a4;
+                overall4.push(nameobj);
+                a2=[];
                  }
-   
-            var a1=[];
-            var overall1=[];
+       alert(JSON.stringify(overall4));
+/*var temp4=[];
+
+for(var l=0;l<res2.length;l++){
+  
+
+      for(var r=0;r<overall1.length;r++){
+        for(var n=0;n<res.length;n++){   
+        if(res[n].rowid==overall1[r].rowidz){
+           if(res[n].planning_date==overall1[r].planning_date){
+
+  
+             var nameobj={};
+             nameobj.planning_date=res[n].planning_date; 
+             nameobj.period=res[n].period; 
+             nameobj.concept_id=res[n].concept_id; 
+             nameobj.conceptname=res[n].conceptname; 
+             nameobj.innovation=res[n].innovation; 
+             nameobj.remark=res[n].remark; 
+             nameobj.rowidz=res[n].rowid; 
+             nameobj.lrrectife=res[n].lrrectife;
+             nameobj.Correction=res[n].Correction;
+             nameobj.subuid=res[n].subuid;
+             nameobj.conuid=res[n].conuid;
+             nameobj.sub_concept_id=res[n].sub_concept_id;
+             nameobj.sub_concept_name=res[n].sub_concept_name;
+             nameobj.mainarr=overall1[r].mainarr;
+             nameobj.valuuid=overall1[r].valuuid;
+             temp2.push(nameobj);
+             res.splice(n,1);
+             }}}}
+       
+        }
+
+
+
+
+
+ for(var l=0;l<temp2.length;l++){
+       for(var r=0;r<overall2.length;r++){
+        for(var n=0;n<temp2.length;n++){   
+          if(temp2[n].rowidz==overall2[r].rowidz){
+              if(temp2[n].planning_date==overall2[r].planning_date){
+             var nameobj={};
+             nameobj.planning_date=temp2[n].planning_date; 
+             nameobj.period=temp2[n].period; 
+             nameobj.innovation=temp2[n].innovation;
+              nameobj.concept_id=temp2[n].concept_id; 
+             nameobj.conceptname=temp2[n].conceptname; 
+             nameobj.remark=temp2[n].remark; 
+             nameobj.rowidz=temp2[n].rowidz; 
+             nameobj.lrrectife=temp2[n].lrrectife;
+             nameobj.Correction=temp2[n].Correction;
+             nameobj.sub_concept_id=temp2[n].sub_concept_id;
+             nameobj.sub_concept_name=temp2[n].sub_concept_name;
+             nameobj.mainarr=temp2[n].mainarr;
+             nameobj.valuuid=temp2[n].valuuid;
+             nameobj.skiluid=overall2[r].skiluid;
+             nameobj.subuid=temp2[n].subuid;
+             nameobj.conuid=temp2[n].conuid;
+             nameobj.skillarr=overall2[r].skillarr;
+             temp1.push(nameobj);
+             temp2.splice(n,1);
+             }}}}
+       
+           }*/
+
+
+
+
+
+
+
+
+
+
+          var a1=[];
+           var overall1=[];
 
            for(var k=0;k<res3.length;k++)
            {       
@@ -1856,7 +1997,6 @@ fnsetcoskill11:function(skarr,period,rowid)
                 overall1.push(nameobj);
                 a1=[];
                  }
-
 
 
       var a2=[];
@@ -1892,12 +2032,15 @@ fnsetcoskill11:function(skarr,period,rowid)
                  }
 
      var temp2=[];
-   /* for(var r=0;r<overall1.length;r++){
-        for(var n=0;n<res.length;n++){   
-          if(res[n].rowid==overall1[r].rowidz){
-            alert(res[n].planning_date+" "+overall1[r].planning_date);
+   for(var l=0;l<res.length;l++){
+  
 
-              if(res[n].planning_date==overall1[r].planning_date){
+      for(var r=0;r<overall1.length;r++){
+        for(var n=0;n<res.length;n++){   
+        if(res[n].rowid==overall1[r].rowidz){
+           if(res[n].planning_date==overall1[r].planning_date){
+
+  
              var nameobj={};
              nameobj.planning_date=res[n].planning_date; 
              nameobj.period=res[n].period; 
@@ -1915,22 +2058,16 @@ fnsetcoskill11:function(skarr,period,rowid)
              nameobj.mainarr=overall1[r].mainarr;
              nameobj.valuuid=overall1[r].valuuid;
              temp2.push(nameobj);
-              res.splice(n,1);
+             res.splice(n,1);
              }}}}
-
-
-
-       alert(JSON.stringify(temp2));
-       alert(temp2.length+""+res.length);
-       alert(JSON.stringify(res));*/
- 
-  for(var l=0;l<res.length;l++){
- 
-      for(var r=0;r<overall1.length;r++){
+       
+        }
+    for(var r=0;r<overall1.length;r++){
         for(var n=0;n<res.length;n++){   
-          if(res[n].rowid==overall1[r].rowidz){
-            //alert(res[n].planning_date+" "+overall1[r].planning_date);
-             if(res[n].planning_date==overall1[r].planning_date){
+
+        if(res[n].rowid==overall1[r].rowidz){
+           if(res[n].planning_date==overall1[r].planning_date){
+
              var nameobj={};
              nameobj.planning_date=res[n].planning_date; 
              nameobj.period=res[n].period; 
@@ -1941,27 +2078,26 @@ fnsetcoskill11:function(skarr,period,rowid)
              nameobj.rowidz=res[n].rowid; 
              nameobj.lrrectife=res[n].lrrectife;
              nameobj.Correction=res[n].Correction;
-           //  nameobj.subuid=res[n].subuid;
-           //  nameobj.conuid=res[n].conuid;
+             nameobj.subuid=res[n].subuid;
+             nameobj.conuid=res[n].conuid;
              nameobj.sub_concept_id=res[n].sub_concept_id;
              nameobj.sub_concept_name=res[n].sub_concept_name;
              nameobj.mainarr=overall1[r].mainarr;
-           //  nameobj.valuuid=overall1[r].valuuid;
+             nameobj.valuuid=overall1[r].valuuid;
              temp2.push(nameobj);
-              res.splice(n,1);
+            res.splice(n,1);
              }}}}
-       
-        }
+          
 
-        //alert(temp2.length);
-         //alert(res.length);
-        
+  
+
+     
        // alert(JSON.stringify(temp2)); 
       //alert(JSON.stringify(res)); 
 
   for(var l=0;l<temp2.length;l++){
-   // alert('1');
 
+ 
        for(var r=0;r<overall2.length;r++){
         for(var n=0;n<temp2.length;n++){   
           if(temp2[n].rowidz==overall2[r].rowidz){
@@ -1972,7 +2108,35 @@ fnsetcoskill11:function(skarr,period,rowid)
              nameobj.innovation=temp2[n].innovation;
               nameobj.concept_id=temp2[n].concept_id; 
              nameobj.conceptname=temp2[n].conceptname; 
-              
+             nameobj.remark=temp2[n].remark; 
+             nameobj.rowidz=temp2[n].rowidz; 
+             nameobj.lrrectife=temp2[n].lrrectife;
+             nameobj.Correction=temp2[n].Correction;
+             nameobj.sub_concept_id=temp2[n].sub_concept_id;
+             nameobj.sub_concept_name=temp2[n].sub_concept_name;
+             nameobj.mainarr=temp2[n].mainarr;
+             nameobj.valuuid=temp2[n].valuuid;
+             nameobj.skiluid=overall2[r].skiluid;
+             nameobj.subuid=temp2[n].subuid;
+             nameobj.conuid=temp2[n].conuid;
+             nameobj.skillarr=overall2[r].skillarr;
+             temp1.push(nameobj);
+             temp2.splice(n,1);
+             }}}}
+
+           }
+         
+           alert(JSON.stringify(temp2));
+for(var r=0;r<overall2.length;r++){
+        for(var n=0;n<temp2.length;n++){   
+          if(temp2[n].rowidz==overall2[r].rowidz){
+              if(temp2[n].planning_date==overall2[r].planning_date){
+             var nameobj={};
+             nameobj.planning_date=temp2[n].planning_date; 
+             nameobj.period=temp2[n].period; 
+             nameobj.innovation=temp2[n].innovation;
+              nameobj.concept_id=temp2[n].concept_id; 
+             nameobj.conceptname=temp2[n].conceptname; 
              nameobj.remark=temp2[n].remark; 
              nameobj.rowidz=temp2[n].rowidz; 
              nameobj.lrrectife=temp2[n].lrrectife;
@@ -1989,7 +2153,9 @@ fnsetcoskill11:function(skarr,period,rowid)
              temp2.splice(n,1);
              }}}}
        
-         }
+
+         
+
 
            for(var i=0;i<temp1.length;i++){
                     var obj={};
@@ -2090,6 +2256,7 @@ fnsetcoskill11:function(skarr,period,rowid)
   document.querySelector('class-teacher-book-rejection-item-card').empid=res2[0].empid; 
  document.querySelector('class-teacher-book-rejection-item-card').empname=res2[0].empname;
         },
+<<<<<<< HEAD
    fnfinalbook:function(status,empid,skill,innovation,enrichmentsuggest,period,planneddate,concept,conceptid,remark,mainarr){
     //alert('3');
     for(var i=0;i<mainarr.length;i++){
@@ -2097,16 +2264,24 @@ fnsetcoskill11:function(skarr,period,rowid)
            var obj={};
            obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
            obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+=======
+   fnfinalbook:function(costatus,empid,innovation,enrichmentsuggest,period,planneddate,concept,conceptid,remark,rowidz,subconceptname,subconceptid,subuid,conuid,Correction,lrrectife){
+
+  
+ this.fnfinalbookurl=sessionStorage.getItem("addrinfo")+"/fnfinalbook-service";
+     var obj={};
+         obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+         obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+>>>>>>> origin/master
            obj.chapterid=localStorage.getItem("curr_sess_capters");
            obj.subjectid=sessionStorage.getItem("subjectidz");
            obj.gradeid=sessionStorage.getItem("grdeidz");
            obj.sectionid=sessionStorage.getItem("sectionidz");
            obj.completion_date=localStorage.getItem("localsess_from_service");
            obj.empid=empid;
-           obj.status=status;
-           obj.skill=skill;
-           obj.value_id=mainarr[i].valueid;
-           obj.value_name=mainarr[i].valuename;
+           obj.status=costatus;
+           obj.Correction=Correction;
+           obj.lrrectife=lrrectife;
            obj.innovation=innovation;
            obj.enrichmentsuggest=enrichmentsuggest;
            obj.planneddate=planneddate;
@@ -2114,12 +2289,16 @@ fnsetcoskill11:function(skarr,period,rowid)
            obj.concept=concept;
            obj.conceptid=conceptid;
            obj.remark=remark;
-           obj.conc_date=conceptid+planneddate;
+           obj.rowidz=rowidz;
+           obj.subconceptname=subconceptname;
+           obj.subconceptid=subconceptid;
+           obj.subuid=subuid;
+           obj.conuid=conuid;
+          
            this.fnfinalbookparam=obj;
            this.$.fnfinalbookajax.generateRequest();
            alert(JSON.stringify(obj));
-         }
-        },
+         },
           fnfinalbookResponse:function(e)
           {
             var res=e.detail.response.returnval;
@@ -2127,7 +2306,87 @@ fnsetcoskill11:function(skarr,period,rowid)
             this.FnFetchClassConceptService();
           },
 
-          chaptcompletionstatus:function()
+
+
+
+ fnfinalbookskill:function(skillarr,costatus,empid,period,planneddate,skiluid,rowidz,subuid){
+
+     for(var i=0;i<skillarr.length;i++){
+
+             this.fnfinalbookskillurl=sessionStorage.getItem("addrinfo")+"/fnfinalbookskill-service";
+        var obj={};
+         obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+         obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+           obj.chapterid=localStorage.getItem("curr_sess_capters");
+           obj.subjectid=sessionStorage.getItem("subjectidz");
+           obj.gradeid=sessionStorage.getItem("grdeidz");
+           obj.sectionid=sessionStorage.getItem("sectionidz");
+           obj.completion_date=localStorage.getItem("localsess_from_service");
+           obj.empid=empid;
+           obj.status=costatus;
+           obj.planneddate=planneddate;
+           obj.rowidz=rowidz;
+           obj.skiluid=skiluid;
+           obj.period=period;
+           obj.skillid=skillarr[i].skillid;
+           obj.skillname=skillarr[i].skillname;
+           obj.subuid=subuid;
+           this.fnfinalbookskillparam=obj;
+           this.$.fnfinalbookskillajax.generateRequest();
+           alert(JSON.stringify(obj));
+       }
+         },
+          fnfinalbookskillResponse:function(e)
+          {
+            var res=e.detail.response.returnval;
+         
+
+            
+          },
+
+
+
+
+
+
+
+
+
+
+
+
+ fnfinalbookvalue:function(mainarr,costatus,empid,period,planneddate,valuuid,rowidz,subuid){
+
+   for(var i=0;i<mainarr.length;i++){ 
+  this.fnfinalbookvalueurl=sessionStorage.getItem("addrinfo")+"/fnfinalbookvalue-service";
+     var obj={};
+         obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+         obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+           obj.chapterid=localStorage.getItem("curr_sess_capters");
+           obj.subjectid=sessionStorage.getItem("subjectidz");
+           obj.gradeid=sessionStorage.getItem("grdeidz");
+           obj.sectionid=sessionStorage.getItem("sectionidz");
+           obj.completion_date=localStorage.getItem("localsess_from_service");
+           obj.empid=empid;
+           obj.status=costatus;
+           obj.valueid=mainarr[i].valueid;
+           obj.valuename=mainarr[i].valuename;
+           obj.planneddate=planneddate;
+           obj.period=period;
+           obj.rowidz=rowidz;
+           obj.valuuid=valuuid;
+           obj.subuid=subuid;
+           this.fnfinalbookvalueparam=obj;
+           this.$.fnfinalbookvalueajax.generateRequest();
+           
+        }
+         },
+fnfinalbookvalueResponse:function(e)
+           {
+            var res=e.detail.response.returnval;
+        
+          },
+ chaptcompletionstatus:function()
           {
 
             this.chapterstatusurl=sessionStorage.getItem("addrinfo")+"/chapterstatus-service";
