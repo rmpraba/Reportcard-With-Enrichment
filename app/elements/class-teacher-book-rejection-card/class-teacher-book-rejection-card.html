@@ -39,18 +39,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           height: 25px;
         } 
     </style>
-    <div>   <paper-input value={{captheadid}} hidden></paper-input>
+    <div>
+
+
+
+ 
+
+
+
+
+
+
+       <paper-input value={{captheadid}} hidden></paper-input>
             <paper-input value={{conceptid}} hidden></paper-input>
       <table border="0">
       <tr style="border-bottom: 1px solid #ccc; line-height: 1.8em;border-color:#6699ff">
               <td hidden>{{empid}}</td>
-              <td>{{concept}}</td>
+              <td>{{conceptname}}</td>
+              <td>{{subconceptname}}</td>
               <td>{{period}}</td>
               <td>{{skill}}</td>
-              <td><template is="dom-repeat" items="{{mainarr}}" as="wf">
-              {{wf.valuename}}
-              </template>
-              </td>
+              <td>{{value}}</td>
               <td>{{innovation}}</td> 
               <td>{{planneddate}}</td>
               <td>
@@ -58,9 +67,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   <complection-date-picker-card hidden$="{{hidesavevalue}}" ></complection-date-picker-card></td>
               <td><paper-textarea readonly$="{{newremarkszzz}}" value={{remark}}></paper-textarea></td>
               <td>{{enrichmentsug}}</td>
+              <td></td>
+              <td>{{correctionstatus}}</td>
+              <td>{{completionstatus}}</td>
               <td>
                 <paper-checkbox id={{id}} on-change="fnsetyes">Yes</paper-checkbox></br>
-                <!-- <paper-checkbox id={{idz}} on-change="fnsetno">No</paper-checkbox> -->
+              
            </td>
               <td><paper-icon-button  on-click="fnaroveset" hidden$="{{hidesavevalue}}" icon="save"></paper-icon-button>
               <paper-icon-button  on-click="fnedit" icon="create" hidden$="{{hideeditvalue}}"></paper-icon-button>
