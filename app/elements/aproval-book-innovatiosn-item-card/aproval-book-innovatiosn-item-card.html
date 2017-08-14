@@ -163,10 +163,16 @@
                 <h4>{{remark}}</h4>
               </paper-button>
             </td>
+
+            <td style="width: 8.98%;">
+              <paper-input value="{{Correction}}"></paper-input>
+            </td>
             <td style="width: 8.98%;padding-left: 1%;">
               <!-- <paper-input value="{{Correctiogfgdgn}}"></paper-input> -->
               <paper-button on-click="lsstatus"></paper-button>
+
                 <h4 style="margin-top: -8%;">{{correction}}</h4>
+
             </td> 
             <td>
                 <paper-icon-button id="saveidd"  hidden$="{{hidecheck1}}"  icon="save" on-click="fnsavebook"></paper-icon-button>
@@ -236,8 +242,6 @@
           </center>
       </paper-dialog>
 
-    
-    
       <paper-dialog id="innovationdialog" modal>
           <paper-textarea label="Innovation"  value="{{innovation}}"></paper-textarea>
           <center style="margin-top: 14%;">
@@ -506,7 +510,30 @@ fnpasssubarr:function(subsarr){
         }
 
       }
-      else
+
+  else if(this.planneddate=="empty")
+      {
+
+      this.$.bookservice.fnsetcoskill(conarr,this.period,this.innovation,this.remark,this.rowid,this.lrrectife,this.Correction);
+      this.$.bookservice.fnsetcoskillvalue(valuearr,this.period,this.rowid);
+      this.$.bookservice.fnsetcoskill11(skarr,this.period,this.rowid); 
+      this.$.bookservice.fnsetcoskill12(subsarrr,this.period,this.rowid); 
+      this.$.bookservice.fnmasterplaninsert(conarr,valuearr,skarr,subsarrr,this.period,this.innovation,this.remark,this.rowid,this.lrrectife,this.Correction);
+
+        this.hidecheck1=true;
+        this.hidecheck=false;  
+        this.planneddate="";     
+        this.showdate=moment(new Date()).format('L');
+        localStorage.setItem("localsess_last_service",this.showdate);
+        document.querySelector('concept-check-card').fnclean();
+        document.querySelector('aproval-book').fnclean1();
+        document.querySelector('subconcept-dialog-card').fnclean1();
+        document.querySelector('skill-dialog-card').fnclean1();
+        setsubarr=[];
+        trmp=[];
+         }
+    else
+>>>>>>> origin/master
       {
          // alert('edit');
              this.$.bookservice.fnbookeditskill(this.period,this.innovation,this.remark,this.planneddate,this.rowidz,this.lrrectife,this.correction);
