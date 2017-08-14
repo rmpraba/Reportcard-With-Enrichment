@@ -17,9 +17,15 @@
         }
 
     </style>
+
       <paper-input value={{captheadid}} hidden></paper-input>
       <paper-input value={{conceptid}} hidden></paper-input>
-      <paper-input value={{subflag}} hidden></paper-input>
+      <paper-input value={{skiluid}} hidden></paper-input>
+      <paper-input value={{subuid}} hidden></paper-input>
+      <paper-input value={{conuid}} hidden></paper-input>
+      <paper-input value={{valuuid}} hidden></paper-input>
+      <paper-input value={{subconceptid}} hidden></paper-input>
+
       <table border="0">
         <tr style="border-bottom: 1px solid #ccc; line-height: 1.8em;border-color:#6699ff">
               <td hidden>{{empid}}</td>
@@ -42,7 +48,7 @@
              </td>
               <td>{{remark}}</td>
               <td>{{lrrectife}}</td>
-              <td>{{Correction}}</td>
+              <td>{{Correction11}}</td>
               <td>
               <div>{{enrichmentsug}}</div>
                <paper-input value={{enrichmentsuggest}} hidden$="{{hidecheck}}"></paper-input>
@@ -81,10 +87,14 @@ var costatus;
            if(costatus==""||costatus==null)
            {
                   costatus='yes';
-             /* alert(this.empid+" "+this.skill+" "+this.innovation+" "+this.enrichmentsuggest+" "+this.period+" "+this.planneddate+" "+this.concept+" "+this.conceptid+" "+this.remark+" "+this.mainarr);
-      */
-    this.$.bookservice.fnfinalbook(costatus,this.empid,this.skill,this.innovation,this.enrichmentsuggest,this.period,this.planneddate,this.concept,this.conceptid,this.remark,this.mainarr);
-             document.querySelector('aproval-save-and-edit-book-card').splices();
+             /* alert(this.empid+" "+this.skill+" "+this.innovation+" "+this.enrichmentsuggest+" "+this.period+" "+this.planneddate+" "+this.concept+" "+this.conceptid+" "+this.remark+" "+this.mainarr); */
+     alert(this.Correction);
+
+      
+      this.$.bookservice.fnfinalbookskill(this.skillarr,costatus,this.empid,this.period,this.planneddate,this.skiluid,this.rowidz,this.subuid);
+      this.$.bookservice.fnfinalbookvalue(this.mainarr,costatus,this.empid,this.period,this.planneddate,this.valuuid,this.rowidz,this.subuid);
+   this.$.bookservice.fnfinalbook(costatus,this.empid,this.innovation,this.enrichmentsuggest,this.period,this.planneddate,this.concept,this.conceptid,this.remark,this.rowidz,this.subconceptname,this.subconceptid,this.subuid,this.conuid,this.Correction,this.lrrectife);
+    document.querySelector('aproval-save-and-edit-book-card').splices();
                       costatus="";
                   costatus=null;
            }
@@ -92,8 +102,13 @@ var costatus;
            {
             /*   alert(this.empid+" "+this.skill+" "+this.innovation+" "+this.enrichmentsuggest+" "+this.period+" "+this.planneddate+" "+this.concept+" "+this.conceptid+" "+this.remark+" "+this.mainarr);
 */
-               this.$.bookservice.fnfinalbook(costatus,this.empid,this.skill,this.innovation,this.enrichmentsuggest,this.period,this.planneddate,this.concept,this.conceptid,this.remark,this.mainarr);
-                document.querySelector('aproval-save-and-edit-book-card').splices();
+      alert(this.Correction);       
+      this.$.bookservice.fnfinalbookskill(this.skillarr,costatus,this.empid,this.period,this.planneddate,this.skiluid,this.rowidz,this.subuid);
+      this.$.bookservice.fnfinalbookvalue(this.mainarr,costatus,this.empid,this.period,this.planneddate,this.valuuid,this.rowidz,this.subuid);
+    this.$.bookservice.fnfinalbook(costatus,this.empid,this.innovation,this.enrichmentsuggest,this.period,this.planneddate,this.concept,this.conceptid,this.remark,this.rowidz,this.subconceptname,this.subconceptid,this.subuid,this.conuid,this.Correction,this.lrrectife);
+    document.querySelector('aproval-save-and-edit-book-card').splices();
+                      costatus="";
+                  
                 costatus="";
                 costatus=null;
             }
