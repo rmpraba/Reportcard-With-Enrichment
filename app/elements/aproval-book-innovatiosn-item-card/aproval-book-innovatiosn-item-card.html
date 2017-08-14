@@ -13,6 +13,7 @@
           border-collapse: collapse;
           margin-left: -1%;
           margin-top: -1%;
+
       }
      paper-textarea
       {
@@ -75,6 +76,19 @@
         border-radius: 10px;
           width: 380px;
           height: 270px;
+      }
+      #fngetskilldialogid
+      {
+        border-radius: 10px;
+        width: 380px;
+        height: 270px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+      }
+      .horizontalframes1
+      {
+         @apply(--layout-horizontal);
+        width: 90%;
       }
     </style>
     <div>
@@ -152,7 +166,7 @@
             <td style="width: 8.98%;padding-left: 1%;">
               <!-- <paper-input value="{{Correctiogfgdgn}}"></paper-input> -->
               <paper-button on-click="lsstatus"></paper-button>
-                <h4>{{correction}}</h4>
+                <h4 style="margin-top: -8%;">{{correction}}</h4>
             </td> 
             <td>
                 <paper-icon-button id="saveidd"  hidden$="{{hidecheck1}}"  icon="save" on-click="fnsavebook"></paper-icon-button>
@@ -199,13 +213,27 @@
       </center>
       </paper-dialog>
        <paper-dialog id="fngetskilldialogid" modal>
+        <h3>Skill Name</h3>
           <template is="dom-repeat" items="{{skillarrz}}" as="sa">
-         <skill-dialog-card skillid="{{sa.skill_id}}" id="VVYJ{{rowid}}{{iddate}}{{sa.skill_id}}" skillname="{{sa.skill_name}}" check="{{sa.check}}" rowid="{{rowid}}"></skill-dialog-card>
-      </template>  
-      <center style="margin-top: 5%;">
-          <paper-button on-click="skillsave"  style="background-color:black;color:white">Submit</paper-button>
-         <paper-button on-click="skillclose" style="background-color:black;color:white">Close</paper-button>
-      </center>
+            <skill-dialog-card skillid="{{sa.skill_id}}" id="VVYJ{{rowid}}{{iddate}}{{sa.skill_id}}" skillname="{{sa.skill_name}}" check="{{sa.check}}" rowid="{{rowid}}"></skill-dialog-card>
+          </template>  
+         <!--  <div class="horizontalframes1">
+            <table>
+              <template is="dom-repeat" items="{{skillarrz}}" as="view">
+                <tr>
+                  <template is="dom-repeat" items="{{view}}" as="sa">
+                    <td style="padding-left:15px">
+                      <skill-dialog-card skillid="{{sa.skill_id}}" id="VVYJ{{rowid}}{{iddate}}{{sa.skill_id}}" skillname="{{sa.skill_name}}" check="{{sa.check}}" rowid="{{rowid}}"></skill-dialog-card>
+                    </td>
+                  </template>
+                </tr>
+              </template>
+            </table>
+          </div> -->
+          <center style="margin-top: 5%;">
+              <paper-button on-click="skillsave"  style="background-color:black;color:white">Submit</paper-button>
+              <paper-button on-click="skillclose" style="background-color:black;color:white">Close</paper-button>
+          </center>
       </paper-dialog>
 
     
@@ -214,7 +242,9 @@
           <paper-textarea label="Innovation"  value="{{innovation}}"></paper-textarea>
           <center style="margin-top: 14%;">
             <paper-button  on-click="innovatsave" style="color:white;background-color:black">Save</paper-button>
-            <paper-button style="color:white;background-color:black" on-click="innovatclose" >Close</paper-button>
+            <paper-button id="innvtt" style="color:white;background-color:black" on-click="innovatclose" >Close</paper-button>
+
+            <paper-button id="innttvvnn"  style="color:white;background-color:black" on-click="invtclse" >Close</paper-button>
           </center>
       </paper-dialog>
 
@@ -222,7 +252,9 @@
           <paper-textarea label="Remarks" value="{{remark}}"></paper-textarea>
           <center style="margin-top: 14%;">
             <paper-button  on-click="remarksave" style="color:white;background-color:black">Save</paper-button>
-            <paper-button style="color:white;background-color:black" on-click="remarkclose" >Close</paper-button>
+            <paper-button  id="rmcls1" style="color:white;background-color:black" on-click="remarkclose" >Close</paper-button>
+
+            <paper-button  id="rmclssz" style="color:white;background-color:black" on-click="rmkclose" >Close</paper-button>
           </center>
       </paper-dialog>
 
@@ -231,7 +263,9 @@
           <paper-textarea label="LR Rectification" value="{{lrrectife}}"></paper-textarea>
           <center style="margin-top: 14%;">
             <paper-button  on-click="lrrsave" style="color:white;background-color:black">Save</paper-button>
-            <paper-button style="color:white;background-color:black" on-click="lrrclose" >Close</paper-button>
+            <paper-button id="lrrectzz" style="color:white;background-color:black" on-click="lrrclose" >Close</paper-button>
+
+            <paper-button id="lrrctbtn" style="color:white;background-color:black" on-click="lrtcls" >Close</paper-button>
           </center>
       </paper-dialog>
 
@@ -239,7 +273,9 @@
           <paper-textarea label="Correction Status" value="{{correction}}"></paper-textarea>
           <center style="margin-top: 14%;">
             <paper-button  on-click="statussave" style="color:white;background-color:black">Save</paper-button>
-            <paper-button style="color:white;background-color:black" on-click="statusclose" >Close</paper-button>
+            <paper-button id="statsid1" style="color:white;background-color:black" on-click="statusclose" >Close</paper-button>
+
+            <paper-button id="certstszz" style="color:white;background-color:black" on-click="crtstscls" >Close</paper-button>
           </center>
       </paper-dialog>
       
@@ -306,6 +342,10 @@
         this.innovation="";
         this.showdate=moment(new Date()).format('L');
         localStorage.setItem("localsess_last_service",this.showdate);
+        this.$.rmclssz.hidden=true;
+        this.$.innttvvnn.hidden=true;
+        this.$.lrrctbtn.hidden=true;
+        this.$.certstszz.hidden=true;
         },
    FnShowDialog:function(){
     this.date=new Date();
@@ -349,10 +389,10 @@ fndates:function(e){
         temp.push({"conceptname":conarr[i].conceptname});
       }
      }
+     //document.querySelector('concept-check-card').fnRefresh();
      // alert(JSON.stringify(temp));
      this.conceptzz=[];
      this.conceptzz=temp;
-
     },
     fnsubmit1:function(e){
      // alert(JSON.stringify(valuearr));
@@ -377,6 +417,7 @@ fndates:function(e){
      }
      this.skillarrzx=[];
      this.skillarrzx=temp1;
+          //document.querySelector('skill-dialog-card').FnRefresh();
     // alert(JSON.stringify(skarr));
     // alert(JSON.stringify(this.skillarrzx));
     },
@@ -413,6 +454,7 @@ fnpasssubarr:function(subsarr){
     },
     fnclose:function(e){
     this.$.dzfsd.close();
+   document.querySelector('concept-check-card').fnRefreshzz();
     // for(var i=0;i<conarr.length;i++){
     //   if(conarr[i].rowid==this.rowid){
         
@@ -423,55 +465,63 @@ fnpasssubarr:function(subsarr){
     },
     fnclose1:function(e){
     this.$.dzfsd1xsasa.close();
+    document.querySelector('aproval-book').newRefreshzz();
     },
     fnsavebook:function(e)
     {
-      if(conarr.length!=0 && valuearr.length!=0 && skarr.length!=0 && subsarrr.length!=0){
-
-      if(this.period==""|| this.period==null)
-     {
-          alert("Please Enter All Fields");
-          this.hidecheck1=false;
-        this.hidecheck=true;
-
-           this.showdate=moment(new Date()).format('L');
-        localStorage.setItem("localsess_last_service",this.showdate);
-    
-      }
-  else if(this.planneddate=="empty")
+      //alert(conarr.length+""+ valuearr.length+""+ skarr.length+""+ subsarrr.length);
+      if(conarr.length!=0 && valuearr.length!=0 && skarr.length!=0 && subsarrr.length!=0)
       {
-        this.$.bookservice.fnsetcoskill(conarr,this.period,this.innovation,this.remark,this.rowid,this.lrrectife,this.correction);
-        this.$.bookservice.fnsetcoskillvalue(valuearr,this.period,this.rowid);
-         this.$.bookservice.fnsetcoskill11(skarr,this.period,this.rowid); 
-          this.$.bookservice.fnsetcoskill12(subsarrr,this.period,this.rowid); 
-  
-        this.hidecheck1=true;
-        this.hidecheck=false;  
-        this.planneddate="";     
-        this.showdate=moment(new Date()).format('L');
-        localStorage.setItem("localsess_last_service",this.showdate);
-        document.querySelector('concept-check-card').fnclean();
-        document.querySelector('aproval-book').fnclean1();
-        document.querySelector('subconcept-dialog-card').fnclean1();
-        document.querySelector('skill-dialog-card').fnclean1();
-        setsubarr=[];
-        trmp=[];
-         }
-    else
-      {
-         this.$.bookservice.fnbookeditskill(this.period,this.innovation,this.remark,this.planneddate,this.rowidz,this.lrrectife,this.correction);
+
+
+        if(this.period==""|| this.period==null || this.lrrectife=="" || this.lrrectife==null || this.correction=="" || this.correction==null )
+         {
+              alert("Please Enter All Fields");
+              this.hidecheck1=false;
+            this.hidecheck=true;
+
+               /*this.showdate=moment(new Date()).format('L');
+            localStorage.setItem("localsess_last_service",this.showdate);*/
+        
+          }
+        else if(this.planneddate=="empty")
+        {
+          //alert('save');
+              this.$.bookservice.fnsetcoskill(conarr,this.period,this.innovation,this.remark,this.rowid,this.lrrectife,this.correction);
+              this.$.bookservice.fnsetcoskillvalue(valuearr,this.period,this.rowid);
+               this.$.bookservice.fnsetcoskill11(skarr,this.period,this.rowid); 
+                this.$.bookservice.fnsetcoskill12(subsarrr,this.period,this.rowid); 
+        
+              this.hidecheck1=true;
+              this.hidecheck=false;  
+              this.planneddate="";     
+              this.showdate=moment(new Date()).format('L');
+              localStorage.setItem("localsess_last_service",this.showdate);
+              document.querySelector('concept-check-card').fnclean();
+              document.querySelector('aproval-book').fnclean1();
+              document.querySelector('subconcept-dialog-card').fnclean1();
+              document.querySelector('skill-dialog-card').fnclean1();
+              setsubarr=[];
+              trmp=[];
+        }
 
       }
-        document.querySelector('concept-check-card').fnclean();
-        document.querySelector('aproval-book').fnclean1();
+      else
+      {
+         // alert('edit');
+             this.$.bookservice.fnbookeditskill(this.period,this.innovation,this.remark,this.planneddate,this.rowidz,this.lrrectife,this.correction);
+
+      }
+         
    
         this.conceptjhkhzz="";
-      }
-      else {
-     //   alert("ENTER THE VALUE");
+      
+      /*else 
+      {
+        alert("ENTER THE VALUE");
         alert(this.period+" "+this.innovation+" "+this.remark+" "+this.planneddate+" "+this.rowidz+" "+this.lrrectife+" "+this.correction);
-          this.$.bookservice.fnbookeditskill(this.period,this.innovation,this.remark,this.planneddate,this.rowidz,this.lrrectife,this.correction);
-      }
+        
+      }*/
   },
 
     fngetconceptz:function(e){
@@ -577,23 +627,38 @@ fngetskillsResponse:function(e){
       var res1=e.detail.response.skillarr;
        var res=e.detail.response.conceptarr;
        //alert(JSON.stringify(res1));
-       //alert(JSON.stringify(res));
-          for(var j=0;j<res.length;j++){
+       //alert(JSON.stringify(res)); 
+       var sklarr=[];
+       var sktemp=[];
+          for(var j=0;j<res.length;j++)
+          {
             var flag=0;
-              for(var i=0;i<res1.length;i++){
-                  
+              for(var i=0;i<res1.length;i++)
+              {  
                   if(res[j].skill_id==res1[i].skill_id)
                   {    
                    flag=1;
                    res[j].check=true;   
                   }
-                 }
-                 if(flag==0){
+              }
+                 if(flag==0)
+                 {
                   res[j].check=false;
                  }
-                }
+          }
+         /* for(var j=0;j<res.length;j++)
+          {
+            sktemp.push(res[j]);
+              if(j!=0&&j%4==0)  
+               {
+                sklarr.push(sktemp);
+                sktemp=[];
+               } 
+               //alert(JSON.stringify(sklarr));
+          }
+          sklarr.push(sktemp);*/
                  this.skillarrz=res;
-               //alert(JSON.stringify(this.valuearrz));
+              // alert(JSON.stringify(this.skillarrz));
 },
 
     fngetinchaptvaluevalue:function(e){
@@ -683,6 +748,15 @@ fngetskillsResponse:function(e){
       this.hidecheck1=false;
       this.hidecheck=true;
       this.innovattionvaluezs=false;
+      this.$.rmcls1.hidden=true;
+      this.$.rmclssz.hidden=false;
+      this.$.innvtt.hidden=true;
+      this.$.innttvvnn.hidden=false;
+      this.$.lrrectzz.hidden=true;
+      this.$.lrrctbtn.hidden=false;
+      this.$.statsid1.hidden=true;
+      this.$.certstszz.hidden=false;
+
     },
     fnsetpassvalz:function(e){
      tempvaluarr=e;
@@ -695,10 +769,12 @@ fngetskillsResponse:function(e){
     },
     subconceptclose:function(e){
      this.$.fngetdialogid.close();
+     document.querySelector('subconcept-dialog-card').fnrefresh1();
       },
      skillclose:function()
     {
     this.$.fngetskilldialogid.close();
+    document.querySelector('skill-dialog-card').FnRefresh();
     },
  
 
@@ -722,6 +798,10 @@ fngetskillsResponse:function(e){
       this.$.innovationdialog.close();
       this.innovation="";
     },
+    invtclse:function()
+    {
+      this.$.innovationdialog.close();
+    },
     remarksave:function(e)
     {
       this.$.remarkdialog.toggle();
@@ -730,6 +810,10 @@ fngetskillsResponse:function(e){
     {
       this.$.remarkdialog.close();
       this.remark="";
+    },
+    rmkclose:function()
+    {
+      this.$.remarkdialog.close();
     },
     lsninnovation:function(e)
     {
@@ -758,6 +842,10 @@ fngetskillsResponse:function(e){
       this.$.lrrecitificationdialog.close();
       this.lrrectife="";
     },
+    lrtcls:function()
+    {
+      this.$.lrrecitificationdialog.close();
+    },
     lsstatus:function()
     {
       this.$.lsstatusdialog.toggle();
@@ -770,6 +858,10 @@ fngetskillsResponse:function(e){
     {
       this.$.lsstatusdialog.close();
       this.correction="";
+    },
+    crtstscls:function()
+    {
+      this.$.lsstatusdialog.close();
     }
 
    });

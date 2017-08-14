@@ -10,40 +10,43 @@
       }  
        table
       {   table-layout: fixed;
-          width: 1237px;
+          width: 1314px;;
           border-collapse: collapse;
-          margin-left: 27%;
-          margin-top: 20%;
+          margin-left: -1%;
+          margin-top: 0%;
         }
 
     </style>
       <paper-input value={{captheadid}} hidden></paper-input>
       <paper-input value={{conceptid}} hidden></paper-input>
       <paper-input value={{subflag}} hidden></paper-input>
-      <table border="0">
-        <tr style="border-bottom: 1px solid #ccc; line-height: 1.8em;border-color:#6699ff">
+      <table border="1">
+        <!-- <tr style="border-bottom: 1px solid #ccc; line-height: 1.8em;border-color:#6699ff"> -->
+        <tr>
               <td hidden>{{empid}}</td>
-              <td>{{concept}}</td>
-              <td>{{subconceptname}}</td>
-              <td>{{period}}</td>
-              <td>
+              <td style="width: 9.7%;">{{concept}}</td>
+              <td style="width: 7.8%;">{{subconceptname}}</td>
+              <td style="width: 4.46%;">{{period}}</td>
+              <td style="width: 7.6%;">
               <template is="dom-repeat" items="{{skillarr}}" as="sr">
                {{sr.skillname}},
               </template>
               </td>
-              <td style="width: 7%;"><template is="dom-repeat" items="{{mainarr}}" as="st">
-               {{st.valuename}},
-              </template></td>
-              <td style="padding-left: 2%;">{{innovation}}</td> 
-              <td>{{planneddate}}</td>
-              <td>
+              <td style="width: 7.6%;">
+                <template is="dom-repeat" items="{{mainarr}}" as="st">
+                  {{st.valuename}},
+                </template>
+              </td>
+              <td style="padding-left: 2%;width: 7.6%;">{{innovation}}</td> 
+              <td style="width: 7.6%;">{{planneddate}}</td>
+              <td style="width: 7.6%;">
                 <div>{{completiondate}}</div>
                   <complection-date-picker-card hidden$="{{hidecheck}}"></complection-date-picker-card>
              </td>
-              <td>{{remark}}</td>
-              <td>{{lrrectife}}</td>
-              <td>{{Correction}}</td>
-              <td>
+              <td style="width: 7.6%;">{{remark}}</td>
+              <td style="width: 7.6%;">{{lrrectife}}</td>
+              <td style="width: 7.6%;">{{Correction}}</td>
+              <td style="width: 7.6%;">
               <div>{{enrichmentsug}}</div>
                <paper-input value={{enrichmentsuggest}} hidden$="{{hidecheck}}"></paper-input>
               </td>
@@ -55,7 +58,7 @@
                     
                   </div>
               </td>
-              <td>
+              <td style="width: 2.8%">
                <div hidden$="{{hidecheck}}"><paper-icon-button  on-click="fnaroveset" icon="save"></paper-icon-button>
                </div>
               </td>

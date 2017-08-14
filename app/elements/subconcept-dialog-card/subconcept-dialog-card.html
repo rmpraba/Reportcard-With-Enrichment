@@ -65,6 +65,19 @@
          subsarr.splice(obj);
          temparr1.splice(obj);
        },
+
+       fnrefresh1:function(e)
+       {
+        if(subsarr!=0)
+        {
+          for(var k=0;k<subsarr.length;k++)
+          {
+            var subcnptid=subsarr[k].id;
+            document.querySelector('#'+subcnptid).checked=false;
+            subsarr.splice(k,1);
+          }
+        }
+       }
    }); 
   })();
   </script>

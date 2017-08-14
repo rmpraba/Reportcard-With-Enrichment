@@ -8,8 +8,8 @@ var dbserver_ip_address = process.env.OPENSHIFT_MYSQL_DB_HOST || '127.0.0.1'
 var connection = mysql.createConnection({
    host     : 'localhost',
    user     : 'root',
-   password : 'admin',
-   database : 'reportcardnewins'
+   password : '',
+   database : 'reportcardnew'
   // port     : '62631',
   // user     : 'adminM1qnV1d',
   // password : 'HC2bIf7Sk2LD',
@@ -10063,7 +10063,9 @@ app.post('/fnsubmitsection-service' , urlencodedParser,function (req, res)
 app.post('/previoussection-service',  urlencodedParser,function (req,res)
   {
   /*var qur="SELECT * from md_student where id='"+req.query.admission_no+"'  and school_id='"+req.query.scholid1+"' and grade_id='"+req.query.grade_id+"'and school_type='"+req.query.school_type+"' and academic_year='"+req.query.academic_year+"'";  */
+
   var qur="SELECT student_name,gender,dob,class_id from md_student where id='"+req.query.admission_no+"'  and school_id='"+req.query.scholid1+"' and grade_id='"+req.query.grade_id+"'and school_type='"+req.query.school_type+"' and academic_year='"+req.query.academic_year+"'";
+  console.log("--------------pre student-----------------")
   console.log(qur);
   connection.query(qur,
     function(err, rows)
@@ -10073,6 +10075,7 @@ app.post('/previoussection-service',  urlencodedParser,function (req,res)
       //console.log(JSON.stringify(rows));  
        if(rows.length>0) 
        {
+          console.log(rows);
           res.status(200).json({'returnval': rows});
        }
        else
@@ -11027,6 +11030,7 @@ app.post('/fngetskills-service',  urlencodedParser,function (req,res)
   {  
       var qur1="SELECT * FROM master_skill";
       var qur2="SELECT * FROM md_book_skill where  capter_id='"+req.query.capter_id+"' and  planning_date='"+req.query.planneddate+"' and period='"+req.query.period+"'";
+      console.log("---------------------------------");
    console.log(qur1);
     console.log(qur2);
     var conceptarr=[];

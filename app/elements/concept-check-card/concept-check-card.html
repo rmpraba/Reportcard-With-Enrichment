@@ -110,8 +110,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         }
 
-
        },
+
+       fnRefreshzz:function(e)
+       {
+        if(concarr!=0)
+        {
+          for(var k=0;k<concarr.length;k++)
+          {
+            var conptid=concarr[k].id;
+            document.querySelector('#'+conptid).checked=false;
+            concarr.splice(k,1);
+          }
+        }
+       }
     });
   })();
   </script>

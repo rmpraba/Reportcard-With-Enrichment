@@ -8,9 +8,13 @@
       :host {
         display: block;
       }
+      .skillcard
+      {
+        @apply(--layout-horizontal);
+      }
     </style>
 
-    <div>
+    <div class="skillcard">
         <paper-input value={{skillid}} hidden></paper-input>
         <paper-input value={{skillname}} hidden></paper-input>
         <paper-input value={{conceptid}} hidden></paper-input>
@@ -64,6 +68,19 @@
          skillarrr.splice(obj);
          temparr1.splice(obj);
        },
+
+       FnRefresh:function(e)
+       {
+        if(skillarrr!=0)
+        {
+          for(var k=0;k<skillarrr.length;k++)
+          {
+            var skld=skillarrr[k].id;
+            document.querySelector('#'+skld).checked=false;
+            skillarrr.splice(k,1);
+          }
+        }
+       }
    }); 
   })();
   </script>
