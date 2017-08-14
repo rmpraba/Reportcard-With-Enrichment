@@ -564,7 +564,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         params="{{fnfinalbookvalueparam}}"
         handle-as="json"
         content-type="application/json"
-
         on-response="fnfinalbookvalueResponse"
           debounce-duration="300" />
  
@@ -580,6 +579,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         content-type="application/json"
         on-response="fnmasterplaninsertResponse"
         debounce-duration="300" />
+
+        
+
+      <iron-ajax
+        method="post"
+        id="fnsubconceptsaveajax"
+        url="{{fnsubconceptsaveurl}}"
+        params="{{fnsubconceptsaveparam}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="fnsubconceptsaveResponse"
+        debounce-duration="300"/>
 
   </template>
   <script>
@@ -2678,9 +2689,37 @@ fnfinalbookvalueResponse:function(e)
                 temparr1.push(obj);
           }
           document.querySelector('curriculam-report').fullreportarr=temparr1;      
-        }
+        },
 
-
+        fnsubconceptsave:function(conceptid,subconceptid,subconceptname,capterid)
+        {
+            this.fnsubconceptsaveurl=sessionStorage.getItem("addrinfo")+"/fnsubconceptsave-service";
+            var obj={"capterid":"","subconceptname":"","concept_id":"","subconceptid":""};
+              
+              obj.grade_id=sessionStorage.getItem("grdeidz");
+              obj.subject_id=sessionStorage.getItem("subjectidz");
+              obj.school_id=sessionStorage.getItem("curr_sess_loggedschoolid");
+              obj.academic_year=localStorage.getItem("curr_sess_academicyear"); 
+              obj.capterid=capterid;
+              obj.concept_id=conceptid;
+              obj.subconceptname=subconceptname;
+              obj.subconceptid=subconceptid;
+              this.fnsubconceptsaveparam=obj;
+               // alert(JSON.stringify(obj));
+              this.$.fnsubconceptsaveajax.generateRequest();
+      },
+      fnsubconceptsaveResponse:function(e)
+      {
+           var res=e.detail.response.returnval;
+            //alert(JSON.stringify(res));
+            if(res=='Updated')
+            {
+                alert('Updated');
+                //this.conceptseq(); 
+                this.fnbooksubconceptedit(); 
+            }    
+      },
+        
 
     });
   })();

@@ -10602,7 +10602,7 @@ app.post('/fnbookupdatevalue-service',  urlencodedParser,function (req, res)
      
     var qur="update md_concept set  concept='"+req.query.concept+"' where capter_id='"+req.query.capter_id+"' and concept_id='"+req.query.concept_id+"' and grade_id='"+req.query.grade_id+"' and subject_id='"+req.query.subject_id+"' and school_id='"+req.query.school_id+"'and academic_year='"+req.query.academic_year+"'";
 
-    console.log("----------- coceppt edit-------------");
+    console.log("----------- concept edit-------------");
     console.log(qur);
 
     connection.query(qur,
@@ -12133,6 +12133,34 @@ var qur="select school_id,id,student_name,class_id  from md_student where  class
       console.log(err);
   });
 });
+
+
+
+
+app.post('/fnsubconceptsave-service',  urlencodedParser,function (req, res)
+{ 
+     
+    var qur="update md_sub_concept set  sub_concept_name='"+req.query.subconceptname+"' where capter_id='"+req.query.capter_id+"' and concept_id='"+req.query.concept_id+"' and sub_concept_id='"+req.query.subconceptid+"'";
+
+    console.log("----------- sub concept edit-------------");
+    console.log(qur);
+
+    connection.query(qur,
+      function(err, rows)
+      {
+        if(!err)
+        {    
+          res.status(200).json({'returnval': 'Updated'});
+        }
+        else
+        {
+          console.log(err);
+          res.status(200).json({'returnval': 'fail'});
+        }  
+
+  });
+});
+
 
 var server = app.listen(5000, function () {
 var host = server.address().address

@@ -16,33 +16,71 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         :host {
         display: block;  
       }
-      .collapse-content::shadow #scroller  {
-    padding: 15px;
-    border: 1px solid #dedede;
-    width: 500px;
-      height: 350px;  
-  }
- .dialog-right-position {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-    }
-    .dialog-right-position::shadow #scroller {
-      width: 500px;
-      height: 350px;
-    }  
+      #subconedittt
+        {
+          border-radius: 10px;
+          width: 350px;
+          height: 200px;
+        }
+        #textarea1
+        {
+              position: relative;
+            margin-top: 21%;
+            width: 77%;
+        }
+        #scedt1
+        {
+            position: fixed;
+            margin-top: -4%;
+            margin-left: 17em;
+        }
 
-      .card
-      {
-         @apply(--layout-horizontal);
+        #scsve1
+        {
+            position: fixed;
+            margin-top: -4%;
+            margin-left: 17em;
+        }
+
+        .card
+        {
+          @apply(--layout-horizontal);
             margin-top: -2em;
-      }
+          /*margin-left: -6%;*/
+        }
     </style>
     <div class="card">
-      <h4 style="margin-top:18%;" no ink>{{subconceptname}}</h4>
+      <!-- <h4 style="margin-top:18%;" no ink>{{subconceptname}}</h4> -->
+      <paper-input value="{{capterid}}" hidden></paper-input>
+      <paper-input value="{{conceptid}}" hidden></paper-input>
+      <paper-input value="{{sub_concept_id}}" hidden></paper-input>
+
+      <paper-button on-click="subcncptedit" no ink>
+        <h4 style="margin-top:18%;" no ink>{{subconceptname}}</h4>
+      </paper-button>
     </div>
+
+    <paper-dialog id="subconedittt" modal>
+          <div>
+            <paper-icon-button icon="close" suffix on-click="Fnclosesubconcpt" style="float: right;position: fixed;margin-left: 20%;margin-top: -1%;"></paper-icon-button>
+          </div>
+          <div>
+            <paper-textarea id="textarea1"  readonly$="{{subbconceptzzzzz}}" value="{{subconceptnamez}}">
+            </paper-textarea>
+          </div>
+          <div>
+            <paper-icon-button id="scedt1" icon="create" suffix on-click="fnsubediittttt"  
+            hidden$="{{subedtzzzzzzzz}}">
+            </paper-icon-button>
+            <paper-icon-button id="scsve1" icon="save" on-click="fnnsubconsubmit" 
+            hidden$="{{subsavezzzzzzzz}}">
+            </paper-icon-button>
+          </div>
+         
+        </paper-dialog>   
     
- 
+  <teacher-book-service-card id="bookservice"></teacher-book-service-card>
+
   </template>
   <script>
   (function() {
@@ -50,14 +88,37 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     Polymer({
       is: 'sub-concept-value-item-card',
-
-      properties: {
-        foo: {
-          type: String,
-          value: 'sub-concept-value-item-card',
-          notify: true
-        }
+      ready:function()
+      {
+        this.subbconceptzzzzz=true;
+        this.subsavezzzzzzzz=true;
+      },
+      subcncptedit:function(e)
+      {
+        localStorage.setItem("curr_sess_sub_conceptid",this.sub_concept_id);
+        this.subconceptnamez=this.subconceptname;
+        this.$.subconedittt.toggle();
+      },
+      fnsubediittttt:function(e)
+      {
+        this.subedtzzzzzzzz=true;
+        this.subbconceptzzzzz=false;
+        this.subsavezzzzzzzz=false;
+      },
+      Fnclosesubconcpt:function()
+      {
+        this.$.subconedittt.close();
+      },
+      fnnsubconsubmit:function()
+      {
+        this.$.bookservice.subconceptsave(this.conceptid,this.sub_concept_id,this.subconceptnamez,this.capterid);
+         this.subedtzzzzzzzz=false;
+        this.subbconceptzzzzz=true;
+        this.subsavezzzzzzzz=true;
+        this.subconceptnamez="";
+        this.$.subconedittt.toggle();
       }
+
     });
   })();
   </script>
