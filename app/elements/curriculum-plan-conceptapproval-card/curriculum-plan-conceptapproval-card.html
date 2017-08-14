@@ -170,8 +170,12 @@
        localStorage.setItem("curr_sess_chapterid",this.chapterid); 
        localStorage.setItem("curr_sess_chaptername",this.chaptername); 
        this.$.bookservice.fngetclassbookchapterconceptvalue(this.gradeid,this.sectionidz,this.sectionidname,this.subjectid,this.chapterid);
+       this.$.bookservice.fetchalreadyapprovedchapterconcept(); 
+       
        this.$.clsplnevalttttt.hidden=false;
        this.$.empidzz.hidden=false;
+       // this.$.bookservice.fngetclassbookchapterconceptvalue(this.gradeid,this.sectionidz,this.sectionidname,this.subjectid,this.chapterid);
+
       },
       FnRefreshzzz:function()
       {
