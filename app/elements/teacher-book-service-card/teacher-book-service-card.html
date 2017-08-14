@@ -1,12 +1,3 @@
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
 
 <link rel="import" href="..\..\bower_components/polymer/polymer.html">
 
@@ -842,30 +833,6 @@ fnbooksubconcepteditResponse:function(e){
        {            
           var res=e.detail.response.conceptarr;
           var res1=e.detail.response.chapterarr;
-          /*var res2=[];
-          var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(res.length);
-                     for(var i=0;i<res.length;i++){
-                  var obj={};
-                  obj.concept_id=res[i].concept_id;  
-                  obj.concept=res[i].concept;   
-                  obj.capter_id=res[i].capter_id;  
-                  obj.period=res[i].period;  
-                  obj.planned_date=res[i].planned_date;  
-                  obj.hidecheck=false; 
-                  obj.hidecheck1=true; 
-                  res2.push(obj);     
-                  }
-      for(var k=0;k<r;k++){
-        var obj={};
-               obj.concept_id="";  
-               obj.concept="";   
-               obj.capter_id=""; 
-               obj.hidecheck=true; 
-               obj.hidecheck1=false; 
-               res2.push(obj);     
-              }*/
-
-
 
          var temp1=[];
          var overallzz=[];
@@ -1674,12 +1641,8 @@ fnsetcoskill11:function(skarr,period,rowid)
          fngetclassbooksectionvalueResponse:function(e)
          {
             var res1=e.detail.response.sectionarr;
-            // alert(JSON.stringify(res1));
-            document.querySelector('curriculum-plan-conceptapproval-card').sectionarr=res1;
-    
-     },
-
-
+            document.querySelector('curriculum-plan-conceptapproval-card').sectionarr=res1;    
+        },
           fngetclassbooksubjectvalue:function(gradeid,sectionid){
            this.fngetclassbooksubjectvalueurl=sessionStorage.getItem("addrinfo")+"/fngetclassbooksubjectvalue-service";
            // alert(JSON.stringify('coming'));
@@ -1738,13 +1701,7 @@ fnsetcoskill11:function(skarr,period,rowid)
           fngetclassbookchapterconceptResponse:function(e)
           {
             var res=e.detail.response.chapterarr;
-            // alert(JSON.stringify(res));
-            var obj={};
-          
-            obj.hidetitleflag=false;
-            obj.hideflag=true;
             var temp=[];
-            temp.push(obj);
             for(var i=0;i<res.length;i++){
             res[i].sno=i+1;
             res[i].hidetitleflag=true;
@@ -1790,7 +1747,7 @@ fnsetcoskill11:function(skarr,period,rowid)
            obj.skill=o.skill;
            obj.value=o.value;
            obj.innovation=o.innovation;
-           obj.lrrectification=o.lr;
+           obj.lrrectification=o.lrrectification;
            obj.remarks=o.remarks;
            obj.correctionstatus=o.correctionstatus;
            obj.completionstatus=o.completionstatus;
