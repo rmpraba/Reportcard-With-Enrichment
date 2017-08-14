@@ -1726,21 +1726,7 @@ fnsetcoskill11:function(skarr,period,rowid)
             var res=e.detail.response.chapterarr;
             // alert(JSON.stringify(res));
             var obj={};
-            obj.sno="S.No";
-            obj.concept_id="Concept Id";
-            obj.concept_name="Concept Name";
-            obj.sub_concept_id="Sub Concept Id";
-            obj.sub_concept_name="Workschedule";
-            obj.period="Period";
-            obj.planned_date_from="From Date";
-            obj.planned_to_date="To Date";
-            obj.skill="Skill";
-            obj.value="Value";
-            obj.innovation="Innovation";
-            obj.remarks="Remarks";
-            obj.lr_rectification="LR Rectification";
-            obj.correction_status="Correction Status";
-            obj.completion_status="Completion Status";
+          
             obj.hidetitleflag=false;
             obj.hideflag=true;
             var temp=[];
@@ -2174,7 +2160,7 @@ for(var r=0;r<overall2.length;r++){
                       obj.rowid=i+1;
                       obj.hidecheck=false; 
                       setattr.push(obj);
-                      }}
+                      }
 // alert(JSON.stringify(setattr));
  document.querySelector('class-teacher-book-approve-card').mainarr1=setattr; 
  document.querySelector('class-teacher-book-approve-card').empid=res1[0].empid; 
