@@ -1674,7 +1674,7 @@ fnsetcoskill11:function(skarr,period,rowid)
          fngetclassbooksectionvalueResponse:function(e)
          {
             var res1=e.detail.response.sectionarr;
-            alert(JSON.stringify(res1));
+            // alert(JSON.stringify(res1));
             document.querySelector('curriculum-plan-conceptapproval-card').sectionarr=res1;
     
      },
@@ -1682,19 +1682,20 @@ fnsetcoskill11:function(skarr,period,rowid)
 
           fngetclassbooksubjectvalue:function(gradeid,sectionid){
            this.fngetclassbooksubjectvalueurl=sessionStorage.getItem("addrinfo")+"/fngetclassbooksubjectvalue-service";
+           // alert(JSON.stringify('coming'));
            var obj={"schoolid":"","academic_year":"","roleid":"","emp_id":""};
            obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
            obj.academic_year=localStorage.getItem("curr_sess_academicyear");
            obj.roleid=sessionStorage.getItem("curr_sess_loggedroleid");
 
-           obj.emp_id=sessionStorage.getItem("curr_sess_loggedid");
-           obj.chapterid=localStorage.getItem("curr_sess_capters"); 
-           obj.subjectid=sessionStorage.getItem("subjectidz"); 
-           obj.gradeid=sessionStorage.getItem("grdeidz");
-           obj.sectoinid=sessionStorage.getItem("sectionidz");
-           this.fetchclassconceptparam=obj;
+           obj.empid=sessionStorage.getItem("curr_sess_loggedid");
+           obj.chapterid=localStorage.getItem("curr_sess_chapterid"); 
+           obj.subjectid=localStorage.getItem("curr_sess_subjectid"); 
+           obj.gradeid=gradeid; 
+           obj.sectionid=sectionid; 
+           this.fngetclassbooksubjectvalueparam=obj;
            //alert(JSON.stringify(obj));
-           this.$.fetchclassconceptajax.generateRequest();
+           this.$.fngetclassbooksubjectvalueajax.generateRequest();
        
           },
           fngetclassbooksubjectvalueResponse:function(e)

@@ -8,9 +8,9 @@ var dbserver_ip_address = process.env.OPENSHIFT_MYSQL_DB_HOST || '127.0.0.1'
 var connection = mysql.createConnection({
    host     : 'localhost',
    user     : 'root',
-   password : '',
+   password : 'admin',
 
-   database : 'reportcardnew'
+   database : 'reportcardnewins'
  
 });
    
@@ -11406,6 +11406,7 @@ app.post('/fngetclassbooksectionvalue-service',  urlencodedParser,function (req,
 app.post('/fngetclassbooksubjectvalue-service',  urlencodedParser,function (req,res)
   {     
     var qur="SELECT distinct(subject_id),(select subject_name from md_subject where subject_id=g.subject_id) as subject_name FROM mp_teacher_grade g where section_id='"+req.query.sectionid+"' and grade_id='"+req.query.gradeid+"' and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and id='"+req.query.empid+"' and role_id='subject-teacher'";
+    console.log('---------calling subject--------------');
     console.log(qur);
     var conceptarr=[];
     var sectionarr=[];
