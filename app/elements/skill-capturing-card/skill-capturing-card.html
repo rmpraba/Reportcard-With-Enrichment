@@ -24,10 +24,15 @@
         <tr style="border-bottom: 1px solid #ccc; line-height: 1.8em;border-color:#6699ff">
               <td hidden>{{empid}}</td>
               <td>{{concept}}</td>
+              <td>{{subconceptname}}</td>
               <td>{{period}}</td>
-              <td>{{skill}}</td>
+              <td>
+              <template is="dom-repeat" items="{{skillarr}}" as="sr">
+               {{sr.skillname}},
+              </template>
+              </td>
               <td style="width: 7%;"><template is="dom-repeat" items="{{mainarr}}" as="st">
-               {{st.valuename}}
+               {{st.valuename}},
               </template></td>
               <td style="padding-left: 2%;">{{innovation}}</td> 
               <td>{{planneddate}}</td>
@@ -36,6 +41,8 @@
                   <complection-date-picker-card hidden$="{{hidecheck}}"></complection-date-picker-card>
              </td>
               <td>{{remark}}</td>
+              <td>{{lrrectife}}</td>
+              <td>{{Correction}}</td>
               <td>
               <div>{{enrichmentsug}}</div>
                <paper-input value={{enrichmentsuggest}} hidden$="{{hidecheck}}"></paper-input>

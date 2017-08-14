@@ -64,6 +64,18 @@
           width: 380px;
           height: 270px;
       }
+      #lrrecitificationdialog
+      {
+          border-radius: 10px;
+          width: 380px;
+          height: 270px;
+      }
+      #lsstatusdialog
+      {
+        border-radius: 10px;
+          width: 380px;
+          height: 270px;
+      }
     </style>
     <div>
            <paper-input value={{rowid}} hidden></paper-input>
@@ -76,13 +88,13 @@
             <td style="padding-left: 3%;width: 5.8%;">{{rowid}}</td>
             
              <td style="width: 10.5%;padding-left: 2%;">
-                <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetconceptz" style="color:#6699ff;position: absolute;margin-left: 4%;margin-top: -3%;"></paper-icon-button>
+                <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetconceptz" style="color:#6699ff;float: right;"></paper-icon-button>
                   <template is="dom-repeat" items="{{conceptzz}}" as="r">
                     <h4 style="margin-left: -11%;width: 35%;">{{r.conceptname}}</h4>
                   </template>
               </td>
               <td style="width: 8.98%;padding-left: 2%;">
-               <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetsubconcept" style="color:#6699ff;position: absolute;margin-left: 4%;margin-top: -3%;"></paper-icon-button>
+               <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetsubconcept" style="color:#6699ff;float: right;"></paper-icon-button>
                   <template is="dom-repeat" items="{{subconceptarr1}}" as="rse">
                     <h4 style="margin-left: -11%;width: 35%;">{{rse.subconceptname}}</h4>
                   </template>
@@ -105,38 +117,47 @@
                   <dialog-page id="ID_Show_Dialog"></dialog-page>
               </td>
              <td style="width: 8.98%;padding-left: 2%;">
-                <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetskill" style="color:#6699ff;position: absolute;margin-left: 4%;margin-top: -3%;"></paper-icon-button>
+                <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetskill" style="color:#6699ff;float: right;"></paper-icon-button>
                   <template is="dom-repeat" items="{{skillarrzx}}" as="r">
                     <h4 style="margin-left: -11%;width: 35%;">{{r.skillname}}</h4>
                   </template>
              </td>
              <td style="width: 8.98%;padding-left: 2%;">
-                <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetconceptz1" style="color:#6699ff;position: absolute;margin-left: 4%;margin-top: -3%;"></paper-icon-button>
+                <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetconceptz1" style="color:#6699ff;float: right;"></paper-icon-button>
                 <!-- <paper-button on-click="lsnvalue">
                   <h4>{{valuez}}</h4>
                 </paper-button> -->
                   <template is="dom-repeat" items="{{mainarr}}" as="ry">
-                    <h4 style="margin-left: 10%;width: 39%;">{{ry.valuename}}</h4>
+                    <h4 style="margin-left: 10%;">{{ry.valuename}}</h4>
                   </template>
 
             </td>
-            <td style="width: 8.98%;padding-left: 2%;">
+            <td style="width: 8.98%;">
               <!-- <paper-textarea  readonly$="{{innovattionvaluezs}}" value="{{innovation}}"></paper-textarea> -->
               <paper-button on-click="lsninnovation">
                 <h4>{{innovation}}</h4>
               </paper-button>
             </td>
             <td style="width: 8.98%;">
-              <paper-input value="{{lrrectife}}"></paper-input>
+              <!-- <paper-input value="{{lrrectife}}"></paper-input> -->
+              <paper-button on-click="lrrectify"></paper-button>
+                <h4 style="padding-left: 18%;margin-top: -7%;">{{lrrectife}}</h4>
             </td> 
-            <td style="width: 8.98%;padding-left: 2%;">
+            <td style="width: 8.98%;">
               <!-- <paper-input value="{{remark}}"></paper-input> -->
               <paper-button on-click="lsnremark">
                 <h4>{{remark}}</h4>
               </paper-button>
             </td>
+
             <td style="width: 8.98%;">
               <paper-input value="{{Correction}}"></paper-input>
+            </td>
+            <td style="width: 8.98%;padding-left: 1%;">
+              <!-- <paper-input value="{{Correctiogfgdgn}}"></paper-input> -->
+              <paper-button on-click="lsstatus"></paper-button>
+                <h4>{{correction}}</h4>
+
             </td> 
             <td>
                 <paper-icon-button id="saveidd"  hidden$="{{hidecheck1}}"  icon="save" on-click="fnsavebook"></paper-icon-button>
@@ -191,6 +212,7 @@
          <paper-button on-click="skillclose" style="background-color:black;color:white">Close</paper-button>
       </center>
       </paper-dialog>
+
       <paper-dialog id="innovationdialog" modal>
           <paper-textarea label="Innovation"  value="{{innovation}}"></paper-textarea>
           <center style="margin-top: 14%;">
@@ -206,7 +228,25 @@
             <paper-button style="color:white;background-color:black" on-click="remarkclose" >Close</paper-button>
           </center>
       </paper-dialog>
+
+
+      <paper-dialog id="lrrecitificationdialog" modal>
+          <paper-textarea label="LR Rectification" value="{{lrrectife}}"></paper-textarea>
+          <center style="margin-top: 14%;">
+            <paper-button  on-click="lrrsave" style="color:white;background-color:black">Save</paper-button>
+            <paper-button style="color:white;background-color:black" on-click="lrrclose" >Close</paper-button>
+          </center>
+      </paper-dialog>
+
+      <paper-dialog id="lsstatusdialog" modal>
+          <paper-textarea label="Correction Status" value="{{correction}}"></paper-textarea>
+          <center style="margin-top: 14%;">
+            <paper-button  on-click="statussave" style="color:white;background-color:black">Save</paper-button>
+            <paper-button style="color:white;background-color:black" on-click="statusclose" >Close</paper-button>
+          </center>
+      </paper-dialog>
       
+
        <iron-ajax
         method="post"
         id="fngetconceptcheckajax"
@@ -403,11 +443,13 @@ fnpasssubarr:function(subsarr){
       }
   else if(this.planneddate=="empty")
       {
+
       this.$.bookservice.fnsetcoskill(conarr,this.period,this.innovation,this.remark,this.rowid,this.lrrectife,this.Correction);
       this.$.bookservice.fnsetcoskillvalue(valuearr,this.period,this.rowid);
       this.$.bookservice.fnsetcoskill11(skarr,this.period,this.rowid); 
       this.$.bookservice.fnsetcoskill12(subsarrr,this.period,this.rowid); 
       this.$.bookservice.fnmasterplaninsert(conarr,valuearr,skarr,subsarrr,this.period,this.innovation,this.remark,this.rowid,this.lrrectife,this.Correction);
+
         this.hidecheck1=true;
         this.hidecheck=false;  
         this.planneddate="";     
@@ -422,7 +464,7 @@ fnpasssubarr:function(subsarr){
          }
     else
       {
-         this.$.bookservice.fnbookeditskill(this.period,this.innovation,this.remark,this.planneddate,this.rowidz,this.lrrectife,this.Correction);
+         this.$.bookservice.fnbookeditskill(this.period,this.innovation,this.remark,this.planneddate,this.rowidz,this.lrrectife,this.correction);
 
       }
         document.querySelector('concept-check-card').fnclean();
@@ -432,8 +474,8 @@ fnpasssubarr:function(subsarr){
       }
       else {
      //   alert("ENTER THE VALUE");
-        alert(this.period+" "+this.innovation+" "+this.remark+" "+this.planneddate+" "+this.rowidz+" "+this.lrrectife+" "+this.Correction);
-          this.$.bookservice.fnbookeditskill(this.period,this.innovation,this.remark,this.planneddate,this.rowidz,this.lrrectife,this.Correction);
+        alert(this.period+" "+this.innovation+" "+this.remark+" "+this.planneddate+" "+this.rowidz+" "+this.lrrectife+" "+this.correction);
+          this.$.bookservice.fnbookeditskill(this.period,this.innovation,this.remark,this.planneddate,this.rowidz,this.lrrectife,this.correction);
       }
   },
 
@@ -706,8 +748,34 @@ fngetskillsResponse:function(e){
     setdate:function()
     {
       alert('You are allowed to select future date only..!');
+    },
+    lrrectify:function()
+    {
+      this.$.lrrecitificationdialog.toggle();
+    },
+    lrrsave:function(e)
+    {
+      this.$.lrrecitificationdialog.toggle();
+      
+    },
+    lrrclose:function()
+    {
+      this.$.lrrecitificationdialog.close();
+      this.lrrectife="";
+    },
+    lsstatus:function()
+    {
+      this.$.lsstatusdialog.toggle();
+    },
+    statussave:function(e)
+    {
+      this.$.lsstatusdialog.toggle();
+    },
+    statusclose:function()
+    {
+      this.$.lsstatusdialog.close();
+      this.correction="";
     }
-
 
    });
   })();

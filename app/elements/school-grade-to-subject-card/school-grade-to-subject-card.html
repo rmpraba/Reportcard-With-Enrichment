@@ -324,7 +324,7 @@
    
        }
      
-alert(JSON.stringify(overall));
+//alert(JSON.stringify(overall));
             var temp=[];
           var subarr=[];
           var obj={};
@@ -383,14 +383,13 @@ alert(JSON.stringify(overall));
             document.querySelector('#empLanguageprefernce1id').selected=-1;
            }
         },
-        /*saveinputzz:function()
-        {
-          this.$.mydialog.toggleDialog();
-        },
-      noinputmsg:function()
-      {
-        this.$.mydialog.toggleDialog3();
-      }*/
+       fnrefresh:function()
+       {
+           this.$.tbz1.hidden=true;
+           this.$.empLanguageprefernce1.hidden=true;
+           this.hidegenerate=true;
+           document.querySelector('#empLanguageprefernce1id').selected=-1;
+       }
 
     });
   })();

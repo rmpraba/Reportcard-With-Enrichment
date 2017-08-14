@@ -5,6 +5,7 @@
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
 <link rel="import" href="../demosumbit-card/demosumbit-card.html">
 <link rel="import" href="../employee-schooltype-to-category-basecard/employee-schooltype-to-category-basecard.html">
+<!-- <link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html"> -->
 
 
 <dom-module id="employe-schooltype-to-category-card">
@@ -123,6 +124,28 @@
       @apply(--layout-vertical);
       margin-left: 6em;
     }
+     #emsubspinddd
+       {
+          height: 100%;
+          width: 100%;
+          position: fixed;
+          background-color: #000;
+          bottom: 0; 
+          left: 0; 
+          opacity: 0.7; 
+          right: 0; 
+          top: 0; 
+          z-index: 10000;
+          margin: 0 auto;
+          text-align: center;
+        }
+        #empsubjspinnerddd
+        {
+          margin: 20% auto;
+          text-align: center;
+         width: 100px;
+         height: 100px;
+        }
     </style>
    
       <div>
@@ -222,11 +245,13 @@
                 <!-- <tr><hr/></tr> -->
               </template>
             <!-- </div> -->   
-          </table>   
+          </table>  
         </div>  
 
-
-
+         <!-- <paper-dialog id="emsubspinddd">
+              <paper-spinner id="empsubjspinnerddd"></paper-spinner>
+         </paper-dialog>
+ -->
 
 
         <div hidden>
@@ -374,21 +399,25 @@
     },
   */
   grnerate:function(e)
-        {
+  {
+      //document.querySelector('#emsubspinddd').open();
+      //this.$.empsubjspinnerddd.active=true;
 
-  this.schooltypeid=sessionStorage.getItem("curr_sess_loggedschooltype_ids");
-  this.categoryid=sessionStorage.getItem("curr_sess_loggedschoolcategory_id");
-  this.$.uiservice.fngetempsubject(this.schooltypeid,this.categoryid,this.emplangprefernce);
-   //alert(JSON.stringify(overall1));
-     overall=[];
-         g=[];
-    document.querySelector('employe-creation-card').Fnsubjectclean();
+      this.schooltypeid=sessionStorage.getItem("curr_sess_loggedschooltype_ids");
+      this.categoryid=sessionStorage.getItem("curr_sess_loggedschoolcategory_id");
+      this.$.uiservice.fngetempsubject(this.schooltypeid,this.categoryid,this.emplangprefernce);
+      //this.openempsubspinr();
+       //alert(JSON.stringify(overall1));
+         overall=[];
+             g=[];
+        document.querySelector('employe-creation-card').Fnsubjectclean();
  
-          },
+  },
       setempsubject11:function(e){
         dbsetsubjectarr=e;    
           },
-      setempsubject1:function(arr){
+      setempsubject1:function(arr)
+      {
         dbsetsubjectarr=arr;
         this.hidegenerate=false;
         this.hidenewtabzzzz=false;
@@ -396,19 +425,19 @@
         this.$.z22.hidden=false;
   
 
- if(overall1!=0){ 
-         document.querySelector('employe-creation-card').stupersonalinfo13(kn); 
-         kn.splice(obj);     
-        }
+       if(overall1!=0)
+       { 
+          document.querySelector('employe-creation-card').stupersonalinfo13(kn);
+          kn.splice(obj);     
+       }
             var setarrr=[];
            for(var i=0;i<getcategory.length;i++)
-                 {
-                          var subject_name=getcategory[i].subject_name;
-                          
-                            var obj={"srtarr":""};
-                                obj.srtarr=subject_name;
-                               setarrr.push(obj);
-                           }
+           {
+              var subject_name=getcategory[i].subject_name;
+               var obj={"srtarr":""};
+               obj.srtarr=subject_name;
+               setarrr.push(obj);
+            }
 
                   var generatearr=[];
                 for(var j=0;j<empteacharr.length;j++)
@@ -444,24 +473,26 @@
                     {
                        if(generatearr[k].emp_id==generatearr[l].emp_id)
                        {
-                         var obj1={"subject_name":"","subject_id":""}
-                         obj1.subject_name=generatearr[l].subject_name;
-                         obj1.subject_id=generatearr[l].subject_id;
-                         obj1.id=generatearr[l].subject_id+generatearr[k].emp_id;
-                         a.push(obj1);
-                         generatearr.splice(l,1);
-                         l--;
+                           var obj1={"subject_name":"","subject_id":""}
+                           obj1.subject_name=generatearr[l].subject_name;
+                           obj1.subject_id=generatearr[l].subject_id;
+                           obj1.id=generatearr[l].subject_id+generatearr[k].emp_id;
+                           a.push(obj1);
+                           generatearr.splice(l,1);
+                           l--;
                         }
                     }
-                   nameobj.employee=a;
-                   overall.push(nameobj);
-                   overall1.push(nameobj);
-                   a=[];
+                       nameobj.employee=a;
+                       overall.push(nameobj);
+                       overall1.push(nameobj);
+                       a=[];
                 }
- var k=[];
-   for(var j=0;j<overall.length;j++){
-         if(j<=7){
-             var obj={"emp_name":"","emp_id":"","employee":""};
+     var k=[];
+       for(var j=0;j<overall.length;j++)
+       {
+             if(j<=7)
+             {
+                 var obj={"emp_name":"","emp_id":"","employee":""};
                     var emp_name=overall[j].emp_name;
                     var emp_id=overall[j].emp_id;
                     var employee=overall[j].employee;
@@ -470,71 +501,89 @@
                            obj.employee=employee;
                             k.push(obj);
                             g.push(obj);
-      }}
-for(var j=0;j<k.length;j++){
+              }
+       }
+      for(var j=0;j<k.length;j++)
+      {
        var flag=0;
-  for(var q=0;q<dbsetsubjectarr.length;q++){
-      if(k[j].emp_id==dbsetsubjectarr[q].emp_id){
+        for(var q=0;q<dbsetsubjectarr.length;q++)
+        {
+          if(k[j].emp_id==dbsetsubjectarr[q].emp_id)
+          {
              flag=1;
              var ddd=k[j].emp_id;
               var sss=dbsetsubjectarr[q].subjectid;
              // alert(sss);
-         for(var t=0;t<k[j].employee.length;t++){
-              
-           if(k[j].employee[t].subject_id==sss){
-                      var rrn=k[j].employee[t].id;
-                      var admno=k[j].emp_id;
-                      k[j].employee[t].check=true;
-                      var obj={"dd":"","admno":""};
-                      obj.dd=rrn;
-                      obj.admno=admno;
-                      kn.push(obj);
-                      }
-                  
-                     }}}}
-            for(var i=0;i<overall.length;i++){
-       for(var s=0;s<k.length;s++){
-                if(overall[i].emp_id==k[s].emp_id){
-           overall.splice(i,1);
-         }}}
-         var temp=[];
-          var subarr=[];
-         var obj={};
-          obj.emp_id="";
-          obj.emp_name="";
-          for(var i=0;i<(setarrr).length;i++){
-          var obj1={};
-          obj1.subject_name=setarrr[i].srtarr;
-          obj1.hideinput=false;
-          obj1.hidecheck=true;          
-          subarr.push(obj1);
-          }
-          obj.employee=subarr;
-          temp.push(obj);
+             for(var t=0;t<k[j].employee.length;t++)
+             {
+               if(k[j].employee[t].subject_id==sss)
+               {
+                          var rrn=k[j].employee[t].id;
+                          var admno=k[j].emp_id;
+                          k[j].employee[t].check=true;
+                          var obj={"dd":"","admno":""};
+                          obj.dd=rrn;
+                          obj.admno=admno;
+                          kn.push(obj);
+                }
+                      
+              }
+           }
+        }
+      }
+        for(var i=0;i<overall.length;i++)
+        {
+           for(var s=0;s<k.length;s++)
+           {
+              if(overall[i].emp_id==k[s].emp_id)
+              {
+               overall.splice(i,1);
+              }
+           }
+        }
+             var temp=[];
+              var subarr=[];
+             var obj={};
+              obj.emp_id="";
+              obj.emp_name="";
+              for(var i=0;i<(setarrr).length;i++)
+              {
+                var obj1={};
+                obj1.subject_name=setarrr[i].srtarr;
+                obj1.hideinput=false;
+                obj1.hidecheck=true;          
+                subarr.push(obj1);
+              }
+              obj.employee=subarr;
+              temp.push(obj);
 
-         this.finalarr=[];
-         this.finalarr.push(temp[0]);
-         for(var i=0;i<(k).length;i++){
-          for(var j=0;j<(k[i].employee).length;j++){
-            k[i].employee[j].hideinput=true;
-            k[i].employee[j].hidecheck=false;
-          }
-          this.finalarr.push(k[i]);
-         }
-        for(var i=0;i<this.finalarr.length;i++)
-         {
-          if(i==0)
-            this.finalarr[i].hidebtn=true;
-          else
-            this.finalarr[i].hidebtn=false;
-         }
-         this.subjectbigarr=this.finalarr;
-        
-       if(k.length!=0){
-        this.schooltypeid=sessionStorage.getItem("curr_sess_loggedschooltype_ids");
-      this.categoryid=sessionStorage.getItem("curr_sess_loggedschoolcategory_id");
-     this.$.uiservice.fngetempsubject1(this.schooltypeid,this.categoryid,this.emplangprefernce);
-   }},
+             this.finalarr=[];
+             this.finalarr.push(temp[0]);
+             for(var i=0;i<(k).length;i++)
+             {
+                for(var j=0;j<(k[i].employee).length;j++)
+                {
+                  k[i].employee[j].hideinput=true;
+                  k[i].employee[j].hidecheck=false;
+                }
+               this.finalarr.push(k[i]);
+             }
+            for(var i=0;i<this.finalarr.length;i++)
+            {
+                if(i==0)
+                  this.finalarr[i].hidebtn=true;
+                else
+                  this.finalarr[i].hidebtn=false;
+            }
+               this.subjectbigarr=this.finalarr;
+           if(k.length!=0)
+           {
+              this.schooltypeid=sessionStorage.getItem("curr_sess_loggedschooltype_ids");
+              this.categoryid=sessionStorage.getItem("curr_sess_loggedschoolcategory_id");
+              this.$.uiservice.fngetempsubject1(this.schooltypeid,this.categoryid,this.emplangprefernce);
+           }
+           //this.clsempsubspinrsds();
+    },
 fnnext:function(e){
                  var setarrr=[];
                   for(var i=0;i<getcategory.length;i++){
@@ -753,6 +802,18 @@ for(var j=0;j<l.length;j++){
              }
       
  },
+
+    /*openempsubspinr:function()
+      {
+          document.querySelector('#emsubspinddd').open();
+          this.$.empsubjspinnerddd.active=true;
+      },
+    clsempsubspinrsds:function()
+    {
+          this.$.empsubjspinnerddd.active=false;
+          document.querySelector('#emsubspinddd').close();
+    }*/
+      
    
     
 
