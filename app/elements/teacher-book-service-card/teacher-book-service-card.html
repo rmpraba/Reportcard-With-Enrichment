@@ -538,7 +538,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         debounce-duration="300" />
         <iron-ajax
         method="post"
-<<<<<<< HEAD
         id="fnfinalbookskillajax"
         url="{{fnfinalbookskillurl}}"
         params="{{fnfinalbookskillparam}}"
@@ -553,15 +552,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         params="{{fnfinalbookvalueparam}}"
         handle-as="json"
         content-type="application/json"
-        on-response="fnfinalbookvalueResponse"
-=======
+        on-response="fnfinalbookvalueResponse"/>
+
+        <iron-ajax
+        method="post"
         id="fnmasterplaninsertajax"
         url="{{fnmasterplaninserturl}}"
         params="{{fnmasterplaninsertparam}}"
         handle-as="json"
         content-type="application/json"
         on-response="fnmasterplaninsertResponse"
->>>>>>> origin/master
         debounce-duration="300" />
 
   </template>
@@ -1849,19 +1849,18 @@ fnsetcoskill11:function(skarr,period,rowid)
                 a3=[];
                  }
  
-      alert(JSON.stringify(overall3));
+      //alert(JSON.stringify(overall3));
       var a4=[];
       var overall4=[];
 
 
-<<<<<<< HEAD
+
 
           var b=[];
         var subarr=[];            
             for(var k=0;k<res4.length;k++)
-=======
-        for(var k=0;k<res6.length;k++)
->>>>>>> origin/master
+            {
+            for(var k=0;k<res6.length;k++)
            {       
            var nameobj={};
              nameobj.planning_date=res6[k].planning_date; 
@@ -1890,7 +1889,7 @@ fnsetcoskill11:function(skarr,period,rowid)
                 overall4.push(nameobj);
                 a2=[];
                  }
-       alert(JSON.stringify(overall4));
+       //alert(JSON.stringify(overall4));
 /*var temp4=[];
 
 for(var l=0;l<res2.length;l++){
@@ -2256,23 +2255,17 @@ for(var r=0;r<overall2.length;r++){
   document.querySelector('class-teacher-book-rejection-item-card').empid=res2[0].empid; 
  document.querySelector('class-teacher-book-rejection-item-card').empname=res2[0].empname;
         },
-<<<<<<< HEAD
+
    fnfinalbook:function(status,empid,skill,innovation,enrichmentsuggest,period,planneddate,concept,conceptid,remark,mainarr){
     //alert('3');
-    for(var i=0;i<mainarr.length;i++){
-             this.fnfinalbookurl=sessionStorage.getItem("addrinfo")+"/fnfinalbook-service";
-           var obj={};
-           obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
-           obj.academic_year=localStorage.getItem("curr_sess_academicyear");
-=======
-   fnfinalbook:function(costatus,empid,innovation,enrichmentsuggest,period,planneddate,concept,conceptid,remark,rowidz,subconceptname,subconceptid,subuid,conuid,Correction,lrrectife){
-
-  
- this.fnfinalbookurl=sessionStorage.getItem("addrinfo")+"/fnfinalbook-service";
-     var obj={};
+    for(var i=0;i<mainarr.length;i++)
+    {
+            
+        this.fnfinalbookurl=sessionStorage.getItem("addrinfo")+"/fnfinalbook-service";
+        var obj={};
          obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
          obj.academic_year=localStorage.getItem("curr_sess_academicyear");
->>>>>>> origin/master
+
            obj.chapterid=localStorage.getItem("curr_sess_capters");
            obj.subjectid=sessionStorage.getItem("subjectidz");
            obj.gradeid=sessionStorage.getItem("grdeidz");
@@ -2297,7 +2290,8 @@ for(var r=0;r<overall2.length;r++){
           
            this.fnfinalbookparam=obj;
            this.$.fnfinalbookajax.generateRequest();
-           alert(JSON.stringify(obj));
+          } 
+           
          },
           fnfinalbookResponse:function(e)
           {
@@ -2305,9 +2299,6 @@ for(var r=0;r<overall2.length;r++){
             alert('Inserted');
             this.FnFetchClassConceptService();
           },
-
-
-
 
  fnfinalbookskill:function(skillarr,costatus,empid,period,planneddate,skiluid,rowidz,subuid){
 
@@ -2333,7 +2324,7 @@ for(var r=0;r<overall2.length;r++){
            obj.subuid=subuid;
            this.fnfinalbookskillparam=obj;
            this.$.fnfinalbookskillajax.generateRequest();
-           alert(JSON.stringify(obj));
+           //alert(JSON.stringify(obj));
        }
          },
           fnfinalbookskillResponse:function(e)
@@ -2343,15 +2334,6 @@ for(var r=0;r<overall2.length;r++){
 
             
           },
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2417,6 +2399,7 @@ fnfinalbookvalueResponse:function(e)
            this.$.getappovedcoordinatorajax.generateRequest();
       
        },
+
        getappovedcoordinatorResponse:function(e){
            var res=e.detail.response.returnval;
            document.querySelector('teacher-book-approve-card').gradearr=res;
