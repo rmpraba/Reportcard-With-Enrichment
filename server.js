@@ -8,8 +8,8 @@ var dbserver_ip_address = process.env.OPENSHIFT_MYSQL_DB_HOST || '127.0.0.1'
 var connection = mysql.createConnection({
    host     : 'localhost',
    user     : 'root',
-   password : 'admin',
-   database : 'reportcardnewins'
+   password : '',
+   database : 'reportcard1'
 
 });
    
@@ -11771,7 +11771,7 @@ console.log("----------------");
 app.post('/fnfinalbook1-service',  urlencodedParser,function (req, res)
 {  
 
-var qur="update final_book_sug set completion_date='"+req.query.completion_date+"',skill='"+req.query.skill+"',innovation='"+req.query.innovation+"',remark='"+req.query.remark+"' ,period='"+req.query.period+"',enrichment_sug='"+req.query.enrichmentsug+"',completion='"+req.query.completion+"' where school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and concept_id='"+req.query.conceptid+"' and capter_id='"+req.query.chapterid+"'and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and  section_id='"+req.query.sectionid+"' and planning_date='"+req.query.planneddate+"'";
+var qur="update md_curriculum_planning_approval  set completion_date='"+req.query.completion_date+"',skill='"+req.query.skill+"',innovation='"+req.query.innovation+"',remarks='"+req.query.remark+"' ,period='"+req.query.period+"',enrichment_sug='"+req.query.enrichmentsug+"',completion_status='"+req.query.completion+"' where school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and concept_id='"+req.query.conceptid+"' and chapter_id='"+req.query.chapterid+"'and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and  section_id='"+req.query.sectionid+"' and  sub_concept_id='"+req.query.subconceptid+"'";
 console.log("****************");
 console.log(qur);
 console.log("****************");

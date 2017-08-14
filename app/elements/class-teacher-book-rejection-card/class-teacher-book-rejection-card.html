@@ -56,7 +56,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <paper-input value={{gradeid}} hidden></paper-input>
             <paper-input value={{sectionid}} hidden></paper-input>
             <paper-input value={{conceptid}} hidden></paper-input>
-
+            
       <table border="0">
       <tr style="border-bottom: 1px solid #ccc; line-height: 1.8em;border-color:#6699ff">
               <td hidden>{{empid}}</td>
@@ -116,9 +116,9 @@ var costatus;
        alert("Please Enter The value");
       }*/
 
-        alert(this.empid+" 1"+this.skill+" 2"+this.innovation+" 3"+this.enrichmentsug+"4 "+this.period+"5 "+this.planneddate+"6 "+this.concept+" 7"+this.conceptid+" 8"+this.remark+" 9"+this.value);
+        alert(this.conceptid+" "+this.sectionid+" "+this.subjectid+" "+this.subconceptid+""+this.empid+" 1"+this.skill+" 2"+this.innovation+" 3"+this.enrichmentsug+"4 "+this.period+"5 "+this.planneddate+" "+this.concept+" 7"+this.conceptid+" 8"+this.remark+" 9"+this.value+" "+this.enrichmentsug+" "+this.correctionstatus+" "+this.completionstatus);
 
-   this.$.bookservice.fnfinalreaprovebook(this.empid,this.skill,this.innovation,this.enrichmentsug,this.period,this.planneddate,this.concept,this.conceptid,this.remark);
+   this.$.bookservice.fnfinalreaprovebook(this.empid,this.skill,this.innovation,this.enrichmentsug,this.period,this.planneddate,this.conceptname,this.conceptid,this.remark,this.sectionid,this.subjectid,this.subconceptid,this.value,this.correctionstatus,this.completionstatus,);
 
       this.hidesavevalue=true;
       this.hideeditvalue=false;

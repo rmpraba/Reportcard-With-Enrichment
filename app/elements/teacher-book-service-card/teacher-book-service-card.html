@@ -2194,49 +2194,37 @@ for(var r=0;r<overall2.length;r++){
         fetchclassconcept11Response:function(e){
 
           var res2=e.detail.response.returnval;
+       
         var setattr=[];
                var a=[];
             var overall=[];
            for(var k=0;k<res2.length;k++)
-           {       
+           {     
                   var nameobj={};
                       nameobj.conceptid=res2[k].concept_id;
-                      nameobj.concept=res2[k].concept;
+                      nameobj.conceptname=res2[k].concept_name;
+                      nameobj.subconceptid=res2[k].sub_concept_id;
+                      nameobj.subconceptname=res2[k].sub_concept_name;
                       nameobj.skill=res2[k].skill;
+                      nameobj.value=res2[k].value;
+                       nameobj.period=res2[k].period;
+                     
                       nameobj.innovation=res2[k].innovation;
-                      nameobj.planned_date=res2[k].planning_date;
-                      var id_date=res2[k].planning_date;
-                      id_date=id_date.replace(/[^\w\s]/gi, '');
-                      nameobj.id_date=id_date;
-                      nameobj.remark=res2[k].remark;
-                      nameobj.period=res2[k].period;
-                      nameobj.completion=res2[k].completion;
-                      nameobj.completion_date=res2[k].completion_date;
-                      nameobj.enrichment_sug=res2[k].enrichment_sug;
+                      nameobj.lr_rectifitcation=res2[k].lr_rectifitcation;
+                      nameobj.remarks=res2[k].remarks;
+                      nameobj.correction_status=res2[k].correction_status;
+                      nameobj.completion_status=res2[k].completion_status;
+                      nameobj.section_id=res2[k].section_id;
+                      nameobj.planned_date_from=res2[k].planned_date_from;
+                      nameobj.planned_to_date=res2[k].planned_to_date;
+                       nameobj.rowid=k+1;
                       nameobj.hidecheck=true; 
                       nameobj.grade_id=sessionStorage.getItem("grdeidz");
                       nameobj.subject_id=sessionStorage.getItem("subjectidz");
-
-        var obj={"valueid":"","valuename":""};
-            obj.valueid=res2[k].value_id;
-            obj.valuename=res2[k].value_name;
-            a.push(obj);
-           
-           for(var l=k+1;l<res2.length;l++)
-            {
-             if(res2[k].conc_date==res2[l].conc_date)
-                {
-             var obj1={"valueid":"","valuename":""}
-                 obj1.valueid=res2[l].value_id;
-                 obj1.valuename=res2[l].value_name;
-                 a.push(obj1);
-                res2.splice(l,1);
-                 l--;
-               }}
-                nameobj.mainarr=a;
-                setattr.push(nameobj);
-                a=[];
+                    setattr.push(nameobj);
                  }
+                       alert(JSON.stringify(setattr));
+  
    document.querySelector('class-teacher-book-rejection-item-card').mainnarr=setattr; 
   document.querySelector('class-teacher-book-rejection-item-card').empid=res2[0].empid; 
  document.querySelector('class-teacher-book-rejection-item-card').empname=res2[0].empname;
@@ -2456,7 +2444,7 @@ fnfinalbookvalueResponse:function(e)
           document.querySelector('teacher-book-approve-card').chapterarr=e.detail.response.returnval;
         },
 
-          fnfinalreaprovebook:function(empid,skill,innovation,enrichmentsug,period,planneddate,concept,conceptid,remark)
+          fnfinalreaprovebook:function(empid,skill,innovation,enrichmentsug,period,planneddate,conceptname,conceptid,remark,sectionid,subjectid,subconceptid,value,correctionstatus,completionstatus)
           {
              this.fnfinalbook1url=sessionStorage.getItem("addrinfo")+"/fnfinalbook1-service";
               var obj={};
@@ -2473,13 +2461,16 @@ fnfinalbookvalueResponse:function(e)
                obj.innovation=innovation;
                obj.enrichmentsug=enrichmentsug;
                obj.period=period;
-               obj.concept=concept;
+               obj.conceptname=conceptname;
                obj.conceptid=conceptid;
+               obj.subconceptid=subconceptid;
                obj.remark=remark;
                obj.completion='yes';
+               obj.correctionstatus=correctionstatus;
+
               this.fnfinalbook1param=obj;
                 //alert("1");
-                //alert(JSON.stringify(obj));
+                alert(JSON.stringify(obj));
               this.$.fnfinalbook1ajax.generateRequest();
         },
         fnfinalbook1Response:function(e)
