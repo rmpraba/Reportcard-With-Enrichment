@@ -74,6 +74,19 @@
          concarr.splice(obj);
          temparr1.splice(obj);
        },
+
+       newRefreshzz:function(e)
+       {
+        if(concarr!=0)
+        {
+          for(var k=0;k<concarr.length;k++)
+          {
+            var vleidd=concarr[k].id;
+            document.querySelector('#'+vleidd).checked=false;
+            concarr.splice(k,1);
+          }
+        }
+       }
    }); 
   })();
   </script>

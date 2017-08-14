@@ -111,6 +111,7 @@
        {
          border-radius: 10px;
        }
+
      </style>    
     <center><h2 hidden style="color:#00ccff">{{empnamez}}</h2></center>
      <paper-input hidden value="{{empnamez}}"></paper-input>
@@ -193,9 +194,9 @@
              <template  is="dom-repeat" items="{{overallarr1}}" as="view">
                 <tr>   
              <aproval-book-innovatiosn-item-card rowid="{{view.rowid}}" remark="{{view.remark}}" period="{{view.period}}" planneddate="{{view.planning_date}}" skill="{{view.skill}}" innovation="{{view.innovation}}" iddate="{{view.id_date}}" hidecheck="{{view.hidecheck}}" hidecheck11="{{view.hidecheck11}}"  hidecheck1="{{view.hidecheck1}}"  rowidz="{{view.rowidz}}" valuez="{{view.valuez}}" conceptzz="{{view.valuearrr}}" mainarr="{{view.mainarr}}" subconceptarr1="{{view.suarr}}" skillarrzx="{{view.skillarr}}"  correction="{{view.Correction}}" lrrectife="{{view.lrrectife}}"> 
-                  </aproval-book-innovatiosn-item-card>
+              </aproval-book-innovatiosn-item-card>
                 </tr> 
-              </template>  
+              </template>    
             </tr>  
       </table>
     
@@ -334,6 +335,11 @@
       this.$.bookservice.FnFetchConceptService(this.gradeid,this.subjectid,this.chapterid);
       this.$.zdsasddsasfsa.hidden=false;
       this.$.bookservice.conceptseq();
+      document.querySelector('concept-check-card').fnRefreshzz();
+      document.querySelector('subconcept-dialog-card').fnrefresh1();
+      document.querySelector('skill-dialog-card').FnRefresh();
+      document.querySelector('aproval-book').newRefreshzz();
+      
       //document.querySelector('from-book-date-picker').fndates();
        //document.querySelector('concept-check-card').fnclean();
        },
