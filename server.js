@@ -11454,6 +11454,22 @@ app.post('/fngetclassbookchapterconcept-service',  urlencodedParser,function (re
   });
 });
 
+app.post('/fetchalreadyapprovedchapterconcept-service',  urlencodedParser,function (req,res)
+  {     
+    var qur="SELECT * FROM md_curriculum_planning_approval WHERE school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and emp_id='"+req.query.empid+"' and grade_id='"+req.query.gradeid+"' and section_id='"+req.query.sectionid+"' and subject_id='"+req.query.subjectid+"' and chapter_id='"+req.query.chapterid+"'";
+    console.log('--------------------Already approved concepts-------------------------------');
+    console.log(qur);
+    console.log('---------------------------------------------------');
+    connection.query(qur,function(err, rows){
+    if(!err)
+    {  
+    res.status(200).json({'approvedarr': rows});
+    }
+    else
+     res.status(200).json({'': 'no rows'}); 
+  });
+});
+
 app.post('/updateapprovalstatusofchapterconcept-service',  urlencodedParser,function (req,res)
   {     
     var response={ 
@@ -11484,12 +11500,15 @@ app.post('/updateapprovalstatusofchapterconcept-service',  urlencodedParser,func
       correction_status: req.query.correctionstatus, 
       completion_status: req.query.completionstatus 
     };
+    // var qurcheck="SELECT * FROM md_curriculum_planning_approval WHERE school_id='"+req.query.schoolid+"' "+
+    // "and academic_year='"+req.query.academicyear+"' and emp_id";
     connection.query("INSERT INTO md_curriculum_planning_approval SET ?",[response],function(err, rows){
     if(!err)
     {  
     res.status(200).json({'returnval': 'Updated!'});
     }
-    else{
+    else
+    {
      console.log(err);
      res.status(200).json({'returnval': 'Not Updated!'}); 
     }
