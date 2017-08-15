@@ -55,26 +55,24 @@
               </td>
               <td style="padding-left: 2%;width: 7.36%;">{{innovation}}</td> 
               <td style="width: 7.4%;">{{fromdate}}</td>
-              <td style="width: 7.36%;">
-                <div>{{todate}}</div>
-                  <complection-date-picker-card hidden$="{{hidecheck}}"></complection-date-picker-card>
-              </td> 
+              <td style="width: 7.36%;">{{todate}}</td> 
               <td style="width: 7.36%;">{{lr}}</td>
-              <td style="width: 7.36%;">{{remarks}}</td>
+              <td style="width: 7.36%;">{{remarks}}</td>              
               <td style="width: 7.36%;">{{correctionstatus}}</td>
-              <td style="width: 7.36%;">
-                <div>{{enrichmentsug}}</div>
-                <paper-input value={{enrichmentsuggest}} hidden$="{{hidecheck}}"></paper-input>
-              </td>
+              <td style="width: 7.36%;" hidden$="{{hidetitleflag}}">{{completiondate}}</td>
+              <td hidden$="{{hideflag}}">
+              <complection-date-picker-card></complection-date-picker-card></td>
               <td hidden$="{{hidetitleflag}}">{{completionstatus}}</td>
               <td style="width: 4%;" hidden$="{{hideflag}}">
                 <paper-checkbox id="cpayes{{subconceptid}}"  on-change="FnYes">Yes</paper-checkbox>
                 <paper-checkbox id="cpano{{subconceptid}}" on-change="FnNo">No</paper-checkbox>
               </td>
-              <!-- <td  hidden$="{{hidetitleflag}}"></td> -->
+              <td style="width: 7.36%;">
+                <div hidden$="{{hidetitleflag}}">{{enrichmentsug}}</div>
+                <paper-input value={{enrichmentsuggest}} hidden$="{{hideflag}}"></paper-input>
+              </td>              
+              <td  hidden$="{{hidetitleflag}}"></td>
               <td style="width: 2.7%;" hidden$="{{hideflag}}"><paper-icon-button icon="save" on-click="FnSave"></paper-icon-button></td>
-                       
-              
               <!-- <td style="width: 7.6%;">{{Correction}}</td>
               <td style="width: 7.6%;">
 
@@ -133,14 +131,15 @@
         obj.subconceptid=this.subconceptid;
         obj.subconceptname=this.subconceptname;
         obj.period=this.period;
-        obj.planneddatefrom=this.fromdate;
-        obj.plannedtodate=this.todate;
+        obj.fromdate=this.fromdate;
+        obj.todate=this.todate;
         obj.skill=this.skill;
         obj.value=this.value;
         obj.innovation=this.innovation;
         obj.lrrectification=this.lr;
         obj.remarks=this.remarks;
         obj.correctionstatus=this.correctionstatus;
+        obj.enrichmentsuggest=this.enrichmentsuggest;
         if(document.querySelector("#cpayes"+this.subconceptid).checked==true)
           obj.completionstatus="Yes";
         if(document.querySelector("#cpano"+this.subconceptid).checked==true)

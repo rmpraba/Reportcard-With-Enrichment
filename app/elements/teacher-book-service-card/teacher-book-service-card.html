@@ -1455,11 +1455,13 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
                 }
             }
           }
-            if(flag==0)
-                
+    
+            // alert(JSON.stringify(res2));
+            // alert(JSON.stringify(temp));
+            if(flag==0)                
             document.querySelector('teacher-book-approve-card').overallarr1=res2;
             else
-             document.querySelector('teacher-book-approve-card').overallarr1=temp;   
+            document.querySelector('teacher-book-approve-card').overallarr1=temp;   
               res2=[];
               temp=[];
               this.periodafter="";
@@ -1479,7 +1481,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
 
       subflagseqeResponse:function(e)
       {
- var arr= e.detail.response.returnval;
+    var arr= e.detail.response.returnval;
        //alert(JSON.stringify(arr));
      subflagseqid=arr[0].sub+arr[0].sub_seq;
       },
@@ -1528,7 +1530,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
         obj.flag="active";
         obj.conc_date=arr[i].conceptid+localStorage.getItem("localsess_from_service")
         this.fnsetcoskillparam=obj;
-        alert(JSON.stringify(obj));
+        // alert(JSON.stringify(obj));
         this.$.fnsetcoskillajax.generateRequest();
        }
    },
@@ -1775,6 +1777,8 @@ fnsetcoskill11:function(skarr,period,rowid)
                 for(var j=0;j<this.approvedarr.length;j++){
                     if(temp[i].concept_id==this.approvedarr[j].concept_id&&temp[i].sub_concept_id==this.approvedarr[j].sub_concept_id&&temp[i].row_id==this.approvedarr[j].row_id){
                         temp[i].completion_status=this.approvedarr[j].completion_status;
+                        temp[i].completion_date=this.approvedarr[j].completion_date;
+                        temp[i].enrichment_sug=this.approvedarr[j].enrichment_sug;
                         temp[i].hidetitleflag=false;
                         temp[i].hideflag=true;
                     }
@@ -1791,6 +1795,7 @@ fnsetcoskill11:function(skarr,period,rowid)
            obj.academicyear=localStorage.getItem("curr_sess_academicyear");
            obj.roleid=sessionStorage.getItem("curr_sess_loggedroleid");
            obj.empid=sessionStorage.getItem("curr_sess_loggedid");
+           obj.empname=sessionStorage.getItem("curr_sess_loggeduname");
            obj.sectionid=localStorage.getItem("curr_sess_sectionid");
            obj.sectionname=localStorage.getItem("curr_sess_sectionname");
            obj.gradeid=localStorage.getItem("curr_sess_gradeid");
@@ -1814,6 +1819,8 @@ fnsetcoskill11:function(skarr,period,rowid)
            obj.remarks=o.remarks;
            obj.correctionstatus=o.correctionstatus;
            obj.completionstatus=o.completionstatus;
+           obj.enrichmentsuggest=o.enrichmentsuggest;
+           obj.completiondate=localStorage.getItem("localsess_comp_service");
            this.updateapprovalstatusofchapterconceptparam=obj;
            this.$.updateapprovalstatusofchapterconceptajax.generateRequest();
           },
@@ -2275,7 +2282,7 @@ for(var r=0;r<overall2.length;r++){
                       nameobj.subject_id=sessionStorage.getItem("subjectidz");
                     setattr.push(nameobj);
                  }
-                       alert(JSON.stringify(setattr));
+                       // alert(JSON.stringify(setattr));
   
    document.querySelector('class-teacher-book-rejection-item-card').mainnarr=setattr; 
   document.querySelector('class-teacher-book-rejection-item-card').empid=res2[0].empid; 
@@ -2524,7 +2531,7 @@ fnfinalbookvalueResponse:function(e)
 
               this.fnfinalbook1param=obj;
                 //alert("1");
-                alert(JSON.stringify(obj));
+                // alert(JSON.stringify(obj));
               this.$.fnfinalbook1ajax.generateRequest();
         },
         fnfinalbook1Response:function(e)

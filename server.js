@@ -10716,17 +10716,19 @@ app.post('/fetchconcept-service',  urlencodedParser,function (req,res)
 var qur3="SELECT * FROM md_book_value  where capter_id='"+req.query.chapterid+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"'";
   var qur4="SELECT * FROM md_book_skill  where capter_id='"+req.query.chapterid+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"'";
 var qur5="SELECT * FROM md_book_sub_concept  where capter_id='"+req.query.chapterid+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"'";
-
+console.log("------------fetching info for planning--------------------");
     console.log(qur1);
-    //console.log("------------skill--------------------");
+    console.log('----------------------------');
     console.log(qur2);
+    console.log('----------------------------');
     console.log(qur3);
+    console.log('----------------------------');
     var chapterarr=[];
     var skillarr=[];
     var valuearr=[];
     var dbskillarr=[];
     var subarr=[];
- connection.query(qur1,function(err, rows){
+    connection.query(qur1,function(err, rows){
     if(!err)
     {  
      chapterarr=rows;
@@ -10761,7 +10763,11 @@ console.log(err);
     else
 console.log(err);
   });}
+    else
+      console.log(err);
   });}
+    else
+      console.log(err);
     });}
     else{
       console.log(err);
@@ -11268,7 +11274,7 @@ app.post('/fetchclassconcept11-service',  urlencodedParser,function (req,res)
 
 app.post('/chapterstatus-service',  urlencodedParser,function (req, res)
 {
- // var qur="select distinct(f.chapter_id),f.grade_id,g.grade_name,f.subject_id,s.subject_name,f.section_id,gs.section_id as section_name,ch.capter,e.emp_name,f.emp_id from  md_curriculum_planning_approval f  join md_grade g on(g.grade_id=f.grade_id) join md_subject s on(s.subject_id=f.subject_id) join mp_grade_section gs on(gs.class_id=f.section_id) join md_chapter ch on(ch.capter_id=f.chapter_id) join   md_employee_creation e on(e.emp_id=f.emp_id) where f.school_id='"+req.query.schoolid+"' and f.completion_status='No' and gs.school_id='"+req.query.schoolid+"' and gs.grade_id=f.grade_id and gs.academic_year='"+req.query.academic_year+"'and f.academic_year='"+req.query.academic_year+"' and ch.school_id='"+req.query.schoolid+"' and ch.academic_year='"+req.query.academic_year+"' and  e.school_id='"+req.query.schoolid+"' and e.academic_year='"+req.query.academic_year+"'"; 
+ // var qur="select distinct(f.chapter_id),f.grade_id,g.grade_name,f.subject_id,s.subject_name,f.section_id,gs.section_id as section_name,ch.capter,e.emp_name,f.emp_id from  md_curriculum_planning_approval f  join md_grade g on(g.grade_id=f.grade_id) join md_subject s on(s.subject_id=f.subject_id) join mp_grade_section gs on(gs.class_id=f.section_id) join md_chapter ch on(ch.capter_id=f.chapter_id) join   md_employee_creation e on(e.emp_id=f.emp_id) where f.school_id='"+req.query.schoolid+"' and f.completion_status='No' and gs.school_id='"+req.query.schoolid+"' and gs.grade_id=f.grade_id and gs.academic_year='"+req.query.academicyear+"'and f.academic_year='"+req.query.academicyear+"' and ch.school_id='"+req.query.schoolid+"' and ch.academic_year='"+req.query.academicyear+"' and  e.school_id='"+req.query.schoolid+"' and e.academic_year='"+req.query.academicyear+"'"; 
  var qur="select * from md_curriculum_planning_approval where school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' "+
  " and completion_status='No' and grade_id in (select distinct(grade_id) from mp_teacher_grade where school_id='"+req.query.schoolid+"' "+
  " and academic_year='"+req.query.academicyear+"' and id='"+req.query.empid+"' and role_id='co-ordinator')";
@@ -11481,6 +11487,7 @@ app.post('/updateapprovalstatusofchapterconcept-service',  urlencodedParser,func
       school_id: req.query.schoolid,
       academic_year: req.query.academicyear,
       emp_id:req.query.empid,
+      emp_name:req.query.empname,
       grade_id: req.query.gradeid,
       grade_name: req.query.gradename,
       section_id: req.query.sectionid,
@@ -11495,15 +11502,17 @@ app.post('/updateapprovalstatusofchapterconcept-service',  urlencodedParser,func
       sub_concept_id: req.query.subconceptid,
       sub_concept_name: req.query.subconceptname,
       period: req.query.period,
-      planned_date_from: req.query.plannedfromdate,
-      planned_to_date: req.query.plannedtodate,
+      planned_date_from: req.query.fromdate,
+      planned_to_date: req.query.todate,
       skill: req.query.skill,
       value: req.query.value,
       innovation: req.query.innovation,
       lr_rectification: req.query.lrrectification,
       remarks: req.query.remarks,
       correction_status: req.query.correctionstatus, 
-      completion_status: req.query.completionstatus 
+      completion_status: req.query.completionstatus,
+      enrichment_sug:req.query.enrichmentsuggest,
+      completion_date:req.query.completiondate 
     };
     // var qurcheck="SELECT * FROM md_curriculum_planning_approval WHERE school_id='"+req.query.schoolid+"' "+
     // "and academic_year='"+req.query.academicyear+"' and emp_id";
