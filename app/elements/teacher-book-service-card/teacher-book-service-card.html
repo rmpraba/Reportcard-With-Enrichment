@@ -877,7 +877,7 @@ fnbooksubconcepteditResponse:function(e){
               
             obj.flag='active';
             this.fnsendconceptparam=obj;
-            alert(JSON.stringify(obj));
+          //  alert(JSON.stringify(obj));
             this.$.fnsendconceptajax.generateRequest();
       },
 
@@ -885,7 +885,7 @@ fnbooksubconcepteditResponse:function(e){
       {
 
          var res=e.detail.response.returnval;
-         alert(JSON.stringify(res));
+        // alert(JSON.stringify(res));
             if(res=="Inserted")
             {
               alert('Inserted');
@@ -2652,21 +2652,16 @@ fnfinalbookvalueResponse:function(e)
           document.querySelector('curriculam-report').fullreportarr=temparr1;      
         },
 
-        fnsubconceptsave:function(conceptid,subconceptid,subconceptname,capterid)
+        subconceptsave:function(conceptid,sub_concept_id,subconceptname,capterid)
         {
             this.fnsubconceptsaveurl=sessionStorage.getItem("addrinfo")+"/fnsubconceptsave-service";
-            var obj={"capterid":"","subconceptname":"","concept_id":"","subconceptid":""};
-              
-              obj.grade_id=sessionStorage.getItem("grdeidz");
-              obj.subject_id=sessionStorage.getItem("subjectidz");
-              obj.school_id=sessionStorage.getItem("curr_sess_loggedschoolid");
-              obj.academic_year=localStorage.getItem("curr_sess_academicyear"); 
+            var obj={"capterid":"","subconceptname":"","concept_id":"","sub_concept_id":""};
               obj.capterid=capterid;
               obj.concept_id=conceptid;
               obj.subconceptname=subconceptname;
-              obj.subconceptid=subconceptid;
+              obj.sub_concept_id=sub_concept_id;
               this.fnsubconceptsaveparam=obj;
-               // alert(JSON.stringify(obj));
+            //alert(JSON.stringify(obj));
               this.$.fnsubconceptsaveajax.generateRequest();
       },
       fnsubconceptsaveResponse:function(e)

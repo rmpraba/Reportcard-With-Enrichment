@@ -42,15 +42,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div>
 
 
-
- 
-
-
-
-
-
-
-      
             <paper-input value={{subconceptid}} hidden></paper-input>
             <paper-input value={{subjectid}} hidden></paper-input>
             <paper-input value={{gradeid}} hidden></paper-input>
@@ -117,13 +108,8 @@ var costatus;
     {
       
 
-      /*if(this.empid==""||this.skill==""||this.innovation==""||this.enrichmentsug==""||this.period==""||this.planneddate==""||this.concept==""||this.conceptid==""||this.remark==""||this.valuez=="")
-      {
-       alert("Please Enter The value");
-      }*/
-
-        alert(this.conceptid+" "+this.sectionid+" "+this.subjectid+" "+this.subconceptid+""+this.empid+" 1"+this.skill+" 2"+this.innovation+" 3"+this.enrichmentsug+"4 "+this.period+"5 "+this.planneddate+" "+this.concept+" 7"+this.conceptid+" 8"+this.remark+" 9"+this.value+" "+this.enrichmentsug+" "+this.correctionstatus+" "+this.completionstatus);
-
+ 
+      
     this.$.bookservice.fnfinalreaprovebook(this.empid,this.skill,this.innovation,this.enrichmentsug,this.period,this.planneddate,this.conceptname,this.conceptid,this.remark,this.sectionid,this.subjectid,this.subconceptid,this.value,this.correctionstatus,this.completionstatus,this.rowidz);
 
       this.hidesavevalue=true;
