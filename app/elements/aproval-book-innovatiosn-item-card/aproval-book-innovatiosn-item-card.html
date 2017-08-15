@@ -29,8 +29,8 @@
 
           width: 250px;
           height: 320px;
-          overflow-x: hidden;
-          overflow-y: visible;
+         /* overflow-x: hidden;
+          overflow-y: visible;*/
       }
       #dzfsd1xsasa
       {
@@ -89,6 +89,15 @@
       }
       .concptcard
       {
+        width: 79%;
+        height: 55%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+      }
+      .skillcardd
+      {
+         width: 86%;
+        height: 50%;
         overflow-x: hidden;
         overflow-y: scroll;
       }
@@ -225,9 +234,11 @@
       </paper-dialog>
        <paper-dialog id="fngetskilldialogid" modal>
         <h3>Skill Name</h3>
-          <template is="dom-repeat" items="{{skillarrz}}" as="sa">
-            <skill-dialog-card skillid="{{sa.skill_id}}" id="VVYJ{{rowid}}{{iddate}}{{sa.skill_id}}" skillname="{{sa.skill_name}}" check="{{sa.check}}" rowid="{{rowid}}"></skill-dialog-card>
-          </template>  
+          <div class="skillcardd">
+            <template is="dom-repeat" items="{{skillarrz}}" as="sa">
+              <skill-dialog-card skillid="{{sa.skill_id}}" id="VVYJ{{rowid}}{{iddate}}{{sa.skill_id}}" skillname="{{sa.skill_name}}" check="{{sa.check}}" rowid="{{rowid}}"></skill-dialog-card>
+            </template>  
+          </div>  
          <!--  <div class="horizontalframes1">
             <table>
               <template is="dom-repeat" items="{{skillarrz}}" as="view">
