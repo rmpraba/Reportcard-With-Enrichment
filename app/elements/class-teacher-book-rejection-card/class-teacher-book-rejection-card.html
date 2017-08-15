@@ -17,11 +17,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }  table
         {   
-          table-layout: fixed;
-          width: 1270px;
+              table-layout: fixed;
+          width: 1301px;
           border-collapse: collapse;
-          margin-left: 19%;
-          margin-top: 20%;
+          margin-left: -1%;
+          margin-top: 0%;
         }
 
         .card
@@ -42,37 +42,39 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div>
 
 
-
- 
-
-
-
-
-
-
-       <paper-input value={{captheadid}} hidden></paper-input>
+            <paper-input value={{subconceptid}} hidden></paper-input>
+            <paper-input value={{subjectid}} hidden></paper-input>
+            <paper-input value={{gradeid}} hidden></paper-input>
+            <paper-input value={{sectionid}} hidden></paper-input>
             <paper-input value={{conceptid}} hidden></paper-input>
-      <table border="0">
-      <tr style="border-bottom: 1px solid #ccc; line-height: 1.8em;border-color:#6699ff">
+            <paper-input value={{rowidz}} hidden></paper-input>
+
+
+
+      <table border="1">
+      <tr >
+
+
               <td hidden>{{empid}}</td>
-              <td>{{conceptname}}</td>
-              <td>{{subconceptname}}</td>
-              <td>{{period}}</td>
-              <td>{{skill}}</td>
-              <td>{{value}}</td>
-              <td>{{innovation}}</td> 
-              <td>{{planneddate}}</td>
-              <td>
+              <td style="width: 8.1%;">{{conceptname}}</td>
+              <td style="width: 10%;">{{subconceptname}}</td>
+              <td style="width: 5%;">{{period}}</td>
+              <td style="width: 8.1%;">{{skill}}</td>
+              <td style="width: 8.1%;">{{value}}</td>
+              <td style="width: 8.1%;">{{innovation}}</td> 
+              <td style="width: 8.1%;">{{planneddate}}</td>
+              <td style="width: 8.1%;">
                 <div hidden$="{{hideeditvalue}}">{{completiondate}}</div>
-                  <complection-date-picker-card hidden$="{{hidesavevalue}}" ></complection-date-picker-card></td>
-              <td><paper-textarea readonly$="{{newremarkszzz}}" value={{remark}}></paper-textarea></td>
-              <td>{{enrichmentsug}}</td>
-              <td></td>
-              <td>{{correctionstatus}}</td>
-              <td>{{completionstatus}}</td>
-              <td>
+                  <complection-date-picker-card hidden$="{{hidesavevalue}}" ></complection-date-picker-card>
+              </td>
+              <td style="width: 8.1%;">
+                <paper-textarea readonly$="{{newremarkszzz}}" value={{remark}}></paper-textarea>
+              </td>
+              <td style="width: 8.2%;">{{enrichmentsug}}</td>
+              <td style="width: 8.2%;">{{correctionstatus}}</td>
+              <!-- <td style="width: 8.1%;">{{completionstatus}}</td> -->
+              <td style="width: 8.2%;">
                 <paper-checkbox id={{id}} on-change="fnsetyes">Yes</paper-checkbox></br>
-              
            </td>
               <td><paper-icon-button  on-click="fnaroveset" hidden$="{{hidesavevalue}}" icon="save"></paper-icon-button>
               <paper-icon-button  on-click="fnedit" icon="create" hidden$="{{hideeditvalue}}"></paper-icon-button>
@@ -106,14 +108,9 @@ var costatus;
     {
       
 
-      /*if(this.empid==""||this.skill==""||this.innovation==""||this.enrichmentsug==""||this.period==""||this.planneddate==""||this.concept==""||this.conceptid==""||this.remark==""||this.valuez=="")
-      {
-       alert("Please Enter The value");
-      }*/
-
-       // alert(this.empid+" 1"+this.skill+" 2"+this.innovation+" 3"+this.enrichmentsug+"4 "+this.period+"5 "+this.planneddate+"6 "+this.concept+" 7"+this.conceptid+" 8"+this.remark+" 9"+this.valuez);
-
-   this.$.bookservice.fnfinalreaprovebook(this.empid,this.skill,this.innovation,this.enrichmentsug,this.period,this.planneddate,this.concept,this.conceptid,this.remark);
+ 
+      
+    this.$.bookservice.fnfinalreaprovebook(this.empid,this.skill,this.innovation,this.enrichmentsug,this.period,this.planneddate,this.conceptname,this.conceptid,this.remark,this.sectionid,this.subjectid,this.subconceptid,this.value,this.correctionstatus,this.completionstatus,this.rowidz);
 
       this.hidesavevalue=true;
       this.hideeditvalue=false;

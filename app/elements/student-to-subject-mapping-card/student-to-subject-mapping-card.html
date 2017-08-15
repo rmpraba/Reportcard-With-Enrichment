@@ -74,9 +74,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
            position: absolute;
           border: 1px solid grey;
           height: 100px;
-          margin-left: 53.1em;
-          min-height: 440px;
-          top: 17em !important; 
+          margin-left: 47.9em;
+          min-height: 413px;
+          top: 16.5em !important; 
            
       } 
       .newwwwcarddd
@@ -159,15 +159,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <table>
               <thead> 
                 <tr>
-                  <td></td> 
-                    <th class="innercard1" style="width: 850px; margin-left: 19em;margin-top: -31em;">
+                  <td></td>     
+                    <th class="innercard1" style="width: 866px; margin-left: 19em;margin-top: -31em;">
                       <template is="dom-repeat" items="{{setsubjectarr}}" as="view">
                         <h4>{{view.srtarr}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4>   
                       </template>
                     </th>  
                 </tr>
               </thead>
-              <div class="newwwwcarddd" style="width: 1220px;height: 350px;margin-left: 2%;">
+              <div class="newwwwcarddd" style="width: 1220px;height: 350px;margin-left: 6%;">
                   <template is="dom-repeat" items="{{bigarr}}" as="view">
                     <tr>
                       <td class="outcard">
@@ -178,7 +178,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                           <student-list-mapping-item id="{{s.id}}" studentname="{{view.student_name}}" studentid="{{view.student_id}}" subjectid="{{s.subject_id}}" subjectname="{{s.subject_name}}" langugagepref="{{s.language_pref}}" check="{{s.check}}"></student-list-mapping-item>
                         </template>  
                       </td>        
-                      <td style="padding-left: 7em;">    
+                      <td style="padding-left: 9em;">    
                         <paper-icon-button id="btn1" icon="save" on-click="fnsubmit"></paper-icon-button>
                         <paper-tooltip for="btn1">Save</paper-tooltip>
                       </td>

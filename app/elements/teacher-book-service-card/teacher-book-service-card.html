@@ -694,8 +694,8 @@
         obj.subconceptid=subarr[i].subconceptid;
         obj.subconceptname=subarr[i].subconceptname;
         obj.period=period;
-        obj.plannedfromdate="";
-        obj.plannedtodate="";
+        obj.plannedfromdate=localStorage.getItem("localsess_from_service");
+        obj.plannedtodate=localStorage.getItem("localsess_last_service");
         obj.skill=subarr[i].skillname;
         obj.value=subarr[i].valuename;
         obj.innovation=innovation;
@@ -918,7 +918,7 @@ fnbooksubconcepteditResponse:function(e){
               
             obj.flag='active';
             this.fnsendconceptparam=obj;
-            alert(JSON.stringify(obj));
+          //  alert(JSON.stringify(obj));
             this.$.fnsendconceptajax.generateRequest();
       },
 
@@ -926,7 +926,7 @@ fnbooksubconcepteditResponse:function(e){
       {
 
          var res=e.detail.response.returnval;
-         alert(JSON.stringify(res));
+        // alert(JSON.stringify(res));
             if(res=="Inserted")
             {
               alert('Inserted');
@@ -1163,6 +1163,8 @@ fnbooksubconcepteditResponse:function(e){
              nameobj.rowidz=res[k].rowid; 
               nameobj.lrrectife=res[k].lrrectife;
              nameobj.Correction=res[k].Correction;
+             nameobj.planned_to_date=res[k].planned_to_date;
+
            
 
         var obj={"conceptid":"","conceptname":""};
@@ -1303,6 +1305,8 @@ for(var k=0;k<res5.length;k++)
              obj.period=overall[n].period; 
              obj.lrrectife=overall[n].lrrectife;
              obj.Correction=overall[n].Correction;
+             obj.planned_to_date=overall[n].planned_to_date;
+
            
              obj.innovation=overall[n].innovation; 
              obj.remark=overall[n].remark;
@@ -1321,6 +1325,7 @@ for(var k=0;k<res5.length;k++)
              obj.remark=overall[n].remark;
               obj.lrrectife=overall[n].lrrectife;
              obj.Correction=overall[n].Correction;
+             obj.planned_to_date=overall[n].planned_to_date;
           
              obj.mainarr="";
              obj.rowidz=overall[n].rowidz;
@@ -1336,6 +1341,7 @@ for(var k=0;k<res5.length;k++)
              obj.remark=overall[n].remark;
              obj.lrrectife=overall[n].lrrectife;
              obj.Correction=overall[n].Correction;
+             obj.planned_to_date=overall[n].planned_to_date;
           
              obj.mainarr="";
              obj.rowidz=overall[n].rowidz;
@@ -1357,6 +1363,8 @@ for(var k=0;k<res5.length;k++)
              obj.mainarr=temp2[n].mainarr;
               obj.lrrectife=temp2[n].lrrectife;
              obj.Correction=temp2[n].Correction;
+           
+             obj.planned_to_date=temp2[n].planned_to_date;
           
              obj.valuearrr=temp2[n].valuearrr; 
              obj.skillarr=overall2[r].skillarr; 
@@ -1375,6 +1383,7 @@ var temp1=[];
              obj.innovation=temp3[n].innovation; 
              obj.lrrectife=temp3[n].lrrectife;
              obj.Correction=temp3[n].Correction;
+             obj.planned_to_date=temp3[n].planned_to_date;
                     
              obj.remark=temp3[n].remark;
              obj.mainarr=temp3[n].mainarr;
@@ -1401,8 +1410,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
                       obj.rowidz=temp1[i].rowidz;
                       obj.lrrectife=temp1[i].lrrectife;
                       obj.Correction=temp1[i].Correction;
-                    
-                           
+                      obj.planned_to_date=temp1[i].planned_to_date;
                       var id_date=temp1[i].planning_date;
                       id_date=id_date.replace(/[^\w\s]/gi, '');
                       obj.id_date=id_date;
@@ -1419,7 +1427,8 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
                    obj.capter_id=""; 
                    obj.innovation="";  
                    obj.remark="";  
-                   obj.planning_date="empty" 
+                   obj.planning_date="empty" ;
+                   obj.planned_to_date="" ;
                    obj.rowidz="";
                    obj.hidecheck=true; 
                    obj.hidecheck1=false; 
@@ -1505,6 +1514,8 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
         obj.concept_name=arr[i].conceptname;
         obj.capter_id=localStorage.getItem("curr_sess_capters");
         obj.planned_date=localStorage.getItem("localsess_from_service");
+        obj.planned_to=localStorage.getItem("localsess_last_service");
+
         obj.period=period;
         obj.subjectid=sessionStorage.getItem("subjectidz");
         obj.gradeid=sessionStorage.getItem("grdeidz");
@@ -1517,7 +1528,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
         obj.flag="active";
         obj.conc_date=arr[i].conceptid+localStorage.getItem("localsess_from_service")
         this.fnsetcoskillparam=obj;
-        //alert(JSON.stringify(obj));
+        alert(JSON.stringify(obj));
         this.$.fnsetcoskillajax.generateRequest();
        }
    },
@@ -2235,49 +2246,37 @@ for(var r=0;r<overall2.length;r++){
         fetchclassconcept11Response:function(e){
 
           var res2=e.detail.response.returnval;
+       
         var setattr=[];
                var a=[];
             var overall=[];
            for(var k=0;k<res2.length;k++)
-           {       
+           {     
                   var nameobj={};
                       nameobj.conceptid=res2[k].concept_id;
-                      nameobj.concept=res2[k].concept;
+                      nameobj.conceptname=res2[k].concept_name;
+                      nameobj.subconceptid=res2[k].sub_concept_id;
+                      nameobj.subconceptname=res2[k].sub_concept_name;
                       nameobj.skill=res2[k].skill;
+                      nameobj.value=res2[k].value;
+                       nameobj.period=res2[k].period;
+                     
                       nameobj.innovation=res2[k].innovation;
-                      nameobj.planned_date=res2[k].planning_date;
-                      var id_date=res2[k].planning_date;
-                      id_date=id_date.replace(/[^\w\s]/gi, '');
-                      nameobj.id_date=id_date;
-                      nameobj.remark=res2[k].remark;
-                      nameobj.period=res2[k].period;
-                      nameobj.completion=res2[k].completion;
-                      nameobj.completion_date=res2[k].completion_date;
-                      nameobj.enrichment_sug=res2[k].enrichment_sug;
+                      nameobj.lr_rectifitcation=res2[k].lr_rectifitcation;
+                      nameobj.remarks=res2[k].remarks;
+                      nameobj.correction_status=res2[k].correction_status;
+                      nameobj.completion_status=res2[k].completion_status;
+                      nameobj.section_id=res2[k].section_id;
+                      nameobj.planned_date_from=res2[k].planned_date_from;
+                      nameobj.planned_to_date=res2[k].planned_to_date;
+                       nameobj.rowid=k+1;
                       nameobj.hidecheck=true; 
                       nameobj.grade_id=sessionStorage.getItem("grdeidz");
                       nameobj.subject_id=sessionStorage.getItem("subjectidz");
-
-        var obj={"valueid":"","valuename":""};
-            obj.valueid=res2[k].value_id;
-            obj.valuename=res2[k].value_name;
-            a.push(obj);
-           
-           for(var l=k+1;l<res2.length;l++)
-            {
-             if(res2[k].conc_date==res2[l].conc_date)
-                {
-             var obj1={"valueid":"","valuename":""}
-                 obj1.valueid=res2[l].value_id;
-                 obj1.valuename=res2[l].value_name;
-                 a.push(obj1);
-                res2.splice(l,1);
-                 l--;
-               }}
-                nameobj.mainarr=a;
-                setattr.push(nameobj);
-                a=[];
+                    setattr.push(nameobj);
                  }
+                       alert(JSON.stringify(setattr));
+  
    document.querySelector('class-teacher-book-rejection-item-card').mainnarr=setattr; 
   document.querySelector('class-teacher-book-rejection-item-card').empid=res2[0].empid; 
  document.querySelector('class-teacher-book-rejection-item-card').empname=res2[0].empname;
@@ -2498,7 +2497,7 @@ fnfinalbookvalueResponse:function(e)
           document.querySelector('teacher-book-approve-card').chapterarr=e.detail.response.returnval;
         },
 
-          fnfinalreaprovebook:function(empid,skill,innovation,enrichmentsug,period,planneddate,concept,conceptid,remark)
+          fnfinalreaprovebook:function(empid,skill,innovation,enrichmentsug,period,planneddate,conceptname,conceptid,remark,sectionid,subjectid,subconceptid,value,correctionstatus,completionstatus,rowidz)
           {
              this.fnfinalbook1url=sessionStorage.getItem("addrinfo")+"/fnfinalbook1-service";
               var obj={};
@@ -2511,17 +2510,21 @@ fnfinalbookvalueResponse:function(e)
                obj.completion_date=localStorage.getItem("localsess_comp_service");
                obj.planneddate=planneddate;
                obj.empid=empid;
-               obj.skill=skill;
+               obj.skill=skill;  
                obj.innovation=innovation;
                obj.enrichmentsug=enrichmentsug;
                obj.period=period;
-               obj.concept=concept;
+               obj.conceptname=conceptname;
                obj.conceptid=conceptid;
+               obj.subconceptid=subconceptid;
                obj.remark=remark;
                obj.completion='yes';
+               obj.rowidz=rowidz;
+               obj.correctionstatus=correctionstatus;
+
               this.fnfinalbook1param=obj;
                 //alert("1");
-                //alert(JSON.stringify(obj));
+                alert(JSON.stringify(obj));
               this.$.fnfinalbook1ajax.generateRequest();
         },
         fnfinalbook1Response:function(e)
@@ -2678,18 +2681,13 @@ fnfinalbookvalueResponse:function(e)
         fnsubconceptsave:function(conceptid,subconceptid,subconceptname,capterid)
         {
             this.fnsubconceptsaveurl=sessionStorage.getItem("addrinfo")+"/fnsubconceptsave-service";
-            var obj={"capterid":"","subconceptname":"","concept_id":"","subconceptid":""};
-              
-              obj.grade_id=sessionStorage.getItem("grdeidz");
-              obj.subject_id=sessionStorage.getItem("subjectidz");
-              obj.school_id=sessionStorage.getItem("curr_sess_loggedschoolid");
-              obj.academic_year=localStorage.getItem("curr_sess_academicyear"); 
+            var obj={"capterid":"","subconceptname":"","concept_id":"","sub_concept_id":""};
               obj.capterid=capterid;
               obj.concept_id=conceptid;
               obj.subconceptname=subconceptname;
-              obj.subconceptid=subconceptid;
+              obj.sub_concept_id=sub_concept_id;
               this.fnsubconceptsaveparam=obj;
-               // alert(JSON.stringify(obj));
+            //alert(JSON.stringify(obj));
               this.$.fnsubconceptsaveajax.generateRequest();
       },
       fnsubconceptsaveResponse:function(e)
