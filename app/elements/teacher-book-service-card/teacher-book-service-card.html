@@ -1771,10 +1771,13 @@ fnsetcoskill11:function(skarr,period,rowid)
             res[i].hideflag=false;
             temp.push(res[i]);
             }
+            alert(JSON.stringify(this.approvedarr));
             for(var i=0;i<temp.length;i++){
                 for(var j=0;j<this.approvedarr.length;j++){
                     if(temp[i].concept_id==this.approvedarr[j].concept_id&&temp[i].sub_concept_id==this.approvedarr[j].sub_concept_id&&temp[i].row_id==this.approvedarr[j].row_id){
                         temp[i].completion_status=this.approvedarr[j].completion_status;
+                         temp[i].completion_date=this.approvedarr[j].completion_date;
+                         temp[i].enrichment_sug=this.approvedarr[j].enrichment_sug;
                         temp[i].hidetitleflag=false;
                         temp[i].hideflag=true;
                     }
@@ -1799,6 +1802,7 @@ fnsetcoskill11:function(skarr,period,rowid)
            obj.subjectname=localStorage.getItem("curr_sess_subjectname");
            obj.chapterid=localStorage.getItem("curr_sess_chapterid");
            obj.chaptername=localStorage.getItem("curr_sess_chaptername");
+           obj.completion_date=localStorage.getItem("localsess_comp_service");
            obj.rowid=o.rowid;
            obj.conceptid=o.conceptid;           
            obj.conceptname=o.conceptname;
@@ -1812,6 +1816,8 @@ fnsetcoskill11:function(skarr,period,rowid)
            obj.innovation=o.innovation;
            obj.lrrectification=o.lrrectification;
            obj.remarks=o.remarks;
+           obj.enrichmentsuggest=o.enrichmentsuggest;
+           
            obj.correctionstatus=o.correctionstatus;
            obj.completionstatus=o.completionstatus;
            this.updateapprovalstatusofchapterconceptparam=obj;
@@ -1832,11 +1838,15 @@ fnsetcoskill11:function(skarr,period,rowid)
             obj.subjectid=localStorage.getItem("curr_sess_subjectid"); 
             obj.gradeid=localStorage.getItem("curr_sess_gradeid");
             obj.sectionid=localStorage.getItem("curr_sess_sectionid");
+           
+
             this.fetchalreadyapprovedchapterconceptparam=obj;
             this.$.fetchalreadyapprovedchapterconceptajax.generateRequest();
           },
           fetchalreadyapprovedchapterconceptResponse:function(e){
             this.approvedarr=e.detail.response.approvedarr;
+            alert(1);
+            alert(JSON.stringify(this.approvedarr));
             this.fngetclassbookchapterconceptvalue();
           },
           FnFetchClassConceptService:function(gradeid,subjectid,chapterid,sectoinidz){

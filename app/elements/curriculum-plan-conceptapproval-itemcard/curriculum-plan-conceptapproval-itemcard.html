@@ -55,12 +55,18 @@
               </td>
               <td style="padding-left: 2%;width: 7.36%;">{{innovation}}</td> 
               <td style="width: 7.4%;">{{fromdate}}</td>
-              <td style="width: 7.36%;">{{todate}} </td> 
+              <td style="width: 7.36%;">
+               {{todate}}
+              
+              </td> 
               <td style="width: 7.36%;">{{lr}}</td>
               <td style="width: 7.36%;">{{remarks}}</td>
+              <td style="width: 7.4%;">
+              <div  hidden$="{{hidetitleflag}}" >{{completiondate}}</div>
+               <complection-date-picker-card hidden$="{{hidecheck}}"></complection-date-picker-card></td>
               <td style="width: 7.36%;">{{correctionstatus}}</td>
               <td style="width: 7.36%;">
-                <div>{{enrichmentsug}}</div>
+                <div  hidden$="{{hidetitleflag}}" >{{enrichmentsug}}</div>
                 <paper-input value={{enrichmentsuggest}} hidden$="{{hidecheck}}"></paper-input>
               </td>
               <td hidden$="{{hidetitleflag}}">{{completionstatus}}</td>
@@ -138,6 +144,7 @@
         obj.lrrectification=this.lr;
         obj.remarks=this.remarks;
         obj.correctionstatus=this.correctionstatus;
+        obj.enrichmentsuggest=this.enrichmentsuggest;
         if(document.querySelector("#cpayes"+this.subconceptid).checked==true)
           obj.completionstatus="Yes";
         if(document.querySelector("#cpano"+this.subconceptid).checked==true)
