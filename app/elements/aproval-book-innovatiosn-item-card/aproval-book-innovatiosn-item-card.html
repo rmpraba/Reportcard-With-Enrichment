@@ -82,13 +82,16 @@
         border-radius: 10px;
         width: 380px;
         height: 270px;
-        overflow-x: hidden;
-        overflow-y: scroll;
       }
       .horizontalframes1
       {
          @apply(--layout-horizontal);
         width: 90%;
+      }
+      .concptcard
+      {
+        overflow-x: hidden;
+        overflow-y: scroll;
       }
     </style>
     <div>
@@ -185,9 +188,11 @@
 
     <paper-dialog id="dzfsd" modal>
        <h3>Concept Name</h3>
-      <template is="dom-repeat" items="{{conceparr}}" as="s">
-         <concept-check-card conceptid="{{s.concept_id}}" id="FFYJ{{rowid}}{{iddate}}{{s.concept_id}}" conceptname="{{s.concept}}" check="{{s.check}}" rowid="{{rowid}}"></concept-check-card>
-      </template>  
+       <div class="concptcard">
+        <template is="dom-repeat" items="{{conceparr}}" as="s">
+          <concept-check-card conceptid="{{s.concept_id}}" id="FFYJ{{rowid}}{{iddate}}{{s.concept_id}}" conceptname="{{s.concept}}" check="{{s.check}}" rowid="{{rowid}}"></concept-check-card>
+        </template>  
+       </div> 
       <center style="margin-top: 5%;">
           <paper-button on-click="fnsubmit"  style="background-color:black;color:white">Submit</paper-button>
          <paper-button on-click="fnclose" style="background-color:black;color:white">Close</paper-button>
