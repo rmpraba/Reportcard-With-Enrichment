@@ -4,14 +4,10 @@
 <dom-module id="curriculam-report">
   <template>
     <style>
-      :host {
-        display: block;
-      }
       #btn1
-       {
+      {
         background-color: #363636;
         color: #ffffff; 
-        /*width: 12%;*/
         height: 34px;
         margin-top: 4%;
         margin-left: 48%;
@@ -22,56 +18,62 @@
         <h3>CURRICULAM REPORT</h3>
       </center>
     </div>  
-      <div class="setgrade" style="margin-left: 41%;">
-        <paper-dropdown-menu  label="Select the Grade">
-          <paper-menu id="reportgradezzzzsss" class="dropdown-content"   on-iron-select="fngradeselectz">
-            <template is="dom-repeat" items="{{reportgradearr}}">
-              <paper-item value="{{item.gradeid}}">{{item.gradename}}</paper-item>
+      <div style="margin-left: 35%;">
+        <paper-dropdown-menu  label="Grade">
+          <paper-menu id="cprgrade" class="dropdown-content"   on-iron-select="FnSelectGrade">
+            <template is="dom-repeat" items="{{gradearr}}">
+            <paper-item value="{{item.grade_id}}">{{item.grade_name}}</paper-item>
+            </template>    
+          </paper-menu>
+        </paper-dropdown-menu>
+        <paper-dropdown-menu  label="Subject" style="margin-left: 5%;">
+          <paper-menu id="cprsubject" class="dropdown-content"   on-iron-select="FnSelectSubject">
+            <template is="dom-repeat" items="{{subjectarr}}">
+            <paper-item value="{{item.subject_id}}">{{item.subject_name}}</paper-item>
             </template>    
           </paper-menu>
         </paper-dropdown-menu>
       </div>
-      
-
-
       <div class="curriculamreport" hidden$="{{fullreport}}">
-       <table id="chapterreport" border="1" style="border-collapse: collapse;margin-left: 15%;width: 80%; margin-top: 4%;">
+       <table id="cprreport" border="1" style="border-collapse: collapse;margin-left: 5%;width: 90%; margin-top: 4%;">
         <tr style="text-align: left;">
-          <th>SNO</th>
-          <th>Subject</th>
+          <th>S.No</th>
           <th>Chapter</th>
           <th>Concept</th>
-          <!-- <th>Period</th> -->
+          <th>Work Schedule</th>
+          <th>Period</th>
+          <th>Planned From Date</th>
+          <th>Planned To Date</th>
           <th>Skill</th>
           <th>Value</th>
           <th>Innovation</th>
-          <th>Planned Date</th>
+          <th>LR Rectification</th>
           <th>Remarks</th>
         </tr>
         <template  is="dom-repeat" items="{{fullreportarr}}" as="view">
           <tr>
-              <td>{{view.sno}}</td>
-              <td>{{view.subject_name}}</td>
-              <td>{{view.capter}}</td>
-              <td>{{view.concept}}</td>
-              <!-- <td>{{view.period}}</td> -->
-              <td>{{view.skill}}</td>
-              <td>{{view.value_name}}</td>
-              <td>{{view.innovation}}</td>
-              <td>{{view.planning_date}}</td>
-              <td>{{view.remark}}</td>
+            <td>{{view.sno}}</td>
+            <td>{{view.chapter_name}}</td>
+            <td>{{view.concept}}</td>
+            <td>{{view.subconcept}}</td>
+            <td>{{view.period}}</td>
+            <td>{{view.planned_date_from}}</td>
+            <td>{{view.planned_to_date}}</td>
+            <td>{{view.skill}}</td>
+            <td>{{view.value}}</td>
+            <td>{{view.innovation}}</td>
+            <td>{{view.lr_rectification}}</td>
+            <td>{{view.remarks}}</td>
           </tr>
         </template>
       </table>
-
-          <input type="button" id="btn1" onclick="tableToExcel('chapterreport', Curriculam Report')" value="Export to Excel">
-    </div>
-
+      <input type="button" id="btn1" onclick="tableToExcel('cprreport', 'Curriculam Report')" value="Export to Excel">
+      </div>
       <teacher-book-service-card id="bookservice"></teacher-book-service-card>
-  </template>
-      <script type="text/javascript">
-        var tableToExcel = (function() 
-        {
+      </template>
+    <script type="text/javascript">
+      var tableToExcel = (function() 
+      {
           var uri = 'data:application/vnd.ms-excel;base64,'
           , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
           , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
@@ -81,32 +83,34 @@
           var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
           window.location.href = uri + base64(format(template, ctx))
       }
-    })()
+      })()
     </script>
-
-
-  <script>
-  (function() {
+    <script>
+    (function() {
     'use strict';
-
     Polymer({
       is: 'curriculam-report',
-
-     fngradeselectz:function(e)
+     FnSelectGrade:function(e)
      {
         this.gradeid=e.target.selectedItem.value;
-        sessionStorage.setItem("grdeidz",this.gradeid);
+        localStorage.setItem("curr_sess_gradeid",this.gradeid);
         this.gradename=e.target.selectedItem.textContent.trim();
-        this.$.bookservice.getcurriculamdetails(this.gradeid);
-        this.fullreport=false;
+        document.querySelector('#cprsubject').selected=-1;
+        this.$.bookservice.fnfetchcprsubject(this.gradename);
+     },
+     FnSelectSubject:function(e){
+        this.subjectid=e.target.selectedItem.value;
+        localStorage.setItem("curr_sess_subjectid",this.subjectid);
+        this.gradename=e.target.selectedItem.textContent.trim();
+        this.$.bookservice.getcurriculamdetails(this.gradeid,this.subjectid);
      },
      Fnrefresh11:function()
      {
-      document.querySelector('#reportgradezzzzsss').selected=-1;
-      this.fullreport=true;
+        document.querySelector('#cprgrade').selected=-1;
+        document.querySelector('#cprsubject').selected=-1;
+        this.fullreport=true;
      }
-
     });
-  })();
-  </script>
+    })();
+    </script>
 </dom-module>

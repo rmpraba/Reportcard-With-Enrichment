@@ -10,7 +10,6 @@ var connection = mysql.createConnection({
    user     : 'root',
    password : 'admin',
    database : 'reportcardnewins'
-
 });
    
 var bodyParser = require('body-parser'); 
@@ -207,31 +206,31 @@ app.post('/grade-service',  urlencodedParser,function (req, res)
   if(req.query.roleid=='subject-teacher')
   {
     var qur="select grade_name,grade_id from md_grade where grade_id "+
-  "in(select grade_id from mp_teacher_grade where "+
+  "in(select grade_id from mp_teacher_grade where academic_year='"+req.query.academicyear+"' and "+
   "school_id='"+req.query.schoolid+"' and id='"+req.query.loggedid+"' and role_id='"+req.query.roleid+"')";
   }
   else if(req.query.roleid=='class-teacher')
   {
     var qur="select grade_name,grade_id from md_grade where grade_id "+
-    "in(select grade_id from mp_teacher_grade where "+
+    "in(select grade_id from mp_teacher_grade where academic_year='"+req.query.academicyear+"' and "+
     "school_id='"+req.query.schoolid+"' and id='"+req.query.loggedid+"' and role_id='"+req.query.roleid+"')";
   }
    else if(req.query.roleid=='co-ordinator')
   {
     var qur="select grade_name,grade_id from md_grade where grade_id "+
-    "in(select grade_id from mp_teacher_grade where "+
+    "in(select grade_id from mp_teacher_grade where academic_year='"+req.query.academicyear+"' and "+
     "school_id='"+req.query.schoolid+"' and id='"+req.query.loggedid+"' and role_id='"+req.query.roleid+"')";
   }
   else if(req.query.roleid=='headmistress')
   {
     var qur="select grade_name,grade_id from md_grade where grade_id "+
-    "in(select grade_id from mp_teacher_grade where "+
-    "school_id='"+req.query.schoolid+"')";
+    "in(select grade_id from mp_teacher_grade where academic_year='"+req.query.academicyear+"' and "+
+    "school_id='"+req.query.schoolid+"' )";
   }
    else if(req.query.roleid=='principal'||req.query.roleid=='viceprincipal'||req.query.roleid=='headofedn'||req.query.roleid=='management')
   {
     var qur="select grade_name,grade_id from md_grade where grade_id "+
-    "in(select grade_id from mp_teacher_grade where "+
+    "in(select grade_id from mp_teacher_grade where academic_year='"+req.query.academicyear+"' and "+
     "school_id='"+req.query.schoolid+"')";
   }
 
@@ -11268,7 +11267,10 @@ var qur1="select  emp_id as empid,(select distinct emp_name from md_employee_cre
 
 app.post('/chapterstatus-service',  urlencodedParser,function (req, res)
 {
- var qur="select distinct(f.chapter_id),f.grade_id,g.grade_name,f.subject_id,s.subject_name,f.section_id,gs.section_id as section_name,ch.capter,e.emp_name,f.emp_id from  md_curriculum_planning_approval f  join md_grade g on(g.grade_id=f.grade_id) join md_subject s on(s.subject_id=f.subject_id) join mp_grade_section gs on(gs.class_id=f.section_id) join md_chapter ch on(ch.capter_id=f.chapter_id) join   md_employee_creation e on(e.emp_id=f.emp_id) where f.school_id='"+req.query.schoolid+"' and f.completion_status='No' and gs.school_id='"+req.query.schoolid+"' and gs.grade_id=f.grade_id and gs.academic_year='"+req.query.academic_year+"'and f.academic_year='"+req.query.academic_year+"' and ch.school_id='"+req.query.schoolid+"' and ch.academic_year='"+req.query.academic_year+"' and  e.school_id='"+req.query.schoolid+"' and e.academic_year='"+req.query.academic_year+"'"; 
+ // var qur="select distinct(f.chapter_id),f.grade_id,g.grade_name,f.subject_id,s.subject_name,f.section_id,gs.section_id as section_name,ch.capter,e.emp_name,f.emp_id from  md_curriculum_planning_approval f  join md_grade g on(g.grade_id=f.grade_id) join md_subject s on(s.subject_id=f.subject_id) join mp_grade_section gs on(gs.class_id=f.section_id) join md_chapter ch on(ch.capter_id=f.chapter_id) join   md_employee_creation e on(e.emp_id=f.emp_id) where f.school_id='"+req.query.schoolid+"' and f.completion_status='No' and gs.school_id='"+req.query.schoolid+"' and gs.grade_id=f.grade_id and gs.academic_year='"+req.query.academic_year+"'and f.academic_year='"+req.query.academic_year+"' and ch.school_id='"+req.query.schoolid+"' and ch.academic_year='"+req.query.academic_year+"' and  e.school_id='"+req.query.schoolid+"' and e.academic_year='"+req.query.academic_year+"'"; 
+ var qur="select * from md_curriculum_planning_approval where school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' "+
+ " and completion_status='No' and grade_id in (select distinct(grade_id) from mp_teacher_grade where school_id='"+req.query.schoolid+"' "+
+ " and academic_year='"+req.query.academicyear+"' and id='"+req.query.empid+"' and role_id='co-ordinator')";
   console.log('-------------------Chapter completion----------------------');
   console.log(qur);
      connection.query(qur, function(err, rows)
@@ -12081,7 +12083,14 @@ app.post('/fngetconceptreport-service',  urlencodedParser,function (req, res)
 
 app.post('/fngetcurriculam-service',  urlencodedParser,function (req, res)
 {
-  var qur="select  s.subject_id,s.concept_id,s.capter_id,s.period,s.skill,s.innovation,s.remark,s.planning_date,ch.capter,cp.concept,b.subject_name,v.value_name from md_skill s join md_chapter ch on(ch.capter_id=s.capter_id) join md_concept cp on(cp.concept_id=s.concept_id) join md_subject b on(b.subject_id=s.subject_id) join md_book_value v on(v.rowid=s.rowid) where s.school_id='"+req.query.schoolid+"' and s.grade_id='"+req.query.gradeid+"'  and s.academic_year='"+req.query.academic_year+"' and ch.school_id='"+req.query.schoolid+"' and ch.academic_year='"+req.query.academic_year+"' and v.school_id='"+req.query.schoolid+"' and v.grade_id='"+req.query.gradeid+"'  and v.academic_year='"+req.query.academic_year+"'";
+  // var qur="select * from md_curriculum_planning where school_id='"+req.query.schoolid+"' and academic_year='"+req.query.acadamicyear+"' "+
+  // "grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"'";
+var qur="select remarks,grade_id,subject_name,row_id,chapter_name,group_concat(concept_name) as concept, "+
+" group_concat(sub_concept_name) as subconcept,skill,value,innovation,period,planned_date_from, "+
+" planned_to_date,lr_rectification from md_curriculum_planning "+
+" where school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' "+
+" group by chapter_name,grade_id,subject_name,row_id,skill,value,innovation,period,planned_date_from, "+
+" planned_to_date,lr_rectification,remarks order by row_id";
   
   console.log('-------------------Chapter Report----------------------');
   console.log(qur);
