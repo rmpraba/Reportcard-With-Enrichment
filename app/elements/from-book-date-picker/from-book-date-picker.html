@@ -20,7 +20,7 @@
     </style>
     <!--component which invokes the predefined date picker control-->
     <div class="card">
-      <paper-input label=" planing date" class="btn" on-click="FnShowDialog" raised value="{{showdate}}"></paper-input>
+      <paper-input label=" planing to date" class="btn" on-click="FnShowDialog" raised value="{{showdate}}"></paper-input>
       <paper-dialog id="dialog" class="paper-date-picker-dialog" modal on-iron-overlay-closed="FnDismissDialog">
         <paper-date-picker id="picker" date="{{date}}"></paper-date-picker>
         <div class="buttons">
@@ -67,7 +67,7 @@ fndates:function(e){
           else
           {
             this.showdate = moment(this.$.picker.date).format('L');
-              localStorage.setItem("localsess_from_service",this.showdate);
+              localStorage.setItem("localsess_last_service",this.showdate);
           }      
       }
     },

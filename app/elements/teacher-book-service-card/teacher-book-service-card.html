@@ -653,8 +653,8 @@
         obj.subconceptid=subarr[i].subconceptid;
         obj.subconceptname=subarr[i].subconceptname;
         obj.period=period;
-        obj.plannedfromdate="";
-        obj.plannedtodate="";
+        obj.plannedfromdate=localStorage.getItem("localsess_from_service");
+        obj.plannedtodate=localStorage.getItem("localsess_last_service");
         obj.skill=subarr[i].skillname;
         obj.value=subarr[i].valuename;
         obj.innovation=innovation;
@@ -1122,6 +1122,8 @@ fnbooksubconcepteditResponse:function(e){
              nameobj.rowidz=res[k].rowid; 
               nameobj.lrrectife=res[k].lrrectife;
              nameobj.Correction=res[k].Correction;
+             nameobj.planned_to_date=res[k].planned_to_date;
+
            
 
         var obj={"conceptid":"","conceptname":""};
@@ -1262,6 +1264,8 @@ for(var k=0;k<res5.length;k++)
              obj.period=overall[n].period; 
              obj.lrrectife=overall[n].lrrectife;
              obj.Correction=overall[n].Correction;
+             obj.planned_to_date=overall[n].planned_to_date;
+
            
              obj.innovation=overall[n].innovation; 
              obj.remark=overall[n].remark;
@@ -1280,6 +1284,7 @@ for(var k=0;k<res5.length;k++)
              obj.remark=overall[n].remark;
               obj.lrrectife=overall[n].lrrectife;
              obj.Correction=overall[n].Correction;
+             obj.planned_to_date=overall[n].planned_to_date;
           
              obj.mainarr="";
              obj.rowidz=overall[n].rowidz;
@@ -1295,6 +1300,7 @@ for(var k=0;k<res5.length;k++)
              obj.remark=overall[n].remark;
              obj.lrrectife=overall[n].lrrectife;
              obj.Correction=overall[n].Correction;
+             obj.planned_to_date=overall[n].planned_to_date;
           
              obj.mainarr="";
              obj.rowidz=overall[n].rowidz;
@@ -1316,6 +1322,8 @@ for(var k=0;k<res5.length;k++)
              obj.mainarr=temp2[n].mainarr;
               obj.lrrectife=temp2[n].lrrectife;
              obj.Correction=temp2[n].Correction;
+           
+             obj.planned_to_date=temp2[n].planned_to_date;
           
              obj.valuearrr=temp2[n].valuearrr; 
              obj.skillarr=overall2[r].skillarr; 
@@ -1334,6 +1342,7 @@ var temp1=[];
              obj.innovation=temp3[n].innovation; 
              obj.lrrectife=temp3[n].lrrectife;
              obj.Correction=temp3[n].Correction;
+             obj.planned_to_date=temp3[n].planned_to_date;
                     
              obj.remark=temp3[n].remark;
              obj.mainarr=temp3[n].mainarr;
@@ -1360,8 +1369,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
                       obj.rowidz=temp1[i].rowidz;
                       obj.lrrectife=temp1[i].lrrectife;
                       obj.Correction=temp1[i].Correction;
-                    
-                           
+                      obj.planned_to_date=temp1[i].planned_to_date;
                       var id_date=temp1[i].planning_date;
                       id_date=id_date.replace(/[^\w\s]/gi, '');
                       obj.id_date=id_date;
@@ -1378,7 +1386,8 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
                    obj.capter_id=""; 
                    obj.innovation="";  
                    obj.remark="";  
-                   obj.planning_date="empty" 
+                   obj.planning_date="empty" ;
+                   obj.planned_to_date="" ;
                    obj.rowidz="";
                    obj.hidecheck=true; 
                    obj.hidecheck1=false; 
@@ -1464,6 +1473,8 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
         obj.concept_name=arr[i].conceptname;
         obj.capter_id=localStorage.getItem("curr_sess_capters");
         obj.planned_date=localStorage.getItem("localsess_from_service");
+        obj.planned_to=localStorage.getItem("localsess_last_service");
+
         obj.period=period;
         obj.subjectid=sessionStorage.getItem("subjectidz");
         obj.gradeid=sessionStorage.getItem("grdeidz");
@@ -1476,7 +1487,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
         obj.flag="active";
         obj.conc_date=arr[i].conceptid+localStorage.getItem("localsess_from_service")
         this.fnsetcoskillparam=obj;
-        //alert(JSON.stringify(obj));
+        alert(JSON.stringify(obj));
         this.$.fnsetcoskillajax.generateRequest();
        }
    },
@@ -2444,7 +2455,7 @@ fnfinalbookvalueResponse:function(e)
           document.querySelector('teacher-book-approve-card').chapterarr=e.detail.response.returnval;
         },
 
-          fnfinalreaprovebook:function(empid,skill,innovation,enrichmentsug,period,planneddate,conceptname,conceptid,remark,sectionid,subjectid,subconceptid,value,correctionstatus,completionstatus)
+          fnfinalreaprovebook:function(empid,skill,innovation,enrichmentsug,period,planneddate,conceptname,conceptid,remark,sectionid,subjectid,subconceptid,value,correctionstatus,completionstatus,rowidz)
           {
              this.fnfinalbook1url=sessionStorage.getItem("addrinfo")+"/fnfinalbook1-service";
               var obj={};
@@ -2457,7 +2468,7 @@ fnfinalbookvalueResponse:function(e)
                obj.completion_date=localStorage.getItem("localsess_comp_service");
                obj.planneddate=planneddate;
                obj.empid=empid;
-               obj.skill=skill;
+               obj.skill=skill;  
                obj.innovation=innovation;
                obj.enrichmentsug=enrichmentsug;
                obj.period=period;
@@ -2466,6 +2477,7 @@ fnfinalbookvalueResponse:function(e)
                obj.subconceptid=subconceptid;
                obj.remark=remark;
                obj.completion='yes';
+               obj.rowidz=rowidz;
                obj.correctionstatus=correctionstatus;
 
               this.fnfinalbook1param=obj;
