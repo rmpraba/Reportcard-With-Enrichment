@@ -43,43 +43,43 @@
 
     <table border="1" style="border-collapse: collapse;">
         <tr>
-              <td style="width: 2.6%;">{{sno}}</td>
-              <td style="width: 9.4%;">{{conceptname}}</td>
-              <td style="width: 8.45%;">{{subconceptname}}</td>
-              <td style="width: 3.6%;">{{period}}</td>
-              <td style="width: 6.2%;">
+              <td style="width: 2.85%;">{{sno}}</td>
+              <td style="width: 10%;">{{conceptname}}</td>
+              <td style="width: 9%;">{{subconceptname}}</td>
+              <td style="width: 3.85%;">{{period}}</td>
+              <td style="width: 6.6%;">
               {{skill}}
               </td>
-              <td style="width: 6.2%;">
+              <td style="width: 6.6%;">
                 {{value}}
               </td>
-              <td style="padding-left: 2%;width: 6.2%;">{{innovation}}</td> 
-              <td style="width: 6.2%;">{{fromdate}}</td>
-              <td style="width: 6.2%;">
+              <td style="padding-left: 2%;width: 6.6%;">{{innovation}}</td> 
+              <td style="width: 6.6%;">{{fromdate}}</td>
+              <td style="width: 6.56%;">
                {{todate}}
               
               </td>               
-              <td style="width: 7.36%;">{{lr}}</td>
-              <td style="width: 7.36%;">{{remarks}}</td>
-              <td style="width: 7.36%;">
+              <td style="width: 6.56%;">{{lr}}</td>
+              <td style="width: 6.56%;">{{remarks}}</td>
+              <td style="width: 6.56%;">
                <div hidden$="{{hidetitleflag}}">{{correctionstatus}}</div>
                 <paper-input value={{correctionstatus}} hidden$="{{hideflag}}"></paper-input>
              </td>
-              <td style="width: 7.36%;" hidden$="{{hidetitleflag}}">{{completiondate}}</td>
-              <td hidden$="{{hideflag}}">
+              <td hidden$="{{hidetitleflag}}">{{completiondate}}</td>
+              <td hidden$="{{hideflag}}" style="width: 6.56%;">
               <complection-date-picker-card></complection-date-picker-card>
               </td>
               <td hidden$="{{hidetitleflag}}">{{completionstatus}}</td>
-              <td style="width: 4%;" hidden$="{{hideflag}}">
-                <paper-checkbox id="cpayes{{subconceptid}}"  on-change="FnYes">Yes</paper-checkbox>
+              <td hidden$="{{hideflag}}" style="width: 6.56%;">
+                <paper-checkbox id="cpayes{{subconceptid}}"  on-change="FnYes">Yes</paper-checkbox><br>
                 <paper-checkbox id="cpano{{subconceptid}}" on-change="FnNo">No</paper-checkbox>
               </td>
-              <td style="width: 7.36%;">
+              <td style="width: 6.56%;">
                 <div hidden$="{{hidetitleflag}}">{{enrichmentsug}}</div>
                 <paper-input value={{enrichmentsuggest}} hidden$="{{hideflag}}"></paper-input>
               </td>              
               <td  hidden$="{{hidetitleflag}}"></td>
-              <td style="width: 2.7%;" hidden$="{{hideflag}}"><paper-icon-button icon="save" on-click="FnSave"></paper-icon-button></td>
+              <td hidden$="{{hideflag}}"><paper-icon-button icon="save" on-click="FnSave"></paper-icon-button></td>
             
         </tr>
       </table>
