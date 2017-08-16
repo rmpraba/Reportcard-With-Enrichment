@@ -266,6 +266,11 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
         <h4>Curriculam Report</h4>
         </paper-button>
       </div>
+       <div class="card" hidden$="{{evaluationreport}}">
+        <paper-button on-click="fnevaluationreport" no ink><img src="../../images/ereport.jpg" height="180px" width="180px">
+        <h4>Evaluation Report</h4>
+        </paper-button>
+      </div>
 
       </div>
     </div>
@@ -834,6 +839,13 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
         document.querySelector('home-page').setPage('curriculam-report','');
         this.$.bookservice.fnfetchcprgrade();
      }
+   if(localStorage.getItem('curr_sess_loggedassesmenttype')=="evaluationreport")
+     {
+      document.querySelector('app-card').setPage('homepage','');
+      document.querySelector('home-page').setPage('evaluation-report-card','');
+       this.$.bookservice.fnsetrejectbookgrade1();
+      this.$.bookservice.fnsetrejectbooksubject1();
+      }   
       this.$.cdialog.close();   
       },
       FnStudent:function()
@@ -1413,7 +1425,14 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
             localStorage.setItem('curr_sess_loggedassesmenttype','curriculamreport');
             document.querySelector('curriculam-report').Fnrefresh11();
             this.$.cdialog.toggle();
+          },
+            fnevaluationreport:function(e)
+          {
+            localStorage.setItem('curr_sess_loggedassesmenttype','evaluationreport');
+          //  document.querySelector('curriculam-report').Fnrefresh11();
+            this.$.cdialog.toggle();
           }
+       
     });
   })();
   </script>

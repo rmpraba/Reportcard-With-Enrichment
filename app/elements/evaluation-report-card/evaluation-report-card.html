@@ -1,9 +1,11 @@
 
 <link rel="import" href="..\..\bower_components/polymer/polymer.html">
-<dom-module id="incomplete-chapter-report">
+<dom-module id="evaluation-report-card">
   <template>
     <style>
       :host {
+        display: block;
+      }  :host {
         display: block;
       }
        .position
@@ -23,7 +25,7 @@
 
     <div>
       <center>
-        <h3>INCOMPLETE CHAPTER REPORT</h3>
+        <h3>COMPLETE CHAPTER REPORT</h3>
       </center>
     </div>
       <span class="position"> 
@@ -66,8 +68,8 @@
           </paper-dropdown-menu>
         </span> 
     <div style="border-left:20%">Teacher Name:{{empname}}</div>
-      <div class="chapterreport" hidden$="{{incompletereport}}">
-       <table id="newreport1" border="1" style="border-collapse: collapse;margin-left: 15%;width: 80%; margin-top: 4%;">
+      <div class="chapterreport" hidden$="{{incompletereport1}}">
+       <table id="newreport2" border="1" style="border-collapse: collapse;margin-left: 15%;width: 80%; margin-top: 4%;">
         <tr style="text-align: left;">
           <th>SNO</th>
        
@@ -102,12 +104,11 @@
         </template>
       </table>
 
-          <input type="button" id="btn2" onclick="tableToExcel('newreport1', 'Incomplete Chapter Report')" value="Export to Excel">
+          <input type="button" id="btn2" onclick="tableToExcel('newreport2', 'Complete Chapter Report')" value="Export to Excel">
     </div>  
         <teacher-book-service-card id="bookservice"></teacher-book-service-card>
   </template>
-
-  <script type="text/javascript">
+   <script type="text/javascript">
     var tableToExcel = (function() 
     {
       var uri = 'data:application/vnd.ms-excel;base64,'
@@ -126,9 +127,11 @@
     'use strict';
 
     Polymer({
-      is: 'incomplete-chapter-report',
-
-      fnselectgrade:function(e)
+      is: 'evaluation-report-card',
+ready:function(e){
+this.incompletereport1=true;
+},
+   fnselectgrade:function(e)
       {
         this.gradeid=e.target.selectedItem.value;
         sessionStorage.setItem("grdeidz",this.gradeid);
@@ -136,7 +139,7 @@
         document.querySelector('#reportsubjectzzzz').selected=-1;
         document.querySelector('#reportsectionzzzz').selected=-1;
         document.querySelector('#reportchapter').selected=-1;
-        this.incompletereport=true;
+        this.incompletereport1=true;
       },
 
       fnselectsubject:function(e)
@@ -144,27 +147,27 @@
         this.subjectid=e.target.selectedItem.value;
        sessionStorage.setItem("subjectidz",this.subjectid);
        this.subjectname=e.target.selectedItem.textContent.trim();
-       this.$.bookservice.fngetchaptersubject(this.gradeid,this.subjectid);
+       this.$.bookservice.fngetevalutionsection(this.gradeid,this.subjectid);
        document.querySelector('#reportsectionzzzz').selected=-1;
         document.querySelector('#reportchapter').selected=-1;
-        this.incompletereport=true;
+        this.incompletereport1=true;
       },
       fnsetsection:function(e)
       {
         this.sectionidz=e.target.selectedItem.value;
         sessionStorage.setItem("sectionidz",this.sectionidz);
         this.sectionidname=e.target.selectedItem.textContent.trim();
-        this.$.bookservice.getchaptersection(this.gradeid,this.subjectid,this.sectionidz);
+        this.$.bookservice.fngetevalutionchaptersection(this.gradeid,this.subjectid,this.sectionidz);
         document.querySelector('#reportchapter').selected=-1;
-        this.incompletereport=true;
+        this.incompletereport1=true;
       },
       fnselectchapter:function(e)
       {
           this.chapterid=e.target.selectedItem.value;
           this.chaptername=e.target.selectedItem.textContent.trim();
           localStorage.setItem("curr_sess_capters",this.chapterid); 
-          this.$.bookservice.fngetconceptskill(this.gradeid,this.subjectid,this.sectionidz,this.chapterid);
-          this.incompletereport=false;
+          this.$.bookservice.fngetconceptskill1(this.gradeid,this.subjectid,this.sectionidz,this.chapterid);
+          this.incompletereport1=false;
       },
       FnRefresh:function()
       {
@@ -172,8 +175,12 @@
         document.querySelector('#reportsubjectzzzz').selected=-1;
         document.querySelector('#reportsectionzzzz').selected=-1;
         document.querySelector('#reportchapter').selected=-1;
-        this.incompletereport=true;
+        this.incompletereport1=true;
       }
+
+
+
+
     });
   })();
   </script>

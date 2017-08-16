@@ -420,7 +420,15 @@
         content-type="application/json"
         on-response="fnsetrejectbookgradeResponse"
         debounce-duration="300"/>
-
+       <iron-ajax
+        method="post"
+        id="fnsetrejectbookgrade1ajax"
+        url="{{fnsetrejectbookgrade1url}}"
+        params="{{fnsetrejectbookgrade1param}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="fnsetrejectbookgrade1Response"
+        debounce-duration="300"/>
         <iron-ajax
         method="post"
         id="fnsetrejectbooksubjectajax"
@@ -429,6 +437,15 @@
         handle-as="json"
         content-type="application/json"
         on-response="fnsetrejectbooksubjectResponse"
+        debounce-duration="300"/>
+        <iron-ajax
+        method="post"
+        id="fnsetrejectbooksubject1ajax"
+        url="{{fnsetrejectbooksubject1url}}"
+        params="{{fnsetrejectbooksubject1param}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="fnsetrejectbooksubject1Response"
         debounce-duration="300"/>
 
          <iron-ajax
@@ -452,7 +469,15 @@
         content-type="application/json"
         on-response="fngetconceptskillResponse"
         debounce-duration="300"/>
-
+          <iron-ajax
+        method="post"
+        id="fngetconceptskill1ajax"
+        url="{{fngetconceptskill1url}}"
+        params="{{fngetconceptskill1param}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="fngetconceptskill1Response"
+        debounce-duration="300"/>
           <iron-ajax
         method="post"
         id="fngetrejectsectionajax"
@@ -597,6 +622,24 @@
         content-type="application/json"
         on-response="fnfetchcprsubjectResponse"
         debounce-duration="300"/>
+        <iron-ajax
+        method="post"
+        id="fngetevalutionsectionajax"
+        url="{{fngetevalutionsectionurl}}"
+        params="{{fngetevalutionsectionparam}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="fngetevalutionsectionResponse"
+        debounce-duration="300"/>
+         <iron-ajax
+        method="post"
+        id="fngetevalutionchaptersectionajax"
+        url="{{fngetevalutionchaptersectionurl}}"
+        params="{{fngetevalutionchaptersectionparam}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="fngetevalutionchaptersectionResponse"
+        debounce-duration="300"/>
 
   </template>
   <script>
@@ -701,9 +744,7 @@
         obj.innovation=innovation;
         obj.lrrectification=lrrectife;
         obj.remarks=remark;
-        // obj.correctionstatus=correction;
         this.fnmasterplaninsertparam=obj;
-        //alert(JSON.stringify(obj));
         this.$.fnmasterplaninsertajax.generateRequest();      
         }
       },
@@ -2560,6 +2601,27 @@ fnfinalbookvalueResponse:function(e)
           document.querySelector('incomplete-chapter-report').chaptergradearr=res;
           document.querySelector('curriculam-report').reportgradearr=res;
         },
+
+            fnsetrejectbookgrade1:function(e)
+        {
+          this.fnsetrejectbookgrade1url=sessionStorage.getItem("addrinfo")+"/fnbookplangrade-service";
+            var obj={"schoolid":"","academic_year":"","roleid":"","emp_id":""};
+           obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+           obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+           obj.roleid=sessionStorage.getItem("curr_sess_loggedroleid");
+           obj.emp_id=sessionStorage.getItem("curr_sess_loggedid");
+           this.fnsetrejectbookgrade1param=obj;
+           //alert(JSON.stringify(obj));
+           this.$.fnsetrejectbookgrade1ajax.generateRequest();
+        },
+    
+        fnsetrejectbookgrade1Response:function(e)
+        {
+          var res=e.detail.response.returnval;
+          //alert(JSON.stringify(res));
+   document.querySelector('evaluation-report-card').chaptergradearr=res;
+  
+        },
         fngetchaptersubject:function(gradeid,subjectid)
         {
 
@@ -2580,7 +2642,36 @@ fnfinalbookvalueResponse:function(e)
           var res=e.detail.response.returnval;
           document.querySelector('incomplete-chapter-report').chaptersectionarr=res;
         },
+           fngetevalutionsection:function(gradeid,subjectid)
+        {
 
+          this.fngetevalutionsectionurl=sessionStorage.getItem("addrinfo")+"/fngetrejectsection-service";
+             var obj={"schoolid":"","academic_year":"","roleid":"","emp_id":""};
+           obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+           obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+           obj.roleid=sessionStorage.getItem("curr_sess_loggedroleid");
+           obj.emp_id=sessionStorage.getItem("curr_sess_loggedid");
+           obj.subjectid=subjectid;
+           obj.gradeid=gradeid;
+           this.fngetevalutionsectionparam=obj;
+          // alert(JSON.stringify(obj));
+           this.$.fngetevalutionsectionajax.generateRequest();
+        },
+        fngetevalutionsectionResponse:function(e)
+        {
+          var res=e.detail.response.returnval;
+          document.querySelector('evaluation-report-card').chaptersectionarr=res;
+        },
+     fnsetrejectbooksubject1:function(e)
+         {
+            this.fnsetrejectbooksubject1url=sessionStorage.getItem("addrinfo")+"/fnbookplansubject-service";
+            this.$.fnsetrejectbooksubject1ajax.generateRequest();
+        },
+        fnsetrejectbooksubject1Response:function(e)
+        {
+            var res=e.detail.response.returnval;
+      document.querySelector('evaluation-report-card').chaptersubjectarr=res;
+        },
          fnsetrejectbooksubject:function(e)
          {
             this.fnsetrejectbooksubjecturl=sessionStorage.getItem("addrinfo")+"/fnbookplansubject-service";
@@ -2591,6 +2682,7 @@ fnfinalbookvalueResponse:function(e)
             var res=e.detail.response.returnval;
             document.querySelector('incomplete-chapter-report').chaptersubjectarr=res;
         },
+   
 
 
         getchaptersection:function(gradeid,subjectid,sectionidz)
@@ -2613,9 +2705,27 @@ fnfinalbookvalueResponse:function(e)
           var res=e.detail.response.returnval;
           document.querySelector('incomplete-chapter-report').reportchapterarr=res;
         },
-
-
-        fngetconceptskill:function(gradeid,subjectid,sectionidz,chapterid)
+ fngetevalutionchaptersection:function(gradeid,subjectid,sectionidz)
+        {
+  this.fngetevalutionchaptersectionurl=sessionStorage.getItem("addrinfo")+"/fngetrejectsubject1-service";
+             var obj={};
+           obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+           obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+           obj.roleid=sessionStorage.getItem("curr_sess_loggedroleid");
+           obj.emp_id=sessionStorage.getItem("curr_sess_loggedid");
+           obj.subjectid=subjectid;
+           obj.gradeid=gradeid;
+           obj.sectionidz=sectionidz;
+           this.fngetevalutionchaptersectionparam=obj;
+       //    alert(JSON.stringify(obj));
+           this.$.fngetevalutionchaptersectionajax.generateRequest();
+        },
+        fngetevalutionchaptersectionResponse:function(e)
+        {
+          var res=e.detail.response.returnval;
+         document.querySelector('evaluation-report-card').reportchapterarr=res;
+        },
+     fngetconceptskill:function(gradeid,subjectid,sectionidz,chapterid)
         {
           this.fngetconceptskillurl=sessionStorage.getItem("addrinfo")+"/fngetconceptreport-service";
           var obj={};
@@ -2663,8 +2773,62 @@ fnfinalbookvalueResponse:function(e)
                 temparr.push(obj);
           }
            document.querySelector('incomplete-chapter-report').getreportarr=temparr;
-          document.querySelector('incomplete-chapter-report').empid=temparr[0].emp_name;
-          document.querySelector('incomplete-chapter-report').empname=temparr[0].emp_id;
+document.querySelector('incomplete-chapter-report').empid=temparr[0].emp_id;
+document.querySelector('incomplete-chapter-report').empname=temparr[0].emp_name;
+       
+
+        },
+
+ fngetconceptskill1:function(gradeid,subjectid,sectionidz,chapterid)
+        {
+          this.fngetconceptskill1url=sessionStorage.getItem("addrinfo")+"/fngetconceptreport1-service";
+          var obj={};
+           obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+           obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+           obj.roleid=sessionStorage.getItem("curr_sess_loggedroleid");
+           obj.emp_id=sessionStorage.getItem("curr_sess_loggedid");
+           obj.subjectid=subjectid;
+           obj.gradeid=gradeid;
+           obj.sectionidz=sectionidz;
+           obj.chapterid=chapterid;
+           this.fngetconceptskill1param=obj;
+          
+           this.$.fngetconceptskill1ajax.generateRequest();
+        },
+
+        fngetconceptskill1Response:function(e)
+        {
+          var res=e.detail.response.returnval;
+          alert(JSON.stringify(res));
+
+          var temparr=[];
+          for(var i=0;i<res.length;i++)
+          {
+            var obj={};
+
+                obj.emp_name=res[i].emp_name;
+                obj.emp_id=res[i].emp_id;
+                obj.concept=res[i].concept_name;
+                obj.sub_concept_id=res[i].sub_concept_id;
+                obj.sub_concept_id=res[i].sub_concept_id;
+                obj.sub_concept_name=res[i].sub_concept_name;
+                obj.skill=res[i].skill;
+                obj.value=res[i].value;
+                obj.innovation=res[i].innovation;
+                obj.planned_date_from=res[i].planned_date_from;
+                obj.planned_to_date=res[i].planned_to_date;
+                obj.completion_date=res[i].completion_date;
+                obj.correction_status=res[i].correction_status;
+                obj.remark=res[i].remarks;
+                obj.enrichment_sug=res[i].enrichment_sug;
+
+                var a=i+1;
+                obj.sno=a;
+                temparr.push(obj);
+          }
+  document.querySelector('evaluation-report-card').getreportarr=temparr;
+ document.querySelector('evaluation-report-card').empid=temparr[0].emp_id;
+document.querySelector('evaluation-report-card').empname=temparr[0].emp_name;
        
 
         },
