@@ -61,7 +61,10 @@
               </td> 
               <td style="width: 7.36%;">{{lr}}</td>
               <td style="width: 7.36%;">{{remarks}}</td>
-              <td style="width: 7.36%;">{{correctionstatus}}</td>
+              <td style="width: 7.36%;">
+               <div hidden$="{{hidetitleflag}}">{{correctionstatus}}</div>
+                <paper-input value={{correctionstatus}} hidden$="{{hideflag}}"></paper-input>
+             </td>
               <td style="width: 7.36%;" hidden$="{{hidetitleflag}}">{{completiondate}}</td>
               <td hidden$="{{hideflag}}">
               <complection-date-picker-card></complection-date-picker-card></td>
