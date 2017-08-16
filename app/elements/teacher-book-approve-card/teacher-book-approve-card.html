@@ -58,7 +58,7 @@
    {
           table-layout: fixed;
           border-collapse: collapse;
-          width: 101.1%;
+          width: 1900px;
           /*margin-left: 5%;*/
           margin-top: 5%;
    }
@@ -177,9 +177,9 @@
         <!--<tr style="border-bottom: 1px solid #ccc; line-height: 1.8em;border-color:#6699ff"> -->
         <tr>
           <th style="width: 5%;">S.NO</th>
-          <th style="width: 12.8%;">Concept</th>
-          <th style="width: 11%;">Work schdule</th>
-          <th style="width: 10.9%;">#Periods</th>
+          <th style="width: 16%;">Concept</th>
+          <th style="width: 17%;">Work schdule</th>
+          <th style="width: 6%;">#Periods</th>
           <th style="width: 10.9%;">Plan From</th>
           <th style="width: 10.9%;">Plan To</th>
           <th style="width: 10.9%;">Skill</th>
@@ -187,7 +187,7 @@
           <th style="width: 10.9%;">Innovation</th>
           <th style="width: 10.9%;">LR rectification</th>
           <th style="width: 10.9%;">Remarks</th>
-          <th style="width: 11%;">Correction status</th>
+          <!-- <th style="width: 11%;">Correction status</th> -->
           <th style="width: 4.6%;"></th>
         
         </tr>  
@@ -336,6 +336,7 @@
       this.$.bookservice.FnFetchConceptService(this.gradeid,this.subjectid,this.chapterid);
       this.$.zdsasddsasfsa.hidden=false;
       this.$.bookservice.conceptseq();
+      
       document.querySelector('concept-check-card').fnRefreshzz();
       document.querySelector('subconcept-dialog-card').fnrefresh1();
       document.querySelector('skill-dialog-card').FnRefresh();

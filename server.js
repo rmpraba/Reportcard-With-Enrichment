@@ -9,8 +9,8 @@ var connection = mysql.createConnection({
    host     : 'localhost',
    user     : 'root',
 
-   password : 'admin',
-   database : 'reportcardnewins'
+   password : '',
+   database : 'reportcardnew'
 
 });
 var bodyParser = require('body-parser'); 
@@ -10711,7 +10711,7 @@ app.post('/fetchconcept-service',  urlencodedParser,function (req,res)
 {  
    var qur1="SELECT * FROM md_chapter where capter_id='"+req.query.chapterid+"'and subjectid='"+req.query.subjectid+"' and gradeid='"+req.query.gradeid+"' and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' "; 
 
- var qur2="SELECT concept_id as conceptid,planning_date,rowid,period,lrrectife,Correction,innovation,remark,flag,conc_date,planned_to_date,(select  concept from md_concept  where  concept_id=conceptid)  as conceptname FROM `md_skill` WHERE  capter_id='"+req.query.chapterid+"' and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"' ";
+ var qur2="SELECT concept_id as conceptid,planning_date,rowid,period,lrrectife,innovation,remark,flag,conc_date,planned_to_date,(select  concept from md_concept  where  concept_id=conceptid)  as conceptname FROM `md_skill` WHERE  capter_id='"+req.query.chapterid+"' and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"' ";
 
 var qur3="SELECT * FROM md_book_value  where capter_id='"+req.query.chapterid+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"'";
   var qur4="SELECT * FROM md_book_skill  where capter_id='"+req.query.chapterid+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"'";
@@ -10871,8 +10871,8 @@ app.post('/fnmasterplaninsert-service' , urlencodedParser,function (req, res)
       value: req.query.value,
       innovation: req.query.innovation,
       lr_rectification: req.query.lrrectification,
-      remarks: req.query.remarks,
-      correction_status: req.query.correctionstatus 
+      remarks: req.query.remarks
+      // correction_status: req.query.correctionstatus 
     };
     console.log('Coming for master insertion....');
     connection.query("INSERT INTO md_curriculum_planning SET ?",[response],
@@ -10907,8 +10907,8 @@ app.post('/fnsetcoskill-service' , urlencodedParser,function (req, res)
        grade_id:req.query.gradeid,
        conc_date:req.query.conc_date, 
        planned_to_date:req.query.planned_to,
-       lrrectife:req.query.lrrectife,
-       Correction:req.query.Correction,
+       lrrectife:req.query.lrrectife
+       // Correction:req.query.Correction,
     };
     console.log("----------------------------");
      console.log(response);
@@ -11034,7 +11034,7 @@ app.post('/fnsetcoskill12-service' , urlencodedParser,function (req, res)
 app.post('/fnbookeditskill-service',  urlencodedParser,function (req, res)
 {  
 
-var qur="update md_skill set planning_date='"+req.query.planned_date+"',lrrectife='"+req.query.lrrectife+"',innovation='"+req.query.innovation+"',remark='"+req.query.remark+"',Correction='"+req.query.Correction+"' ,period='"+req.query.period+"' where school_id='"+req.query.school_id+"' and academic_year='"+req.query.academic_year+"' and rowid='"+req.query.rowidz+"' and capter_id='"+req.query.capter_id+"'";
+var qur="update md_skill set planning_date='"+req.query.planned_date+"',lrrectife='"+req.query.lrrectife+"',innovation='"+req.query.innovation+"',remark='"+req.query.remark+"',period='"+req.query.period+"' where school_id='"+req.query.school_id+"' and academic_year='"+req.query.academic_year+"' and rowid='"+req.query.rowidz+"' and capter_id='"+req.query.capter_id+"'";
 console.log(qur);
 
   connection.query(qur,

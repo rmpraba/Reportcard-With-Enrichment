@@ -636,7 +636,7 @@
       fnfetchcprsubjectResponse:function(e){
         document.querySelector('curriculam-report').subjectarr=e.detail.response.returnval;
       },
-      fnmasterplaninsert:function(conarr,valuearr,skarr,subarr,period,innovation,remark,rowid,lrrectife,correction){
+      fnmasterplaninsert:function(conarr,valuearr,skarr,subarr,period,innovation,remark,rowid,lrrectife){
         var overall=[];
         for(var i=0;i<subarr.length;i++){
         var valueid="";
@@ -701,7 +701,7 @@
         obj.innovation=innovation;
         obj.lrrectification=lrrectife;
         obj.remarks=remark;
-        obj.correctionstatus=correction;
+        // obj.correctionstatus=correction;
         this.fnmasterplaninsertparam=obj;
         //alert(JSON.stringify(obj));
         this.$.fnmasterplaninsertajax.generateRequest();      
@@ -1153,7 +1153,7 @@ fnbooksubconcepteditResponse:function(e){
         var overall=[];
            for(var k=0;k<res.length;k++)
            {       
-           var nameobj={"planning_date":"","period":"","skill":"","innovation":"","remark":"","Correction":""};
+           var nameobj={"planning_date":"","period":"","skill":"","innovation":"","remark":""};
              nameobj.planning_date=res[k].planning_date; 
              nameobj.period=res[k].period; 
              nameobj.skill=res[k].skill; 
@@ -1161,13 +1161,10 @@ fnbooksubconcepteditResponse:function(e){
              nameobj.remark=res[k].remark; 
              nameobj.rowid=res[k].rowid; 
              nameobj.rowidz=res[k].rowid; 
-              nameobj.lrrectife=res[k].lrrectife;
-             nameobj.Correction=res[k].Correction;
+             nameobj.lrrectife=res[k].lrrectife;
              nameobj.planned_to_date=res[k].planned_to_date;
 
-           
-
-        var obj={"conceptid":"","conceptname":""};
+         var obj={"conceptid":"","conceptname":""};
             obj.conceptid=res[k].conceptid;
             obj.conceptname=res[k].conceptname;
             a.push(obj);
@@ -1177,7 +1174,7 @@ fnbooksubconcepteditResponse:function(e){
                 if(res[k].rowid==res[l].rowid)
                  {
                  
-          if(res[k].planning_date==res[l].planning_date)
+                if(res[k].planning_date==res[l].planning_date)
                 {
             
                  var obj1={"conceptid":"","conceptname":""}
@@ -1194,7 +1191,7 @@ fnbooksubconcepteditResponse:function(e){
    
         var b=[];
         var subarr=[];            
-for(var k=0;k<res5.length;k++)
+        for(var k=0;k<res5.length;k++)
            {       
            var nameobj={};
              nameobj.planning_date=res5[k].planning_date; 
@@ -1257,10 +1254,8 @@ for(var k=0;k<res5.length;k++)
                 overall1.push(nameobj);
                 a1=[];
                  }
-        
       }
-       
- 
+    
     var temp2=[];
    var a2=[];
       var overall2=[];
@@ -1304,7 +1299,7 @@ for(var k=0;k<res5.length;k++)
              obj.planning_date=overall[n].planning_date; 
              obj.period=overall[n].period; 
              obj.lrrectife=overall[n].lrrectife;
-             obj.Correction=overall[n].Correction;
+             // obj.Correction=overall[n].Correction;
              obj.planned_to_date=overall[n].planned_to_date;
 
            
@@ -1324,7 +1319,7 @@ for(var k=0;k<res5.length;k++)
             obj.innovation=overall[n].innovation; 
              obj.remark=overall[n].remark;
               obj.lrrectife=overall[n].lrrectife;
-             obj.Correction=overall[n].Correction;
+             // obj.Correction=overall[n].Correction;
              obj.planned_to_date=overall[n].planned_to_date;
           
              obj.mainarr="";
@@ -1340,7 +1335,7 @@ for(var k=0;k<res5.length;k++)
             obj.innovation=overall[n].innovation; 
              obj.remark=overall[n].remark;
              obj.lrrectife=overall[n].lrrectife;
-             obj.Correction=overall[n].Correction;
+             // obj.Correction=overall[n].Correction;
              obj.planned_to_date=overall[n].planned_to_date;
           
              obj.mainarr="";
@@ -1362,7 +1357,7 @@ for(var k=0;k<res5.length;k++)
              obj.remark=temp2[n].remark;
              obj.mainarr=temp2[n].mainarr;
               obj.lrrectife=temp2[n].lrrectife;
-             obj.Correction=temp2[n].Correction;
+             // obj.Correction=temp2[n].Correction;
            
              obj.planned_to_date=temp2[n].planned_to_date;
           
@@ -1382,7 +1377,7 @@ var temp1=[];
              obj.period=temp3[n].period; 
              obj.innovation=temp3[n].innovation; 
              obj.lrrectife=temp3[n].lrrectife;
-             obj.Correction=temp3[n].Correction;
+             // obj.Correction=temp3[n].Correction;
              obj.planned_to_date=temp3[n].planned_to_date;
                     
              obj.remark=temp3[n].remark;
@@ -1409,7 +1404,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
                       obj.skillarr=temp1[i].skillarr;
                       obj.rowidz=temp1[i].rowidz;
                       obj.lrrectife=temp1[i].lrrectife;
-                      obj.Correction=temp1[i].Correction;
+                      // obj.Correction=temp1[i].Correction;
                       obj.planned_to_date=temp1[i].planned_to_date;
                       var id_date=temp1[i].planning_date;
                       id_date=id_date.replace(/[^\w\s]/gi, '');
@@ -1434,7 +1429,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
                    obj.hidecheck1=false; 
                    obj.hidecheck11=false; 
                    obj.lrrectife="";
-                   obj.Correction="";  
+                   // obj.Correction="";  
                   res2.push(obj);
                    }
            for(var i=0;i<res2.length;i++){
@@ -1504,7 +1499,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
   
    },
 
-   fnsetcoskill:function(arr,period,innovation,remark,rowid,lrrectife,Correction)
+   fnsetcoskill:function(arr,period,innovation,remark,rowid,lrrectife)
 {
         //alert(period);
        for(var i=0;i<arr.length;i++){
@@ -1524,7 +1519,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
         obj.innovation=innovation;
         obj.remark=remark;
         obj.lrrectife=lrrectife;
-        obj.Correction=Correction;
+        // obj.Correction=Correction;
         
         obj.rowid=rowid+localStorage.getItem("curr_sess_capters");
         obj.flag="active";
@@ -1630,7 +1625,7 @@ fnsetcoskill11:function(skarr,period,rowid)
         },
 
 
-    fnbookeditskill:function(period,innovation,remark,planneddate,rowidz,lrrectife,Correction){
+    fnbookeditskill:function(period,innovation,remark,planneddate,rowidz,lrrectife){
   
     this.fnbookeditskillurl=sessionStorage.getItem("addrinfo")+"/fnbookeditskill-service";
      var obj={};
@@ -1643,10 +1638,8 @@ fnsetcoskill11:function(skarr,period,rowid)
       obj.planned_date=planneddate;
       obj.rowidz=rowidz;
       obj.lrrectife=lrrectife;
-      obj.Correction=Correction;
-
+      // obj.Correction=Correction;
       this.fnbookeditskillparam=obj;
-
       this.$.fnbookeditskillajax.generateRequest();
 
     
