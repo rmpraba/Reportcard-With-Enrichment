@@ -61,8 +61,32 @@
         on-response="changepasswordResponse"
         debounce-duration="300"
         >
-
   </iron-ajax>
+  
+  <iron-ajax
+        method="post"
+        id="getschoolnameajax"
+        url="{{getschoolnameurl}}"
+        params="{{getschoolnameparam}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="getschoolnameResponse"
+        debounce-duration="300"
+        >
+  </iron-ajax>
+
+  <iron-ajax
+        method="post"
+        id="empchangepasswordajax"
+        url="{{empchangepasswordurl}}"
+        params="{{empchangepasswordparam}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="empchangepasswordResponse"
+        debounce-duration="300"
+        >
+  </iron-ajax>
+
   <beginner-assesment-service id="bassesmentservice"></beginner-assesment-service>
   </template>
 
@@ -71,17 +95,36 @@
    
     Polymer({
       is: "login-service",
-     changepassword:function(username,oldpassword,newpassword){
+     changepassword:function(username,oldpassword,newpassword,schoolid){
       this.changepasswordurl=sessionStorage.getItem("addrinfo")+"/changepassword-service";
-      var obj={"username":"","oldpassword":"","newpassword":""}
+      var obj={"username":"","oldpassword":"","newpassword":"","schoolid":""}
+      obj.schoolid=schoolid;
       obj.username=username;
       obj.oldpassword=oldpassword;
       obj.newpassword=newpassword;
       this.changepasswordparam=obj;
+      //alert(JSON.stringify(obj));
       this.$.changepasswordajax.generateRequest();
      },
      changepasswordResponse:function(e){
       alert(e.detail.response.returnval);
+     },
+     empchangepassword:function(username1,oldpassword1,newpassword1,schlid)
+     {
+      this.empchangepasswordurl=sessionStorage.getItem("addrinfo")+"/Emplchangepassword-service";
+      var obj={"username":"","oldpassword":"","newpassword":"","schoolid":""}
+      obj.schlid=schlid;
+      obj.username1=username1;
+      obj.oldpassword1=oldpassword1;
+      obj.newpassword1=newpassword1;
+      this.empchangepasswordparam=obj;
+      //alert(JSON.stringify(obj));
+      this.$.empchangepasswordajax.generateRequest();
+     },
+     empchangepasswordResponse:function(e)
+     {
+      alert(e.detail.response.returnval);
+      var res=e.detail.response.returnval;
      },
      addressResponse:function(e)
       {
@@ -179,9 +222,20 @@
         {
         alert('Invalid UserName or Password');
         }
-        }
-      });     
-      
+        },
+         getschoolname:function()
+         {
+           this.getschoolnameurl=sessionStorage.getItem("addrinfo")+"/Getschoolname-service";      
+          this.$.getschoolnameajax.generateRequest();
+         }, 
+
+         getschoolnameResponse:function(e)
+         {
+          var res=e.detail.response.returnval;
+          document.querySelector('forgotpassword-card').schoolnamearr=res;
+         }
+
+      });  
       })();
   </script>
 
