@@ -10553,7 +10553,7 @@ app.post('/fngetconceptvalue-service',  urlencodedParser,function (req,res)
 
 
 
-
+/*
 app.post('/fnsendconcept-service' ,  urlencodedParser,function (req, res)
 {  
     var response={ 
@@ -10561,7 +10561,6 @@ app.post('/fnsendconcept-service' ,  urlencodedParser,function (req, res)
        concept:req.query.concept,
        capter_id:req.query.capter_id,
        flag:req.query.flag, 
-       
       }; 
      var qqq="SELECT * FROM md_concept WHERE concept_id='"+req.query.concept_id+"' and concept='"+req.query.concept+"'";
  
@@ -10571,7 +10570,7 @@ app.post('/fnsendconcept-service' ,  urlencodedParser,function (req, res)
     connection.query(qqq,
     function(err, rows)
     {
-    if(rows.length==0)
+    if(rows.length==0) 
     {
         connection.query("INSERT INTO md_concept SET ?",[response],
           function(err, rows)
@@ -10597,13 +10596,43 @@ app.post('/fnsendconcept-service' ,  urlencodedParser,function (req, res)
       res.status(200).json({'returnval': 'Already Exit'});
     }
   });
-});    
+}); */  
+
+
+app.post('/fnsendconcept-service',  urlencodedParser,function (req,res)
+  {  
+    var qur="INSERT INTO md_concept SET ?";
+    var response={ 
+      concept_id:req.query.concept_id,
+       concept:req.query.concept,
+       capter_id:req.query.capter_id,
+       flag:req.query.flag
+    };
+    console.log('------------school book-------------');
+    console.log(response);
+    connection.query(qur,[response],
+    function(err, rows)
+    {
+    if(!err)
+    {   
+
+    var tempseq1=parseInt((req.query.concept_id).substring(3))+1;
+      connection.query("UPDATE sequence SET concept_sequence='"+tempseq1+"'", function (err,result)
+      {
+        if(result.affectedRows>0)
+         res.status(200).json({'returnval': 'Inserted'});
+      });
+   }
+    else
+     res.status(200).json({'returnval': 'no rows'}); 
+  });
+}); 
 
 
 app.post('/fnbookupdatevalue-service',  urlencodedParser,function (req, res)
 { 
      
-    var qur="update md_concept set  concept='"+req.query.concept+"' where capter_id='"+req.query.capter_id+"' and concept_id='"+req.query.concept_id+"' and grade_id='"+req.query.grade_id+"' and subject_id='"+req.query.subject_id+"' and school_id='"+req.query.school_id+"'and academic_year='"+req.query.academic_year+"'";
+    var qur="update md_concept set  concept='"+req.query.concept+"' where capter_id='"+req.query.capter_id+"' and concept_id='"+req.query.concept_id+"'";
 
     console.log("----------- concept edit-------------");
     console.log(qur);
