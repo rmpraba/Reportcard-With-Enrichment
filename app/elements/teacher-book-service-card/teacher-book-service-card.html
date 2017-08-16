@@ -2644,7 +2644,7 @@ fnfinalbookvalueResponse:function(e)
         fngetconceptskillResponse:function(e)
         {
           var res=e.detail.response.returnval;
-          //alert(JSON.stringify(res));
+          alert(JSON.stringify(res));
 
           var temparr=[];
           for(var i=0;i<res.length;i++)
@@ -2652,11 +2652,11 @@ fnfinalbookvalueResponse:function(e)
             var obj={};
 
                 obj.emp_name=res[i].emp_name;
-                obj.capter=res[i].concept_name;
+                obj.emp_id=res[i].emp_id;
                 obj.concept=res[i].concept_name;
                 obj.sub_concept_id=res[i].sub_concept_id;
                 obj.sub_concept_id=res[i].sub_concept_id;
-                obj.sub_concept_name=sub_concept_name;
+                obj.sub_concept_name=res[i].sub_concept_name;
                 obj.skill=res[i].skill;
                 obj.value=res[i].value;
                 obj.innovation=res[i].innovation;
@@ -2664,7 +2664,6 @@ fnfinalbookvalueResponse:function(e)
                 obj.planned_to_date=res[i].planned_to_date;
                 obj.completion_date=res[i].completion_date;
                 obj.correction_status=res[i].correction_status;
-           
                 obj.remark=res[i].remarks;
                 obj.enrichment_sug=res[i].enrichment_sug;
 
@@ -2672,7 +2671,11 @@ fnfinalbookvalueResponse:function(e)
                 obj.sno=a;
                 temparr.push(obj);
           }
-          document.querySelector('incomplete-chapter-report').getreportarr=temparr;
+           document.querySelector('incomplete-chapter-report').getreportarr=temparr;
+          document.querySelector('incomplete-chapter-report').empid=temparr[0].emp_name;
+          document.querySelector('incomplete-chapter-report').empname=temparr[0].emp_id;
+       
+
         },
 
         getcurriculamdetails:function(gradeid,subjectid)

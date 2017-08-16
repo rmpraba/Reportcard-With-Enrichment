@@ -65,19 +65,20 @@
                 </paper-menu>
           </paper-dropdown-menu>
         </span> 
-
+    <div style="border-left:20%">Teacher Name:{{empname}}</div>
       <div class="chapterreport" hidden$="{{incompletereport}}">
        <table id="newreport1" border="1" style="border-collapse: collapse;margin-left: 15%;width: 80%; margin-top: 4%;">
         <tr style="text-align: left;">
           <th>SNO</th>
-          <th>Employee Name</th>
-          <th>Chapter</th>
+       
+         
           <th>Concept</th>
-          <td>Sub Concept</td>
+          <th>Sub Concept</th>
           <th>Skill</th>
           <th>Value</th>
           <th>Innovation</th>
-          <th>Planned Date</th>
+          <th>Plan from Date</th>
+          <th>Plan to Date</th>
           <th>Completed Date</th>
           <th>Remarks</th>
           <th>Correction Status</th>
@@ -86,9 +87,7 @@
         <template  is="dom-repeat" items="{{getreportarr}}" as="view">
           <tr>
               <td>{{view.sno}}</td>
-              <td>{{view.emp_name}}</td>
-              <td>{{view.capter}}</td>
-              <td>{{view.concept}}</td>
+               <td>{{view.concept}}</td>
               <td>{{view.sub_concept_name}}</td>
               <td>{{view.skill}}</td>
               <td>{{view.value}}</td>
