@@ -9,7 +9,7 @@ var connection = mysql.createConnection({
    host     : 'localhost',
    user     : 'root',
    password : '',
-   database : 'reportcard1'
+   database : 'reportcardnew'
 
 });
 var bodyParser = require('body-parser'); 
@@ -118,7 +118,12 @@ app.post('/changepassword-service',  urlencodedParser,function (req, res)
   var username={"id":req.query.username};
   var oldpassword={"password":req.query.oldpassword};
   var newpassword={"password":req.query.newpassword};
-  connection.query('UPDATE md_employee SET ? WHERE ? and ?',[newpassword,username,oldpassword],
+  var schoolid={"school_id":req.query.schoolid};
+  console.log(schoolid);
+  console.log(username);
+  console.log(oldpassword);
+  console.log(newpassword);
+  connection.query('UPDATE md_employee SET ? WHERE ? and ? and ?',[newpassword,username,oldpassword,schoolid],
     function(err,result)
     {
       console.log('..............result..............');
@@ -12177,6 +12182,63 @@ app.post('/fnsubconceptsave-service',  urlencodedParser,function (req, res)
 
   });
 });
+
+app.post('/Getschoolname-service', urlencodedParser,function (req,res)
+{  
+  
+  var qur="SELECT * FROM md_school";
+  connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    { 
+      //console.log(JSON.stringify(rows));   
+      res.status(200).json({'returnval': rows});
+    }
+    else
+    {
+      console.log(err);
+      res.status(200).json({'returnval': 'fail'});
+    }  
+
+  });
+});
+
+
+
+
+app.post('/Emplchangepassword-service',  urlencodedParser,function (req, res)
+{
+  
+  var username={"emp_id":req.query.username1};
+  var oldpassword={"emp_password":req.query.oldpassword1};
+  var newpassword={"emp_password":req.query.newpassword1};
+  var schoolid={"school_id":req.query.schoolid};
+  console.log(schoolid);
+  console.log(username);
+  console.log(oldpassword);
+  console.log(newpassword);
+  connection.query('UPDATE md_employee_creation SET ? WHERE ? and ? and ?',[newpassword,username,oldpassword,schoolid],
+    function(err,result)
+    {
+      console.log('..............result..............');
+      console.log(result.affectedRows);
+    if(!err)
+    {  
+      if(result.affectedRows>0)  
+      res.status(200).json({'returnval': 'Password changed!'});
+    
+    else
+    {
+      console.log(err);     
+      res.status(200).json({'returnval': 'Password not changed!'});
+    }
+    }
+    else
+      console.log(err);    
+  });
+});
+
 
 
 var server = app.listen(5000, function () {

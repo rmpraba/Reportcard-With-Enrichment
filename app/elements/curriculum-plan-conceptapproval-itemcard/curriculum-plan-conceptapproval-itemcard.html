@@ -46,14 +46,14 @@
               <td style="width: 2.85%;">{{sno}}</td>
               <td style="width: 10%;">{{conceptname}}</td>
               <td style="width: 9%;">{{subconceptname}}</td>
-              <td style="width: 3.85%;">{{period}}</td>
+              <td style="width: 3.85%;text-align: center;">{{period}}</td>
               <td style="width: 6.6%;">
               {{skill}}
               </td>
               <td style="width: 6.6%;">
                 {{value}}
               </td>
-              <td style="padding-left: 2%;width: 6.6%;">{{innovation}}</td> 
+              <td style="padding-left: 0%;width: 6.6%;">{{innovation}}</td> 
               <td style="width: 6.6%;">{{fromdate}}</td>
               <td style="width: 6.56%;">
                {{todate}}
@@ -65,11 +65,11 @@
                <div hidden$="{{hidetitleflag}}">{{correctionstatus}}</div>
                 <paper-input value={{correctionstatus}} hidden$="{{hideflag}}"></paper-input>
              </td>
-              <td hidden$="{{hidetitleflag}}">{{completiondate}}</td>
+              <td hidden$="{{hidetitleflag}}" style="width: 6.56%;">{{completiondate}}</td>
               <td hidden$="{{hideflag}}" style="width: 6.56%;">
               <complection-date-picker-card></complection-date-picker-card>
               </td>
-              <td hidden$="{{hidetitleflag}}">{{completionstatus}}</td>
+              <td hidden$="{{hidetitleflag}}" style="width: 6.56%;">{{completionstatus}}</td>
               <td hidden$="{{hideflag}}" style="width: 6.56%;">
                 <paper-checkbox id="cpayes{{subconceptid}}"  on-change="FnYes">Yes</paper-checkbox><br>
                 <paper-checkbox id="cpano{{subconceptid}}" on-change="FnNo">No</paper-checkbox>
