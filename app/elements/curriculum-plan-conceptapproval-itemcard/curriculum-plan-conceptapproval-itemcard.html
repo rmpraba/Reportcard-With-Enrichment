@@ -6,7 +6,7 @@
     <style>
     table
       {   table-layout: fixed;
-          width: 1313px;;
+          width: 1900px;;
           border-collapse: collapse;
           margin-left: -1%;
           margin-top: 0%;
@@ -43,28 +43,29 @@
 
     <table border="1" style="border-collapse: collapse;">
         <tr>
-              <td style="width: 2.7%;">{{sno}}</td>
+              <td style="width: 2.6%;">{{sno}}</td>
               <td style="width: 9.4%;">{{conceptname}}</td>
-              <td style="width: 7.65%;">{{subconceptname}}</td>
-              <td style="width: 4.4%;">{{period}}</td>
-              <td style="width: 7.4%;">
+              <td style="width: 8.45%;">{{subconceptname}}</td>
+              <td style="width: 3.6%;">{{period}}</td>
+              <td style="width: 6.2%;">
               {{skill}}
               </td>
-              <td style="width: 7.36%;">
+              <td style="width: 6.2%;">
                 {{value}}
               </td>
-              <td style="padding-left: 2%;width: 7.36%;">{{innovation}}</td> 
-              <td style="width: 7.4%;">{{fromdate}}</td>
-              <td style="width: 7.36%;">
+              <td style="padding-left: 2%;width: 6.2%;">{{innovation}}</td> 
+              <td style="width: 6.2%;">{{fromdate}}</td>
+              <td style="width: 6.2%;">
                {{todate}}
               
               </td> 
-              <td style="width: 7.36%;">{{lr}}</td>
-              <td style="width: 7.36%;">{{remarks}}</td>
-              <td style="width: 7.36%;">{{correctionstatus}}</td>
+              <td style="width: 6.2%;">{{lr}}</td>
+              <td style="width: 6.2%;">{{remarks}}</td>
+              <td style="width: 6.2%;">{{correctionstatus}}</td>
               <td style="width: 7.36%;" hidden$="{{hidetitleflag}}">{{completiondate}}</td>
               <td hidden$="{{hideflag}}">
-              <complection-date-picker-card></complection-date-picker-card></td>
+                <complection-date-picker-card></complection-date-picker-card>
+              </td>
               <td hidden$="{{hidetitleflag}}">{{completionstatus}}</td>
               <td style="width: 4%;" hidden$="{{hideflag}}">
                 <paper-checkbox id="cpayes{{subconceptid}}"  on-change="FnYes">Yes</paper-checkbox>

@@ -123,11 +123,11 @@
                     <h4 style="margin-left: -11%;width: 90%;">{{rse.subconceptname}}</h4>
                   </template>
               </td>
-             <td style="width: 4.85%;padding-left: 2%;">
-                <paper-input style="width: 60%;" value="{{period}}" allowed-pattern="[0-9]"></paper-input>
+             <td style="width: 4.85%;padding-left: 1%;text-align: center;">
+                <paper-input style="width: 80%;" value="{{period}}" allowed-pattern="[0-9]"></paper-input>
              </td>
              <td style="width: 8.75%;">
-                <paper-input hidden$="{{hidecheck}}" value="{{planneddate}}"></paper-input>
+                <paper-input style="margin-left:11%;" hidden$="{{hidecheck}}" value="{{planneddate}}" ></paper-input>
                 <div class="card"  hidden$="{{hidecheck1}}">
                   <paper-input label="From date" class="btn" on-click="FnShowDialog" raised value="{{showdate}}"></paper-input>
                     <paper-dialog id="dialog" class="paper-date-picker-dialog" modal   on-iron-overlay-closed="FnDismissDialog">
