@@ -2613,8 +2613,8 @@ fnfinalbookvalueResponse:function(e)
            obj.subjectid=subjectid;
            obj.gradeid=gradeid;
            obj.sectionidz=sectionidz;
-          this.fngetrejectsubjectparam=obj;
-          // alert(JSON.stringify(obj));
+           this.fngetrejectsubjectparam=obj;
+          alert(JSON.stringify(obj));
            this.$.fngetrejectsubjectajax.generateRequest();
         },
         fngetrejectsubjectResponse:function(e)
@@ -2649,17 +2649,23 @@ fnfinalbookvalueResponse:function(e)
           var temparr=[];
           for(var i=0;i<res.length;i++)
           {
-            var obj={"emp_name":"","capter":"","concept":"","skill":"","value":"","innovation":"","planning_date":"","completion_date":"","remark":"","enrichment_sug":"","sno":""};
+            var obj={};
 
                 obj.emp_name=res[i].emp_name;
-                obj.capter=res[i].capter;
-                obj.concept=res[i].concept;
+                obj.capter=res[i].concept_name;
+                obj.concept=res[i].concept_name;
+                obj.sub_concept_id=res[i].sub_concept_id;
+                obj.sub_concept_id=res[i].sub_concept_id;
+                obj.sub_concept_name=sub_concept_name;
                 obj.skill=res[i].skill;
                 obj.value=res[i].value;
                 obj.innovation=res[i].innovation;
-                obj.planning_date=res[i].planning_date;
+                obj.planned_date_from=res[i].planned_date_from;
+                obj.planned_to_date=res[i].planned_to_date;
                 obj.completion_date=res[i].completion_date;
-                obj.remark=res[i].remark;
+                obj.correction_status=res[i].correction_status;
+           
+                obj.remark=res[i].remarks;
                 obj.enrichment_sug=res[i].enrichment_sug;
 
                 var a=i+1;
