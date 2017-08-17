@@ -448,36 +448,7 @@
         on-response="fnsetrejectbooksubject1Response"
         debounce-duration="300"/>
 
-         <iron-ajax
-        method="post"
-        id="fngetrejectsubjectajax"
-        url="{{fngetrejectsubjecturl}}"
-        params="{{fngetrejectsubjectparam}}"
-        handle-as="json"
-        content-type="application/json"
-        on-response="fngetrejectsubjectResponse"
-        debounce-duration="300"/>
-
         
-
-        <iron-ajax
-        method="post"
-        id="fngetconceptskillajax"
-        url="{{fngetconceptskillurl}}"
-        params="{{fngetconceptskillparam}}"
-        handle-as="json"
-        content-type="application/json"
-        on-response="fngetconceptskillResponse"
-        debounce-duration="300"/>
-          <iron-ajax
-        method="post"
-        id="fngetconceptskill1ajax"
-        url="{{fngetconceptskill1url}}"
-        params="{{fngetconceptskill1param}}"
-        handle-as="json"
-        content-type="application/json"
-        on-response="fngetconceptskill1Response"
-        debounce-duration="300"/>
           <iron-ajax
         method="post"
         id="fngetrejectsectionajax"
@@ -631,16 +602,7 @@
         content-type="application/json"
         on-response="fngetevalutionsectionResponse"
         debounce-duration="300"/>
-         <iron-ajax
-        method="post"
-        id="fngetevalutionchaptersectionajax"
-        url="{{fngetevalutionchaptersectionurl}}"
-        params="{{fngetevalutionchaptersectionparam}}"
-        handle-as="json"
-        content-type="application/json"
-        on-response="fngetevalutionchaptersectionResponse"
-        debounce-duration="300"/>
-
+      
   </template>
   <script>
   (function() {
@@ -1488,8 +1450,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
             }
           }
     
-            // alert(JSON.stringify(res2));
-            // alert(JSON.stringify(temp));
+             
             if(flag==0)                
             document.querySelector('teacher-book-approve-card').overallarr1=res2;
             else
@@ -2625,7 +2586,7 @@ fnfinalbookvalueResponse:function(e)
         fngetchaptersubject:function(gradeid,subjectid)
         {
 
-          this.fngetrejectsectionurl=sessionStorage.getItem("addrinfo")+"/fngetrejectsection-service";
+          this.fngetrejectsectionurl=sessionStorage.getItem("addrinfo")+"/fngetconceptreport-service";
              var obj={"schoolid":"","academic_year":"","roleid":"","emp_id":""};
            obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
            obj.academic_year=localStorage.getItem("curr_sess_academicyear");
@@ -2640,12 +2601,42 @@ fnfinalbookvalueResponse:function(e)
         fngetrejectsectionResponse:function(e)
         {
           var res=e.detail.response.returnval;
-          document.querySelector('incomplete-chapter-report').chaptersectionarr=res;
+           
+
+          var temparr=[];
+          for(var i=0;i<res.length;i++)
+          {
+            var obj={};
+
+                obj.emp_name=res[i].emp_name;
+                obj.emp_id=res[i].emp_id;
+                obj.chapter=res[i].chapter_name;
+                obj.section=res[i].section_name;
+                obj.concept=res[i].concept_name;
+                obj.sub_concept_id=res[i].sub_concept_id;
+                obj.sub_concept_id=res[i].sub_concept_id;
+                obj.sub_concept_name=res[i].sub_concept_name;
+                obj.skill=res[i].skill;
+                obj.value=res[i].value;
+                obj.innovation=res[i].innovation;
+                obj.planned_date_from=res[i].planned_date_from;
+                obj.planned_to_date=res[i].planned_to_date;
+                obj.completion_date=res[i].completion_date;
+                obj.correction_status=res[i].correction_status;
+                obj.remark=res[i].remarks;
+                obj.enrichment_sug=res[i].enrichment_sug;
+
+                var a=i+1;
+                obj.sno=a;
+                temparr.push(obj);
+            }
+document.querySelector('incomplete-chapter-report').getreportarr=temparr;
+
         },
            fngetevalutionsection:function(gradeid,subjectid)
         {
 
-          this.fngetevalutionsectionurl=sessionStorage.getItem("addrinfo")+"/fngetrejectsection-service";
+this.fngetevalutionsectionurl=sessionStorage.getItem("addrinfo")+"/fngetconceptreport1-service";
              var obj={"schoolid":"","academic_year":"","roleid":"","emp_id":""};
            obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
            obj.academic_year=localStorage.getItem("curr_sess_academicyear");
@@ -2660,7 +2651,36 @@ fnfinalbookvalueResponse:function(e)
         fngetevalutionsectionResponse:function(e)
         {
           var res=e.detail.response.returnval;
-          document.querySelector('evaluation-report-card').chaptersectionarr=res;
+         
+           var temparr=[];
+          for(var i=0;i<res.length;i++)
+          {
+            var obj={};
+
+                obj.emp_name=res[i].emp_name;
+                obj.emp_id=res[i].emp_id;
+                obj.chapter=res[i].chapter_name;
+                obj.section=res[i].section_name;
+                obj.concept=res[i].concept_name;
+                obj.sub_concept_id=res[i].sub_concept_id;
+                obj.sub_concept_id=res[i].sub_concept_id;
+                obj.sub_concept_name=res[i].sub_concept_name;
+                obj.skill=res[i].skill;
+                obj.value=res[i].value;
+                obj.innovation=res[i].innovation;
+                obj.planned_date_from=res[i].planned_date_from;
+                obj.planned_to_date=res[i].planned_to_date;
+                obj.completion_date=res[i].completion_date;
+                obj.correction_status=res[i].correction_status;
+                obj.remark=res[i].remarks;
+                obj.enrichment_sug=res[i].enrichment_sug;
+
+                var a=i+1;
+                obj.sno=a;
+                temparr.push(obj);
+            }
+      document.querySelector('evaluation-report-card').getreportarr=temparr;
+
         },
      fnsetrejectbooksubject1:function(e)
          {
@@ -2682,158 +2702,7 @@ fnfinalbookvalueResponse:function(e)
             var res=e.detail.response.returnval;
             document.querySelector('incomplete-chapter-report').chaptersubjectarr=res;
         },
-   
-
-
-        getchaptersection:function(gradeid,subjectid,sectionidz)
-        {
-          this.fngetrejectsubjecturl=sessionStorage.getItem("addrinfo")+"/fngetrejectsubject-service";
-             var obj={};
-           obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
-           obj.academic_year=localStorage.getItem("curr_sess_academicyear");
-           obj.roleid=sessionStorage.getItem("curr_sess_loggedroleid");
-           obj.emp_id=sessionStorage.getItem("curr_sess_loggedid");
-           obj.subjectid=subjectid;
-           obj.gradeid=gradeid;
-           obj.sectionidz=sectionidz;
-           this.fngetrejectsubjectparam=obj;
-          alert(JSON.stringify(obj));
-           this.$.fngetrejectsubjectajax.generateRequest();
-        },
-        fngetrejectsubjectResponse:function(e)
-        {
-          var res=e.detail.response.returnval;
-          document.querySelector('incomplete-chapter-report').reportchapterarr=res;
-        },
- fngetevalutionchaptersection:function(gradeid,subjectid,sectionidz)
-        {
-  this.fngetevalutionchaptersectionurl=sessionStorage.getItem("addrinfo")+"/fngetrejectsubject1-service";
-             var obj={};
-           obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
-           obj.academic_year=localStorage.getItem("curr_sess_academicyear");
-           obj.roleid=sessionStorage.getItem("curr_sess_loggedroleid");
-           obj.emp_id=sessionStorage.getItem("curr_sess_loggedid");
-           obj.subjectid=subjectid;
-           obj.gradeid=gradeid;
-           obj.sectionidz=sectionidz;
-           this.fngetevalutionchaptersectionparam=obj;
-       //    alert(JSON.stringify(obj));
-           this.$.fngetevalutionchaptersectionajax.generateRequest();
-        },
-        fngetevalutionchaptersectionResponse:function(e)
-        {
-          var res=e.detail.response.returnval;
-         document.querySelector('evaluation-report-card').reportchapterarr=res;
-        },
-     fngetconceptskill:function(gradeid,subjectid,sectionidz,chapterid)
-        {
-          this.fngetconceptskillurl=sessionStorage.getItem("addrinfo")+"/fngetconceptreport-service";
-          var obj={};
-           obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
-           obj.academic_year=localStorage.getItem("curr_sess_academicyear");
-           obj.roleid=sessionStorage.getItem("curr_sess_loggedroleid");
-           obj.emp_id=sessionStorage.getItem("curr_sess_loggedid");
-           obj.subjectid=subjectid;
-           obj.gradeid=gradeid;
-           obj.sectionidz=sectionidz;
-           obj.chapterid=chapterid;
-           this.fngetconceptskillparam=obj;
-           //alert(JSON.stringify(obj));
-           this.$.fngetconceptskillajax.generateRequest();
-        },
-
-        fngetconceptskillResponse:function(e)
-        {
-          var res=e.detail.response.returnval;
-          alert(JSON.stringify(res));
-
-          var temparr=[];
-          for(var i=0;i<res.length;i++)
-          {
-            var obj={};
-
-                obj.emp_name=res[i].emp_name;
-                obj.emp_id=res[i].emp_id;
-                obj.concept=res[i].concept_name;
-                obj.sub_concept_id=res[i].sub_concept_id;
-                obj.sub_concept_id=res[i].sub_concept_id;
-                obj.sub_concept_name=res[i].sub_concept_name;
-                obj.skill=res[i].skill;
-                obj.value=res[i].value;
-                obj.innovation=res[i].innovation;
-                obj.planned_date_from=res[i].planned_date_from;
-                obj.planned_to_date=res[i].planned_to_date;
-                obj.completion_date=res[i].completion_date;
-                obj.correction_status=res[i].correction_status;
-                obj.remark=res[i].remarks;
-                obj.enrichment_sug=res[i].enrichment_sug;
-
-                var a=i+1;
-                obj.sno=a;
-                temparr.push(obj);
-          }
-           document.querySelector('incomplete-chapter-report').getreportarr=temparr;
-document.querySelector('incomplete-chapter-report').empid=temparr[0].emp_id;
-document.querySelector('incomplete-chapter-report').empname=temparr[0].emp_name;
-       
-
-        },
-
- fngetconceptskill1:function(gradeid,subjectid,sectionidz,chapterid)
-        {
-          this.fngetconceptskill1url=sessionStorage.getItem("addrinfo")+"/fngetconceptreport1-service";
-          var obj={};
-           obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
-           obj.academic_year=localStorage.getItem("curr_sess_academicyear");
-           obj.roleid=sessionStorage.getItem("curr_sess_loggedroleid");
-           obj.emp_id=sessionStorage.getItem("curr_sess_loggedid");
-           obj.subjectid=subjectid;
-           obj.gradeid=gradeid;
-           obj.sectionidz=sectionidz;
-           obj.chapterid=chapterid;
-           this.fngetconceptskill1param=obj;
-          
-           this.$.fngetconceptskill1ajax.generateRequest();
-        },
-
-        fngetconceptskill1Response:function(e)
-        {
-          var res=e.detail.response.returnval;
-          alert(JSON.stringify(res));
-
-          var temparr=[];
-          for(var i=0;i<res.length;i++)
-          {
-            var obj={};
-
-                obj.emp_name=res[i].emp_name;
-                obj.emp_id=res[i].emp_id;
-                obj.concept=res[i].concept_name;
-                obj.sub_concept_id=res[i].sub_concept_id;
-                obj.sub_concept_id=res[i].sub_concept_id;
-                obj.sub_concept_name=res[i].sub_concept_name;
-                obj.skill=res[i].skill;
-                obj.value=res[i].value;
-                obj.innovation=res[i].innovation;
-                obj.planned_date_from=res[i].planned_date_from;
-                obj.planned_to_date=res[i].planned_to_date;
-                obj.completion_date=res[i].completion_date;
-                obj.correction_status=res[i].correction_status;
-                obj.remark=res[i].remarks;
-                obj.enrichment_sug=res[i].enrichment_sug;
-
-                var a=i+1;
-                obj.sno=a;
-                temparr.push(obj);
-          }
-  document.querySelector('evaluation-report-card').getreportarr=temparr;
- document.querySelector('evaluation-report-card').empid=temparr[0].emp_id;
-document.querySelector('evaluation-report-card').empname=temparr[0].emp_name;
-       
-
-        },
-
-        getcurriculamdetails:function(gradeid,subjectid)
+    getcurriculamdetails:function(gradeid,subjectid)
         {
            this.fngetreporturl=sessionStorage.getItem("addrinfo")+"/fngetcurriculam-service";
            var obj={};

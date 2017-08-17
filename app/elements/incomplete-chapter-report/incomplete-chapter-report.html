@@ -8,7 +8,7 @@
       }
        .position
        {
-          margin-left:7%;
+          margin-left:23%;
        }
        #btn2
        {
@@ -19,6 +19,12 @@
         margin-top: 4%;
         margin-left: 48%;
       }
+  paper-dropdown-menu
+    {
+      width: 15%;
+      --paper-input-container-label: { color: red };
+      text-align:center;
+    }
     </style>
 
     <div>
@@ -46,32 +52,18 @@
           </paper-dropdown-menu>
        </span>
      
-        <span class="position"> 
-         <paper-dropdown-menu  label="Select Section">
-                <paper-menu id="reportsectionzzzz" class="dropdown-content"   on-iron-select="fnsetsection">
-                  <template is="dom-repeat" items="{{chaptersectionarr}}">
-                    <paper-item value="{{item.class_id}}">{{item.section_id}}</paper-item>
-                  </template>    
-                </paper-menu>
-          </paper-dropdown-menu>
-       </span>   
-             
-       <span class="position"> 
-          <paper-dropdown-menu  label="Select the chapter">
-              <paper-menu id="reportchapter" class="dropdown-content"   on-iron-select="fnselectchapter">
-                   <template is="dom-repeat" items="{{reportchapterarr}}">
-                    <paper-item value="{{item.chapter_id}}">{{item.chapter_name}}</paper-item>
-                  </template>    
-                </paper-menu>
-          </paper-dropdown-menu>
-        </span> 
-    <div style="border-left:20%">Teacher Name:{{empname}}</div>
+  
       <div class="chapterreport" hidden$="{{incompletereport}}">
-       <table id="newreport1" border="1" style="border-collapse: collapse;margin-left: 15%;width: 80%; margin-top: 4%;">
+       <table id="newreport1" border="1" style="border-collapse: collapse;
+    margin-left: 1%;
+    width: 100%;
+    margin-top: 4%;">
         <tr style="text-align: left;">
           <th>SNO</th>
        
-         
+          <th>Employee Name</th>
+          <th>Section Name</th>
+          <th>Chapter Name</th>
           <th>Concept</th>
           <th>Sub Concept</th>
           <th>Skill</th>
@@ -87,7 +79,10 @@
         <template  is="dom-repeat" items="{{getreportarr}}" as="view">
           <tr>
               <td>{{view.sno}}</td>
-               <td>{{view.concept}}</td>
+              <td>{{view.emp_name}}</td>
+              <td>{{view.section}}</td>
+              <td>{{view.chapter}}</td>
+              <td>{{view.concept}}</td>
               <td>{{view.sub_concept_name}}</td>
               <td>{{view.skill}}</td>
               <td>{{view.value}}</td>
@@ -134,8 +129,7 @@
         sessionStorage.setItem("grdeidz",this.gradeid);
         this.gradename=e.target.selectedItem.textContent.trim();
         document.querySelector('#reportsubjectzzzz').selected=-1;
-        document.querySelector('#reportsectionzzzz').selected=-1;
-        document.querySelector('#reportchapter').selected=-1;
+       
         this.incompletereport=true;
       },
 
@@ -144,34 +138,17 @@
         this.subjectid=e.target.selectedItem.value;
        sessionStorage.setItem("subjectidz",this.subjectid);
        this.subjectname=e.target.selectedItem.textContent.trim();
-       this.$.bookservice.fngetchaptersubject(this.gradeid,this.subjectid);
-       document.querySelector('#reportsectionzzzz').selected=-1;
-        document.querySelector('#reportchapter').selected=-1;
-        this.incompletereport=true;
+      this.$.bookservice.fngetchaptersubject(this.gradeid,this.subjectid);
+   
+        this.incompletereport=false;
       },
-      fnsetsection:function(e)
-      {
-        this.sectionidz=e.target.selectedItem.value;
-        sessionStorage.setItem("sectionidz",this.sectionidz);
-        this.sectionidname=e.target.selectedItem.textContent.trim();
-        this.$.bookservice.getchaptersection(this.gradeid,this.subjectid,this.sectionidz);
-        document.querySelector('#reportchapter').selected=-1;
-        this.incompletereport=true;
-      },
-      fnselectchapter:function(e)
-      {
-          this.chapterid=e.target.selectedItem.value;
-          this.chaptername=e.target.selectedItem.textContent.trim();
-          localStorage.setItem("curr_sess_capters",this.chapterid); 
-          this.$.bookservice.fngetconceptskill(this.gradeid,this.subjectid,this.sectionidz,this.chapterid);
-          this.incompletereport=false;
-      },
+   
+     
       FnRefresh:function()
       {
         document.querySelector('#reportgradezzzz').selected=-1;
         document.querySelector('#reportsubjectzzzz').selected=-1;
-        document.querySelector('#reportsectionzzzz').selected=-1;
-        document.querySelector('#reportchapter').selected=-1;
+        
         this.incompletereport=true;
       }
     });
