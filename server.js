@@ -9,7 +9,9 @@ var connection = mysql.createConnection({
    host     : 'localhost',
    user     : 'root',
    password : '',
+
    database : 'reportcard1'
+
 
 });
 var bodyParser = require('body-parser'); 
@@ -12239,7 +12241,7 @@ var qur="select school_id,id,student_name,class_id  from md_student where  class
 app.post('/fnsubconceptsave-service',  urlencodedParser,function (req, res)
 { 
      
-    var qur="update md_sub_concept set  sub_concept_name='"+req.query.subconceptname+"' where capter_id='"+req.query.capter_id+"' and concept_id='"+req.query.concept_id+"' and sub_concept_id='"+req.query.subconceptid+"'";
+    var qur="update md_sub_concept set  sub_concept_name='"+req.query.subconceptname+"' where capter_id='"+req.query.capterid+"' and concept_id='"+req.query.concept_id+"' and sub_concept_id='"+req.query.sub_concept_id+"'";
 
     console.log("----------- sub concept edit-------------");
     console.log(qur);
