@@ -7215,7 +7215,7 @@ var qur="SELECT * FROM allow_student_section where school_id='"+req.query.school
 
 app.post('/studenttranferinfo-service',  urlencodedParser,function (req,res)
 { 
-  var qur="SELECT school_id,class_id,school_type,id,student_name,school_type,(select class from md_class_section where id= class_id) as class,(select section from md_class_section where id= class_id) as section  FROM md_student where id='"+req.query.studentname+"'and school_id='"+req.query.school_id+"'";
+  var qur="SELECT school_id,class_id,school_type,id,student_name,school_type,(select class from md_class_section where id= class_id) as class,(select section from md_class_section where id= class_id) as section  FROM md_student where id='"+req.query.studentname+"'and school_id='"+req.query.school_id+"' and academic_year='"+req.query.academic_year+"'";
   connection.query(qur,
     function(err, rows)
     {

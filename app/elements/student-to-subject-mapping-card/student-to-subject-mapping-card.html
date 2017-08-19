@@ -224,7 +224,9 @@
         on-response="SbjecttoStudentmapping1Response"
         debounce-duration="300"
         >
-
+ <paper-dialog id="Sectemplyspin">
+      <paper-spinner id="sectempspinner"></paper-spinner>
+    </paper-dialog>
         <demosumbit-card id="newwalerttt"></demosumbit-card>
   <master-ui-service id="uiservice"></master-ui-service>
   </template>
@@ -298,7 +300,7 @@
         this.SbjecttoStudentmappingparam=obj;
       // alert(JSON.stringify(obj));   
         this.$.SbjecttoStudentmappingajax.generateRequest();
-      
+      this.sectionopenspinner();
           },
 
      FnStoSSection:function(e)
@@ -355,7 +357,18 @@
      var res=e.detail.response.returnval;
      //alert(JSON.stringify(res));
       studbarr=res;
- },
+    },
+  sectionclosespinner:function()
+      {
+          this.$.sectempspinner.active=false;
+          document.querySelector('#Sectemplyspin').close();
+      },
+  sectionopenspinner:function()
+      {
+          document.querySelector('#Sectemplyspin').open();
+          this.$.sectempspinner.active=true;
+      },
+
  fnsubmit:function(e)
  {  if(this.FnStosGradeid=="Grade-5"||this.FnStosGradeid=="Grade-6"||this.FnStosGradeid=="Grade-7"||this.FnStosGradeid=="Grade-8"||this.FnStosGradeid=="Grade-9"||this.FnStosGradeid=="Grade-10")
       {
@@ -496,6 +509,7 @@
      }
   
      this.bigarr=overall;
+     this.sectionclosespinner();
               },
      FnSubjecttostudentthirdlanguageResponse:function(e){
          var res=e.detail.response.returnval; 
@@ -608,9 +622,8 @@
          if(flag==0){
           }
      }
-  
-  
-        this.bigarr=overall;
+     this.bigarr=overall;
+      this.sectionclosespinner();
           },
      SbjecttoStudentmappingResponse:function(e){
      var res=e.detail.response.returnval;
