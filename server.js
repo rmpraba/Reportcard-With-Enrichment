@@ -401,8 +401,7 @@ app.post('/subject-service',  urlencodedParser,function (req, res)
     var qur="select * from md_subject where subject_id in "+
     "(select subject_id from mp_grade_subject)";
   }
-
-  console.log('-------------------subject----------------------');
+console.log('-------------------subject----------------------');
   console.log(qur);
 
   // var qur="select subject_name from md_subject where subject_id in(select subject_id from mp_grade_subject where term_id=(select assesment_id from md_assesment_type where assesment_name='"+req.query.termtype+"') and grade_id=(select grade_id from md_grade where grade_name='"+req.query.gradename+"'))";
