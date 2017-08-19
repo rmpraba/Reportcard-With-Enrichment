@@ -8405,7 +8405,9 @@ app.post('/FnSubjecttostudentlanguage-service',  urlencodedParser,function (req,
 app.post('/SbjecttoStudentmapping1-service',  urlencodedParser,function (req, res)
 {
       var qur='SELECT * from tr_student_to_subject where school_id="'+req.query.subjectselectid+'"and academic_year="'+req.query.FnStoStermid+'" and grade="'+req.query.FnStosGradeid+'" and class_id="'+req.query.FnStoSSectionid+'"';
-     // console.log(qur);
+
+      console.log("--------------------------------------");
+     console.log(qur);
   connection.query(qur,
     function(err, rows)
     {

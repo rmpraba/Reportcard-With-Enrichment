@@ -67,14 +67,14 @@ section p{
    {
     width: 382px;
     height: 350px;
-    margin-top: -8%;
+    margin-top: -6%;
     overflow-x: hidden;
     overflow-y: visible;
    }
    table
    {
         margin-left: -25em;
-        margin-top: 11%;
+        margin-top: 2%;
         /*margin-top: -4em;*/
    }
   
@@ -112,8 +112,10 @@ section p{
       
        #itemcarddialog
        {
-          width: 81%;
-          height: 129px;
+          /*width: 81%;
+          height: 129px;*/
+           min-width: 81%;
+          height: 144px;
           text-align: center;
          display: inline-block;
           @apply(--layout-center);
@@ -150,7 +152,7 @@ section p{
           <img src="../../images/book5.jpg">
             <center style="position: absolute;margin-top: -14%;margin-left: 39%;
             color: #1d1d1f;">
-              <h2>{{setsubconcept}}</h2>
+              <h2 style="min-width: 50%;margin-left: -9em;">{{setsubconcept}}</h2>
             </center>
             <paper-fab style="bottom: 116px;left: 92%;"  icon="add" mini on-click="fnsetsubsetcon"></paper-fab>
            <!--  <paper-fab  style="bottom: 155px;left: 85%;" id="chapedit" icon="create" mini on-click="Fnchapteredit"></paper-fab> -->
