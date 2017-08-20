@@ -42,16 +42,24 @@ var empsectionarr=[];
     
       fnsave:function(e){
 
-          //   alert(JSON.stringify(empsectionarr));
- 
+          //   alert(JSON.stringify(empsectionarr)); 
       var temparr=[];
-      for(var i=0;i<empsectionarr.length;i++){
-        //alert(empsectionarr[i].grasub+""+this.classid);
-        if(empsectionarr[i].grasub==this.classid)
-          temparr.push(empsectionarr[i]);
-       }
+      if(empsectionarr.length==0)
+      {
+        alert('Please Select the Section');
+      }
+      else
+      {
+          for(var i=0;i<empsectionarr.length;i++)
+          {
+          //alert(empsectionarr[i].grasub+""+this.classid);
+            if(empsectionarr[i].grasub==this.classid)
+            temparr.push(empsectionarr[i]);
+          }
         this.$.uiservice.fnsavesection(temparr,this.employeeidz);
          this.$.mydialog.toggleDialog();
+      }
+      
       },
  
       });

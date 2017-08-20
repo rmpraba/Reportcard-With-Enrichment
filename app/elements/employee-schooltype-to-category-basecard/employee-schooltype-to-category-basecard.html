@@ -40,18 +40,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
     fnsetsave:function(e){
     var temparr=[];
-     for(var i=0;i<getgradenames.length;i++){
-      if(getgradenames[i].id==this.stuid){ 
-         temparr.push(getgradenames[i]);
+    if(getgradenames.length==0)
+    {
+      alert('Please Select Section');
+    }
+    else
+    {
+        for(var i=0;i<getgradenames.length;i++)
+       {
+          if(getgradenames[i].id==this.stuid)
+          { 
+             temparr.push(getgradenames[i]);
+          }
        }
-     }
-  // alert(JSON.stringify(temparr));
+      // alert(JSON.stringify(temparr));
        schooltype=sessionStorage.getItem("curr_sess_loggedschooltupes");
      //  alert(this.stugradeid+" "+schooltype);
       
        this.$.uiservice.fnsetstudentinfo(temparr,this.stugradeid,schooltype);
        this.$.uiservice.fnretrivestudent(this.stugradeid);
        this.$.mydialog.toggleDialog();
+    }
+     
   
      },
      });
