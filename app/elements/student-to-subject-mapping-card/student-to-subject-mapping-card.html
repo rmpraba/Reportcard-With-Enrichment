@@ -134,7 +134,7 @@
           </paper-dropdown-menu> 
          </div>
         
-        <div class="vertical-row" hidden$="{{hidenewline}}"></div>
+        <!-- <div class="vertical-row" hidden$="{{hidenewline}}"></div> -->
           
           <div id="labelhide">
             <div style="float: left;position: absolute;top: 27%;margin-left: 26%;" id="secondid">
@@ -275,7 +275,7 @@
         this.hidenewsubcat=true;
         this.$.secondid.hidden=true;
         this.$.thirdid.hidden=true;
-        this.hidenewline=true;
+        //this.hidenewline=true;
     
       },  
         f12:function(e){
@@ -308,7 +308,7 @@
         
             this.FnStoSSectionid=e.target.selectedItem.textContent.trim();
             this.FnStoSSectionid1=e.target.selectedItem.value;
-             this.hidenewsubcat=false;
+             //this.hidenewsubcat=false;
             this.$.labelhide.hidden=false;
             //this.$.button1.hidden=false;
             //this.hidenewline=false;
@@ -322,7 +322,7 @@
                   this.f13();
                   this.$.secondid.hidden=false;
              this.$.thirdid.hidden=false;
-             this.hidenewline=false;  
+             // this.hidenewline=false;  
 
           }
          else{
@@ -330,7 +330,7 @@
                 this.f12();
              this.$.secondid.hidden=false;
              this.$.thirdid.hidden=true; 
-             this.hidenewline=true;  
+             // this.hidenewline=true;  
             
        
          }
@@ -357,6 +357,8 @@
      var res=e.detail.response.returnval;
      //alert(JSON.stringify(res));
       studbarr=res;
+      this.hidenewsubcat=false;
+
     },
   sectionclosespinner:function()
       {
@@ -367,7 +369,8 @@
       {
           document.querySelector('#Sectemplyspin').open();
           this.$.sectempspinner.active=true;
-      },
+      },      
+
 
  fnsubmit:function(e)
  {  if(this.FnStosGradeid=="Grade-5"||this.FnStosGradeid=="Grade-6"||this.FnStosGradeid=="Grade-7"||this.FnStosGradeid=="Grade-8"||this.FnStosGradeid=="Grade-9"||this.FnStosGradeid=="Grade-10")
@@ -643,7 +646,7 @@
      {
       this.hidenewsubcat=true;
       this.$.labelhide.hidden=true;
-        this.hidenewline=true;
+        //this.hidenewline=true;
         //this.$.button1.hidden=true;
      },
      fnupdate:function(e)
