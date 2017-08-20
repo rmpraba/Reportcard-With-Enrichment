@@ -42,6 +42,7 @@
         <p>{{gradename}}</p>
         <p>{{subjectname}}</p>
         <p>{{sectionname}}</p>
+        <p>{{termid}}</p>
         <p>{{chapter_name}}</p>
         <p>{{empname}}</p>
         <p><paper-button  id="tb3" on-click="FnView">View</paper-button></p>
@@ -79,12 +80,15 @@ this.rejectcapterstatusurl=sessionStorage.getItem("addrinfo")+"/fetchclassconcep
            obj.sectoinidz=this.classid;
            obj.chapterid=this.chapterid;
            obj.empid=this.empid;
+           obj.termid=this.termid;
            this.rejectcapterstatusparam=obj;
            this.$.rejectcapterstatusajax.generateRequest();
            sessionStorage.setItem("grdeidz",this.gradeid);
            sessionStorage.setItem("subjectidz",this.subjectid);
            sessionStorage.setItem("sectionidz",this.classid);
-           localStorage.setItem("curr_sess_capters",this.chapterid); 
+           localStorage.setItem("curr_sess_capters",this.chapterid);
+           sessionStorage.setItem("termid",this.termid);
+
         //alert(JSON.stringify(obj));
     
     
@@ -102,6 +106,8 @@ this.rejectcapterstatusurl=sessionStorage.getItem("addrinfo")+"/fetchclassconcep
                       nameobj.conceptname=res2[k].concept_name;
                       nameobj.subconceptid=res2[k].sub_concept_id;
                       nameobj.subconceptname=res2[k].sub_concept_name;
+                      nameobj.enrichment_sug=res2[k].enrichment_sug;
+                     
                       nameobj.skill=res2[k].skill;
                       nameobj.value=res2[k].value;
                       nameobj.period=res2[k].period;
@@ -120,7 +126,7 @@ this.rejectcapterstatusurl=sessionStorage.getItem("addrinfo")+"/fetchclassconcep
                       nameobj.subject_id=sessionStorage.getItem("subjectidz");
                     setattr.push(nameobj);
    }
-                       //alert(JSON.stringify(setattr));
+                   //    alert(JSON.stringify(setattr));
   
     document.querySelector('app-card').setPage('homepage','');
    document.querySelector('home-page').setPage('class-teacher-book-rejection-item-card','');

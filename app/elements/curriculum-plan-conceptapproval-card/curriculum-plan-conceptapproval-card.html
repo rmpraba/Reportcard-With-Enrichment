@@ -7,8 +7,8 @@
       :host {
         display: block;
       }
-      .position{
-        margin-left:7%   
+      .position{   
+        margin-left:5%   
    
       }
       #tb1{
@@ -71,7 +71,16 @@
             </template>    
           </paper-menu>
         </paper-dropdown-menu>
-      </span>        
+      </span>  
+        <span class="position"> 
+         <paper-dropdown-menu id="term" label="Select Term">
+           <paper-menu id="chaptertermid" class="dropdown-content"   on-iron-select="Fnchaptertermid" attr-for-selected="value" required>
+                <paper-item value="term1">Term1</paper-item>
+                <paper-item value="term2">Term2</paper-item>
+                <paper-item value="term3">Term3</paper-item>
+            </paper-menu>
+          </paper-dropdown-menu>
+       </span>        
       <span class="position"> 
         <paper-dropdown-menu  label="Select the chapter">
           <paper-menu id="cpapprovalchapter" class="dropdown-content"   on-iron-select="FnSelectChapter">
@@ -80,7 +89,8 @@
           </template>    
           </paper-menu>
         </paper-dropdown-menu>
-     </span>   
+     </span> 
+    
     </div>
 
 
@@ -159,11 +169,15 @@
        this.subjectname=e.target.selectedItem.textContent.trim();
        localStorage.setItem("curr_sess_subjectid",this.subjectid);
        localStorage.setItem("curr_sess_subjectname",this.subjectname);
-       this.$.bookservice.fngetclassbookchaptervalue(this.gradeid,this.sectionidname,this.subjectid);
-       document.querySelector('#cpapprovalchapter').selected=-1;
+     document.querySelector('#cpapprovalchapter').selected=-1;
        this.$.clsplnevalttttt.hidden=true;
         this.name="";
         this.$.empidzz.hidden=true;
+      },
+       Fnchaptertermid:function(e){
+        this.termid=e.target.selectedItem.textContent.trim();
+        sessionStorage.setItem("termid",this.termid);
+     this.$.bookservice.fngetclassbookchaptervalue(this.gradeid,this.sectionidname,this.subjectid,this.termid);  
       },
       FnSelectChapter:function(e){
        this.chapterid=e.target.selectedItem.value;
@@ -175,9 +189,10 @@
        
        this.$.clsplnevalttttt.hidden=false;
        this.$.empidzz.hidden=false;
-       // this.$.bookservice.fngetclassbookchapterconceptvalue(this.gradeid,this.sectionidz,this.sectionidname,this.subjectid,this.chapterid);
-
+      
       },
+     
+        
       FnRefreshzzz:function()
       {
         document.querySelector('#cpapprovalgrade').selected=-1;

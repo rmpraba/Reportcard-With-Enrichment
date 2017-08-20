@@ -225,7 +225,9 @@
         debounce-duration="300"
         >
 
-        
+ <paper-dialog id="Sectemplyspin">
+      <paper-spinner id="sectempspinner"></paper-spinner>
+    </paper-dialog>
         <demosumbit-card id="newwalerttt"></demosumbit-card>
   <master-ui-service id="uiservice"></master-ui-service>
   </template>
@@ -299,7 +301,7 @@
         this.SbjecttoStudentmappingparam=obj;
       // alert(JSON.stringify(obj));   
         this.$.SbjecttoStudentmappingajax.generateRequest();
-      
+      this.sectionopenspinner();
           },
 
      FnStoSSection:function(e)
@@ -356,7 +358,20 @@
      //alert(JSON.stringify(res));
       studbarr=res;
       this.hidenewsubcat=false;
- },
+
+    },
+  sectionclosespinner:function()
+      {
+          this.$.sectempspinner.active=false;
+          document.querySelector('#Sectemplyspin').close();
+      },
+  sectionopenspinner:function()
+      {
+          document.querySelector('#Sectemplyspin').open();
+          this.$.sectempspinner.active=true;
+      },      
+
+
  fnsubmit:function(e)
  {  
    
@@ -498,7 +513,9 @@
      }
   
      this.bigarr=overall;
-     this.fnsectionclose();
+
+     this.sectionclosespinner();
+
               },
      FnSubjecttostudentthirdlanguageResponse:function(e){
          var res=e.detail.response.returnval; 
@@ -611,10 +628,9 @@
          if(flag==0){
           }
      }
-  
-  
-        this.bigarr=overall;
-        this.fnsectionclose();
+
+     this.bigarr=overall;
+      this.sectionclosespinner();
           },
      SbjecttoStudentmappingResponse:function(e){
      var res=e.detail.response.returnval;
