@@ -14,7 +14,7 @@
     top: 200px;
     right: 65%;
     width: 327px;
-    height: 300px;
+    height: 300px;   
    }
 section p{    
   }
@@ -135,11 +135,23 @@ section p{
          <paper-dropdown-menu  label="Select Subject">
                 <paper-menu id="teacherrefzzzz" class="dropdown-content"   on-iron-select="fnemployeename">
                   <template is="dom-repeat" items="{{subjectarr}}">
-                    <paper-item value="{{item.subjectid}}">{{item.subjectname}}</paper-item>
+                     <paper-item value="{{item.subjectid}}">{{item.subjectname}}</paper-item>
                   </template>    
                 </paper-menu>
           </paper-dropdown-menu>
        </span>
+  <span class="position1"> 
+ 
+
+
+         <paper-dropdown-menu id="term" label="Select Term">
+            <paper-menu id="chaptertermid" class="dropdown-content"   on-iron-select="Fnchaptertermid" attr-for-selected="value" required>
+                <paper-item value="term1">Term1</paper-item>
+                <paper-item value="Term2">Term2</paper-item>
+                <paper-item value="Term3">Term3</paper-item>
+            </paper-menu>
+          </paper-dropdown-menu>
+          </span>
       <paper-dialog id="newchapterrr" modal>
          <paper-input label="Enter Chapter" value="{{captername}}" ></paper-input>
          <paper-input label="Enter Peroid" value="{{period}}" allowed-pattern="[0-9]"></paper-input>
@@ -229,14 +241,14 @@ var k;
        sessionStorage.setItem("subjectidz",this.subjectid);
       this.subjectname=e.target.selectedItem.textContent.trim()
       this.$.newcardd.hidden=false;
-       this.$.bookservice.getcaptervalue();
-  
+     
     },
-    fnsection:function(e){
-     this.sectoinidz=e.target.selectedItem.value;
-       sessionStorage.setItem("sectoinidz",this.sectoinidz);
-     this.sectoinname=e.target.selectedItem.textContent.trim()
-       this.$.bookservice.getcaptervalue();
+   
+    Fnchaptertermid:function(e){
+    this.termid=e.target.selectedItem.textContent.trim()
+   sessionStorage.setItem("termid",this.termid);
+     this.$.bookservice.getcaptervalue();
+   
     },
      fnset:function(e)
      {
@@ -250,7 +262,7 @@ var k;
        }
        else
        {
-          this.$.bookservice.fnsetcapture(this.gradeid,this.subjectid,this.captername,this.capterid,this.period,this.bufferperiod);
+    this.$.bookservice.fnsetcapture(this.gradeid,this.subjectid,this.captername,this.capterid,this.period,this.bufferperiod,this.termid);
           this.captername="";
           this.period="";
           this.bufferperiod="";

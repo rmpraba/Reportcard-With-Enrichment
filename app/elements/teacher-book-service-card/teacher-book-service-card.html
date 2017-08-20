@@ -699,13 +699,15 @@
         obj.subconceptid=subarr[i].subconceptid;
         obj.subconceptname=subarr[i].subconceptname;
         obj.period=period;
-        obj.plannedfromdate=localStorage.getItem("localsess_from_service");
+      obj.plannedfromdate=localStorage.getItem("localsess_from_service");
         obj.plannedtodate=localStorage.getItem("localsess_last_service");
         obj.skill=subarr[i].skillname;
         obj.value=subarr[i].valuename;
         obj.innovation=innovation;
         obj.lrrectification=lrrectife;
         obj.remarks=remark;
+        obj.termid=sessionStorage.getItem("termid"); 
+
         this.fnmasterplaninsertparam=obj;
         this.$.fnmasterplaninsertajax.generateRequest();      
         }
@@ -802,16 +804,15 @@ fnbooksubconcepteditResponse:function(e){
 
     getcaptervalue:function(e)
       {
-       // alert('testtt');
      this.getcaptervalueurl=sessionStorage.getItem("addrinfo")+"/getcaptervalue-service";
-     var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
+var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
       obj.grade_id=sessionStorage.getItem("grdeidz");
       obj.subject_id=sessionStorage.getItem("subjectidz");
       obj.section_id=sessionStorage.getItem("sectoinidz");
       obj.school_id=sessionStorage.getItem("curr_sess_loggedschoolid");
-      obj.academic_year=localStorage.getItem("curr_sess_academicyear"); 
+      obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+      obj.termid=sessionStorage.getItem("termid"); 
       this.getcaptervalueparam=obj;
-     // alert(JSON.stringify(obj));
       this.$.getcaptervalueajax.generateRequest();
     
       },
@@ -833,7 +834,7 @@ fnbooksubconcepteditResponse:function(e){
     document.querySelector('teacher-book-refernce-card').capterarr=overall;
        },
 
-        fnsetcapture:function(gradeid,subjectid,captername,capterid,period,bufferperiodz)
+        fnsetcapture:function(gradeid,subjectid,captername,capterid,period,bufferperiodz,termid)
         {
             this.fnsetcaptureurl=sessionStorage.getItem("addrinfo")+"/bookrefsectioncapter-service";
              var obj={"school_id":"","gradeid":"","subjectid":"","academic_year":"","capter_id":"","capter":"","sectionid":""};  
@@ -842,6 +843,8 @@ fnbooksubconcepteditResponse:function(e){
               obj.capter_id=capterid;
               obj.capter=captername;
               obj.period=period;
+              obj.termid=termid;
+
               obj.buffer_period=bufferperiodz;
               obj.school_id=sessionStorage.getItem("curr_sess_loggedschoolid");
               obj.academic_year=localStorage.getItem("curr_sess_academicyear");
@@ -1069,7 +1072,8 @@ fnbooksubconcepteditResponse:function(e){
                     obj.school_id=sessionStorage.getItem("curr_sess_loggedschoolid");
                     obj.academic_year=localStorage.getItem("curr_sess_academicyear");
                     obj.subjectid=sessionStorage.getItem("subjectidz");
-                    obj.gradeid=sessionStorage.getItem("grdeidz"); 
+                    obj.gradeid=sessionStorage.getItem("grdeidz");
+                   obj.termid=sessionStorage.getItem("termid"); 
                   this.chapupdateparam=obj;
                   // alert(JSON.stringify(obj));
                   this.$.chapupdateajax.generateRequest();  
@@ -1133,6 +1137,8 @@ fnbooksubconcepteditResponse:function(e){
            obj.chapterid=localStorage.getItem("curr_sess_capters");
            obj.subjectid=sessionStorage.getItem("subjectidz");
            obj.gradeid=sessionStorage.getItem("grdeidz");
+           obj.termid=sessionStorage.getItem("termid"); 
+
            this.fetchconceptparam=obj;
            //alert(JSON.stringify(obj));
            this.$.fetchconceptajax.generateRequest();
@@ -1504,7 +1510,8 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
    this.fnsetcoskillurl=sessionStorage.getItem("addrinfo")+"/fnsetcoskill-service";
        var obj={};
         obj.school_id=sessionStorage.getItem("curr_sess_loggedschoolid");
-        obj.academic_year=localStorage.getItem("curr_sess_academicyear"); 
+        obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+        obj.termid=sessionStorage.getItem("termid"); 
         obj.concept_id=arr[i].conceptid;
         obj.concept_name=arr[i].conceptname;
         obj.capter_id=localStorage.getItem("curr_sess_capters");
@@ -1529,14 +1536,15 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
    },
 
 
-   fnsetcoskillvalue:function(valuearr,period,rowid)
-{
-  //alert(2);
-  for(var i=0;i<valuearr.length;i++){
+fnsetcoskillvalue:function(valuearr,period,rowid)
+   {
+ 
+ for(var i=0;i<valuearr.length;i++){
       this.fnsetcoskillvalueurl=sessionStorage.getItem("addrinfo")+"/fnsetbookvale-service";
        var obj={};
         obj.school_id=sessionStorage.getItem("curr_sess_loggedschoolid");
-        obj.academic_year=localStorage.getItem("curr_sess_academicyear"); 
+        obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+        obj.termid=sessionStorage.getItem("termid"); 
         obj.capter_id=localStorage.getItem("curr_sess_capters");
         obj.value_id=valuearr[i].valueid;
         obj.value_name=valuearr[i].valuename;
@@ -1548,7 +1556,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
         obj.flag="active";
         obj.conc_date=valuearr[i].valueid+localStorage.getItem("localsess_from_service")
         this.fnsetcoskillvalueparam=obj;
-        //alert(JSON.stringify(obj));
+       alert(JSON.stringify(obj));
         this.$.fnsetcoskillvalueajax.generateRequest();
         }
       },
@@ -1564,7 +1572,8 @@ fnsetcoskill11:function(skarr,period,rowid)
       this.fnsetcoskill11url=sessionStorage.getItem("addrinfo")+"/fnsetcoskill11-service";
        var obj={};
         obj.school_id=sessionStorage.getItem("curr_sess_loggedschoolid");
-        obj.academic_year=localStorage.getItem("curr_sess_academicyear"); 
+        obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+        obj.termid=sessionStorage.getItem("termid"); 
         obj.capter_id=localStorage.getItem("curr_sess_capters");
         obj.skill_id=skarr[i].skillid;
         obj.skill_name=skarr[i].skillname;
@@ -1591,8 +1600,9 @@ fnsetcoskill11:function(skarr,period,rowid)
       this.fnsetcoskill12url=sessionStorage.getItem("addrinfo")+"/fnsetcoskill12-service";
        var obj={};
         obj.school_id=sessionStorage.getItem("curr_sess_loggedschoolid");
-        obj.academic_year=localStorage.getItem("curr_sess_academicyear"); 
-        obj.capter_id=localStorage.getItem("curr_sess_capters");
+        obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+        obj.termid=sessionStorage.getItem("termid"); 
+         obj.capter_id=localStorage.getItem("curr_sess_capters");
         obj.sub_concept_id=skarr[i].subconceptid;
         obj.sub_concept_name=skarr[i].subconceptname;
         obj.planned_date=localStorage.getItem("localsess_from_service");
@@ -1636,7 +1646,7 @@ fnsetcoskill11:function(skarr,period,rowid)
       obj.planned_date=planneddate;
       obj.rowidz=rowidz;
       obj.lrrectife=lrrectife;
-      // obj.Correction=Correction;
+      obj.termid=sessionStorage.getItem("termid"); 
       this.fnbookeditskillparam=obj;
       this.$.fnbookeditskillajax.generateRequest();
 
@@ -1720,7 +1730,7 @@ fnsetcoskill11:function(skarr,period,rowid)
           fngetclassbooksubjectvalueResponse:function(e)
           {
             var res=e.detail.response.subjectarr;
-            document.querySelector('curriculum-plan-conceptapproval-card').subjectarr=res;
+   document.querySelector('curriculum-plan-conceptapproval-card').subjectarr=res;
           },
           fngetclassbookchaptervalue:function(gradeid,sectionid,subjectid){
           this.fngetclassbookchaptervalueurl=sessionStorage.getItem("addrinfo")+"/fngetclassbookchaptervalue-service";
@@ -1732,6 +1742,8 @@ fnsetcoskill11:function(skarr,period,rowid)
            obj.sectionid=sectionid;
            obj.gradeid=gradeid;
            obj.subjectid=subjectid;
+           obj.termid=sessionStorage.getItem("termid"); 
+
            this.fngetclassbookchaptervalueparam=obj;
            this.$.fngetclassbookchaptervalueajax.generateRequest();
           },
@@ -1751,6 +1763,8 @@ fnsetcoskill11:function(skarr,period,rowid)
            obj.gradeid=localStorage.getItem("curr_sess_gradeid");
            obj.subjectid=localStorage.getItem("curr_sess_subjectid");
            obj.chapterid=localStorage.getItem("curr_sess_chapterid");
+           obj.termid=sessionStorage.getItem("termid"); 
+
            this.fngetclassbookchapterconceptparam=obj;
            this.$.fngetclassbookchapterconceptajax.generateRequest();
           },
@@ -1799,6 +1813,8 @@ fnsetcoskill11:function(skarr,period,rowid)
            obj.chapterid=localStorage.getItem("curr_sess_chapterid");
            obj.chaptername=localStorage.getItem("curr_sess_chaptername");
            obj.completion_date=localStorage.getItem("localsess_comp_service");
+          obj.termid=sessionStorage.getItem("termid"); 
+
            obj.rowid=o.rowid;
            obj.conceptid=o.conceptid;           
            obj.conceptname=o.conceptname;
@@ -1836,6 +1852,7 @@ fnsetcoskill11:function(skarr,period,rowid)
             obj.subjectid=localStorage.getItem("curr_sess_subjectid"); 
             obj.gradeid=localStorage.getItem("curr_sess_gradeid");
             obj.sectionid=localStorage.getItem("curr_sess_sectionid");
+            obj.termid=sessionStorage.getItem("termid"); 
            
 
             this.fetchalreadyapprovedchapterconceptparam=obj;
@@ -2242,13 +2259,14 @@ for(var r=0;r<overall2.length;r++){
         FnFetchClassConceptService11:function(gradeid,subjectid,chapterid,sectoinidz){
        this.fetchclassconcept11url=sessionStorage.getItem("addrinfo")+"/fetchclassconcept11-service";
      var obj={"schoolid":"","academic_year":"","roleid":"","emp_id":""};
-          obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
-         obj.academic_year=localStorage.getItem("curr_sess_academicyear");
-            obj.chapterid=localStorage.getItem("curr_sess_capters"); 
-           obj.subjectid=sessionStorage.getItem("subjectidz"); 
+    obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+    obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+     obj.chapterid=localStorage.getItem("curr_sess_capters"); 
+     obj.subjectid=sessionStorage.getItem("subjectidz"); 
            obj.gradeid=sessionStorage.getItem("grdeidz");
            obj.sectoinidz=sessionStorage.getItem("sectionidz");
-           this.fetchclassconcept11param=obj;
+               obj.termid=sessionStorage.getItem("termid"); 
+               this.fetchclassconcept11param=obj;
            this.$.fetchclassconcept11ajax.generateRequest();
         },
         fetchclassconcept11Response:function(e){
@@ -2283,7 +2301,7 @@ for(var r=0;r<overall2.length;r++){
                       nameobj.subject_id=sessionStorage.getItem("subjectidz");
                     setattr.push(nameobj);
                  }
-                       // alert(JSON.stringify(setattr));
+                        alert(JSON.stringify(setattr));
   
    document.querySelector('class-teacher-book-rejection-item-card').mainnarr=setattr; 
   document.querySelector('class-teacher-book-rejection-item-card').empid=res2[0].empid; 
@@ -2483,26 +2501,22 @@ fnfinalbookvalueResponse:function(e)
       document.querySelector('curriculum-plan-conceptapproval-card').subjectarr=res;
 
      },
-
-
-      FnFetchChapterService:function(gradeid,subjectid)
+FnFetchChapterService:function(gradeid,subjectid,termid)
       {
-          this.fetchchapterurl=sessionStorage.getItem("addrinfo")+"/fetchchapter-service";
-           var obj={"schoolid":"","academic_year":"","roleid":"","emp_id":""};
-           obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
-           obj.academic_year=localStorage.getItem("curr_sess_academicyear");
-           obj.roleid=sessionStorage.getItem("curr_sess_loggedroleid");
-           obj.emp_id=sessionStorage.getItem("curr_sess_loggedid");
-           obj.subjectid=subjectid;
-           obj.gradeid=gradeid;
-           this.fetchchapterparam=obj;
-           this.$.fetchchapterajax.generateRequest();
+ this.fetchchapterurl=sessionStorage.getItem("addrinfo")+"/fetchchapter-service";
+    var obj={"schoolid":"","academic_year":"","roleid":"","emp_id":""};
+     obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+     obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+     obj.roleid=sessionStorage.getItem("curr_sess_loggedroleid");
+     obj.emp_id=sessionStorage.getItem("curr_sess_loggedid");
+     obj.subjectid=subjectid;
+     obj.gradeid=gradeid;
+     obj.termid=termid;
+     this.fetchchapterparam=obj;
+     this.$.fetchchapterajax.generateRequest();
         },
-
-
-         fetchchapterResponse:function(e){
-         // alert(JSON.stringify(e.detail.response.returnval));
-          document.querySelector('teacher-book-approve-card').chapterarr=e.detail.response.returnval;
+fetchchapterResponse:function(e){
+   document.querySelector('teacher-book-approve-card').chapterarr=e.detail.response.returnval;
         },
 
           fnfinalreaprovebook:function(empid,skill,innovation,enrichmentsug,period,planneddate,conceptname,conceptid,remark,sectionid,subjectid,subconceptid,value,correctionstatus,completionstatus,rowidz)
@@ -2516,6 +2530,7 @@ fnfinalbookvalueResponse:function(e)
                obj.gradeid=sessionStorage.getItem("grdeidz");
                obj.sectionid=sessionStorage.getItem("sectionidz");
                obj.completion_date=localStorage.getItem("localsess_comp_service");
+               obj.termid=sessionStorage.getItem("termid"); 
                obj.planneddate=planneddate;
                obj.empid=empid;
                obj.skill=skill;  
@@ -2583,17 +2598,17 @@ fnfinalbookvalueResponse:function(e)
    document.querySelector('evaluation-report-card').chaptergradearr=res;
   
         },
-        fngetchaptersubject:function(gradeid,subjectid)
+        fngetchaptersubject:function(gradeid,subjectid,termid)
         {
-
-          this.fngetrejectsectionurl=sessionStorage.getItem("addrinfo")+"/fngetconceptreport-service";
-             var obj={"schoolid":"","academic_year":"","roleid":"","emp_id":""};
-           obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
-           obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+ this.fngetrejectsectionurl=sessionStorage.getItem("addrinfo")+"/fngetconceptreport-service";
+    var obj={};
+        obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+        obj.academic_year=localStorage.getItem("curr_sess_academicyear");
            obj.roleid=sessionStorage.getItem("curr_sess_loggedroleid");
            obj.emp_id=sessionStorage.getItem("curr_sess_loggedid");
            obj.subjectid=subjectid;
            obj.gradeid=gradeid;
+           obj.termid=termid;
            this.fngetrejectsectionparam=obj;
           // alert(JSON.stringify(obj));
            this.$.fngetrejectsectionajax.generateRequest();
@@ -2633,7 +2648,7 @@ fnfinalbookvalueResponse:function(e)
 document.querySelector('incomplete-chapter-report').getreportarr=temparr;
 
         },
-           fngetevalutionsection:function(gradeid,subjectid)
+           fngetevalutionsection:function(gradeid,subjectid,termid)
         {
 
 this.fngetevalutionsectionurl=sessionStorage.getItem("addrinfo")+"/fngetconceptreport1-service";
@@ -2644,6 +2659,8 @@ this.fngetevalutionsectionurl=sessionStorage.getItem("addrinfo")+"/fngetconceptr
            obj.emp_id=sessionStorage.getItem("curr_sess_loggedid");
            obj.subjectid=subjectid;
            obj.gradeid=gradeid;
+           obj.termid=termid;
+           
            this.fngetevalutionsectionparam=obj;
           // alert(JSON.stringify(obj));
            this.$.fngetevalutionsectionajax.generateRequest();
