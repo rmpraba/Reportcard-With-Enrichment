@@ -8,7 +8,7 @@
       }
        .position
        {
-          margin-left:23%;
+          margin-left:11%;
        }
        #btn2
        {
@@ -54,7 +54,7 @@
      
   <span class="position"> 
          <paper-dropdown-menu id="term" label="Select Term">
-           <paper-menu id="chaptertermid" class="dropdown-content"   on-iron-select="Fnchaptertermid" attr-for-selected="value" required>
+           <paper-menu id="chaptertermidtttt" class="dropdown-content"   on-iron-select="Fnchaptertermid" attr-for-selected="value" required>
                 <paper-item value="term1">Term1</paper-item>
                 <paper-item value="Term2">Term2</paper-item>
                 <paper-item value="Term3">Term3</paper-item>
@@ -137,7 +137,7 @@
         sessionStorage.setItem("grdeidz",this.gradeid);
         this.gradename=e.target.selectedItem.textContent.trim();
         document.querySelector('#reportsubjectzzzz').selected=-1;
-       
+       document.querySelector('#chaptertermidtttt').selected=-1;
         this.incompletereport=true;
       },
 
@@ -146,7 +146,7 @@
         this.subjectid=e.target.selectedItem.value;
        sessionStorage.setItem("subjectidz",this.subjectid);
        this.subjectname=e.target.selectedItem.textContent.trim();
-     
+     document.querySelector('#chaptertermidtttt').selected=-1;
       
       },
      Fnchaptertermid:function(e){
@@ -161,7 +161,7 @@ this.$.bookservice.fngetchaptersubject(this.gradeid,this.subjectid,
       {
         document.querySelector('#reportgradezzzz').selected=-1;
         document.querySelector('#reportsubjectzzzz').selected=-1;
-        
+        document.querySelector('#chaptertermidtttt').selected=-1;
         this.incompletereport=true;
       }
     });

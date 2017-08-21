@@ -1699,7 +1699,7 @@ fnsetcoskill11:function(skarr,period,rowid)
            obj.subjectid=subjectid;
            obj.gradeid=gradeid;
            this.fngetclassbooksectionvalueparam=obj;
-          // alert(JSON.stringify(obj));
+          //alert(JSON.stringify(obj));
            this.$.fngetclassbooksectionvalueajax.generateRequest();
         },
 
@@ -2286,7 +2286,7 @@ for(var r=0;r<overall2.length;r++){
                       nameobj.skill=res2[k].skill;
                       nameobj.value=res2[k].value;
                        nameobj.period=res2[k].period;
-                     
+                      nameobj.completiondate=res2[k].completion_date;
                       nameobj.innovation=res2[k].innovation;
                       nameobj.lr_rectifitcation=res2[k].lr_rectifitcation;
                       nameobj.remarks=res2[k].remarks;
@@ -2301,7 +2301,7 @@ for(var r=0;r<overall2.length;r++){
                       nameobj.subject_id=sessionStorage.getItem("subjectidz");
                     setattr.push(nameobj);
                  }
-                       // alert(JSON.stringify(setattr));
+                       alert(JSON.stringify(setattr));
   
    document.querySelector('class-teacher-book-rejection-item-card').mainnarr=setattr; 
   document.querySelector('class-teacher-book-rejection-item-card').empid=res2[0].empid; 
