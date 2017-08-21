@@ -308,7 +308,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     fnemployeename:function(e)
     {  
        this.empselectid=e.target.selectedItem.value;
-       this.$.newwgridd.hidden=false;
+       //this.$.newwgridd.hidden=false;
        this.f12();
         this.f11();
         //this.opengrdspinnr();
@@ -332,6 +332,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       fnemployeenamezResponse:function(e){
       empnamearrr=e.detail.response.returnval;
+      this.$.newwgridd.hidden=false;
      // alert(JSON.stringify(sectionnamearr1));
      // alert(JSON.stringify(empnamearrr));
 
@@ -520,7 +521,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this.finalarr.push(overall[i]);
          }
     */
-
         this.$.uiservice.empgetsectionvalues(this.empselectid);
         this.clsgrdspinnr();
 

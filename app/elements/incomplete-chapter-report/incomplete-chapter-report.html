@@ -52,7 +52,15 @@
           </paper-dropdown-menu>
        </span>
      
-  
+  <span class="position"> 
+         <paper-dropdown-menu id="term" label="Select Term">
+           <paper-menu id="chaptertermid" class="dropdown-content"   on-iron-select="Fnchaptertermid" attr-for-selected="value" required>
+                <paper-item value="term1">Term1</paper-item>
+                <paper-item value="Term2">Term2</paper-item>
+                <paper-item value="Term3">Term3</paper-item>
+            </paper-menu>
+          </paper-dropdown-menu>
+       </span>
       <div class="chapterreport" hidden$="{{incompletereport}}">
        <table id="newreport1" border="1" style="border-collapse: collapse;
     margin-left: 1%;
@@ -138,11 +146,16 @@
         this.subjectid=e.target.selectedItem.value;
        sessionStorage.setItem("subjectidz",this.subjectid);
        this.subjectname=e.target.selectedItem.textContent.trim();
-      this.$.bookservice.fngetchaptersubject(this.gradeid,this.subjectid);
-   
-        this.incompletereport=false;
+     
+      
       },
-   
+     Fnchaptertermid:function(e){
+        this.termid=e.target.selectedItem.textContent.trim();
+        sessionStorage.setItem("termid",this.termid);
+this.$.bookservice.fngetchaptersubject(this.gradeid,this.subjectid,
+ this.termid);  
+  this.incompletereport=false;
+      },
      
       FnRefresh:function()
       {

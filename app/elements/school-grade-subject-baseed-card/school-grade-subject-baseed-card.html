@@ -40,15 +40,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         passservicearr=arr;  
       },
     
-      FnSubmit:function(e){
-      var temparr=[];
-      for(var i=0;i<passservicearr.length;i++){
-        if(passservicearr[i].subjectname==this.subjectid)
-          temparr.push(passservicearr[i]);
-         }
-         this.$.uiservice.fnsubjecttocategorysaving(temparr);
-         this.$.mydialog.toggleDialog();
-       document.querySelector('school_grade-subject-item-card').Fngradeclean(); 
+      FnSubmit:function(e)
+      {
+        var temparr=[];
+        if(passservicearr.length==0)
+        {
+          alert('Please select Grade');
+        }
+        else
+        {
+          for(var i=0;i<passservicearr.length;i++)
+          {
+            if(passservicearr[i].subjectname==this.subjectid)
+              temparr.push(passservicearr[i]);
+          }
+            this.$.uiservice.fnsubjecttocategorysaving(temparr);
+            this.$.mydialog.toggleDialog();
+            document.querySelector('school_grade-subject-item-card').Fngradeclean(); 
+        }
+      
      },
   
       });

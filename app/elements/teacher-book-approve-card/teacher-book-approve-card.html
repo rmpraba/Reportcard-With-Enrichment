@@ -9,7 +9,7 @@
     padding: 15px;
     border: 1px solid #dedede;
   }
-  section{
+  section{   
     top: 200px;
     right: 65%;
     width: 327px;
@@ -43,7 +43,7 @@
       */overflow: auto;
    }
    .position{
-    margin-left: 12%;
+    margin-left: 7%;
   
    }
    .hs-inner1
@@ -126,26 +126,7 @@
                 </paper-menu>
          </paper-dropdown-menu>
        </span>
-      <span class="position" hidden>
-        <paper-dropdown-menu  label="Select Empoyee Name">
-                <paper-menu id="asdadczcsadcdasww" class="dropdown-content"   on-iron-select="fnsetemp">
-                  <template is="dom-repeat" items="{{emparr}}">
-                    <paper-item value="{{item.empid}}">{{item.empname}}</paper-item>
-                  </template>    
-                </paper-menu>
-         </paper-dropdown-menu>
-       </span>
-    
-       <!-- <span class="position" hidden$="{{hideallvaluesss}}">  -->
-       <span class="position" hidden> 
-       <paper-dropdown-menu  label="Select The Section ">
-                <paper-menu id="teacherrefyyyy" class="dropdown-content"   on-iron-select="fnsetsection">
-                  <template is="dom-repeat" items="{{sectionarr}}">
-                    <paper-item value="{{item.id}}">{{item.section}}</paper-item>
-                  </template>    
-                </paper-menu>
-         </paper-dropdown-menu>
-       </span>
+     
        <span class="position" hidden$="{{hideallvaluesss}}"> 
        <paper-dropdown-menu  label="Select the subject">
               <paper-menu id="teacherrefzz" class="dropdown-content"   on-iron-select="fnsetsubject">
@@ -154,6 +135,16 @@
                   </template>    
                 </paper-menu>
          </paper-dropdown-menu>
+       </span>
+
+       <span class="position"  hidden$="{{hideallvaluesss}}"> 
+         <paper-dropdown-menu id="term" label="Select Term">
+           <paper-menu id="chaptertermid" class="dropdown-content"   on-iron-select="Fnchaptertermid" attr-for-selected="value" required>
+                <paper-item value="term1">Term1</paper-item>
+                <paper-item value="Term2">Term2</paper-item>
+                <paper-item value="Term3">Term3</paper-item>
+            </paper-menu>
+          </paper-dropdown-menu>
        </span>
        <span class="position" hidden$="{{hideallvaluesss}}"> 
        <paper-dropdown-menu  label="Select the chapter">
@@ -191,7 +182,7 @@
           <th style="width: 4.6%;"></th>
         
         </tr>  
-            <tr>     
+            <tr>        
              <template  is="dom-repeat" items="{{overallarr1}}" as="view">
                 <tr>   
              <aproval-book-innovatiosn-item-card rowid="{{view.rowid}}" remark="{{view.remark}}" period="{{view.period}}" planneddate="{{view.planning_date}}" skill="{{view.skill}}" innovation="{{view.innovation}}" iddate="{{view.id_date}}" hidecheck="{{view.hidecheck}}" hidecheck11="{{view.hidecheck11}}"  hidecheck1="{{view.hidecheck1}}"  rowidz="{{view.rowidz}}" valuez="{{view.valuez}}" conceptzz="{{view.valuearrr}}" mainarr="{{view.mainarr}}" subconceptarr1="{{view.suarr}}" skillarrzx="{{view.skillarr}}"  correction="{{view.Correction}}" lrrectife="{{view.lrrectife}}" plannedtoate="{{view.planned_to_date}}"> 
@@ -211,12 +202,7 @@
       <div  hidden$="{{Conceptbuffidz}}">
       <paper-input label="Which row after??" value="{{periodafter}}"></paper-input>
         <paper-input label="Enter Buffer period" value="{{bufferperiod}}"></paper-input>
-       <!-- <paper-dropdown-menu  label="Select the concept" style="width:100%;margin-left: -1%;"><paper-menu  class="dropdown-content"   on-iron-select="fnselectconcept">
-                 <template is="dom-repeat" items="{{conceptarr}}">
-                    <paper-item value="{{item.concept_id}}">{{item.concept}}</paper-item>
-               </template>    
-                </paper-menu>
-        </paper-dropdown-menu> -->
+     
         </div>
         <center> 
          <div></div>
@@ -333,51 +319,35 @@
       localStorage.setItem("curr_sess_capters",this.chapterid);
       localStorage.setItem("curr_sess_chapterid",this.chapterid); 
       localStorage.setItem("curr_sess_chaptername",this.chaptername); 
-      this.$.bookservice.FnFetchConceptService(this.gradeid,this.subjectid,this.chapterid);
+      this.$.bookservice.FnFetchConceptService(this.gradeid,this.subjectid,this.chapterid,this.termid);
       this.$.zdsasddsasfsa.hidden=false;
       this.$.bookservice.conceptseq();
       
       document.querySelector('concept-check-card').fnRefreshzz();
-      document.querySelector('subconcept-dialog-card').fnrefresh1();
-      document.querySelector('skill-dialog-card').FnRefresh();
-      document.querySelector('aproval-book').newRefreshzz();
+      document.querySelector('subconcept-dialog-card').fnrefreshccc();
+      document.querySelector('skill-dialog-card').FnRefreshhhh();
+      document.querySelector('aproval-book').newRefreshdddd();
       
       //document.querySelector('from-book-date-picker').fndates();
        //document.querySelector('concept-check-card').fnclean();
        },
-  fnselectconcept:function(e){
-      this.conceptid=e.target.selectedItem.value;
-      this.conceptname=e.target.selectedItem.textContent.trim();
-      localStorage.setItem("curr_sess_chapterid",this.conceptid); 
-      conceptidz=this.conceptid;
-      conceptnamez=this.conceptname
-      },
-    fnsetsection:function(e){
-       this.sectionid=e.target.selectedItem.value;
-       this.sectionname=e.target.selectedItem.textContent.trim();
-       sessionStorage.setItem("sectoinidz",this.sectionid);
-       localStorage.setItem("curr_sess_sectionid",this.sectionid);
-       localStorage.setItem("curr_sess_sectionname",this.sectionidname);
-       this.$.bookservice.bookapprvvalsubject(this.gradeid,this.sectionid);
-        document.querySelector('#teacherrefzz').selected=-1;
-        },
-    /*fnsetemp:function(e){
-         this.empid=e.target.selectedItem.value;
-       sessionStorage.setItem("empidz",this.empid);
-       this.empname=e.target.selectedItem.textContent.trim();
-        document.querySelector('#teacherrefyyyy').selected=-1;
-        document.querySelector('#teacherrefzz').selected=-1;
-    },*/
-     fnsetsubject:function(e){
+   fnsetsubject:function(e){
        this.subjectid=e.target.selectedItem.value;
        this.subjectname=e.target.selectedItem.textContent.trim();
        sessionStorage.setItem("subjectidz",this.subjectid);
        localStorage.setItem("curr_sess_subjectid",this.subjectid);
        localStorage.setItem("curr_sess_subjectname",this.subjectname);
-        this.$.bookservice.FnFetchChapterService(this.gradeid,this.subjectid); 
+        
         document.querySelector('#teacherapprovechapter').selected=-1;
         this.$.zdsasddsasfsa.hidden=true;
-      }, 
+      },
+       Fnchaptertermid:function(e){
+        this.termid=e.target.selectedItem.textContent.trim();
+        sessionStorage.setItem("termid",this.termid);
+       
+ this.$.bookservice.FnFetchChapterService(this.gradeid,this.subjectid,this.termid);
+       this.$.zdsasddsasfsa.hidden=true;
+    }, 
   fnRefresh:function()
      {
         document.querySelector('#teacherrefffff').selected=-1;

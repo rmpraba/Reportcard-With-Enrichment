@@ -1960,6 +1960,7 @@ fnschoolemployeerole:function( employeeid,employeename){
          this.studentinfourl=sessionStorage.getItem("addrinfo")+"/studenttranferinfo-service";
          var obj={"school_id":"","studentname":""};
           obj.school_id=sessionStorage.getItem("curr_sess_loggedschoolid");
+           obj.academic_year=localStorage.getItem("curr_sess_academicyear")
           obj.studentname=studentname;
           this.studentinfoparam=obj;
           this.$.studentinfoajax.generateRequest();
