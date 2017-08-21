@@ -44,7 +44,8 @@
         text-align:center;
       }
     </style>
-    <div style="margin-left: -5%;">
+
+    <div style="margin-left: -6%;">
       <span class="position"> 
         <paper-dropdown-menu  label="Select the Grade">
           <paper-menu id="cpapprovalgrade" class="dropdown-content"   on-iron-select="FnSelectGrade">
@@ -123,7 +124,7 @@
           <th style="width: 4%;"></th>  
          </tr>       
           <template is="dom-repeat" items="{{approvearr}}">
-           <tr>         
+           <tr>           
              <curriculum-plan-conceptapproval-itemcard sno="{{item.sno}}" rowid="{{item.row_id}}" conceptid="{{item.concept_id}}" conceptname="{{item.concept_name}}" subconceptid="{{item.sub_concept_id}}" subconceptname="{{item.sub_concept_name}}" period="{{item.period}}" fromdate="{{item.planned_date_from}}" todate="{{item.planned_to_date}}" skill="{{item.skill}}" value="{{item.value}}" innovation="{{item.innovation}}" lr="{{item.lr_rectification}}" remarks="{{item.remarks}}" correctionstatus="{{item.correction_status}}" completionstatus="{{item.completion_status}}" hideflag="{{item.hideflag}}" hidetitleflag="{{item.hidetitleflag}}" completiondate="{{item.completion_date}}" enrichmentsug="{{item.enrichment_sug}}">          
             </curriculum-plan-conceptapproval-itemcard>        
             </tr>  

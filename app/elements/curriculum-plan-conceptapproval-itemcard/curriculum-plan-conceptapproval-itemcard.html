@@ -57,7 +57,7 @@
               <td style="width: 6.6%;">{{fromdate}}</td>
               <td style="width: 6.56%;">
                {{todate}}
-              
+                
               </td>               
               <td style="width: 6.56%;">{{lr}}</td>
               <td style="width: 6.56%;">{{remarks}}</td>
@@ -71,7 +71,7 @@
               </td>
               <td hidden$="{{hidetitleflag}}" style="width: 6.56%;">{{completionstatus}}</td>
               <td hidden$="{{hideflag}}" style="width: 6.56%;">
-                <paper-checkbox id="cpayes{{subconceptid}}"  on-change="FnYes">Yes</paper-checkbox><br>
+                <paper-checkbox id="cpayes{{subconceptid}}" checked on-change="FnYes">Yes</paper-checkbox><br>
                 <paper-checkbox id="cpano{{subconceptid}}" on-change="FnNo">No</paper-checkbox>
               </td>
               <td style="width: 6.56%;">
@@ -89,27 +89,32 @@
   <script>
   (function() {
     'use strict';
-
+     var completionstatus;
     Polymer({
       is: 'curriculum-plan-conceptapproval-itemcard',
+      
       FnYes:function(e){
         if(document.querySelector("#cpayes"+this.subconceptid).checked==true){
-        this.completionstatus="Yes";
+       completionstatus="Yes";
         document.querySelector("#cpano"+this.subconceptid).checked=false;
         }
         if(document.querySelector("#cpayes"+this.subconceptid).checked==false)
-        this.completionstatus="";
+      completionstatus="";
       },
       FnNo:function(e){
         if(document.querySelector("#cpano"+this.subconceptid).checked==true)
         {
-        this.completionstatus="No";
+      completionstatus="No";
         document.querySelector("#cpayes"+this.subconceptid).checked=false;
         }
         if(document.querySelector("#cpano"+this.subconceptid).checked==false)
-        this.completionstatus="";
+       completionstatus="";
       },
       FnSave:function(){
+
+        if(completionstatus==""||completionstatus==null)
+        {
+       completionstatus='Yes';
         var obj={};
         obj.sno=this.sno;
         obj.rowid=this.rowid;
@@ -127,12 +132,35 @@
         obj.remarks=this.remarks;
         obj.correctionstatus=this.correctionstatus;
         obj.enrichmentsuggest=this.enrichmentsuggest;
-        if(document.querySelector("#cpayes"+this.subconceptid).checked==true)
-          obj.completionstatus="Yes";
-        if(document.querySelector("#cpano"+this.subconceptid).checked==true)
-          obj.completionstatus="No";
-        // alert(JSON.stringify(obj));
-        this.$.bookservice.updateapprovalstatusofchapterconcept(obj);           
+        obj.completionstatus=completionstatus;
+             //alert(JSON.stringify(obj));
+        this.$.bookservice.updateapprovalstatusofchapterconcept(obj);
+      completionstatus=""; 
+        }
+        else
+         {
+       var obj={};
+        obj.sno=this.sno;
+        obj.rowid=this.rowid;
+        obj.conceptid=this.conceptid;
+        obj.conceptname=this.conceptname;
+        obj.subconceptid=this.subconceptid;
+        obj.subconceptname=this.subconceptname;
+        obj.period=this.period;
+        obj.fromdate=this.fromdate;
+        obj.todate=this.todate;
+        obj.skill=this.skill;
+        obj.value=this.value;
+        obj.innovation=this.innovation;
+        obj.lrrectification=this.lr;
+        obj.remarks=this.remarks;
+        obj.correctionstatus=this.correctionstatus;
+        obj.enrichmentsuggest=this.enrichmentsuggest;
+        obj.completionstatus=completionstatus;
+              //alert(JSON.stringify(obj));
+        this.$.bookservice.updateapprovalstatusofchapterconcept(obj);
+        completionstatus=""; 
+         }          
       }
     });
   })();

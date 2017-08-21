@@ -5,6 +5,7 @@ var email   = require("emailjs/email");
 var fs = require('fs');
 var dbserver_ip_address = process.env.OPENSHIFT_MYSQL_DB_HOST || '127.0.0.1'
 
+
 var connection = mysql.createConnection({
    host     : 'localhost',
    user     : 'root',
@@ -10755,6 +10756,7 @@ app.post('/fetchconcept-service',  urlencodedParser,function (req,res)
 
 var qur3="SELECT * FROM md_book_value  where capter_id='"+req.query.chapterid+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"' and term_id='"+req.query.termid+"'";
   var qur4="SELECT * FROM md_book_skill  where capter_id='"+req.query.chapterid+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"' and term_id='"+req.query.termid+"'";
+
 var qur5="SELECT * FROM md_book_sub_concept  where capter_id='"+req.query.chapterid+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"' and term_id='"+req.query.termid+"'";
 console.log("------------fetching info for planning--------------------");
     console.log(qur1);
@@ -10783,8 +10785,8 @@ console.log("------------fetching info for planning--------------------");
     connection.query(qur5,function(err, rows){
     if(!err)
     { //console.log(rows);
-     subarr=rows;
-     connection.query(qur3,function(err, rows){
+       subarr=rows;
+   connection.query(qur3,function(err, rows){
     if(!err)
     { 
     if(rows.length>0)
@@ -10793,7 +10795,7 @@ console.log("------------fetching info for planning--------------------");
      }
     else
     {
-    valuearr="empty";
+    valuearr=[];
     }
   res.status(200).json({'chapterarr': chapterarr,'skillarr':skillarr,'valuearr':valuearr,'dbskillarr':dbskillarr,'subarr':subarr});
     }
