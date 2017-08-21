@@ -43,7 +43,7 @@
       */overflow: auto;
    }
    .position{
-    margin-left: 7%;
+    margin-left: 6%;
   
    }
    .hs-inner1
@@ -139,8 +139,8 @@
 
        <span class="position"  hidden$="{{hideallvaluesss}}"> 
          <paper-dropdown-menu id="term" label="Select Term">
-           <paper-menu id="chaptertermid" class="dropdown-content"   on-iron-select="Fnchaptertermid" attr-for-selected="value" required>
-                <paper-item value="term1">Term1</paper-item>
+           <paper-menu id="chaptertermidfffff" class="dropdown-content"   on-iron-select="Fnchaptertermid" attr-for-selected="value" required>
+                <paper-item value="Term1">Term1</paper-item>
                 <paper-item value="Term2">Term2</paper-item>
                 <paper-item value="Term3">Term3</paper-item>
             </paper-menu>
@@ -311,6 +311,7 @@
       this.$.bookservice.bookrefsection(this.gradeid,this.gradename);
       document.querySelector('#teacherrefzz').selected=-1;
         document.querySelector('#teacherapprovechapter').selected=-1;
+        document.querySelector('#chaptertermidfffff').selected=-1;
         this.$.zdsasddsasfsa.hidden=true;
   }, 
      fnselectchapter:function(e){
@@ -339,13 +340,14 @@
        localStorage.setItem("curr_sess_subjectname",this.subjectname);
         
         document.querySelector('#teacherapprovechapter').selected=-1;
+        document.querySelector('#chaptertermidfffff').selected=-1;
         this.$.zdsasddsasfsa.hidden=true;
       },
        Fnchaptertermid:function(e){
         this.termid=e.target.selectedItem.textContent.trim();
         sessionStorage.setItem("termid",this.termid);
-       
- this.$.bookservice.FnFetchChapterService(this.gradeid,this.subjectid,this.termid);
+      this.$.bookservice.FnFetchChapterService(this.gradeid,this.subjectid,this.termid);
+       document.querySelector('#teacherapprovechapter').selected=-1;
        this.$.zdsasddsasfsa.hidden=true;
     }, 
   fnRefresh:function()
@@ -353,6 +355,7 @@
         document.querySelector('#teacherrefffff').selected=-1;
         document.querySelector('#teacherrefzz').selected=-1;
         document.querySelector('#teacherapprovechapter').selected=-1;
+         document.querySelector('#chaptertermidfffff').selected=-1;
         this.$.zdsasddsasfsa.hidden=true;
      }
     
