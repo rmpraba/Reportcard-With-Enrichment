@@ -8,7 +8,7 @@ var dbserver_ip_address = process.env.OPENSHIFT_MYSQL_DB_HOST || '127.0.0.1'
    host     : 'localhost',
    user     : 'root',
    password : '',
-   database : 'reportcardnew'
+   database : 'reportcard11'
 
 
 });
