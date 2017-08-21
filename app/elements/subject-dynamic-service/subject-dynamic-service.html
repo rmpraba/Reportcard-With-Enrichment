@@ -316,6 +316,7 @@
       },
       fetchstudentforsubjectreportResponse:function(e){
         var arr=e.detail.response.returnval;
+        // alert(JSON.stringify(arr));
         if(arr.length>0){
         for(var i=0;i<overall.length;i++){
           for(var j=0;j<arr.length;j++){
@@ -329,6 +330,7 @@
           }
         }        
         }
+        // alert(JSON.stringify(overall));
         document.querySelector('term-assesment-sheet-card').setPage('subject-dynamic-markentrycard');
         document.querySelector('subject-dynamic-markentrycard').hideheader=false;
         document.querySelector('subject-dynamic-markentrycard').setDefaultHeaders();

@@ -224,6 +224,7 @@
         on-response="SbjecttoStudentmapping1Response"
         debounce-duration="300"
         >
+
  <paper-dialog id="Sectemplyspin">
       <paper-spinner id="sectempspinner"></paper-spinner>
     </paper-dialog>
@@ -305,7 +306,6 @@
 
      FnStoSSection:function(e)
      {
-        
             this.FnStoSSectionid=e.target.selectedItem.textContent.trim();
             this.FnStoSSectionid1=e.target.selectedItem.value;
              //this.hidenewsubcat=false;
@@ -341,7 +341,7 @@
     },
  
  fnlangugageprefstudent:function(){
-      this.SbjecttoStudentmapping1url=sessionStorage.getItem("addrinfo")+"/SbjecttoStudentmapping1url-service";
+      this.SbjecttoStudentmapping1url=sessionStorage.getItem("addrinfo")+"/SbjecttoStudentmapping1-service";
         var obj={"FnStoSSectionid":"","subjectselectid":"","FnStoStermid":"","FnStosGradeid":""};
         obj.FnStoSSectionid=this.FnStoSSectionid1;
         obj.subjectselectid=sessionStorage.getItem("curr_sess_loggedschoolid");
@@ -373,32 +373,33 @@
 
 
  fnsubmit:function(e)
- {  if(this.FnStosGradeid=="Grade-5"||this.FnStosGradeid=="Grade-6"||this.FnStosGradeid=="Grade-7"||this.FnStosGradeid=="Grade-8"||this.FnStosGradeid=="Grade-9"||this.FnStosGradeid=="Grade-10")
+ {  
+   
+      if(this.FnStosGradeid=="Grade-5"||this.FnStosGradeid=="Grade-6"||this.FnStosGradeid=="Grade-7"||this.FnStosGradeid=="Grade-8"||this.FnStosGradeid=="Grade-9"||this.FnStosGradeid=="Grade-10")
       {
-     
-           this.$.uiservice.FnSecondLangSubjectToStudentsets(fnthidlanginfoarr);
-           this.$.uiservice.FnThirdLangSubjectToStudent(fnthidlanginfo1arr);
-           //alert("Inserted Successfully");
+               this.$.uiservice.FnSecondLangSubjectToStudentsets(fnthidlanginfoarr);
+               this.$.uiservice.FnThirdLangSubjectToStudent(fnthidlanginfo1arr);
+               alert("Inserted Successfully");
 
-            if(kn.length!=0)
-            {
-           
-            }
-      document.querySelector('student-list-mapping-item').FnSecondLang(); 
-        }
-          else
-         {
-              this.$.uiservice.FnSecondLangSubjectToStudent(fnsecondlanginfoarr);
-                 if(kn.length!=0)  
+                if(kn.length!=0)
                 {
-            //document.querySelector('student-list-mapping-item').FnSecondLang1(kn);
-           // var obj={"dd":"","admno":"","langugagepref":""};
-           //kn.splice(obj);
-                 }
-                  document.querySelector('student-list-mapping-item').FnSecondLang();             
-          }
+               
+                }
+          document.querySelector('student-list-mapping-item').FnSecondLang(); 
+       }
+        else
+        {
+           this.$.uiservice.FnSecondLangSubjectToStudent(fnsecondlanginfoarr);
+              if(kn.length!=0)  
+               {
+              
+               }
+              document.querySelector('student-list-mapping-item').FnSecondLang();   
+              alert("Inserted Successfully");
+
+        }
         //document.querySelector('#rsectionwww').selected=-1;
-        alert("Inserted Successfully");
+        //alert("Inserted Successfully");
 
         },
      FnSubjecttostudentlanguageResponse:function(e){
@@ -512,7 +513,9 @@
      }
   
      this.bigarr=overall;
+
      this.sectionclosespinner();
+
               },
      FnSubjecttostudentthirdlanguageResponse:function(e){
          var res=e.detail.response.returnval; 
@@ -625,6 +628,7 @@
          if(flag==0){
           }
      }
+
      this.bigarr=overall;
       this.sectionclosespinner();
           },
@@ -651,12 +655,15 @@
      },
      fnupdate:function(e)
      {
-      alert("Updated Successfully");
+      alert('Updated');
      },
      fninsert:function(e)
      {
-      alert("Inserted Successfully");
-     }
+      alert('Inserted Successfully');
+     },
+
+
+
 
     
     });

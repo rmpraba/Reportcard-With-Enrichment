@@ -1682,7 +1682,6 @@ fnsetcoskillvalue:function(valuearr,period,rowid)
         obj.flag="active";
         obj.conc_date=valuearr[i].valueid+localStorage.getItem("localsess_from_service")
         this.fnsetcoskillvalueparam=obj;
-      // alert(JSON.stringify(obj));
         this.$.fnsetcoskillvalueajax.generateRequest();
         }
       },
@@ -1825,7 +1824,7 @@ fnsetcoskill11:function(skarr,period,rowid)
            obj.subjectid=subjectid;
            obj.gradeid=gradeid;
            this.fngetclassbooksectionvalueparam=obj;
-          // alert(JSON.stringify(obj));
+          //alert(JSON.stringify(obj));
            this.$.fngetclassbooksectionvalueajax.generateRequest();
         },
 
@@ -1904,7 +1903,7 @@ fnsetcoskill11:function(skarr,period,rowid)
             res[i].hideflag=false;
             temp.push(res[i]);
             }
-            //alert(JSON.stringify(this.approvedarr));
+           // alert(JSON.stringify(this.approvedarr));
             for(var i=0;i<temp.length;i++){
                 for(var j=0;j<this.approvedarr.length;j++){
                     if(temp[i].concept_id==this.approvedarr[j].concept_id&&temp[i].sub_concept_id==this.approvedarr[j].sub_concept_id&&temp[i].row_id==this.approvedarr[j].row_id){
@@ -1964,7 +1963,7 @@ fnsetcoskill11:function(skarr,period,rowid)
            this.$.updateapprovalstatusofchapterconceptajax.generateRequest();
           },
           updateapprovalstatusofchapterconceptResponse:function(e){
-            //alert(e.detail.response.returnval);
+            alert(e.detail.response.returnval);
             this.fetchalreadyapprovedchapterconcept();
           },
           fetchalreadyapprovedchapterconcept:function(){
@@ -2412,7 +2411,7 @@ for(var r=0;r<overall2.length;r++){
                       nameobj.skill=res2[k].skill;
                       nameobj.value=res2[k].value;
                        nameobj.period=res2[k].period;
-                     
+                      nameobj.completiondate=res2[k].completion_date;
                       nameobj.innovation=res2[k].innovation;
                       nameobj.lr_rectifitcation=res2[k].lr_rectifitcation;
                       nameobj.remarks=res2[k].remarks;
@@ -2427,7 +2426,7 @@ for(var r=0;r<overall2.length;r++){
                       nameobj.subject_id=sessionStorage.getItem("subjectidz");
                     setattr.push(nameobj);
                  }
-                        alert(JSON.stringify(setattr));
+                       alert(JSON.stringify(setattr));
   
    document.querySelector('class-teacher-book-rejection-item-card').mainnarr=setattr; 
   document.querySelector('class-teacher-book-rejection-item-card').empid=res2[0].empid; 

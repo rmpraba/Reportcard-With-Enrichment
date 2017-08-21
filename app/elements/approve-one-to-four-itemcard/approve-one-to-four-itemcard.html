@@ -52,6 +52,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
     <!-- <table border="1"> -->
     <!-- <tr> -->
+  <p hidden>{{langpref}}</p>
+  <p hidden>{{subjectid}}</p>
    <div class='card'>
    <p class='p1'>{{academic}}</p>
    <p class='p2'>{{term}}</p>
@@ -82,8 +84,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       localStorage.setItem("curr_sess_assesment",this.assesment);
       localStorage.setItem("curr_sess_assesmenttype",this.assesment);
       localStorage.setItem("curr_sess_subject",this.subject);
+      localStorage.setItem("curr_sess_subjectid",this.subjectid);
       localStorage.setItem("curr_sess_grade",this.grade);
       localStorage.setItem("curr_sess_section",this.section);
+      localStorage.setItem("curr_sess_languagepref",this.langpref);
       //alert(localStorage.getItem("curr_sess_assesment"));
       document.querySelector('approve-one-to-four-card').FnSpinnerrActive(true); 
       if(this.subject=="Attendance")
