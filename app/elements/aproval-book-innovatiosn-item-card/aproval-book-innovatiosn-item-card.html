@@ -298,9 +298,9 @@
           <paper-textarea label="Teaching Aids"  value="{{teachingaid}}"></paper-textarea>
           <center style="margin-top: 14%;">
             <paper-button  on-click="teachingsave" style="color:white;background-color:black">Save</paper-button>
-            <paper-button id="bldvvvv" style="color:white;background-color:black" on-click="closeteachingaaid" >Close</paper-button>
+            <paper-button id="taid1" style="color:white;background-color:black" on-click="closeteachingaaid" >Close</paper-button>
 
-            <paper-button id="bldvallll"  style="color:white;background-color:black" on-click="teachingclose" >Close</paper-button>
+            <paper-button id="taidss"  style="color:white;background-color:black" on-click="teachingclose" >Close</paper-button>
           </center>
       </paper-dialog>
 
@@ -375,16 +375,15 @@
     Polymer({
       is: 'aproval-book-innovatiosn-item-card',
     ready:function()
-        {
-        this.remark="";
-        this.innovation="";
-        this.showdate=moment(new Date()).format('L');
-        localStorage.setItem("localsess_from_service",this.showdate);
-        this.$.rmclssz.hidden=true;
-        this.$.innttvvnn.hidden=true;
-        this.$.lrrctbtn.hidden=true;
-        // this.$.certstszz.hidden=true;
-        },
+    {
+            this.remark="";
+            this.innovation="";
+            this.showdate=moment(new Date()).format('L');
+            localStorage.setItem("localsess_from_service",this.showdate);
+            this.$.rmclssz.hidden=true;
+            this.$.innttvvnn.hidden=true;
+            this.$.taidss.hidden=true;
+    },
    FnShowDialog:function(){
     this.date=new Date();
     this.$.dialog.toggle();
@@ -818,8 +817,8 @@ fngetbldvaluesResponse:function(e){
       this.$.rmclssz.hidden=false;
       this.$.innvtt.hidden=true;
       this.$.innttvvnn.hidden=false;
-      this.$.lrrectzz.hidden=true;
-      this.$.lrrctbtn.hidden=false;
+      this.$.taid1.hidden=true;
+      this.$.taidss.hidden=false;
       //this.$.statsid1.hidden=true;
       // this.$.certstszz.hidden=false;
 
