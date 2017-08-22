@@ -6,7 +6,7 @@
     <style>
     table
       {   table-layout: fixed;
-          width: 1910px;;
+          width: 1911px;;
           border-collapse: collapse;
           margin-left: -2%;
           margin-top: 0%;
@@ -167,6 +167,8 @@
         obj.correctionstatus=this.correctionstatus;
         obj.enrichmentsuggest=this.enrichmentsuggest;
         obj.completionstatus=completionstatus;
+        obj.bldvalues=this.bldvalues;
+        obj.teachingaid=this.teachingaid;
               //alert(JSON.stringify(obj));
         this.$.bookservice.updateapprovalstatusofchapterconcept(obj);
         completionstatus=""; 

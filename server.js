@@ -10,7 +10,7 @@ var connection = mysql.createConnection({
    host     : 'localhost',
    user     : 'root',
    password : '',
-   database : 'reportcard1'
+   database : 'reportcard11'
 
   /*host     : 'localhost',
   port     : '62631',
@@ -10752,7 +10752,7 @@ app.post('/fetchconcept-service',  urlencodedParser,function (req,res)
    var qur1="SELECT * FROM md_chapter where capter_id='"+req.query.chapterid+"'and subjectid='"+req.query.subjectid+"' and gradeid='"+req.query.gradeid+"' and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and term_id='"+req.query.termid+"'"; 
 
 
- var qur2="SELECT concept_id as conceptid,planning_date,rowid,period,lrrectife,innovation,remark,flag,conc_date,planned_to_date,(select  concept from md_concept  where  concept_id=conceptid)  as conceptname FROM `md_skill` WHERE  capter_id='"+req.query.chapterid+"' and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"' and term_id='"+req.query.termid+"' ";
+ var qur2="SELECT concept_id as conceptid,planning_date,rowid,period,teaching_aid,innovation,remark,flag,conc_date,planned_to_date,(select  concept from md_concept  where  concept_id=conceptid)  as conceptname FROM `md_skill` WHERE  capter_id='"+req.query.chapterid+"' and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"' and term_id='"+req.query.termid+"' ";
 
 var qur3="SELECT * FROM md_book_value  where capter_id='"+req.query.chapterid+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"' and term_id='"+req.query.termid+"'";
 
@@ -11372,7 +11372,7 @@ app.post('/buffdel-service',  urlencodedParser,function (req, res)
 
 app.post('/fetchclassconcept11-service',  urlencodedParser,function (req,res)
   {
-   var qur1="select  section_id,emp_id as empid,(select distinct emp_name from md_employee_creation where emp_id=empid and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' ) as empname,chapter_id,chapter_name,concept_id,concept_name,sub_concept_id,sub_concept_name,period,planned_date_from,planned_to_date,skill,value,innovation,lr_rectification,remarks,correction_status,completion_status,created_date,row_id ,term_id ,enrichment_sug from md_curriculum_planning_approval where grade_id='"+req.query.gradeid+"' and  subject_id='"+req.query.subjectid+"' and  section_id='"+req.query.sectoinidz+"' and chapter_id='"+req.query.chapterid+"'  and academic_year='"+req.query.academic_year+"' and school_id='"+req.query.schoolid+"' and completion_status='no' and term_id='"+req.query.termid+"'";
+   var qur1="select  section_id,emp_id as empid,(select distinct emp_name from md_employee_creation where emp_id=empid and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' ) as empname,chapter_id,chapter_name,concept_id,concept_name,sub_concept_id,sub_concept_name,period,planned_date_from,planned_to_date,skill,value,innovation,lr_rectification,remarks,correction_status,completion_status,created_date,row_id ,term_id ,enrichment_sug,bld_value_name,teaching_aid from md_curriculum_planning_approval where grade_id='"+req.query.gradeid+"' and  subject_id='"+req.query.subjectid+"' and  section_id='"+req.query.sectoinidz+"' and chapter_id='"+req.query.chapterid+"'  and academic_year='"+req.query.academic_year+"' and school_id='"+req.query.schoolid+"' and completion_status='no' and term_id='"+req.query.termid+"'";
       console.log("---------------");
       console.log(qur1);
      console.log("---------------");
@@ -11634,6 +11634,8 @@ app.post('/updateapprovalstatusofchapterconcept-service',  urlencodedParser,func
        enrichment_sug: req.query.enrichmentsuggest ,
        completion_date: req.query.completion_date,
        term_id:req.query.termid,
+       bld_value_name:req.query.bldvalues,
+       teaching_aid:req.query.teachingaid
     };
     // var qurcheck="SELECT * FROM md_curriculum_planning_approval WHERE school_id='"+req.query.schoolid+"' "+
     // "and academic_year='"+req.query.academicyear+"' and emp_id";
