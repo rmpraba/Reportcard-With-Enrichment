@@ -10,7 +10,7 @@ var connection = mysql.createConnection({
    host     : 'localhost',
    user     : 'root',
    password : '',
-   database : 'reportcard11'
+   database : 'reportcard1'
 
   /*host     : 'localhost',
   port     : '62631',
@@ -10755,9 +10755,12 @@ app.post('/fetchconcept-service',  urlencodedParser,function (req,res)
  var qur2="SELECT concept_id as conceptid,planning_date,rowid,period,lrrectife,innovation,remark,flag,conc_date,planned_to_date,(select  concept from md_concept  where  concept_id=conceptid)  as conceptname FROM `md_skill` WHERE  capter_id='"+req.query.chapterid+"' and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"' and term_id='"+req.query.termid+"' ";
 
 var qur3="SELECT * FROM md_book_value  where capter_id='"+req.query.chapterid+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"' and term_id='"+req.query.termid+"'";
-  var qur4="SELECT * FROM md_book_skill  where capter_id='"+req.query.chapterid+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"' and term_id='"+req.query.termid+"'";
+
+var qur4="SELECT * FROM md_book_skill  where capter_id='"+req.query.chapterid+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"' and term_id='"+req.query.termid+"'";
 
 var qur5="SELECT * FROM md_book_sub_concept  where capter_id='"+req.query.chapterid+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"' and term_id='"+req.query.termid+"'";
+
+var qur6="SELECT * FROM md_book_bldvalue  where capter_id='"+req.query.chapterid+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"' and term_id='"+req.query.termid+"'";
 console.log("------------fetching info for planning--------------------");
     console.log(qur1);
     console.log('----------------------------');
@@ -10770,6 +10773,7 @@ console.log("------------fetching info for planning--------------------");
     var valuearr=[];
     var dbskillarr=[];
     var subarr=[];
+    var bldarr=[];
     connection.query(qur1,function(err, rows){
     if(!err)
     {  
@@ -10786,6 +10790,10 @@ console.log("------------fetching info for planning--------------------");
     if(!err)
     { //console.log(rows);
        subarr=rows;
+   connection.query(qur6,function(err, rows){
+     if(!err)
+    { //console.log(rows);
+      bldarr=rows;
    connection.query(qur3,function(err, rows){
     if(!err)
     { 
@@ -10797,11 +10805,12 @@ console.log("------------fetching info for planning--------------------");
     {
     valuearr=[];
     }
-  res.status(200).json({'chapterarr': chapterarr,'skillarr':skillarr,'valuearr':valuearr,'dbskillarr':dbskillarr,'subarr':subarr});
+  res.status(200).json({'chapterarr': chapterarr,'skillarr':skillarr,'valuearr':valuearr,'dbskillarr':dbskillarr,'subarr':subarr,'bldarr':bldarr});
     }
     else
-console.log(err);
-  });}
+ console.log(err);
+   });}
+   });}
     else
 console.log(err);
   });}
@@ -10809,6 +10818,7 @@ console.log(err);
       console.log(err);
   });}
     else
+
       console.log(err);
     });}
     else{
@@ -10914,7 +10924,8 @@ app.post('/fnmasterplaninsert-service' , urlencodedParser,function (req, res)
       innovation: req.query.innovation,
       teaching_aid:req.query.teachingaid,
       remarks: req.query.remarks,
-      term_id:req.query.termid 
+      term_id:req.query.termid,
+      bld_value_name:req.query.bldvalue, 
     };
     console.log('Coming for master insertion....');
     connection.query("INSERT INTO md_curriculum_planning SET ?",[response],
@@ -11075,6 +11086,41 @@ app.post('/fnsetcoskill12-service' , urlencodedParser,function (req, res)
     });
 });
 
+app.post('/fnsetcoskill13-service' , urlencodedParser,function (req, res)
+{  
+    var response={ 
+       capter_id:req.query.capter_id,
+       planning_date:req.query.planned_date,
+       school_id:req.query.school_id,
+       academic_year:req.query.academic_year,
+       period:req.query.period,
+       rowid:req.query.rowid,
+       subject_id:req.query.subjectid,
+       grade_id:req.query.gradeid,
+       conc_date:req.query.conc_date,
+       bld_value_id:req.query.bld_value_id,
+       bld_value_name:req.query.bld_value_name,
+       term_id:req.query.termid,
+       
+    };
+    console.log("+++++++++++++++++++++++++++++++");
+     console.log(response);
+     console.log("+++++++++++++++++++++++++++++++")
+     connection.query("INSERT INTO md_book_bldvalue SET ?",[response],
+    function(err, rows)
+    {
+    if(!err)   
+    {
+      res.status(200).json({'returnval':'Inserted!'});
+    }
+    else
+    {
+      console.log(err);
+      res.status(200).json({'returnval': 'Not Inserted!'});
+    }
+    });
+});
+
 
 app.post('/fnbookeditskill-service',  urlencodedParser,function (req, res)
 {  
@@ -11151,6 +11197,33 @@ app.post('/fngetconceptvalue111-service',  urlencodedParser,function (req,res)
      res.status(200).json({'': 'no rows'}); 
   });
 });
+
+app.post('/fngetbldvalues-service',  urlencodedParser,function (req,res)
+  {  
+      var qur1="SELECT * FROM md_bldvalue";
+      var qur2="SELECT * FROM md_book_bldvalue where  capter_id='"+req.query.capter_id+"' and  planning_date='"+req.query.planneddate+"' and period='"+req.query.period+"'";
+   console.log(qur1);
+    console.log(qur2);
+    var conceptarr=[];
+    var skillarr=[];
+    connection.query(qur1,function(err, rows){
+    if(!err)
+    {  
+    conceptarr=rows;
+    connection.query(qur2,function(err, rows){
+    if(!err)
+    {  
+
+    skillarr=rows;
+    res.status(200).json({'conceptarr': conceptarr,'skillarr':skillarr});
+    }
+    });
+    }
+    else
+     res.status(200).json({'': 'no rows'}); 
+  });
+});
+
 
 app.post('/fngetskills-service',  urlencodedParser,function (req,res)
   {  

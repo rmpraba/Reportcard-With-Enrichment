@@ -537,6 +537,15 @@
         debounce-duration="300" />
         <iron-ajax
         method="post"
+        id="fnsetcoskill13ajax"
+        url="{{fnsetcoskill13url}}"
+        params="{{fnsetcoskill13param}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="fnsetcoskill13Response"
+        debounce-duration="300" />
+        <iron-ajax
+        method="post"
         id="fnfinalbookskillajax"
         url="{{fnfinalbookskillurl}}"
         params="{{fnfinalbookskillparam}}"
@@ -641,7 +650,7 @@
       fnfetchcprsubjectResponse:function(e){
         document.querySelector('curriculam-report').subjectarr=e.detail.response.returnval;
       },
-      fnmasterplaninsert:function(conarr,valuearr,skarr,subarr,period,innovation,remark,rowid,teachingaid){
+      fnmasterplaninsert:function(conarr,valuearr,skarr,subarr,period,innovation,remark,rowid,teachingaid,bldvaluearr){
       // alert(subarr.length);
      if(subarr.length!=0){
 
@@ -684,6 +693,25 @@
         subarr[i].skillid=skillid;
         subarr[i].skillname=skillname;
         }
+          for(var i=0;i<subarr.length;i++){
+        var bldvalueid="";
+        var bldvaluename="";
+        for(var j=0;j<bldvaluearr.length;j++){
+            if(subarr[i].rowid==bldvaluearr[j].rowid)
+            {
+                if(bldvalueid=="")
+                bldvalueid=bldvaluearr[j].bldvalueid;
+                else
+                bldvalueid=bldvalueid+","+bldvaluearr[j].bldvalueid;
+                if(bldvaluename=="")
+                bldvaluename=bldvaluearr[j].bldvaluename;
+                else
+              bldvaluename=bldvaluename+","+bldvaluearr[j].bldvaluename;
+            }
+        }
+        subarr[i].bldvalueid=bldvalueid;
+        subarr[i].bldvaluename=bldvaluename;
+        }
         c1=subarr.length;
         for(var i=0;i<subarr.length;i++){
         this.fnmasterplaninserturl=sessionStorage.getItem("addrinfo")+"/fnmasterplaninsert-service";
@@ -706,6 +734,8 @@
         obj.plannedtodate=localStorage.getItem("localsess_last_service");
         obj.skill=subarr[i].skillname;
         obj.value=subarr[i].valuename;
+        obj.bldvalue=subarr[i].bldvaluename;
+     
         obj.innovation=innovation;
         obj.teachingaid=teachingaid;
         obj.remarks=remark;
@@ -753,6 +783,25 @@
         conarr[i].skillid=skillid;
         conarr[i].skillname=skillname;
         }
+          for(var i=0;i<conarr.length;i++){
+        var bldvalueid="";
+        var bldvaluename="";
+        for(var j=0;j<bldvaluearr.length;j++){
+            if(conarr[i].rowid==bldvaluearr[j].rowid)
+            {
+                if(bldvalueid=="")
+                bldvalueid=bldvaluearr[j].bldvalueid;
+                else
+                bldvalueid=bldvalueid+","+bldvaluearr[j].bldvalueid;
+                if(bldvaluename=="")
+                bldvaluename=skarr[j].bldvaluename;
+                else
+                bldvaluename=bldvaluename+","+bldvaluearr[j].bldvaluename;
+            }
+        }
+        conarr[i].bldvalueid=bldvalueid;
+        conarr[i].bldvaluename=bldvaluename;
+        }
         c1=conarr.length;
         for(var i=0;i<conarr.length;i++){
         this.fnmasterplaninserturl=sessionStorage.getItem("addrinfo")+"/fnmasterplaninsert-service";
@@ -775,6 +824,8 @@
         obj.plannedtodate=localStorage.getItem("localsess_last_service");
         obj.skill=conarr[i].skillname;
         obj.value=conarr[i].valuename;
+        obj.bldvalue=conarr[i].bldvaluename;
+      
         obj.innovation=innovation;
         obj.teachingaid=teachingaid;
         obj.remarks=remark;
@@ -864,9 +915,8 @@ fnbooksubconcepteditResponse:function(e){
       this.$.bookrefsectionajax.generateRequest();
       },
       bookrefsectionResponse:function(e){
-     // alert(JSON.stringify(e.detail.response.subjectarr));
-      //alert(JSON.stringify(e.detail.response.sectionarr));
-   
+    
+
       document.querySelector('teacher-book-refernce-card').subjectarr=e.detail.response.subjectarr;
         document.querySelector('teacher-book-refernce-card').sectionarr=e.detail.response.sectionarr;
         document.querySelector('teacher-book-approve-card').sectionarr=e.detail.response.sectionarr;
@@ -1223,6 +1273,8 @@ var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
         var res3=e.detail.response.valuearr;
         var res4=e.detail.response.dbskillarr;
         var res5=e.detail.response.subarr;
+        var res6=e.detail.response.bldarr;
+      
         var res2=[];
         var adcarr=[];
       //alert(JSON.stringify(res));
@@ -1332,6 +1384,39 @@ var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
                  }
          
       
+        var c=[];
+        var overall3=[];            
+        for(var k=0;k<res6.length;k++)
+           {       
+           var nameobj={};
+             nameobj.planning_date=res6[k].planning_date; 
+             nameobj.period=res6[k].period; 
+            nameobj.rowidz=res6[k].rowid; 
+            
+
+        var obj={"bldvalueid":"","bldvaluename":""};
+            obj.bldvalueid=res6[k].bld_value_id;
+            obj.bldvaluename=res6[k].bld_value_name;
+            c.push(obj);
+           
+           for(var l=k+1;l<res6.length;l++)
+            {
+               if(res6[k].rowid==res6[l].rowid)
+                 {
+                 if(res6[k].planning_date==res6[l].planning_date)
+                  {
+               var obj1={"bldvalueid":"","bldvaluename":""}
+                   obj1.bldvalueid=res6[l].bld_value_id;
+                   obj1.bldvaluename=res6[l].bld_value_name;
+                   c.push(obj1);
+                  res6.splice(l,1);
+                 l--;
+               }}}
+                nameobj.bldarr=c;
+                overall3.push(nameobj);
+                c=[];
+                 }
+         
     
     var temp2=[];
    var a2=[];
@@ -1473,6 +1558,8 @@ var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
              }}}}
  
    var temp1=[];
+   var temparr=[];
+   
    for(var l=0;l<temp3.length;l++){
       
        for(var r=0;r<overall1.length;r++){ 
@@ -1494,7 +1581,7 @@ var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
              obj.skillarr=temp3[n].skillarr;
              obj.mainarr=overall1[r].mainarr; 
              obj.rowidz=temp3[n].rowidz;
-             temp1.push(obj);
+             temparr.push(obj);
              temp3.splice(n,1);
              }}}}
           }
@@ -1517,9 +1604,32 @@ var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
              obj.skillarr=temp3[n].skillarr;
              obj.mainarr=overall1[r].mainarr; 
              obj.rowidz=temp3[n].rowidz;
-             temp1.push(obj);
+             temparr.push(obj);
              temp3.splice(n,1);
              }}}}
+
+       for(var n=0;n<temparr.length;n++){
+        for(var r=0;r<overall3.length;r++){ 
+     
+          if(temparr[n].rowidz==overall3[r].rowidz){
+              if(temparr[n].planning_date==overall3[r].planning_date){
+         var obj={};
+             obj.planning_date=temparr[n].planning_date; 
+             obj.period=temparr[n].period; 
+             obj.innovation=temparr[n].innovation; 
+             obj.lrrectife=temparr[n].lrrectife;
+             obj.planned_to_date=temparr[n].planned_to_date;
+                    
+             obj.remark=temparr[n].remark;
+             obj.suarr=temparr[n].suarr;
+             obj.valuearrr=temparr[n].valuearrr; 
+             obj.skillarr=temparr[n].skillarr;
+             obj.mainarr=temparr[n].mainarr;
+             obj.bldarr=overall3[r].bldarr; 
+             obj.rowidz=temparr[n].rowidz;
+             temp1.push(obj);
+              }}}}
+             
 //alert(JSON.stringify(temp3));
 var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.length);
     for(var i=0;i<temp1.length;i++){
@@ -1535,7 +1645,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
                       obj.skillarr=temp1[i].skillarr;
                       obj.rowidz=temp1[i].rowidz;
                       obj.lrrectife=temp1[i].lrrectife;
-                      // obj.Correction=temp1[i].Correction;
+                      obj.bldarr=temp1[i].bldarr;
                       obj.planned_to_date=temp1[i].planned_to_date;
                       var id_date=temp1[i].planning_date;
                       id_date=id_date.replace(/[^\w\s]/gi, '');
@@ -1756,8 +1866,33 @@ fnsetcoskill11:function(skarr,period,rowid)
        //        this.conceptseq(); 
        //        this.FnFetchConceptService();
         },
+fnsetcoskill13:function(skarr,period,rowid)
+{
+ 
+    for(var i=0;i<skarr.length;i++){
+      this.fnsetcoskill13url=sessionStorage.getItem("addrinfo")+"/fnsetcoskill13-service";
+       var obj={};
+        obj.school_id=sessionStorage.getItem("curr_sess_loggedschoolid");
+        obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+        obj.termid=sessionStorage.getItem("termid"); 
+         obj.capter_id=localStorage.getItem("curr_sess_capters");
+        obj.bld_value_id=skarr[i].bldvalueid;
+        obj.bld_value_name=skarr[i].bldvaluename;
+        obj.planned_date=localStorage.getItem("localsess_from_service");
+        obj.subjectid=sessionStorage.getItem("subjectidz");
+        obj.gradeid=sessionStorage.getItem("grdeidz");
+        obj.rowid=rowid+localStorage.getItem("curr_sess_capters");
+        obj.period=period;
+        obj.flag="active";
+        obj.conc_date=skarr[i].bldvalueid+localStorage.getItem("localsess_from_service")
+        this.fnsetcoskill13param=obj;
+        this.$.fnsetcoskill13ajax.generateRequest();
 
-
+        }
+      },
+ fnsetcoskill13Response:function(e){
+ var res=e.detail.response.returnval;
+ },
     fnbookeditskill:function(period,innovation,remark,planneddate,rowidz,teachingaid){
   
     this.fnbookeditskillurl=sessionStorage.getItem("addrinfo")+"/fnbookeditskill-service";
