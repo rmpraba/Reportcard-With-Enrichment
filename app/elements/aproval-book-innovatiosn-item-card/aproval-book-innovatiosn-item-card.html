@@ -101,6 +101,12 @@
         overflow-x: hidden;
         overflow-y: scroll;
       }
+       #teachingopendialog
+      {
+        border-radius: 10px;
+          width: 380px;
+          height: 270px;
+      }
     </style>
     <div>
            <paper-input value={{rowid}} hidden></paper-input>
@@ -109,24 +115,24 @@
            <paper-input value={{rowidz}} hidden></paper-input>
         <table border="1">
            <tr>
-            <td style="padding-left: 3%;width: 4.1%;">{{rowid}}</td>
+            <td style="padding-left: 3%;width: 3.7%;">{{rowid}}</td>
             
-             <td style="width: 12.9%;padding-left: 2%;">
+             <td style="width: 11.8%;padding-left: 2%;">
                 <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetconceptz" style="color:#6699ff;float: right;"></paper-icon-button>
                   <template is="dom-repeat" items="{{conceptzz}}" as="r">
                     <h4 style="margin-left: -11%;width: 90%;">{{r.conceptname}}</h4>
                   </template>
               </td>
-              <td style="width: 13.65%;padding-left: 2%;">
+              <td style="width: 12.56%;padding-left: 2%;">
                <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetsubconcept" style="color:#6699ff;float: right;"></paper-icon-button>
                   <template is="dom-repeat" items="{{subconceptarr1}}" as="rse">
                     <h4 style="margin-left: -11%;width: 90%;">{{rse.subconceptname}}</h4>
                   </template>
               </td>
-             <td style="width: 4.85%;padding-left: 1%;text-align: center;">
+             <td style="width: 4.45%;padding-left: 1%;text-align: center;">
                 <paper-input style="width: 80%;" value="{{period}}" allowed-pattern="[0-9]"></paper-input>
              </td>
-             <td style="width: 8.75%;">
+             <td style="width: 8.1%;">
                 <paper-input style="margin-left:11%;" hidden$="{{hidecheck}}" value="{{planneddate}}" ></paper-input>
                 <div class="card"  hidden$="{{hidecheck1}}">
                   <paper-input label="From date" class="btn" on-click="FnShowDialog" raised value="{{showdate}}"></paper-input>
@@ -140,32 +146,36 @@
                 </div>
                   <dialog-page id="ID_Show_Dialog"></dialog-page>
               </td>
-              <td style="width: 8.75%;">
+              <td style="width: 8.1%;">
             <paper-input hidden$="{{hidecheck}}" value="{{plannedtoate}}"></paper-input>
              <from-book-date-picker hidden$="{{hidecheck1}}"></from-book-date-picker></td>
-             <td style="width: 8.75%;padding-left: 2%;">
+             <td style="width: 8.1%;padding-left: 2%;">
                 <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetskill" style="color:#6699ff;float: right;"></paper-icon-button>
                   <template is="dom-repeat" items="{{skillarrzx}}" as="r">
                     <h4 style="margin-left: -11%;width: 35%;">{{r.skillname}}</h4>
                   </template>
              </td>
-             <td style="width: 8.7%;padding-left: 2%;">
+             <td style="width: 8.01%;padding-left: 2%;">
+               <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetbldvalues" style="color:#6699ff;float: right;"></paper-icon-button>
+             </td>
+             <td style="width: 8.01%;padding-left: 2%;">
                 <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetconceptz1" style="color:#6699ff;float: right;"></paper-icon-button>
                   <template is="dom-repeat" items="{{mainarr}}" as="ry">
                     <h4 style="margin-left: 4%;">{{ry.valuename}}</h4>
                   </template>
             </td>
-            <td style="width: 8.7%;">
+            <td style="width: 8.01%;">
+              <paper-button on-click="fnteachingaid"">
+                <h4>{{teachingaid}}</h4>
+              </paper-button>
+            </td>
+            <td style="width: 8.01%;">
               <paper-button on-click="lsninnovation">
                 <h4>{{innovation}}</h4>
               </paper-button>
             </td>
-            <td style="width: 8.7%;">
-              <paper-button on-click="lrrectify">
-                <h4>{{lrrectife}}</h4>
-              </paper-button>
-            </td>
-            <td style="width: 8.7%;">
+            
+            <td style="width: 8.01%;">
               <paper-button on-click="lsnremark">
                 <h4>{{remark}}</h4>
               </paper-button>  
@@ -279,6 +289,18 @@
             <paper-button id="lrrctbtn" style="color:white;background-color:black" on-click="lrtcls" >Close</paper-button>
           </center>
       </paper-dialog>
+
+
+      <paper-dialog id="teachingopendialog" modal>
+          <paper-textarea label="Teaching Aids"  value="{{teachingaid}}"></paper-textarea>
+          <center style="margin-top: 14%;">
+            <paper-button  on-click="teachingsave" style="color:white;background-color:black">Save</paper-button>
+            <paper-button id="bldvvvv" style="color:white;background-color:black" on-click="closeteachingaaid" >Close</paper-button>
+
+            <paper-button id="bldvallll"  style="color:white;background-color:black" on-click="teachingclose" >Close</paper-button>
+          </center>
+      </paper-dialog>
+
 
      <!--  <paper-dialog id="lsstatusdialog" modal>
           <paper-textarea label="Correction Status" value="{{correction}}"></paper-textarea>
@@ -480,9 +502,9 @@ fnpasssubarr:function(subsarr){
     },
     fnsavebook:function(e)
     {
-if(conarr.length!=0 && valuearr.length!=0 && skarr.length!=0)
+      if(conarr.length!=0 && valuearr.length!=0 && skarr.length!=0)
       {
-  if(this.period==""|| this.period==null)
+        if(this.period==""|| this.period==null)
          {
               alert("Please Enter All Fields");
               this.hidecheck1=false;
@@ -495,11 +517,11 @@ if(conarr.length!=0 && valuearr.length!=0 && skarr.length!=0)
       
          else if(this.planneddate=="empty")
           {
-  this.$.bookservice.fnsetcoskill(conarr,this.period,this.innovation,this.remark,this.rowid,this.lrrectife);
-this.$.bookservice.fnsetcoskillvalue(valuearr,this.period,this.rowid);
-this.$.bookservice.fnsetcoskill11(skarr,this.period,this.rowid); 
-this.$.bookservice.fnsetcoskill12(subsarrr,this.period,this.rowid); 
-this.$.bookservice.fnmasterplaninsert(conarr,valuearr,skarr,subsarrr,this.period,this.innovation,this.remark,this.rowid,this.lrrectife);
+          this.$.bookservice.fnsetcoskill(conarr,this.period,this.innovation,this.remark,this.rowid,this.teachingaid);
+          this.$.bookservice.fnsetcoskillvalue(valuearr,this.period,this.rowid);
+          this.$.bookservice.fnsetcoskill11(skarr,this.period,this.rowid); 
+          this.$.bookservice.fnsetcoskill12(subsarrr,this.period,this.rowid); 
+          this.$.bookservice.fnmasterplaninsert(conarr,valuearr,skarr,subsarrr,this.period,this.innovation,this.remark,this.rowid,this.teachingaid);
 
             this.hidecheck1=true;
             this.hidecheck=false;  
@@ -520,7 +542,7 @@ this.$.bookservice.fnmasterplaninsert(conarr,valuearr,skarr,subsarrr,this.period
       else  
       {
          //alert('edit');
-        this.$.bookservice.fnbookeditskill(this.period,this.innovation,this.remark,this.planneddate,this.rowidz,this.lrrectife);
+        this.$.bookservice.fnbookeditskill(this.period,this.innovation,this.remark,this.planneddate,this.rowidz,this.teachingaid);
 
       }
         this.conceptjhkhzz="";
@@ -862,6 +884,25 @@ fngetskillsResponse:function(e){
     {
       this.$.lsstatusdialog.close();
     }*/
+
+
+    fnteachingaid:function(e)
+    {
+      this.$.teachingopendialog.toggle();
+    },
+    teachingsave:function(e)
+    {
+      this.$.teachingopendialog.toggle();
+    },
+    closeteachingaaid:function()
+    {
+      this.$.teachingopendialog.close();
+      this.bldvalues="";
+    },
+    teachingclose:function()
+    {
+      this.$.teachingopendialog.close();
+    }
 
    });
   })();

@@ -51,15 +51,23 @@
               {{skill}}
               </td>
               <td style="width: 6.6%;">
+                {{bldvalues}}
+              </td>
+              <td style="width: 6.6%;">
                 {{value}}
+              </td>
+              <td style="width: 6.6%;">
+                {{teachingaid}}
               </td>
               <td style="padding-left: 0%;width: 6.6%;">{{innovation}}</td> 
               <td style="width: 6.6%;">{{fromdate}}</td>
               <td style="width: 6.56%;">
                {{todate}}
-                
-              </td>               
-              <td style="width: 6.56%;">{{lr}}</td>
+              </td>     
+              <td style="width: 6.56%;">
+               <div hidden$="{{hidetitleflag}}">{{lr}}</div>
+                <paper-input value={{lr}} hidden$="{{hideflag}}"></paper-input>
+              </td>          
               <td style="width: 6.56%;">{{remarks}}</td>
               <td style="width: 6.56%;">
                <div hidden$="{{hidetitleflag}}">{{correctionstatus}}</div>
@@ -126,7 +134,9 @@
         obj.fromdate=this.fromdate;
         obj.todate=this.todate;
         obj.skill=this.skill;
+        obj.bldvalues=this.bldvalues;
         obj.value=this.value;
+        obj.teachingaid=this.teachingaid;
         obj.innovation=this.innovation;
         obj.lrrectification=this.lr;
         obj.remarks=this.remarks;

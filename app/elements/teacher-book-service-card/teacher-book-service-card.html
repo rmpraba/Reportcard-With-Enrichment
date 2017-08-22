@@ -641,7 +641,7 @@
       fnfetchcprsubjectResponse:function(e){
         document.querySelector('curriculam-report').subjectarr=e.detail.response.returnval;
       },
-      fnmasterplaninsert:function(conarr,valuearr,skarr,subarr,period,innovation,remark,rowid,lrrectife){
+      fnmasterplaninsert:function(conarr,valuearr,skarr,subarr,period,innovation,remark,rowid,teachingaid){
       // alert(subarr.length);
      if(subarr.length!=0){
 
@@ -707,7 +707,7 @@
         obj.skill=subarr[i].skillname;
         obj.value=subarr[i].valuename;
         obj.innovation=innovation;
-        obj.lrrectification=lrrectife;
+        obj.teachingaid=teachingaid;
         obj.remarks=remark;
         obj.termid=sessionStorage.getItem("termid"); 
         this.fnmasterplaninsertparam=obj;
@@ -776,7 +776,7 @@
         obj.skill=conarr[i].skillname;
         obj.value=conarr[i].valuename;
         obj.innovation=innovation;
-        obj.lrrectification=lrrectife;
+        obj.teachingaid=teachingaid;
         obj.remarks=remark;
         obj.termid=sessionStorage.getItem("termid"); 
         this.fnmasterplaninsertparam=obj;
@@ -1629,7 +1629,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
   
    },
 
-   fnsetcoskill:function(arr,period,innovation,remark,rowid,lrrectife)
+   fnsetcoskill:function(arr,period,innovation,remark,rowid,teachingaid)
 {
         //alert(period);
        for(var i=0;i<arr.length;i++){
@@ -1649,7 +1649,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
         obj.gradeid=sessionStorage.getItem("grdeidz");
         obj.innovation=innovation;
         obj.remark=remark;
-        obj.lrrectife=lrrectife;
+        obj.teachingaid=teachingaid;
         // obj.Correction=Correction;
         
         obj.rowid=rowid+localStorage.getItem("curr_sess_capters");
@@ -1758,7 +1758,7 @@ fnsetcoskill11:function(skarr,period,rowid)
         },
 
 
-    fnbookeditskill:function(period,innovation,remark,planneddate,rowidz,lrrectife){
+    fnbookeditskill:function(period,innovation,remark,planneddate,rowidz,teachingaid){
   
     this.fnbookeditskillurl=sessionStorage.getItem("addrinfo")+"/fnbookeditskill-service";
      var obj={};
@@ -1770,13 +1770,10 @@ fnsetcoskill11:function(skarr,period,rowid)
       obj.remark=remark;
       obj.planned_date=planneddate;
       obj.rowidz=rowidz;
-      obj.lrrectife=lrrectife;
+      obj.teachingaid=teachingaid;
       obj.termid=sessionStorage.getItem("termid"); 
       this.fnbookeditskillparam=obj;
-      this.$.fnbookeditskillajax.generateRequest();
-
-    
-   
+      this.$.fnbookeditskillajax.generateRequest();   
     },
       fnbookeditskillResponse:function(e)
       {

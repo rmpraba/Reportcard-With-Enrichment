@@ -10912,7 +10912,7 @@ app.post('/fnmasterplaninsert-service' , urlencodedParser,function (req, res)
       skill: req.query.skill,
       value: req.query.value,
       innovation: req.query.innovation,
-      lr_rectification:req.query.lrrectification,
+      teaching_aid:req.query.teachingaid,
       remarks: req.query.remarks,
       term_id:req.query.termid 
     };
@@ -10950,7 +10950,7 @@ app.post('/fnsetcoskill-service' , urlencodedParser,function (req, res)
        conc_date:req.query.conc_date, 
        term_id:req.query.termid,
        planned_to_date:req.query.planned_to,
-       lrrectife:req.query.lrrectife
+       teaching_aid:req.query.teachingaid
        // Correction:req.query.Correction,
     };
     console.log("----------------------------");
@@ -11079,7 +11079,7 @@ app.post('/fnsetcoskill12-service' , urlencodedParser,function (req, res)
 app.post('/fnbookeditskill-service',  urlencodedParser,function (req, res)
 {  
 
-var qur="update md_skill set planning_date='"+req.query.planned_date+"',lrrectife='"+req.query.lrrectife+"',innovation='"+req.query.innovation+"',remark='"+req.query.remark+"',period='"+req.query.period+"' where school_id='"+req.query.school_id+"' and academic_year='"+req.query.academic_year+"' and rowid='"+req.query.rowidz+"' and capter_id='"+req.query.capter_id+"' and term_id='"+req.query.termid+"'";
+var qur="update md_skill set planning_date='"+req.query.planned_date+"',teaching_aid='"+req.query.teachingaid+"',innovation='"+req.query.innovation+"',remark='"+req.query.remark+"',period='"+req.query.period+"' where school_id='"+req.query.school_id+"' and academic_year='"+req.query.academic_year+"' and rowid='"+req.query.rowidz+"' and capter_id='"+req.query.capter_id+"' and term_id='"+req.query.termid+"'";
 console.log(qur);
 
   connection.query(qur,
