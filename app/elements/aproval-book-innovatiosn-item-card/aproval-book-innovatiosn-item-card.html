@@ -158,7 +158,7 @@
              <td style="width: 8.01%;padding-left: 2%;">
                <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetbldvalues" style="color:#6699ff;float: right;"></paper-icon-button>
                    <template is="dom-repeat" items="{{bldvaluez}}" as="r">
-                    <h4 style="margin-left: -11%;width: 35%;">{{r.bldvaluename}}</h4>
+                    <h4 style="margin-left: -28%;">{{r.bldvaluename}}</h4>
                   </template>
              </td>
              <td style="width: 8.01%;padding-left: 2%;">
@@ -281,17 +281,7 @@
           </center>
       </paper-dialog>
 
-      
-
-      <paper-dialog id="lrrecitificationdialog" modal>
-          <paper-textarea label="LR Rectification" value="{{lrrectife}}"></paper-textarea>
-          <center style="margin-top: 14%;">
-            <paper-button  on-click="lrrsave" style="color:white;background-color:black">Save</paper-button>
-            <paper-button id="lrrectzz" style="color:white;background-color:black" on-click="lrrclose" >Close</paper-button>
-
-            <paper-button id="lrrctbtn" style="color:white;background-color:black" on-click="lrtcls" >Close</paper-button>
-          </center>
-      </paper-dialog>
+    
 
 
       <paper-dialog id="teachingopendialog" modal>
@@ -378,6 +368,7 @@
     {
             this.remark="";
             this.innovation="";
+            this.teachingaid="";
             this.showdate=moment(new Date()).format('L');
             localStorage.setItem("localsess_from_service",this.showdate);
             this.$.rmclssz.hidden=true;
@@ -537,6 +528,7 @@ fnpasssubarr:function(subsarr){
       
          else if(this.planneddate=="empty")
           {
+
           this.$.bookservice.fnsetcoskill(conarr,this.period,this.innovation,this.remark,this.rowid,this.teachingaid);
           this.$.bookservice.fnsetcoskillvalue(valuearr,this.period,this.rowid);
           this.$.bookservice.fnsetcoskill11(skarr,this.period,this.rowid); 
@@ -889,42 +881,8 @@ fngetbldvaluesResponse:function(e){
     {
       alert('You are allowed to select future date only..!');
     },
-    lrrectify:function()
-    {
-      this.$.lrrecitificationdialog.toggle();
-    },
-    lrrsave:function(e)
-    {
-      this.$.lrrecitificationdialog.toggle();
-      
-    },
-    lrrclose:function()
-    {
-      this.$.lrrecitificationdialog.close();
-      this.lrrectife="";
-    },
-    lrtcls:function()
-    {
-      this.$.lrrecitificationdialog.close();
-    },
-    /*lsstatus:function()
-    {
-      this.$.lsstatusdialog.toggle();
-    },
-    statussave:function(e)
-    {
-      this.$.lsstatusdialog.toggle();
-    },
-    statusclose:function()
-    {
-      this.$.lsstatusdialog.close();
-      this.correction="";
-    },
-    crtstscls:function()
-    {
-      this.$.lsstatusdialog.close();
-    }*/
-
+    
+    
 
     fnteachingaid:function(e)
     {
@@ -937,7 +895,7 @@ fngetbldvaluesResponse:function(e){
     closeteachingaaid:function()
     {
       this.$.teachingopendialog.close();
-      this.bldvalues="";
+      this.teachingaid="";
     },
     teachingclose:function()
     {
