@@ -2901,6 +2901,8 @@ fetchchapterResponse:function(e){
                 obj.correction_status=res[i].correction_status;
                 obj.remark=res[i].remarks;
                 obj.enrichment_sug=res[i].enrichment_sug;
+                obj.bld_value_name=res[i].bld_value_name;
+                obj.teaching_aid=res[i].teaching_aid;
 
                 var a=i+1;
                 obj.sno=a;
@@ -2952,7 +2954,8 @@ document.querySelector('incomplete-chapter-report').getreportarr=temparr;
                 obj.correction_status=res[i].correction_status;
                 obj.remark=res[i].remarks;
                 obj.enrichment_sug=res[i].enrichment_sug;
-
+                obj.bld_value_name=res[i].bld_value_name;
+                obj.teaching_aid=res[i].teaching_aid;
                 var a=i+1;
                 obj.sno=a;
                 temparr.push(obj);

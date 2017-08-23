@@ -67,15 +67,16 @@
     width: 100%;
     margin-top: 4%;">
         <tr style="text-align: left;">
-          <th>SNO</th>
-       
+          <th>SNO</th>       
           <th>Employee Name</th>
           <th>Section Name</th>
           <th>Chapter Name</th>
           <th>Concept</th>
           <th>Sub Concept</th>
           <th>Skill</th>
+          <th>BLD Values</th>
           <th>Value</th>
+          <th>Teaching Aids</th>
           <th>Innovation</th>
           <th>Plan from Date</th>
           <th>Plan to Date</th>
@@ -93,7 +94,9 @@
               <td>{{view.concept}}</td>
               <td>{{view.sub_concept_name}}</td>
               <td>{{view.skill}}</td>
+              <td>{{view.bld_value_name}}</td>
               <td>{{view.value}}</td>
+              <td>{{view.teaching_aid}}</td>
               <td>{{view.innovation}}</td>
               <td>{{view.planned_date_from}}</td>
               <td>{{view.planned_to_date}}</td>
@@ -147,7 +150,7 @@
        sessionStorage.setItem("subjectidz",this.subjectid);
        this.subjectname=e.target.selectedItem.textContent.trim();
      document.querySelector('#chaptertermidtttt').selected=-1;
-      
+         this.incompletereport=true;
       },
      Fnchaptertermid:function(e){
         this.termid=e.target.selectedItem.textContent.trim();
