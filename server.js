@@ -10752,12 +10752,15 @@ app.post('/fetchconcept-service',  urlencodedParser,function (req,res)
    var qur1="SELECT * FROM md_chapter where capter_id='"+req.query.chapterid+"'and subjectid='"+req.query.subjectid+"' and gradeid='"+req.query.gradeid+"' and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and term_id='"+req.query.termid+"'"; 
 
 
- var qur2="SELECT concept_id as conceptid,planning_date,rowid,period,lrrectife,innovation,remark,flag,conc_date,planned_to_date,(select  concept from md_concept  where  concept_id=conceptid)  as conceptname FROM `md_skill` WHERE  capter_id='"+req.query.chapterid+"' and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"' and term_id='"+req.query.termid+"' ";
+ var qur2="SELECT concept_id as conceptid,planning_date,rowid,period,teaching_aid,innovation,remark,flag,conc_date,planned_to_date,(select  concept from md_concept  where  concept_id=conceptid)  as conceptname FROM `md_skill` WHERE  capter_id='"+req.query.chapterid+"' and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"' and term_id='"+req.query.termid+"' ";
 
 var qur3="SELECT * FROM md_book_value  where capter_id='"+req.query.chapterid+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"' and term_id='"+req.query.termid+"'";
-  var qur4="SELECT * FROM md_book_skill  where capter_id='"+req.query.chapterid+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"' and term_id='"+req.query.termid+"'";
+
+var qur4="SELECT * FROM md_book_skill  where capter_id='"+req.query.chapterid+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"' and term_id='"+req.query.termid+"'";
 
 var qur5="SELECT * FROM md_book_sub_concept  where capter_id='"+req.query.chapterid+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"' and term_id='"+req.query.termid+"'";
+
+var qur6="SELECT * FROM md_book_bldvalue  where capter_id='"+req.query.chapterid+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"' and term_id='"+req.query.termid+"'";
 console.log("------------fetching info for planning--------------------");
     console.log(qur1);
     console.log('----------------------------');
@@ -10770,6 +10773,7 @@ console.log("------------fetching info for planning--------------------");
     var valuearr=[];
     var dbskillarr=[];
     var subarr=[];
+    var bldarr=[];
     connection.query(qur1,function(err, rows){
     if(!err)
     {  
@@ -10786,6 +10790,10 @@ console.log("------------fetching info for planning--------------------");
     if(!err)
     { //console.log(rows);
        subarr=rows;
+   connection.query(qur6,function(err, rows){
+     if(!err)
+    { //console.log(rows);
+      bldarr=rows;
    connection.query(qur3,function(err, rows){
     if(!err)
     { 
@@ -10797,11 +10805,12 @@ console.log("------------fetching info for planning--------------------");
     {
     valuearr=[];
     }
-  res.status(200).json({'chapterarr': chapterarr,'skillarr':skillarr,'valuearr':valuearr,'dbskillarr':dbskillarr,'subarr':subarr});
+  res.status(200).json({'chapterarr': chapterarr,'skillarr':skillarr,'valuearr':valuearr,'dbskillarr':dbskillarr,'subarr':subarr,'bldarr':bldarr});
     }
     else
-console.log(err);
-  });}
+ console.log(err);
+   });}
+   });}
     else
 console.log(err);
   });}
@@ -10809,6 +10818,7 @@ console.log(err);
       console.log(err);
   });}
     else
+
       console.log(err);
     });}
     else{
@@ -10912,9 +10922,10 @@ app.post('/fnmasterplaninsert-service' , urlencodedParser,function (req, res)
       skill: req.query.skill,
       value: req.query.value,
       innovation: req.query.innovation,
-      lr_rectification:req.query.lrrectification,
+      teaching_aid:req.query.teachingaid,
       remarks: req.query.remarks,
-      term_id:req.query.termid 
+      term_id:req.query.termid,
+      bld_value_name:req.query.bldvalue, 
     };
     console.log('Coming for master insertion....');
     connection.query("INSERT INTO md_curriculum_planning SET ?",[response],
@@ -10950,7 +10961,7 @@ app.post('/fnsetcoskill-service' , urlencodedParser,function (req, res)
        conc_date:req.query.conc_date, 
        term_id:req.query.termid,
        planned_to_date:req.query.planned_to,
-       lrrectife:req.query.lrrectife
+       teaching_aid:req.query.teachingaid
        // Correction:req.query.Correction,
     };
     console.log("----------------------------");
@@ -11075,11 +11086,46 @@ app.post('/fnsetcoskill12-service' , urlencodedParser,function (req, res)
     });
 });
 
+app.post('/fnsetcoskill13-service' , urlencodedParser,function (req, res)
+{  
+    var response={ 
+       capter_id:req.query.capter_id,
+       planning_date:req.query.planned_date,
+       school_id:req.query.school_id,
+       academic_year:req.query.academic_year,
+       period:req.query.period,
+       rowid:req.query.rowid,
+       subject_id:req.query.subjectid,
+       grade_id:req.query.gradeid,
+       conc_date:req.query.conc_date,
+       bld_value_id:req.query.bld_value_id,
+       bld_value_name:req.query.bld_value_name,
+       term_id:req.query.termid,
+       
+    };
+    console.log("+++++++++++++++++++++++++++++++");
+     console.log(response);
+     console.log("+++++++++++++++++++++++++++++++")
+     connection.query("INSERT INTO md_book_bldvalue SET ?",[response],
+    function(err, rows)
+    {
+    if(!err)   
+    {
+      res.status(200).json({'returnval':'Inserted!'});
+    }
+    else
+    {
+      console.log(err);
+      res.status(200).json({'returnval': 'Not Inserted!'});
+    }
+    });
+});
+
 
 app.post('/fnbookeditskill-service',  urlencodedParser,function (req, res)
 {  
 
-var qur="update md_skill set planning_date='"+req.query.planned_date+"',lrrectife='"+req.query.lrrectife+"',innovation='"+req.query.innovation+"',remark='"+req.query.remark+"',period='"+req.query.period+"' where school_id='"+req.query.school_id+"' and academic_year='"+req.query.academic_year+"' and rowid='"+req.query.rowidz+"' and capter_id='"+req.query.capter_id+"' and term_id='"+req.query.termid+"'";
+var qur="update md_skill set planning_date='"+req.query.planned_date+"',teaching_aid='"+req.query.teachingaid+"',innovation='"+req.query.innovation+"',remark='"+req.query.remark+"',period='"+req.query.period+"' where school_id='"+req.query.school_id+"' and academic_year='"+req.query.academic_year+"' and rowid='"+req.query.rowidz+"' and capter_id='"+req.query.capter_id+"' and term_id='"+req.query.termid+"'";
 console.log(qur);
 
   connection.query(qur,
@@ -11151,6 +11197,33 @@ app.post('/fngetconceptvalue111-service',  urlencodedParser,function (req,res)
      res.status(200).json({'': 'no rows'}); 
   });
 });
+
+app.post('/fngetbldvalues-service',  urlencodedParser,function (req,res)
+  {  
+      var qur1="SELECT * FROM md_bldvalue";
+      var qur2="SELECT * FROM md_book_bldvalue where  capter_id='"+req.query.capter_id+"' and  planning_date='"+req.query.planneddate+"' and period='"+req.query.period+"'";
+   console.log(qur1);
+    console.log(qur2);
+    var conceptarr=[];
+    var skillarr=[];
+    connection.query(qur1,function(err, rows){
+    if(!err)
+    {  
+    conceptarr=rows;
+    connection.query(qur2,function(err, rows){
+    if(!err)
+    {  
+
+    skillarr=rows;
+    res.status(200).json({'conceptarr': conceptarr,'skillarr':skillarr});
+    }
+    });
+    }
+    else
+     res.status(200).json({'': 'no rows'}); 
+  });
+});
+
 
 app.post('/fngetskills-service',  urlencodedParser,function (req,res)
   {  
@@ -11299,7 +11372,7 @@ app.post('/buffdel-service',  urlencodedParser,function (req, res)
 
 app.post('/fetchclassconcept11-service',  urlencodedParser,function (req,res)
   {
-   var qur1="select  section_id,emp_id as empid,(select distinct emp_name from md_employee_creation where emp_id=empid and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' ) as empname,chapter_id,chapter_name,concept_id,concept_name,sub_concept_id,sub_concept_name,period,planned_date_from,planned_to_date,skill,value,innovation,lr_rectification,remarks,correction_status,completion_status,created_date,row_id ,term_id ,enrichment_sug from md_curriculum_planning_approval where grade_id='"+req.query.gradeid+"' and  subject_id='"+req.query.subjectid+"' and  section_id='"+req.query.sectoinidz+"' and chapter_id='"+req.query.chapterid+"'  and academic_year='"+req.query.academic_year+"' and school_id='"+req.query.schoolid+"' and completion_status='no' and term_id='"+req.query.termid+"'";
+   var qur1="select  section_id,emp_id as empid,(select distinct emp_name from md_employee_creation where emp_id=empid and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' ) as empname,chapter_id,chapter_name,concept_id,concept_name,sub_concept_id,sub_concept_name,period,planned_date_from,planned_to_date,skill,value,innovation,lr_rectification,remarks,correction_status,completion_status,created_date,row_id ,term_id ,enrichment_sug,bld_value_name,teaching_aid from md_curriculum_planning_approval where grade_id='"+req.query.gradeid+"' and  subject_id='"+req.query.subjectid+"' and  section_id='"+req.query.sectoinidz+"' and chapter_id='"+req.query.chapterid+"'  and academic_year='"+req.query.academic_year+"' and school_id='"+req.query.schoolid+"' and completion_status='no' and term_id='"+req.query.termid+"'";
       console.log("---------------");
       console.log(qur1);
      console.log("---------------");
@@ -11561,6 +11634,8 @@ app.post('/updateapprovalstatusofchapterconcept-service',  urlencodedParser,func
        enrichment_sug: req.query.enrichmentsuggest ,
        completion_date: req.query.completion_date,
        term_id:req.query.termid,
+       bld_value_name:req.query.bldvalues,
+       teaching_aid:req.query.teachingaid
     };
     // var qurcheck="SELECT * FROM md_curriculum_planning_approval WHERE school_id='"+req.query.schoolid+"' "+
     // "and academic_year='"+req.query.academicyear+"' and emp_id";
