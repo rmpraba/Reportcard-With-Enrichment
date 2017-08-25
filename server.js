@@ -10,7 +10,7 @@ var connection = mysql.createConnection({
    host     : 'localhost',
    user     : 'root',
    password : '',
-   database : 'reportcard1'
+   database : 'reportcard11'
 
 
 });
