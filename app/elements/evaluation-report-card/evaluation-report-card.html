@@ -84,6 +84,7 @@
           <th>Completed Date</th>
           <th>Remarks</th>
           <th>Correction Status</th>
+          <th>Completion status</th>
           <th>Enrichment Suggestion</th>
         </tr>
         <template  is="dom-repeat" items="{{getreportarr}}" as="view">
@@ -104,6 +105,7 @@
               <td>{{view.completion_date}}</td>
               <td>{{view.remark}}</td>
               <td>{{view.correction_status}}</td>
+              <td>{{view.completion_status}}</td>
               <td>{{view.enrichment_sug}}</td>
           </tr>
         </template>
