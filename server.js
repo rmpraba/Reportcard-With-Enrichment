@@ -7,7 +7,6 @@ var dbserver_ip_address = process.env.OPENSHIFT_MYSQL_DB_HOST || '127.0.0.1'
 
 
 var connection = mysql.createConnection({
-
    host     : 'localhost',
    user     : 'root',
    password : '',
@@ -11198,32 +11197,6 @@ app.post('/fngetskills-service',  urlencodedParser,function (req,res)
      res.status(200).json({'': 'no rows'}); 
   });
 });
-app.post('/demo-service',  urlencodedParser,function (req,res)
-  {  
-      var qur1="SELECT * FROM master_skill";
-      var qur2="SELECT * FROM md_curriculum_planning  where  chapter_id='"+req.query.capter_id+"' and  planned_date_from='"+req.query.planneddate+"' and period='"+req.query.period+"' and row_id='"+req.query.rowidz+"'";
-      console.log("---------------------------------");
-   console.log(qur1);
-    console.log(qur2);
-    var conceptarr=[];
-    var skillarr=[];
-    connection.query(qur1,function(err, rows){
-    if(!err)
-    {  
-    conceptarr=rows;
-    connection.query(qur2,function(err, rows){
-    if(!err)
-    {  
-
-    skillarr=rows;
-    res.status(200).json({'conceptarr': conceptarr,'skillarr':skillarr});
-    }
-    });
-    }
-    else
-     res.status(200).json({'': 'no rows'}); 
-  });
-});
 
 
 app.post('/buffset-service' ,urlencodedParser, function (req, res)
@@ -12182,7 +12155,7 @@ app.post('/fngetconceptreport1-service',  urlencodedParser,function (req, res)
 {
 
 
-var qur="select * from md_curriculum_planning_approval where school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"' and term_id='"+req.query.termid+"'";
+var qur="select * from md_curriculum_planning_approval where school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"'and term_id='"+req.query.termid+"'";
  
  console.log(qur);
 

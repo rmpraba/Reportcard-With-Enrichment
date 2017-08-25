@@ -1475,6 +1475,9 @@ var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
              temp2.push(obj);
              overall.splice(n,1);
              }}}}
+             //alert(overall.length);
+    //alert(JSON.stringify(overall));
+
     for(var n=0;n<overall.length;n++){
            var obj={};
                  obj.planning_date=overall[n].planning_date; 
@@ -1489,12 +1492,8 @@ var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
              temp2.push(obj);
        
             }
-<<<<<<< HEAD
 
   
-=======
- 
->>>>>>> origin/master
   var temp3=[];
   for(var l=0;l<temp2.length;l++){
   
@@ -1608,13 +1607,12 @@ var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
      
           if(temparr[n].rowidz==overall3[r].rowidz){
               if(temparr[n].planning_date==overall3[r].planning_date){
-          var obj={};
+         var obj={};
              obj.planning_date=temparr[n].planning_date; 
              obj.period=temparr[n].period; 
              obj.innovation=temparr[n].innovation; 
              obj.teachingaid=temparr[n].teachingaid;
              obj.planned_to_date=temparr[n].planned_to_date;
-                    
              obj.remark=temparr[n].remark;
              obj.suarr=temparr[n].suarr;
              obj.valuearrr=temparr[n].valuearrr; 
@@ -2597,6 +2595,7 @@ for(var r=0;r<overall2.length;r++){
                       nameobj.subject_id=sessionStorage.getItem("subjectidz");
                     setattr.push(nameobj);
                  }
+                      // alert(JSON.stringify(setattr));
   
    document.querySelector('class-teacher-book-rejection-item-card').mainnarr=setattr; 
   document.querySelector('class-teacher-book-rejection-item-card').empid=res2[0].empid; 
