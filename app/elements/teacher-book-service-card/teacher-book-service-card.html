@@ -3200,16 +3200,16 @@ document.querySelector('incomplete-chapter-report').getreportarr=temparr;
                     obj.enrichment_sug=res[i].enrichment_sug;
                     obj.completion_date=res[i].completion_date;
                     obj.co_ordinator_remarks=res[i].co_ordinator_remarks;
+                    var n=i+1;
+                    obj.snum=n;
                     //alert(JSON.stringify(obj));
-                    var s=i+1;
-                    obj.sno=s;
                     temparr2.push(obj);
                 }
                 
-                            }
+            }
             //alert(JSON.stringify(temparr2));
             
-            document.querySelector('innovation-report').innovatearr=res;
+            document.querySelector('innovation-report').innovatearr=temparr2;
 
         }
         

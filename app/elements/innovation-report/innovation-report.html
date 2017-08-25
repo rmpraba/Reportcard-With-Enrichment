@@ -30,6 +30,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
     <div>
+      <center>
+        <h3>INNOVATION REPORT</h3>
+      </center>
+    </div>
+    <div>
       <span class="position"> 
         <paper-dropdown-menu  label="Select the Grade">
           <paper-menu id="innovategradecccc" class="dropdown-content"   on-iron-select="fnselectinnovategrade">
@@ -88,13 +93,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <th>Plan to Date</th>
           <th>Completed Date</th>
           <th>Remarks</th>
+          <th>Co-ordinator Remarks</th>
           <th>Correction Status</th>
           <th>Completion Status</th>
           <th>Enrichment Suggestion</th>
         </tr>
         <template  is="dom-repeat" items="{{innovatearr}}" as="view">
           <tr>
-              <td>{{view.sno}}</td>
+              <td>{{view.snum}}</td>
               <td>{{view.emp_name}}</td>
               <td>{{view.section_name}}</td>
               <td>{{view.concept_name}}</td>
@@ -107,6 +113,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <td>{{view.planned_to_date}}</td>
               <td>{{view.completion_date}}</td>
               <td>{{view.remark}}</td>
+              <td>{{view.co_ordinator_remarks}}</td>
               <td>{{view.correction_status}}</td>
               <td>{{view.completion_status}}</td>
               <td>{{view.enrichment_sug}}</td>
