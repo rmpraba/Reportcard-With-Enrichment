@@ -18,7 +18,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }  table
         {   
               table-layout: fixed;
-          width: 1457px;
+          width: 1496px;
           border-collapse: collapse;
           margin-left: -1%;
           margin-top: 0%;
@@ -38,6 +38,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           text-transform: none;
           height: 25px;
         } 
+        
+
+
+         #rejsavedialog
+        {
+          border-radius: 10px;
+          width: 354px;
+          height: 170px;
+        }
+        #rejfailuredialog
+        {
+          border-radius: 10px;
+          width: 354px;
+          height: 170px;
+        }
     </style>
     <div>
 
@@ -56,27 +71,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 
               <td hidden>{{empid}}</td>
-              <td style="width: 10%;">{{conceptname}}</td>
-              <td style="width: 10%;">{{subconceptname}}</td>
-              <td style="width: 5%;">{{period}}</td>
-              <td style="width: 5.9%;">{{skill}}</td>
+              <td style="width: 10%">{{conceptname}}</td>
+              <td style="width: 10%">{{subconceptname}}</td>
+              <td style="width: 5%;text-align: center;">{{period}}</td>
+              <td style="width: 5.4%;">{{skill}}</td>
               <td style="width: 6.7%;">{{bldvalues}}</td>
-              <td style="width: 5.9%;">{{value}}</td>
-              <td style="width: 5.9%;">{{teachingaid}}</td>
-              <td style="width: 5.9%;">{{innovation}}</td> 
-              <td style="width: 5.9%;">{{planfrom}}</td>
-              <td style="width: 5.9%;">{{planto}}</td>
-              <td style="width: 5.9%;">
-                <div hidden>{{completiondate}}</div>
-                  <complection-date-picker-card  ></complection-date-picker-card>
+              <td style="width: 5.4%;">{{value}}</td>
+              <td style="word-wrap: break-word;width: 5.4%;">{{teachingaid}}</td>
+              <td style="word-wrap: break-word;width: 5.4%;">{{innovation}}</td> 
+              <td style="width: 5.4%;">{{planfrom}}</td>
+              <td style="width: 5.4%;">{{planto}}</td>
+              <td style="width: 5.4%;">
+                <div hidden$="{{hideeditvalue}}">{{completiondate}}</div>
+                  <complection-date-picker-card hidden$="{{hidesavevalue}}" ></complection-date-picker-card>
               </td>
-              <td style="width: 5.95%;">
-                <paper-textarea value={{remark}}></paper-textarea>
+              <td style="word-wrap: break-word;width: 5.4%;">{{remark}}</td>
+              <td style="word-wrap: break-word;width: 5.45%;">
+                <paper-textarea readonly$="{{newremarkszzz}}" value={{coremark}}></paper-textarea>
               </td>
-              <td style="width: 5.95%;">{{enrichmentsug}}</td>
-              <td style="width: 5.95%;">{{correctionstatus}}</td>
+              <td style="width: 5.45%;">{{enrichmentsug}}</td>
+              <td style="width: 5.45%;">{{correctionstatus}}</td>
               <!-- <td style="width: 8.1%;">{{completionstatus}}</td> -->
-              <td style="width: 5.95%;">
+              <td style="width: 5.45%;">
                 <paper-checkbox id={{id}} on-change="fnsetyes">Yes</paper-checkbox></br>
            </td>
               <td><paper-icon-button  on-click="fnaroveset" icon="save"></paper-icon-button>
@@ -84,6 +100,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               </td>
            </tr>
       </table>
+
+
+      <paper-dialog id="rejsavedialog" modal>
+       <h3><center>SUCCESS</center></h3>
+       <center>
+         <paper-button on-click="rejectclose2dialog" style="color:white;background-color:black;margin-top: 15%;">OK</paper-button>
+       </center>
+     </paper-dialog>
+
+      <paper-dialog id="rejfailuredialog" modal>
+       <h3><center>FAILURE</center></h3>
+       <center>
+         <paper-button on-click="rejfailureclose2" style="color:white;background-color:black;margin-top: 15%;">OK</paper-button>
+       </center>
+     </paper-dialog>
        <teacher-book-service-card id="bookservice"></teacher-book-service-card>
  
   </template>
@@ -110,10 +141,8 @@ var costatus;
     fnaroveset:function(e)
     {
       
-
- 
-      
-    this.$.bookservice.fnfinalreaprovebook(this.empid,this.skill,this.innovation,this.enrichmentsug,this.period,this.planneddate,this.conceptname,this.conceptid,this.remark,this.sectionid,this.subjectid,this.subconceptid,this.value,this.correctionstatus,this.completionstatus,this.rowidz);
+    //alert(this.coremark);
+    this.$.bookservice.fnfinalreaprovebook(this.empid,this.skill,this.innovation,this.enrichmentsug,this.period,this.planneddate,this.conceptname,this.conceptid,this.remark,this.sectionid,this.subjectid,this.subconceptid,this.value,this.correctionstatus,this.completionstatus,this.rowidz,this.coremark);
 
       this.hidesavevalue=true;
       this.hideeditvalue=false;
@@ -137,6 +166,24 @@ var costatus;
         document.querySelector('#'+this.id).checked=false;
       }
    },*/
+
+
+      rejectclose2dialog:function()
+     {
+      this.$.rejsavedialog.close();
+     },
+     rejectopen2dialog:function()
+     {
+      this.$.rejsavedialog.toggle();
+     },
+     rejfailureopen:function()
+     {
+      this.$.rejfailuredialog.toggle();
+     },
+     rejfailureclose2:function()
+     {
+      this.$.rejfailuredialog.close()
+     }
 
 
     });

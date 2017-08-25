@@ -95,7 +95,7 @@ this.rejectcapterstatusurl=sessionStorage.getItem("addrinfo")+"/fetchclassconcep
         },
          rejectcapterstatusResponse:function(e){
           var res2=e.detail.response.returnval;
-       //alert(JSON.stringify(res2));
+       alert(JSON.stringify(res2));
         var setattr=[];
                var a=[];
             var overall=[];
@@ -122,13 +122,14 @@ this.rejectcapterstatusurl=sessionStorage.getItem("addrinfo")+"/fetchclassconcep
                       nameobj.planned_to_date=res2[k].planned_to_date;
                       nameobj.bld_value_name=res2[k].bld_value_name;
                       nameobj.teaching_aid=res2[k].teaching_aid;
+                       nameobj.co_ordinator_remarks=res2[k].co_ordinator_remarks;
                        nameobj.rowid=k+1;
                       nameobj.hidecheck=true; 
                       nameobj.grade_id=sessionStorage.getItem("grdeidz");
                       nameobj.subject_id=sessionStorage.getItem("subjectidz");
                     setattr.push(nameobj);
    }
-                   //alert(JSON.stringify(setattr));
+                   alert(JSON.stringify(setattr));
   
     document.querySelector('app-card').setPage('homepage','');
    document.querySelector('home-page').setPage('class-teacher-book-rejection-item-card','');

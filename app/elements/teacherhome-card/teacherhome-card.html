@@ -1,4 +1,4 @@
-l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
+<link rel="import" href="..\..\bower_components/polymer/polymer.html">
 <link rel="import" href="..\..\bower_components/paper-button/paper-button.html">
 <link rel="import" href="..\..\bower_components/neon-animation/animations/scale-up-animation.html">
 <link rel="import" href="..\..\bower_components/neon-animation/animations/fade-out-animation.html">
@@ -269,6 +269,12 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
        <div class="card" hidden$="{{evaluationreport}}">
         <paper-button on-click="fnevaluationreport" no ink><img src="../../images/ereport.jpg" height="180px" width="180px">
         <h4>Evaluation Report</h4>
+        </paper-button>
+      </div>
+
+      <div class="card" hidden$="{{innnovationreport}}">
+        <paper-button on-click="fninnovation" no ink><img src="../../images/innovations.jpg" height="180px" width="180px">
+        <h4>Innovation Report</h4>
         </paper-button>
       </div>
 
@@ -845,7 +851,14 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
       document.querySelector('home-page').setPage('evaluation-report-card','');
        this.$.bookservice.fnsetrejectbookgrade1();
       this.$.bookservice.fnsetrejectbooksubject1();
-      }   
+      }  
+      if(localStorage.getItem('curr_sess_loggedassesmenttype')=="innovationreport") 
+      {
+          document.querySelector('app-card').setPage('homepage','');
+          document.querySelector('home-page').setPage('innovation-report','');
+             this.$.bookservice.fninnovategrade();
+             this.$.bookservice.fnselectinnovatesubject();
+      }
       this.$.cdialog.close();   
       },
       FnStudent:function()
@@ -1432,6 +1445,12 @@ l<link rel="import" href="..\..\bower_components/polymer/polymer.html">
           //  document.querySelector('curriculam-report').Fnrefresh11();
           document.querySelector('evaluation-report-card').FnRefreshtt();
             this.$.cdialog.toggle();
+          },
+          fninnovation:function(e)
+          {
+             localStorage.setItem('curr_sess_loggedassesmenttype','innovationreport');
+             document.querySelector('innovation-report').FnRefreshinnvt();
+             this.$.cdialog.toggle();
           }
        
     });
