@@ -85,6 +85,7 @@
           <th>Remarks</th>
           <th>Co-ordinator Remarks</th>
           <th>Correction Status</th>
+          <th>Completion status</th>
           <th>Enrichment Suggestion</th>
         </tr>
         <template  is="dom-repeat" items="{{getreportarr}}" as="view">
@@ -106,6 +107,7 @@
               <td style="word-wrap: break-word;">{{view.remark}}</td>
               <td style="word-wrap: break-word;">{{view.co_ordinator_remarks}}</td>
               <td>{{view.correction_status}}</td>
+              <td>{{view.completion_status}}</td>
               <td>{{view.enrichment_sug}}</td>
           </tr>
         </template>

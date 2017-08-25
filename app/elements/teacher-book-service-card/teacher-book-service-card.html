@@ -692,7 +692,7 @@
       fnfetchcprsubjectResponse:function(e){
         document.querySelector('curriculam-report').subjectarr=e.detail.response.returnval;
       },
-      fnmasterplaninsert:function(conarr,valuearr,skarr,subarr,period,innovation,remark,rowid,teachingaid,bldvaluearr){
+      fnmasterplaninsert:function(conarr,valuearr,skarr,subarr,period,innovation,remark,rowid,teachingaid,bldvaluearr,sno){
       // alert(subarr.length);
      if(subarr.length!=0){
 
@@ -772,6 +772,7 @@
         obj.subconceptid=subarr[i].subconceptid;
         obj.subconceptname=subarr[i].subconceptname;
         obj.period=period;
+        obj.sno=sno;
         obj.plannedfromdate=localStorage.getItem("localsess_from_service");
         obj.plannedtodate=localStorage.getItem("localsess_last_service");
         obj.skill=subarr[i].skillname;
@@ -1265,7 +1266,7 @@ var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
 
      buffset:function(bufferperiodzz,pafter){
         bufferperiod=bufferperiodzz;
-        this.periodafter=pafter;
+      this.periodafter=pafter;
       this.buffseturl=sessionStorage.getItem("addrinfo")+"/buffset-service";
       var obj={};
       obj.capter_id=localStorage.getItem("curr_sess_capters");
@@ -1524,32 +1525,21 @@ var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
              temp2.push(obj);
              overall.splice(n,1);
              }}}}
-             //alert(overall.length);
-    //alert(JSON.stringify(overall));
-
     for(var n=0;n<overall.length;n++){
            var obj={};
                  obj.planning_date=overall[n].planning_date; 
              obj.period=overall[n].period; 
              obj.teachingaid=overall[n].teaching_aid;
-             // obj.Correction=overall[n].Correction;
              obj.planned_to_date=overall[n].planned_to_date;
-
-           
              obj.innovation=overall[n].innovation; 
              obj.remark=overall[n].remark;
              obj.suarr="empty";
              obj.valuearrr=overall[n].valuearrr; 
              obj.rowidz=overall[n].rowidz; 
              temp2.push(obj);
-          //  overall.splice(n,1);
-
+       
             }
 
-            // alert(overall.length);
-    //alert(JSON.stringify(overall));
-   //alert(temp2.length);
- 
   var temp3=[];
   for(var l=0;l<temp2.length;l++){
   
@@ -1663,7 +1653,7 @@ var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
      
           if(temparr[n].rowidz==overall3[r].rowidz){
               if(temparr[n].planning_date==overall3[r].planning_date){
-         var obj={};
+          var obj={};
              obj.planning_date=temparr[n].planning_date; 
              obj.period=temparr[n].period; 
              obj.innovation=temparr[n].innovation; 
@@ -1703,10 +1693,55 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
                       obj.hidecheck=false; 
                       obj.hidecheck1=true; 
                       obj.hidecheck11=true; 
-                     
-                      res2.push(obj);     
+                     res2.push(obj);     
                       }
-                   for(var k=0;k<r;k++){
+
+
+               
+         
+          var flag=0;
+          if(parseInt(this.periodafter)!=-1&&parseInt(this.periodafter)>0&&this.periodafter!=" "){
+            flag=1;
+            var len=res2.length;
+           
+           var temp=[];
+            for(var i=0;i<res2.length;i++){
+                if((i+1)==parseInt(this.periodafter)){
+                     temp.push(res2[i]);
+                   for(var k=0;k<bufferperiod;k++){
+                   var obj={};
+                   obj.concept_id="";  
+                   obj.concept="";   
+                   obj.capter_id=""; 
+                   obj.innovation="";  
+                   obj.remark="";  
+                   obj.planning_date="empty" ;
+                   obj.planned_to_date="" ;
+                   obj.rowidz="";
+                   obj.teachingaid="";
+                   obj.hidecheck=true; 
+                   obj.hidecheck1=false; 
+                   obj.hidecheck11=false;
+                   obj.rowid=parseInt(res2.length)+1+k;
+                   temp.push(obj); 
+                   alert('1');
+                  }
+                  
+                  alert(JSON.stringify(obj));
+
+                  alert(JSON.stringify(res2[i]));
+                    
+                  
+                }
+                else{
+                    temp.push(res2[i]);
+                }
+            }
+          }
+        //alert(JSON.stringify(res2));
+             
+            if(flag==0){
+                  for(var k=0;k<r;k++){
                    var obj={};
                    obj.concept_id="";  
                    obj.concept="";   
@@ -1720,40 +1755,28 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
                    obj.hidecheck=true; 
                    obj.hidecheck1=false; 
                    obj.hidecheck11=false; 
-                 
-                   // obj.Correction="";  
                   res2.push(obj);
-                   }
-           for(var i=0;i<res2.length;i++){
-            res2[i].rowid=i+1;
-          }
-          var flag=0;
-          if(parseInt(this.periodafter)!=-1&&parseInt(this.periodafter)>0&&this.periodafter!="  "){
-            flag=1;
-            var len=res2.length;
-            var obj=res2.splice(len-1,1);
-           var temp=[];
+              }
             for(var i=0;i<res2.length;i++){
-                if((i+1)==parseInt(this.periodafter)){
-                    temp.push(obj);
-                }
-                else{
-                    temp.push(res2[i]);
-                }
+            res2[i].rowid=i+1;
+          } 
+              for(var i=0;i<res2.length;i++){
+            res2[i].sno=i+1;
             }
+           document.querySelector('teacher-book-approve-card').overallarr1=res2;
+           
+          }                
+          else {
+             for(var i=0;i<temp.length;i++){
+            temp[i].sno=i+1;
           }
-        //alert(JSON.stringify(res2));
-             
-            if(flag==0)                
-            document.querySelector('teacher-book-approve-card').overallarr1=res2;
-            else
-            document.querySelector('teacher-book-approve-card').overallarr1=temp;  
-
-             //document.querySelector('teacher-book-approve-card').planningopenddd(); 
+           document.querySelector('teacher-book-approve-card').
               res2=[];
               temp=[];
               this.periodafter="";
 
+            }
+          
        },
 
 
@@ -1793,7 +1816,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
   
    },
 
-   fnsetcoskill:function(arr,period,innovation,remark,rowid,teachingaid)
+fnsetcoskill:function(arr,period,innovation,remark,rowid,teachingaid,sno)
 {
         //alert(period);
        for(var i=0;i<arr.length;i++){
@@ -1807,7 +1830,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
         obj.capter_id=localStorage.getItem("curr_sess_capters");
         obj.planned_date=localStorage.getItem("localsess_from_service");
         obj.planned_to=localStorage.getItem("localsess_last_service");
-
+        obj.sno=sno;
         obj.period=period;
         obj.subjectid=sessionStorage.getItem("subjectidz");
         obj.gradeid=sessionStorage.getItem("grdeidz");
@@ -1826,7 +1849,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
    },
 
 
-fnsetcoskillvalue:function(valuearr,period,rowid)
+fnsetcoskillvalue:function(valuearr,period,rowid,sno)
    {
  
  for(var i=0;i<valuearr.length;i++){
@@ -1844,6 +1867,7 @@ fnsetcoskillvalue:function(valuearr,period,rowid)
         obj.rowid=rowid+localStorage.getItem("curr_sess_capters");
         obj.period=period;
         obj.flag="active";
+        obj.sno=sno;
         obj.conc_date=valuearr[i].valueid+localStorage.getItem("localsess_from_service")
         this.fnsetcoskillvalueparam=obj;
         this.$.fnsetcoskillvalueajax.generateRequest();
@@ -1854,7 +1878,7 @@ fnsetcoskillvalue:function(valuearr,period,rowid)
          //alert(JSON.stringify(res));
 
        },
-fnsetcoskill11:function(skarr,period,rowid)
+fnsetcoskill11:function(skarr,period,rowid,sno)
 {
  
     for(var i=0;i<skarr.length;i++){
@@ -1871,6 +1895,7 @@ fnsetcoskill11:function(skarr,period,rowid)
         obj.gradeid=sessionStorage.getItem("grdeidz");
         obj.rowid=rowid+localStorage.getItem("curr_sess_capters");
         obj.period=period;
+        obj.sno=sno;
         obj.flag="active";
         obj.conc_date=skarr[i].skillid+localStorage.getItem("localsess_from_service")
         this.fnsetcoskill11param=obj;
@@ -1882,7 +1907,7 @@ fnsetcoskill11:function(skarr,period,rowid)
         var res=e.detail.response.returnval;
          //alert(JSON.stringify(res));
        },
-       fnsetcoskill12:function(skarr,period,rowid)
+       fnsetcoskill12:function(skarr,period,rowid,sno)
 {
  
     for(var i=0;i<skarr.length;i++){
@@ -1899,6 +1924,7 @@ fnsetcoskill11:function(skarr,period,rowid)
         obj.gradeid=sessionStorage.getItem("grdeidz");
         obj.rowid=rowid+localStorage.getItem("curr_sess_capters");
         obj.period=period;
+         obj.sno=sno;
         obj.flag="active";
         obj.conc_date=skarr[i].subconceptid+localStorage.getItem("localsess_from_service")
         this.fnsetcoskill12param=obj;
@@ -1920,7 +1946,7 @@ fnsetcoskill11:function(skarr,period,rowid)
        //        this.conceptseq(); 
        //        this.FnFetchConceptService();
         },
-fnsetcoskill13:function(skarr,period,rowid)
+fnsetcoskill13:function(skarr,period,rowid,sno)
 {
  
     for(var i=0;i<skarr.length;i++){
@@ -1937,6 +1963,7 @@ fnsetcoskill13:function(skarr,period,rowid)
         obj.gradeid=sessionStorage.getItem("grdeidz");
         obj.rowid=rowid+localStorage.getItem("curr_sess_capters");
         obj.period=period;
+        obj.sno=sno;
         obj.flag="active";
         obj.conc_date=skarr[i].bldvalueid+localStorage.getItem("localsess_from_service")
         this.fnsetcoskill13param=obj;
@@ -2632,7 +2659,6 @@ for(var r=0;r<overall2.length;r++){
 
                     setattr.push(nameobj);
                  }
-                    //alert(JSON.stringify(setattr));
   
    document.querySelector('class-teacher-book-rejection-item-card').mainnarr=setattr; 
   document.querySelector('class-teacher-book-rejection-item-card').empid=res2[0].empid; 
@@ -3014,7 +3040,7 @@ document.querySelector('incomplete-chapter-report').getreportarr=temparr;
           for(var i=0;i<res.length;i++)
           {
             var obj={};
-
+ 
                 obj.emp_name=res[i].emp_name;
                 obj.emp_id=res[i].emp_id;
                 obj.chapter=res[i].chapter_name;
@@ -3035,6 +3061,7 @@ document.querySelector('incomplete-chapter-report').getreportarr=temparr;
                 obj.bld_value_name=res[i].bld_value_name;
                 obj.teaching_aid=res[i].teaching_aid;
                 obj.co_ordinator_remarks=res[i].co_ordinator_remarks;
+                obj.completion_status=res[i].completion_status;
                 var a=i+1;
                 obj.sno=a;
                 temparr.push(obj);

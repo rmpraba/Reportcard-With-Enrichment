@@ -97,7 +97,6 @@
               <td hidden$="{{hideflag}}" style="width: 5.5%;">
                 <paper-checkbox id="cpayes{{subconceptid}}" checked on-change="FnYes">Yes</paper-checkbox><br>
                 <paper-checkbox id="cpano{{subconceptid}}" on-change="FnNo">No</paper-checkbox>
-              </td>
               <td style="width: 5.5%;">
                 <div hidden$="{{hidetitleflag}}">{{enrichmentsug}}</div>
                 <paper-input value={{enrichmentsuggest}} hidden$="{{hideflag}}"></paper-input>
@@ -131,20 +130,20 @@
       is: 'curriculum-plan-conceptapproval-itemcard',
       
       FnYes:function(e){
-        if(document.querySelector("#cpayes"+this.subconceptid).checked==true){
+        if(document.querySelector("#cpayes"+this.rowid+this.subconceptid).checked==true){
        completionstatus="Yes";
-        document.querySelector("#cpano"+this.subconceptid).checked=false;
+        document.querySelector("#cpano"+this.rowid+this.subconceptid).checked=false;
         }
-        if(document.querySelector("#cpayes"+this.subconceptid).checked==false)
+        if(document.querySelector("#cpayes"+this.rowid+this.subconceptid).checked==false)
       completionstatus="";
       },
       FnNo:function(e){
-        if(document.querySelector("#cpano"+this.subconceptid).checked==true)
+        if(document.querySelector("#cpano"+this.rowid+this.subconceptid).checked==true)
         {
       completionstatus="No";
-        document.querySelector("#cpayes"+this.subconceptid).checked=false;
+        document.querySelector("#cpayes"+this.rowid+this.subconceptid).checked=false;
         }
-        if(document.querySelector("#cpano"+this.subconceptid).checked==false)
+        if(document.querySelector("#cpano"+this.rowid+this.subconceptid).checked==false)
        completionstatus="";
       },
       FnSave:function(){
@@ -154,7 +153,7 @@
        completionstatus='Yes';
         var obj={};
         obj.sno=this.sno;
-        obj.rowid=this.rowid;
+        obj.rowid=this.rowid; 
         obj.conceptid=this.conceptid;
         obj.conceptname=this.conceptname;
         obj.subconceptid=this.subconceptid;

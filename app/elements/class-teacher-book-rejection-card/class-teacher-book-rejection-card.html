@@ -95,8 +95,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <td style="width: 5.45%;">
                 <paper-checkbox id={{id}} on-change="fnsetyes">Yes</paper-checkbox></br>
            </td>
-              <td><paper-icon-button  on-click="fnaroveset" hidden$="{{hidesavevalue}}" icon="save"></paper-icon-button>
-              <paper-icon-button  on-click="fnedit" icon="create" hidden$="{{hideeditvalue}}"></paper-icon-button>
+              <td><paper-icon-button  on-click="fnaroveset" icon="save"></paper-icon-button>
+             
               </td>
            </tr>
       </table>
@@ -127,7 +127,7 @@ var costatus;
 
       ready:function(e)
       {
-        this.hidesavevalue=true;
+        
         this.hideeditvalue=false;
         this.newremarkszzz=true;
   },

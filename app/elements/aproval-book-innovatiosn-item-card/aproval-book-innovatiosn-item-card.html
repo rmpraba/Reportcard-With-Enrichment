@@ -177,14 +177,16 @@
            <paper-input value={{conceptid}} hidden></paper-input>
            <paper-input value={{capterid}} hidden></paper-input>
            <paper-input value={{rowidz}} hidden></paper-input>
+           <paper-input value={{rowidz}} hidden></paper-input>
+       
         <table border="1">
            <tr>
-            <td style="padding-left: 3%;width: 3.7%;">{{rowid}}</td>
+            <td style="padding-left: 3%;width: 3.7%;">{{sno}}</td>
             
              <td style="width: 11.8%;padding-left: 2%;">
                 <paper-icon-button   hidden$="{{hidecheck11}}" icon="add" on-click="fngetconceptz" style="color:#6699ff;float: right;"></paper-icon-button>
                   <template is="dom-repeat" items="{{conceptzz}}" as="r">
-                    <h4 style="margin-left: -11%;width: 90%;">{{r.conceptname}}</h4>
+                     <h4 style="margin-left: -11%;width: 90%;">{{r.conceptname}}</h4>
                   </template>
               </td>
               <td style="width: 12.56%;padding-left: 2%;">
@@ -259,7 +261,8 @@
                 <paper-icon-button id="editidd" hidden$="{{hidecheck}}"  icon="create" on-click="fneditbook"></paper-icon-button> 
                 <paper-tooltip for="editidd">Edit</paper-tooltip>
             </td>
-             
+             <td hidden>
+             <paper-button on-click="demo">button</paper-button></td>
            </tr>
        </table>
      </div>
@@ -426,6 +429,16 @@
         handle-as="json"
         content-type="application/json"
         on-response="fngetbldvaluesResponse"
+        debounce-duration="300" />
+       </iron-ajax>
+       <iron-ajax
+        method="post"
+        id="demoajax"
+        url="{{demourl}}"
+        params="{{demoparam}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="demoResponse"
         debounce-duration="300" />
        </iron-ajax>
          
@@ -613,12 +626,12 @@ fnpasssubarr:function(subsarr){
          else if(this.planneddate=="empty")
           {
 
-          this.$.bookservice.fnsetcoskill(conarr,this.period,this.innovation,this.remark,this.rowid,this.teachingaid);
-          this.$.bookservice.fnsetcoskillvalue(valuearr,this.period,this.rowid);
-          this.$.bookservice.fnsetcoskill11(skarr,this.period,this.rowid); 
-          this.$.bookservice.fnsetcoskill12(subsarrr,this.period,this.rowid); 
-       this.$.bookservice.fnsetcoskill13(bldvaluearr,this.period,this.rowid); 
-          this.$.bookservice.fnmasterplaninsert(conarr,valuearr,skarr,subsarrr,this.period,this.innovation,this.remark,this.rowid,this.teachingaid,bldvaluearr);
+          this.$.bookservice.fnsetcoskill(conarr,this.period,this.innovation,this.remark,this.rowid,this.teachingaid,this.sno);
+          this.$.bookservice.fnsetcoskillvalue(valuearr,this.period,this.rowid,this.sno);
+          this.$.bookservice.fnsetcoskill11(skarr,this.period,this.rowid,this.sno); 
+          this.$.bookservice.fnsetcoskill12(subsarrr,this.period,this.rowid,this.sno); 
+       this.$.bookservice.fnsetcoskill13(bldvaluearr,this.period,this.rowid,this.sno); 
+          this.$.bookservice.fnmasterplaninsert(conarr,valuearr,skarr,subsarrr,this.period,this.innovation,this.remark,this.rowid,this.teachingaid,bldvaluearr,this.sno);
 
             this.hidecheck1=true;
             this.hidecheck=false;  
@@ -729,7 +742,36 @@ fngetsubconceptsResponse:function(e){
                this.fngetskillsparam=obj;
              // alert(JSON.stringify(obj));
                this.$.fngetskillsajax.generateRequest();
+
     
+    },
+    demo:function(e){
+   this.demourl=sessionStorage.getItem("addrinfo")+"/demo-service";
+               var obj={};
+                 obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+               obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+               obj.capter_id=localStorage.getItem("curr_sess_capters");
+               obj.period=this.period;
+               obj.rowidz=this.sno;
+               obj.planneddate=this.planneddate;
+               this.demoparam=obj;
+             // alert(JSON.stringify(obj));
+               this.$.demoajax.generateRequest();
+
+    },
+    demoResponse:function(e){
+      var res=e.detail.response.skillarr;
+      alert(JSON.stringify(res));
+      var k=res[0].skill;
+        alert(k);
+        var temp=[];
+      temp=k.split(",");
+      alert(temp.length);
+         for(var i=0;i<temp.length;i++){
+             var m=temp[i];
+             alert(m);
+         }
+
     },
 fngetskillsResponse:function(e){
       var res1=e.detail.response.skillarr;
@@ -754,20 +796,9 @@ fngetskillsResponse:function(e){
                   res[j].check=false;
                  }
           }
-         /* for(var j=0;j<res.length;j++)
-          {
-            sktemp.push(res[j]);
-              if(j!=0&&j%4==0)  
-               {
-                sklarr.push(sktemp);
-                sktemp=[];
-               } 
-               //alert(JSON.stringify(sklarr));
-          }
-          sklarr.push(sktemp);*/
+      
                  this.skillarrz=res;
-              // alert(JSON.stringify(this.skillarrz));
-},
+        },
 fngetbldvalues:function(e){
  this.$.bldvalueidzzzz.toggle();
      this.fngetbldvaluesurl=sessionStorage.getItem("addrinfo")+"/fngetbldvalues-service";
