@@ -610,6 +610,48 @@
         handle-as="json"
         content-type="application/json"
         on-response="fngetevalutionsectionResponse"
+        debounce-duration="300"/>        
+
+        <iron-ajax
+        method="post"
+        id="fninnovategradeajax"
+        url="{{fninnovategradeurl}}"
+        params="{{fninnovategradeparam}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="fninnovategradeResponse"
+        debounce-duration="300"/>
+
+        
+        <iron-ajax
+        method="post"
+        id="fnselectinnovatesubjectajax"
+        url="{{fnselectinnovatesubjecturl}}"
+        params="{{fnselectinnovatesubjectparam}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="fnselectinnovatesubjectResponse"
+        debounce-duration="300"/>
+
+        
+        <iron-ajax
+        method="post"
+        id="fngetchapterinnvtajax"
+        url="{{fngetchapterinnvturl}}"
+        params="{{fngetchapterinnvtparam}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="fngetchapterinnvtResponse"
+        debounce-duration="300"/>
+
+        <iron-ajax
+        method="post"
+        id="getinnovationdetajax"
+        url="{{getinnovationdeturl}}"
+        params="{{getinnovationdetparam}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="getinnovationdetResponse"
         debounce-duration="300"/>
       
   </template>
@@ -826,7 +868,7 @@
         obj.value=conarr[i].valuename;
         obj.bldvalue=conarr[i].bldvaluename;
       
-        obj.innovation=innovation;
+        obj.innovation=innovation; 
         obj.teachingaid=teachingaid;
         obj.remarks=remark;
         obj.termid=sessionStorage.getItem("termid"); 
@@ -835,13 +877,21 @@
         }
        }
       },
-      fnmasterplaninsertResponse:function(e){
+      fnmasterplaninsertResponse:function(e)
+      {
+        var res=e.detail.response.returnval;
         c2++;
-        if(c1==c2){
-        alert('Inserted');
-        this.conceptseq(); 
-        this.FnFetchConceptService();
-        c1=0;c2=0;
+        if(c1==c2)
+        {
+        //alert('Inserted');
+            document.querySelector('aproval-book-innovatiosn-item-card').saveopendialog();
+            this.conceptseq(); 
+            this.FnFetchConceptService();
+            c1=0;c2=0;
+        }
+        else if(res=='Not Inserted!')
+        {
+         document.uerySelector('aproval-book-innovatiosn-item-card').failureopen();
         }
       },
       conceptsubseq:function(){
@@ -1516,7 +1566,7 @@ var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
              obj.period=temp2[n].period; 
              obj.innovation=temp2[n].innovation; 
              obj.remark=temp2[n].remark;
-               obj.teachingaid=temp2[n].teachingaid;
+             obj.teachingaid=temp2[n].teachingaid;
              // obj.Correction=temp2[n].Correction;
            
              obj.planned_to_date=temp2[n].planned_to_date;
@@ -1697,10 +1747,13 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
             if(flag==0)                
             document.querySelector('teacher-book-approve-card').overallarr1=res2;
             else
-            document.querySelector('teacher-book-approve-card').overallarr1=temp;   
+            document.querySelector('teacher-book-approve-card').overallarr1=temp;  
+
+             //document.querySelector('teacher-book-approve-card').planningopenddd(); 
               res2=[];
               temp=[];
               this.periodafter="";
+
        },
 
 
@@ -2047,6 +2100,7 @@ fnsetcoskill13:function(skarr,period,rowid)
                          temp[i].bld_value_name=this.approvedarr[j].bld_value_name;
                         temp[i].teaching_aid=this.approvedarr[j].teaching_aid;
                         temp[i].lr_rectification=this.approvedarr[j].lr_rectification;
+                        temp[i].co_ordinator_remarks=this.approvedarr[j].co_ordinator_remarks;
                         temp[i].hidetitleflag=false;
                         temp[i].hideflag=true;
                     }
@@ -2095,12 +2149,24 @@ fnsetcoskill13:function(skarr,period,rowid)
            obj.completiondate=localStorage.getItem("localsess_comp_service");
            obj.bldvalues=o.bldvalues;
            obj.teachingaid=o.teachingaid;
+           obj.coremark=o.coremark;
            this.updateapprovalstatusofchapterconceptparam=obj;
+           //alert(JSON.stringify(obj));
            this.$.updateapprovalstatusofchapterconceptajax.generateRequest();
           },
-          updateapprovalstatusofchapterconceptResponse:function(e){
-            alert(e.detail.response.returnval);
-            this.fetchalreadyapprovedchapterconcept();
+          updateapprovalstatusofchapterconceptResponse:function(e)
+          {
+            //alert(e.detail.response.returnval);
+            if(e.detail.response.returnval=='Updated')
+            {
+                document.querySelector('curriculum-plan-conceptapproval-itemcard').saopen2dialog();
+                 this.fetchalreadyapprovedchapterconcept();
+            }
+            else
+            {
+                document.querySelector('curriculum-plan-conceptapproval-itemcard').failureopen2();
+            }
+           
           },
           fetchalreadyapprovedchapterconcept:function(){
             this.fetchalreadyapprovedchapterconcepturl=sessionStorage.getItem("addrinfo")+"/fetchalreadyapprovedchapterconcept-service";
@@ -2530,9 +2596,11 @@ for(var r=0;r<overall2.length;r++){
                this.fetchclassconcept11param=obj;
            this.$.fetchclassconcept11ajax.generateRequest();
         },
-        fetchclassconcept11Response:function(e){
-
+        fetchclassconcept11Response:function(e)
+        {
           var res2=e.detail.response.returnval;
+          //alert(2);
+          //alert(JSON.stringify(res2));
        
         var setattr=[];
                var a=[];
@@ -2556,13 +2624,15 @@ for(var r=0;r<overall2.length;r++){
                       nameobj.section_id=res2[k].section_id;
                       nameobj.planned_date_from=res2[k].planned_date_from;
                       nameobj.planned_to_date=res2[k].planned_to_date;
+                      nameobj.co_ordinator_remarks=res2[k].co_ordinator_remarks;
                        nameobj.rowid=k+1;
                       nameobj.hidecheck=true; 
                       nameobj.grade_id=sessionStorage.getItem("grdeidz");
                       nameobj.subject_id=sessionStorage.getItem("subjectidz");
+
                     setattr.push(nameobj);
                  }
-                      // alert(JSON.stringify(setattr));
+                    //alert(JSON.stringify(setattr));
   
    document.querySelector('class-teacher-book-rejection-item-card').mainnarr=setattr; 
   document.querySelector('class-teacher-book-rejection-item-card').empid=res2[0].empid; 
@@ -2764,7 +2834,7 @@ fnfinalbookvalueResponse:function(e)
      },
 FnFetchChapterService:function(gradeid,subjectid,termid)
       {
- this.fetchchapterurl=sessionStorage.getItem("addrinfo")+"/fetchchapter-service";
+ this.fetchchapterurl=sessionStorage.getItem("addrinfo")+"/fetchchapterinnovate-service";
     var obj={"schoolid":"","academic_year":"","roleid":"","emp_id":""};
      obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
      obj.academic_year=localStorage.getItem("curr_sess_academicyear");
@@ -2780,7 +2850,7 @@ fetchchapterResponse:function(e){
    document.querySelector('teacher-book-approve-card').chapterarr=e.detail.response.returnval;
         },
 
-          fnfinalreaprovebook:function(empid,skill,innovation,enrichmentsug,period,planneddate,conceptname,conceptid,remark,sectionid,subjectid,subconceptid,value,correctionstatus,completionstatus,rowidz)
+          fnfinalreaprovebook:function(empid,skill,innovation,enrichmentsug,period,planneddate,conceptname,conceptid,remark,sectionid,subjectid,subconceptid,value,correctionstatus,completionstatus,rowidz,coremark)
           {
              this.fnfinalbook1url=sessionStorage.getItem("addrinfo")+"/fnfinalbook1-service";
               var obj={};
@@ -2805,17 +2875,25 @@ fetchchapterResponse:function(e){
                obj.completion='yes';
                obj.rowidz=rowidz;
                obj.correctionstatus=correctionstatus;
-
+               obj.coremark=coremark;
               this.fnfinalbook1param=obj;
                 //alert("1");
-                // alert(JSON.stringify(obj));
+                //alert(JSON.stringify(obj));
               this.$.fnfinalbook1ajax.generateRequest();
         },
         fnfinalbook1Response:function(e)
         {
             var res=e.detail.response.returnval;
-            alert('Inserted');
-            this.FnFetchClassConceptService11();
+            //alert('Inserted');
+           
+             if(e.detail.response.returnval=='Updated')
+            {
+                document.querySelector('class-teacher-book-rejection-card').rejectopen2dialog();
+                 this.FnFetchClassConceptService11();
+            }
+            else{
+                document.querySelector('class-teacher-book-rejection-card').rejfailureopen();
+            }
         },
 
         fnsetrejectbookgrade:function(e)
@@ -2903,7 +2981,7 @@ fetchchapterResponse:function(e){
                 obj.enrichment_sug=res[i].enrichment_sug;
                 obj.bld_value_name=res[i].bld_value_name;
                 obj.teaching_aid=res[i].teaching_aid;
-
+                obj.co_ordinator_remarks=res[i].co_ordinator_remarks;
                 var a=i+1;
                 obj.sno=a;
                 temparr.push(obj);
@@ -2956,6 +3034,7 @@ document.querySelector('incomplete-chapter-report').getreportarr=temparr;
                 obj.enrichment_sug=res[i].enrichment_sug;
                 obj.bld_value_name=res[i].bld_value_name;
                 obj.teaching_aid=res[i].teaching_aid;
+                obj.co_ordinator_remarks=res[i].co_ordinator_remarks;
                 var a=i+1;
                 obj.sno=a;
                 temparr.push(obj);
@@ -3030,6 +3109,109 @@ document.querySelector('incomplete-chapter-report').getreportarr=temparr;
                 this.fnbooksubconceptedit(); 
             }    
       },
+
+      fninnovategrade:function()
+      {
+        this.fninnovategradeurl=sessionStorage.getItem("addrinfo")+"/fninnovategrade-service";
+            var obj={"schoolid":"","academic_year":"","roleid":"","emp_id":""};
+           obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+           obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+           obj.roleid=sessionStorage.getItem("curr_sess_loggedroleid");
+           obj.emp_id=sessionStorage.getItem("curr_sess_loggedid");
+           this.fninnovategradeparam=obj;
+           //alert(JSON.stringify(obj));
+           this.$.fninnovategradeajax.generateRequest();
+      },
+      fninnovategradeResponse:function(e)
+      {
+        var res=e.detail.response.returnval;
+        document.querySelector('innovation-report').innovationgradearr=res;
+      },
+     
+
+       fnselectinnovatesubject:function()
+         {
+            this.fnselectinnovatesubjecturl=sessionStorage.getItem("addrinfo")+"/fnselectinnovatesubject-service";
+            this.$.fnselectinnovatesubjectajax.generateRequest();
+        },
+         fnselectinnovatesubjectResponse:function(e)
+        {
+          var res=e.detail.response.returnval;
+          document.querySelector('innovation-report').innovationsubjectarr=res;
+        },
+        fngetchapterinnvt:function(gradeid,subjectid,termid)
+        {
+            this.fngetchapterinnvturl=sessionStorage.getItem("addrinfo")+"/fetchchapterinnovate-service";
+            var obj={"schoolid":"","academic_year":""};
+             obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+             obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+             obj.subjectid=subjectid;
+             obj.gradeid=gradeid;
+             obj.termid=termid;
+             this.fngetchapterinnvtparam=obj;
+             this.$.fngetchapterinnvtajax.generateRequest();
+        },
+        fngetchapterinnvtResponse:function(e)
+        {
+          var res=e.detail.response.returnval;
+           //alert(JSON.stringify(res));
+          document.querySelector('innovation-report').innovatechapterarr=res;  
+        },
+        getinnovationdetails:function(gradeid,subjectid,termid,capterid)
+        {
+            this.getinnovationdeturl=sessionStorage.getItem("addrinfo")+"/fngetchapterinnvt-service";
+            var obj={"schoolid":"","academic_year":""};
+             obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+             obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+             obj.subjectid=subjectid;
+             obj.gradeid=gradeid;
+             obj.termid=termid;
+             obj.capterid=capterid;
+             this.getinnovationdetparam=obj;
+             //alert(JSON.stringify(obj));
+             this.$.getinnovationdetajax.generateRequest();
+        },
+
+        getinnovationdetResponse:function(e)
+        {
+            var res=e.detail.response.returnval;
+            //alert(JSON.stringify(res));
+            var temparr2=[];
+            for(var i=0;i<res.length;i++)
+            {
+                if(res[i].innovation==""||res[i].innovation==null)
+                {
+                    var obj={}
+                    obj.emp_name=res[i].emp_name;
+                    obj.section_name=res[i].section_name;
+                    obj.concept_name=res[i].concept_name;
+                    obj.sub_concept_name=res[i].sub_concept_name;
+                    obj.period=res[i].period;
+                    obj.planned_date_from=res[i].planned_date_from;
+                    obj.planned_to_date=res[i].planned_to_date;
+                    obj.skill=res[i].skill;
+                    obj.value=res[i].value;
+                    obj.lr_rectification=res[i].lr_rectification;
+                    obj.remarks=res[i].remarks;
+                    obj.completion_status=res[i].completion_status;
+                    obj.correction_status=res[i].correction_status;
+                    obj.teaching_aid=res[i].teaching_aid;
+                    obj.bld_value_name=res[i].bld_value_name;
+                    obj.enrichment_sug=res[i].enrichment_sug;
+                    obj.completion_date=res[i].completion_date;
+                    obj.co_ordinator_remarks=res[i].co_ordinator_remarks;
+                    //alert(JSON.stringify(obj));
+                    var s=i+1;
+                    obj.sno=s;
+                    temparr2.push(obj);
+                }
+                
+                            }
+            //alert(JSON.stringify(temparr2));
+            
+            document.querySelector('innovation-report').innovatearr=res;
+
+        }
         
 
     });

@@ -14,30 +14,58 @@
           margin-left: -1%;
           margin-top: -1%;
      }
-     paper-textarea
+     #remarkareaaaaa
       {
-        overflow-x: hidden;
-        overflow-y: visible;
+        overflow-x: visible;
+        overflow-y: hidden;
         height: 90px;
-        width: 70%;
+        width: 45%;
         margin-top: 14%;
       }
-
+      #teachingtextttt
+      {
+        overflow-x: visible;
+        overflow-y: hidden;
+        height: 90px;
+        width: 45%;
+        margin-top: 14%;
+      }
+      #innovatetextsssss
+      {
+        overflow-x: visible;
+        overflow-y: hidden;
+        height: 90px;
+        width: 45%;
+        margin-top: 14%;
+      }
       #dzfsd
       {
           border-radius: 10px;
-
-          width: 250px;
-          height: 320px;
-         /* overflow-x: hidden;
-          overflow-y: visible;*/
+          width: 700px;
+          height: 360px;
+          margin-left: -3%;
+         
+      }
+      #fngetdialogid
+      {
+          border-radius: 10px;
+          width: 700px;
+          height: 370px;
+          margin-left: -5%;
+      }
+      #bldvalueidzzzz
+      {
+          border-radius: 10px;
+          width: 700px;
+          height: 370px;
+          margin-left: -5%;
       }
       #dzfsd1xsasa
       {
           border-radius: 10px;
-          width: 250px;
           height: 320px;
-          width: 280px;
+          width: 700px;
+           margin-left: -5%;
       }
       #skilldialog
       {
@@ -79,8 +107,9 @@
       #fngetskilldialogid
       {
         border-radius: 10px;
-        width: 380px;
-        height: 270px;
+        width: 650px;
+        height: 300px;
+        margin-left: -6%;
       }
       .horizontalframes1
       {
@@ -89,24 +118,59 @@
       }
       .concptcard
       {
-        width: 79%;
+        width: 93%;
+        height: 55%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+      }
+      .subconceptcard
+      {
+        width: 93%;
         height: 55%;
         overflow-x: hidden;
         overflow-y: scroll;
       }
       .skillcardd
       {
-         width: 86%;
+         width: 92%;
         height: 50%;
         overflow-x: hidden;
         overflow-y: scroll;
       }
+      .bldcard
+      {
+        width: 92%;
+        height: 50%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+      }
+      .valuecard
+      {
+        width: 92%;
+        height: 50%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+      }
+
        #teachingopendialog
       {
         border-radius: 10px;
           width: 380px;
           height: 270px;
       }
+
+      #savedialog
+        {
+          border-radius: 10px;
+          width: 354px;
+          height: 170px;
+        }
+        #failuredialog
+        {
+          border-radius: 10px;
+          width: 354px;
+          height: 170px;
+        }
     </style>
     <div>
            <paper-input value={{rowid}} hidden></paper-input>
@@ -169,18 +233,18 @@
             </td>
             <td style="width: 8.01%;">
               <paper-button on-click="fnteachingaid"">
-                <h4>{{teachingaid}}</h4>
+                <h4 style="width: 10em;word-wrap: break-word;">{{teachingaid}}</h4>
               </paper-button>
             </td>
             <td style="width: 8.01%;">
               <paper-button on-click="lsninnovation">
-                <h4>{{innovation}}</h4>
+                <h4 style="width: 10em;word-wrap: break-word;">{{innovation}}</h4>
               </paper-button>
             </td>
             
             <td style="width: 8.01%;">
               <paper-button on-click="lsnremark">
-                <h4>{{remark}}</h4>
+                <h4 style="width: 10em;word-wrap: break-word;">{{remark}}</h4>
               </paper-button>  
             </td>
 
@@ -215,9 +279,11 @@
 
      <paper-dialog id="dzfsd1xsasa" modal>
        <h3>Value Name</h3>
-      <template is="dom-repeat" items="{{valuearrz}}" as="ss">
-         <aproval-book valueid="{{ss.value_id}}" id="VVYJ{{rowid}}{{iddate}}{{ss.value_id}}" valuename="{{ss.value_name}}" check="{{s.check}}" rowid="{{rowid}}"></aproval-book>
-      </template>  
+        <div class="valuecard">
+          <template is="dom-repeat" items="{{valuearrz}}" as="ss">
+            <aproval-book valueid="{{ss.value_id}}" id="VVYJ{{rowid}}{{iddate}}{{ss.value_id}}" valuename="{{ss.value_name}}" check="{{s.check}}" rowid="{{rowid}}"></aproval-book>
+          </template>  
+        </div>  
       <center style="margin-top: 5%;">
           <paper-button on-click="fnsubmit1"  style="background-color:black;color:white">Submit</paper-button>
          <paper-button on-click="fnclose1" style="background-color:black;color:white">Close</paper-button>
@@ -226,22 +292,24 @@
 
      <paper-dialog id="fngetdialogid" modal>
           <h3>Subconcept Name</h3>
-   
+      <div class="subconceptcard">
         <template is="dom-repeat" items="{{subconceptarr}}" as="su">
          <subconcept-dialog-card subconceptid="{{su.sub_concept_id}}" id="VVYJ{{rowid}}{{iddate}}{{su.sub_concept_id}}" subconceptname="{{su.sub_concept_name}}" conceptid="{{su.concept_id}}" concept="{{su.concept}}" rowid="{{rowid}}"></subconcept-dialog-card>
-      </template>     
+        </template>     
+      </div>  
       <center style="margin-top: 5%;">
           <paper-button on-click="subconcept"  style="background-color:black;color:white">Submit</paper-button>
          <paper-button on-click="subconceptclose" style="background-color:black;color:white">Close</paper-button>
       </center>
       </paper-dialog>
 
-       <paper-dialog id="bldvalueid" modal>
+       <paper-dialog id="bldvalueidzzzz" modal>
           <h3>BlD VALUE</h3>
-   
-        <template is="dom-repeat" items="{{bldarr}}" as="st">
-         <bld-value-card bldvalueid="{{st.bld_value_id}}" id="VVYJ{{rowid}}{{iddate}}{{st.bld_value_id}}" bldvaluename="{{st.bld_value_name}}"  check="{{st.check}}"  rowid="{{rowid}}"></bld-value-card>
-      </template>        
+        <div class="bldcard">
+          <template is="dom-repeat" items="{{bldarr}}" as="st">
+            <bld-value-card bldvalueid="{{st.bld_value_id}}" id="VVYJ{{rowid}}{{iddate}}{{st.bld_value_id}}" bldvaluename="{{st.bld_value_name}}"  check="{{st.check}}"  rowid="{{rowid}}"></bld-value-card>
+          </template>        
+        </div>  
       <center style="margin-top: 5%;">
           <paper-button on-click="bldsubmit"  style="background-color:black;color:white">Submit</paper-button>
          <paper-button on-click="bldsubmitclose" style="background-color:black;color:white">Close</paper-button>
@@ -262,20 +330,20 @@
       </paper-dialog>
 
       <paper-dialog id="innovationdialog" modal>
-          <paper-textarea label="Innovation"  value="{{innovation}}"></paper-textarea>
+          <paper-textarea id="innovatetextsssss" label="Innovation"  value="{{innovation}}"></paper-textarea>
           <center style="margin-top: 14%;">
             <paper-button  on-click="innovatsave" style="color:white;background-color:black">Save</paper-button>
-            <paper-button id="innvtt" style="color:white;background-color:black" on-click="innovatclose" >Close</paper-button>
+            <paper-button id="innvtt" style="color:white;background-color:black" on-click="innovatclosezzz" >Close</paper-button>
 
             <paper-button id="innttvvnn"  style="color:white;background-color:black" on-click="invtclse" >Close</paper-button>
           </center>
       </paper-dialog>
 
       <paper-dialog id="remarkdialog" modal>
-          <paper-textarea label="Remarks"  value="{{remark}}"></paper-textarea>
+          <paper-textarea id="remarkareaaaaa" label="Remarks"  value="{{remark}}"></paper-textarea>
           <center style="margin-top: 14%;">
             <paper-button  on-click="remarksave" style="color:white;background-color:black">Save</paper-button>
-            <paper-button id="rmcls1" style="color:white;background-color:black" on-click="remarkclose" >Close</paper-button>
+            <paper-button id="rmcls1" style="color:white;background-color:black" on-click="remarkclosedddd" >Close</paper-button>
 
             <paper-button id="rmclssz"  style="color:white;background-color:black" on-click="rmkclose" >Close</paper-button>
           </center>
@@ -285,7 +353,7 @@
 
 
       <paper-dialog id="teachingopendialog" modal>
-          <paper-textarea label="Teaching Aids"  value="{{teachingaid}}"></paper-textarea>
+          <paper-textarea id="teachingtextttt" label="Teaching Aids"  value="{{teachingaid}}"></paper-textarea>
           <center style="margin-top: 14%;">
             <paper-button  on-click="teachingsave" style="color:white;background-color:black">Save</paper-button>
             <paper-button id="taid1" style="color:white;background-color:black" on-click="closeteachingaaid" >Close</paper-button>
@@ -293,6 +361,21 @@
             <paper-button id="taidss"  style="color:white;background-color:black" on-click="teachingclose" >Close</paper-button>
           </center>
       </paper-dialog>
+
+
+     <paper-dialog id="savedialog" modal>
+       <h3><center>SUCCESS</center></h3>
+       <center>
+         <paper-button on-click="closedialog" style="color:white;background-color:black;margin-top: 15%;">OK</paper-button>
+       </center>
+     </paper-dialog>
+
+      <paper-dialog id="failuredialog" modal>
+       <h3><center>FAILURE</center></h3>
+       <center>
+         <paper-button on-click="failureclose" style="color:white;background-color:black;margin-top: 15%;">OK</paper-button>
+       </center>
+     </paper-dialog>
 
 
 
@@ -374,6 +457,7 @@
             this.$.rmclssz.hidden=true;
             this.$.innttvvnn.hidden=true;
             this.$.taidss.hidden=true;
+            //document.querySelector('teacher-book-approve-card').planningcloseddd();
     },
    FnShowDialog:function(){
     this.date=new Date();
@@ -458,13 +542,13 @@ fndates:function(e){
 
    },
    bldsubmitclose:function(e){
-   this.$.bldvalueid.close();
+   this.$.bldvalueidzzzz.close();
  document.querySelector('bld-value-card').fnRefreshzzz();
   
    },
 
    bldsubmit:function(e){
-this.$.bldvalueid.toggle();
+this.$.bldvalueidzzzz.toggle();
    var temp1=[];
      for(var i=0;i<bldvaluearr.length;i++){
 
@@ -685,7 +769,7 @@ fngetskillsResponse:function(e){
               // alert(JSON.stringify(this.skillarrz));
 },
 fngetbldvalues:function(e){
- this.$.bldvalueid.toggle();
+ this.$.bldvalueidzzzz.toggle();
      this.fngetbldvaluesurl=sessionStorage.getItem("addrinfo")+"/fngetbldvalues-service";
                var obj={};
                  obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
@@ -844,9 +928,10 @@ fngetbldvaluesResponse:function(e){
     innovatsave:function(e)
     {
       this.$.innovationdialog.toggle();
+
       //this.innovattionvaluezs=true;
     },
-    innovatclose:function()
+    innovatclosezzz:function()
     {
       this.$.innovationdialog.close();
       this.innovation="";
@@ -859,7 +944,7 @@ fngetbldvaluesResponse:function(e){
     {
       this.$.remarkdialog.toggle();
     },
-    remarkclose:function()
+    remarkclosedddd:function()
     {
       this.$.remarkdialog.close();
       this.remark="";
@@ -900,7 +985,24 @@ fngetbldvaluesResponse:function(e){
     teachingclose:function()
     {
       this.$.teachingopendialog.close();
-    }
+    },
+    closedialog:function()
+     {
+      this.$.savedialog.close();
+     },
+     saveopendialog:function()
+     {
+      this.$.savedialog.toggle();
+     },
+     failureopen:function()
+     {
+      this.$.failuredialog.toggle();
+     },
+     failureclose:function()
+     {
+      this.$.failuredialog.close()
+     }
+
 
    });
   })();

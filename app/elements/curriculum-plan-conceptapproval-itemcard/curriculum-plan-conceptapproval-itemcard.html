@@ -6,10 +6,22 @@
     <style>
     table
       {   table-layout: fixed;
-          width: 1911px;;
+          width: 1920px;;
           border-collapse: collapse;
           margin-left: -2%;
           margin-top: 0%;
+        }
+         #save2dialog
+        {
+          border-radius: 10px;
+          width: 354px;
+          height: 170px;
+        }
+        #failure2dialog
+        {
+          border-radius: 10px;
+          width: 354px;
+          height: 170px;
         }
     </style>
     <!-- <div>
@@ -43,54 +55,71 @@
 
     <table border="1" style="border-collapse: collapse;">
         <tr>
-              <td style="width: 2.51%;">{{sno}}</td>
-              <td style="width: 8.85%;">{{conceptname}}</td>
-              <td style="width: 7.95%;">{{subconceptname}}</td>
-              <td style="width: 3.45%;text-align: center;">{{period}}</td>
-              <td style="width: 5.85%;">
+              <td style="width: 2.35%;">{{sno}}</td>
+              <td style="width: 8.35%;">{{conceptname}}</td>
+              <td style="width: 7.55%;">{{subconceptname}}</td>
+              <td style="text-align: center;width: 3.25%;">{{period}}</td>
+              <td style="width: 5.5%;">
               {{skill}}
               </td>
-              <td style="width: 5.85%;">
+              <td style="width: 5.5%;">
                 {{bldvalues}}
               </td>
-              <td style="width: 5.85%;">
+              <td style="width: 5.5%;">
                 {{value}}
               </td>
-              <td style="width: 5.85%;">
+              <td style="word-wrap: break-word;width: 5.5%;">
                 {{teachingaid}}
               </td>
-              <td style="padding-left: 0%;width:5.85%;">{{innovation}}</td> 
-              <td style="width: 5.85%;">{{fromdate}}</td>
-              <td style="width: 5.85%;">
+              <td style="word-wrap: break-word;width: 5.5%;">{{innovation}}</td> 
+              <td style="width: 5.5%;">{{fromdate}}</td>
+              <td style="width: 5.5%;">
                {{todate}}
               </td>     
-              <td style="width: 5.8%;">
+              <td style="width: 5.5%;">
                <div hidden$="{{hidetitleflag}}">{{lr}}</div>
                 <paper-input value={{lr}} hidden$="{{hideflag}}"></paper-input>
               </td>          
-              <td style="width: 5.8%;">{{remarks}}</td>
-              <td style="width: 5.8%;">
+              <td style="word-wrap: break-word;width: 5.5%;">{{remarks}}</td>
+              <td style="width: 5.5%;">
+                <div hidden$="{{hidetitleflag}}">{{coremarks}}</div>
+                <paper-input value={{coremark}} hidden$="{{hideflag}}"></paper-input>
+              </td>
+              <td style="width: 5.5%;">
                <div hidden$="{{hidetitleflag}}">{{correctionstatus}}</div>
                 <paper-input value={{correctionstatus}} hidden$="{{hideflag}}"></paper-input>
              </td>
-              <td hidden$="{{hidetitleflag}}" style="width: 5.8%;">{{completiondate}}</td>
-              <td hidden$="{{hideflag}}" style="width: 5.8%;">
+              <td hidden$="{{hidetitleflag}}" style="width: 5.5%;">{{completiondate}}</td>
+              <td hidden$="{{hideflag}}" style="width: 5.5%;">
               <complection-date-picker-card></complection-date-picker-card>
               </td>
-              <td hidden$="{{hidetitleflag}}" style="width: 5.8%;">{{completionstatus}}</td>
-              <td hidden$="{{hideflag}}" style="width: 5.8%;">
+              <td hidden$="{{hidetitleflag}}" style="width: 5.5%;">{{completionstatus}}</td>
+              <td hidden$="{{hideflag}}" style="width: 5.5%;">
                 <paper-checkbox id="cpayes{{subconceptid}}" checked on-change="FnYes">Yes</paper-checkbox><br>
                 <paper-checkbox id="cpano{{subconceptid}}" on-change="FnNo">No</paper-checkbox>
               </td>
-              <td style="width: 5.8%;">
+              <td style="width: 5.5%;">
                 <div hidden$="{{hidetitleflag}}">{{enrichmentsug}}</div>
                 <paper-input value={{enrichmentsuggest}} hidden$="{{hideflag}}"></paper-input>
               </td>              
               <td  hidden$="{{hidetitleflag}}"></td>
               <td hidden$="{{hideflag}}"><paper-icon-button icon="save" on-click="FnSave"></paper-icon-button></td>
-            
         </tr>
       </table>
+
+       <paper-dialog id="save2dialog" modal>
+       <h3><center>UPDATED</center></h3>
+       <center>
+         <paper-button on-click="close2dialog" style="color:white;background-color:black;margin-top: 15%;">OK</paper-button>
+       </center>
+     </paper-dialog>
+
+      <paper-dialog id="failure2dialog" modal>
+       <h3><center>FAILURE</center></h3>
+       <center>
+         <paper-button on-click="failureclose2" style="color:white;background-color:black;margin-top: 15%;">OK</paper-button>
+       </center>
+     </paper-dialog>
 
     <teacher-book-service-card id="bookservice"></teacher-book-service-card>
   </template>
@@ -143,6 +172,7 @@
         obj.correctionstatus=this.correctionstatus;
         obj.enrichmentsuggest=this.enrichmentsuggest;
         obj.completionstatus=completionstatus;
+        obj.coremark=this.coremark;
              //alert(JSON.stringify(obj));
         this.$.bookservice.updateapprovalstatusofchapterconcept(obj);
       completionstatus=""; 
@@ -169,11 +199,29 @@
         obj.completionstatus=completionstatus;
         obj.bldvalues=this.bldvalues;
         obj.teachingaid=this.teachingaid;
+        obj.coremark=this.coremark;
               //alert(JSON.stringify(obj));
         this.$.bookservice.updateapprovalstatusofchapterconcept(obj);
         completionstatus=""; 
          }          
-      }
+      },
+
+      close2dialog:function()
+     {
+      this.$.save2dialog.close();
+     },
+     saopen2dialog:function()
+     {
+      this.$.save2dialog.toggle();
+     },
+     failureopen2:function()
+     {
+      this.$.failure2dialog.toggle();
+     },
+     failureclose2:function()
+     {
+      this.$.failure2dialog.close();
+     }
     });
   })();
   </script>

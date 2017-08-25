@@ -1,4 +1,5 @@
 <link rel="import" href="..\..\bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
 <dom-module id="teacher-book-approve-card">
   <template>
     <style>
@@ -112,6 +113,33 @@
          border-radius: 10px;
        }
 
+        #planspinxyz
+       {
+          height: 100%;
+          width: 100%;
+          position: fixed;
+          background-color: #000;
+          bottom: 0; 
+          left: 0; 
+          opacity: 0.7; 
+          right: 0; 
+          top: 0; 
+          z-index: 10000;
+          margin: 0 auto;
+          text-align: center;
+        }
+        #planningspinnerwxy
+        {
+          margin: 20% auto;
+          text-align: center;
+         width: 100px;
+         height: 100px;
+        }
+        paper-dialog > *:first-child 
+        {
+          margin-top: 50px;
+        }
+        
      </style>    
     <center><h2 hidden style="color:#00ccff">{{empnamez}}</h2></center>
      <paper-input hidden value="{{empnamez}}"></paper-input>
@@ -178,7 +206,7 @@
           <th style="width: 10.9%;">Value</th>
           <th style="width: 10.9%;">Teaching Aids</th>
           <th style="width: 10.9%;">Innovation</th>
-          <th style="width: 10.9%;">Remarks</th>
+          <th style="width: 10.9%;">Remark</th>
           <!-- <th style="width: 11%;">Correction status</th> -->
           <th style="width: 4.6%;"></th>
         
@@ -194,7 +222,9 @@
       </table>
     
    <paper-dialog id="bufferdialog" modal>
-
+        <div>
+          <paper-icon-button icon="close" suffix on-click="bufferclose" style="float: right;position: fixed;margin-left: 20%;margin-top: -3%;"></paper-icon-button>
+        </div>
       <paper-checkbox id="Chaperzzzzidzz" on-change="fnchapter">After Last Row</paper-checkbox>
       <paper-checkbox id="Conceptzzzidzz" on-change="fnconceptzz">After Which Row</paper-checkbox>
         <div  hidden$="{{chaptbuffidz}}">
@@ -210,6 +240,17 @@
         <paper-button id="sub11" on-click="fnconsubmit" style="color:white;background-color:black">Submit</paper-button>
         <paper-button id="sub2222" on-click="fncaptsubmit"  style="color:white;background-color:black">Submit</paper-button>
         <paper-button id="cls111" on-click="fnclose" style="color:white;background-color:black">Close</paper-button></center>
+     </paper-dialog>
+
+     <paper-dialog id="planspinxyz">
+       <paper-spinner id="planningspinnerwxy"></paper-spinner>
+     </paper-dialog>
+
+     <paper-dialog id="savedialog">
+       <label>Success</label>
+       <center>
+         <paper-button on-click="closedialog">OK</paper-button>
+       </center>
      </paper-dialog>
     <teacher-book-service-card id="bookservice"></teacher-book-service-card>
   </template>
@@ -315,13 +356,18 @@
         document.querySelector('#chaptertermidfffff').selected=-1;
         this.$.zdsasddsasfsa.hidden=true;
   }, 
-     fnselectchapter:function(e){
+     fnselectchapter:function(e)
+     {
+
       this.chapterid=e.target.selectedItem.value;
       this.chaptername=e.target.selectedItem.textContent.trim();
       localStorage.setItem("curr_sess_capters",this.chapterid);
       localStorage.setItem("curr_sess_chapterid",this.chapterid); 
       localStorage.setItem("curr_sess_chaptername",this.chaptername); 
+
       this.$.bookservice.FnFetchConceptService(this.gradeid,this.subjectid,this.chapterid,this.termid);
+        //this.planningopenddd();
+
       this.$.zdsasddsasfsa.hidden=false;
       this.$.bookservice.conceptseq();
       
@@ -351,14 +397,40 @@
        document.querySelector('#teacherapprovechapter').selected=-1;
        this.$.zdsasddsasfsa.hidden=true;
     }, 
-  fnRefresh:function()
+    fnRefresh:function()
      {
         document.querySelector('#teacherrefffff').selected=-1;
         document.querySelector('#teacherrefzz').selected=-1;
         document.querySelector('#teacherapprovechapter').selected=-1;
          document.querySelector('#chaptertermidfffff').selected=-1;
         this.$.zdsasddsasfsa.hidden=true;
+     },
+
+     planningcloseddd:function()
+     {
+      alert('close');
+        this.$.planningspinnerwxy.active=false;
+        document.querySelector('#planspinxyz').close();
+     },
+     planningopenddd:function()
+     {
+      alert('active');
+       document.querySelector('#planspinxyz').open();
+          this.$.planningspinnerwxy.active=true;
+     },
+     bufferclose:function()
+     {
+      this.$.bufferdialog.close();
+      Conceptzzzidzz.checked=false;
+      Chaperzzzzidzz.checked=false;
+      this.Conceptbuffidz=true;
+      this.chaptbuffidz=true;
+      this.$.sub11.hidden=true;
+      this.$.sub2222.hidden=true;
+      this.$.cls111.hidden=true;
      }
+
+
     
     });
   })();

@@ -14,7 +14,6 @@
        {
         background-color: #363636;
         color: #ffffff; 
-        /*width: 12%;*/
         height: 34px;
         margin-top: 4%;
         margin-left: 48%;
@@ -82,6 +81,7 @@
           <th>Plan to Date</th>
           <th>Completed Date</th>
           <th>Remarks</th>
+          <th>Co-ordinator Remarks</th>
           <th>Correction Status</th>
           <th>Enrichment Suggestion</th>
         </tr>
@@ -96,12 +96,13 @@
               <td>{{view.skill}}</td>
               <td>{{view.bld_value_name}}</td>
               <td>{{view.value}}</td>
-              <td>{{view.teaching_aid}}</td>
-              <td>{{view.innovation}}</td>
+              <td style="word-wrap: break-word;">{{view.teaching_aid}}</td>
+              <td style="word-wrap: break-word;">{{view.innovation}}</td>
               <td>{{view.planned_date_from}}</td>
               <td>{{view.planned_to_date}}</td>
               <td>{{view.completion_date}}</td>
-              <td>{{view.remark}}</td>
+              <td style="word-wrap: break-word;">{{view.remark}}</td>
+              <td style="word-wrap: break-word;">{{view.co_ordinator_remarks}}</td>
               <td>{{view.correction_status}}</td>
               <td>{{view.enrichment_sug}}</td>
           </tr>
