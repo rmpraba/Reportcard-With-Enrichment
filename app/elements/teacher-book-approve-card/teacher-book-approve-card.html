@@ -366,7 +366,6 @@
       localStorage.setItem("curr_sess_chaptername",this.chaptername); 
 
       this.$.bookservice.FnFetchConceptService(this.gradeid,this.subjectid,this.chapterid,this.termid);
-        //this.planningopenddd();
 
       this.$.zdsasddsasfsa.hidden=false;
       this.$.bookservice.conceptseq();
@@ -410,15 +409,16 @@
 
      planningcloseddd:function()
      {
-      alert('close');
+        //alert('close');
         this.$.planningspinnerwxy.active=false;
         document.querySelector('#planspinxyz').close();
      },
      planningopenddd:function()
      {
-      alert('active');
-       document.querySelector('#planspinxyz').open();
-          this.$.planningspinnerwxy.active=true;
+        //alert('active');
+        
+        document.querySelector('#planspinxyz').open();
+        this.$.planningspinnerwxy.active=true;
      },
      bufferclose:function()
      {

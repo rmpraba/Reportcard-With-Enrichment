@@ -11469,10 +11469,12 @@ app.post('/fetchchapter-service',  urlencodedParser,function (req,res)
 app.post('/fngetclassbooksectionvalue-service',  urlencodedParser,function (req,res)
   {  
     var qur="SELECT distinct class_id,section_id FROM mp_teacher_grade  where grade_id='"+req.query.gradeid+"' and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and id='"+req.query.empid+"' and role_id='subject-teacher'";
+    console.log("-------");
     console.log(qur);
     connection.query(qur,function(err, rows){
     if(!err)
     {  
+      console.log(rows);
     res.status(200).json({'sectionarr':rows});
     }
     });

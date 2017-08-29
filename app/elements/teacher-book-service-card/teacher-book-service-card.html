@@ -1351,7 +1351,7 @@ var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
     
     fetchconceptResponse:function(e)
     {
-  var res1=e.detail.response.chapterarr;
+        var res1=e.detail.response.chapterarr;
         var res=e.detail.response.skillarr;
         var res3=e.detail.response.valuearr;
         var res4=e.detail.response.dbskillarr;
@@ -1399,17 +1399,17 @@ var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
                 nameobj.valuearrr=a;
                 overall.push(nameobj);
                 a=[];
-                 }
+            }
    
            var a1=[];
             var overall1=[];
            for(var k=0;k<res3.length;k++)
            {       
-           var nameobj={};
+            var nameobj={};
              nameobj.planning_date=res3[k].planning_date; 
              nameobj.rowidz=res3[k].rowid; 
             
-       var obj={"valueid":"","valuename":""};
+            var obj={"valueid":"","valuename":""};
             obj.valueid=res3[k].value_id;
             obj.valuename=res3[k].value_name;
             a1.push(obj);
@@ -1430,7 +1430,7 @@ var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
                 nameobj.mainarr=a1;
                 overall1.push(nameobj);
                 a1=[];
-                 }
+          }
   
           var b=[];
         var subarr=[];            
@@ -1464,7 +1464,7 @@ var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
                 nameobj.suarr=b;
                 subarr.push(nameobj);
                 b=[];
-                 }
+            }
          
       
         var c=[];
@@ -1498,7 +1498,7 @@ var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
                 nameobj.bldarr=c;
                 overall3.push(nameobj);
                 c=[];
-                 }
+            }
          
     
     var temp2=[];
@@ -1759,12 +1759,12 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
                    obj.hidecheck11=false;
                    obj.rowid=parseInt(res2.length)+1+k;
                    temp.push(obj); 
-                   alert('1');
+                   //alert('1');
                   }
                   
-                  alert(JSON.stringify(obj));
+                  //alert(JSON.stringify(obj));
 
-                  alert(JSON.stringify(res2[i]));
+                  //alert(JSON.stringify(res2[i]));
                     
                   
                 }
@@ -1799,19 +1799,18 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
             res2[i].sno=i+1;
             }
            document.querySelector('teacher-book-approve-card').overallarr1=res2;
+         //document.querySelector('teacher-book-approve-card').planningopenddd(); 
            
           }                
           else {
              for(var i=0;i<temp.length;i++){
             temp[i].sno=i+1;
           }
-           document.querySelector('teacher-book-approve-card').
               res2=[];
               temp=[];
               this.periodafter="";
 
-            }
-          
+            }         
        },
 
 
@@ -2062,7 +2061,7 @@ fnsetcoskill13:function(skarr,period,rowid,sno)
    
    },
 
-   fngetclassbooksectionvalue:function(gradeid,subjectid){
+   fngetclassbooksectionvalue:function(gradeid){
 
           this.fngetclassbooksectionvalueurl=sessionStorage.getItem("addrinfo")+"/fngetclassbooksectionvalue-service";
              var obj={"schoolid":"","academic_year":"","roleid":"","emp_id":""};
@@ -2070,7 +2069,7 @@ fnsetcoskill13:function(skarr,period,rowid,sno)
            obj.academic_year=localStorage.getItem("curr_sess_academicyear");
            obj.roleid=sessionStorage.getItem("curr_sess_loggedroleid");
            obj.empid=sessionStorage.getItem("curr_sess_loggedid");
-           obj.subjectid=subjectid;
+           //obj.subjectid=subjectid;
            obj.gradeid=gradeid;
            this.fngetclassbooksectionvalueparam=obj;
           //alert(JSON.stringify(obj));
