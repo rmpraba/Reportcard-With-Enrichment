@@ -44,8 +44,8 @@
        <span class="position"> 
          <paper-dropdown-menu  label="Select Subject">
                 <paper-menu id="reportsubjectzzzz" class="dropdown-content"   on-iron-select="fnselectsubject">
-                  <template is="dom-repeat" items="{{chaptersubjectarr}}">
-                    <paper-item value="{{item.subject_id}}">{{item.subject_name}}</paper-item>
+                  <template is="dom-repeat" items="{{chaptersssubjectarr}}">
+                    <paper-item value="{{item.subjectid}}">{{item.subject_name}}</paper-item>
                   </template>    
                 </paper-menu>
           </paper-dropdown-menu>
@@ -140,6 +140,7 @@
         this.gradeid=e.target.selectedItem.value;
         sessionStorage.setItem("grdeidz",this.gradeid);
         this.gradename=e.target.selectedItem.textContent.trim();
+        this.$.bookservice.fnsetrejectbooksubject(this.gradeid,this.gradename);
         document.querySelector('#reportsubjectzzzz').selected=-1;
        document.querySelector('#chaptertermidtttt').selected=-1;
         this.incompletereport=true;

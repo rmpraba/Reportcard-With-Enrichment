@@ -158,8 +158,8 @@
        <span class="position" hidden$="{{hideallvaluesss}}"> 
        <paper-dropdown-menu  label="Select the subject">
               <paper-menu id="teacherrefzz" class="dropdown-content"   on-iron-select="fnsetsubject">
-                   <template is="dom-repeat" items="{{subjectarr}}">
-                    <paper-item value="{{item.subjectid}}">{{item.subjectname}}</paper-item>
+                   <template is="dom-repeat" items="{{subjectarrrr}}">
+                    <paper-item value="{{item.subjectid}}">{{item.subject_name}}</paper-item>
                   </template>    
                 </paper-menu>
          </paper-dropdown-menu>
@@ -350,7 +350,7 @@
      this.gradename=e.target.selectedItem.textContent.trim();
         localStorage.setItem("curr_sess_gradeid",this.gradeid);
         localStorage.setItem("curr_sess_gradename",this.gradename);
-      this.$.bookservice.bookrefsection(this.gradeid,this.gradename);
+      this.$.bookservice.bookrefsubject(this.gradeid,this.gradename);
       document.querySelector('#teacherrefzz').selected=-1;
         document.querySelector('#teacherapprovechapter').selected=-1;
         document.querySelector('#chaptertermidfffff').selected=-1;
@@ -371,12 +371,14 @@
       this.$.zdsasddsasfsa.hidden=false;
       this.$.bookservice.conceptseq();
       
-      document.querySelector('concept-check-card').fnRefreshzz();
-      document.querySelector('subconcept-dialog-card').fnrefreshccc();
-      document.querySelector('skill-dialog-card').FnRefreshhhh();
-      document.querySelector('aproval-book').newRefreshdddd();
+      document.querySelector('concept-check-card').fnRefreshzyz();
+      document.querySelector('subconcept-dialog-card').fnrefreshhccc();
+      document.querySelector('skill-dialog-card').FnRefreshxyhhh();
+      document.querySelector('aproval-book').newRefreshkmdddd();
+      document.querySelector('bld-value-card').fnRefreshjjjzzz();
       
-      //document.querySelector('from-book-date-picker').fndates();
+      document.querySelector('from-book-date-picker').FnClearrrtyz();
+      document.querySelector('aproval-book-innovatiosn-item-card').FnfromClearfff();
        //document.querySelector('concept-check-card').fnclean();
        },
    fnsetsubject:function(e){

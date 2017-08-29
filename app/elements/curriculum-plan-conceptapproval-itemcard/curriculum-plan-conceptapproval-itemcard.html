@@ -24,42 +24,14 @@
           height: 170px;
         }
     </style>
-    <!-- <div>
-      <table border="1" style="border-collapse: collapse;">
-        <tr>
-          <td width="30px">{{sno}}</td>
-          <td hidden>{{rowid}}</td>
-          <td hidden>{{conceptid}}</td>
-          <td width="150px">{{conceptname}}</td>
-          <td hidden>{{subconceptid}}</td>
-          <td width="180px">{{subconceptname}}</td>
-          <td width="15px">{{period}}</td>
-          <td width="70px">{{fromdate}}</td>
-          <td width="70px">{{todate}}</td>
-          <td width="80px">{{skill}}</td>
-          <td width="80px">{{value}}</td>
-          <td width="130px">{{innovation}}</td>
-          <td width="130px">{{lr}}</td>
-          <td width="150px">{{remarks}}</td>
-          <td width="75px">{{correctionstatus}}</td>
-          <td width="75px" hidden$="{{hidetitleflag}}">{{completionstatus}}</td>
-          <td width="75px" hidden$="{{hideflag}}">
-          <paper-checkbox id="cpayes{{subconceptid}}"  on-change="FnYes">Yes</paper-checkbox>
-          <paper-checkbox id="cpano{{subconceptid}}" on-change="FnNo">No</paper-checkbox>
-          </td>
-          <td width="30px" hidden$="{{hidetitleflag}}"></td>
-          <td width="30px" hidden$="{{hideflag}}"><paper-icon-button icon="save" on-click="FnSave"></paper-icon-button></td>
-        </tr>
-      </table>
-    </div> -->
-
+   
     <table border="1" style="border-collapse: collapse;">
         <tr>
               <td style="width: 2.35%;">{{sno}}</td>
               <td style="width: 8.35%;">{{conceptname}}</td>
               <td style="width: 7.55%;">{{subconceptname}}</td>
               <td style="text-align: center;width: 3.25%;">{{period}}</td>
-              <td style="width: 5.5%;">
+              <td style="width: 5.5%;word-wrap: break-word;">
               {{skill}}
               </td>
               <td style="width: 5.5%;">
@@ -220,7 +192,11 @@
      failureclose2:function()
      {
       this.$.failure2dialog.close();
-     }
+     },
+      dateset:function()
+     {
+       alert('You are allowed to select future date only..!');
+     },
     });
   })();
   </script>

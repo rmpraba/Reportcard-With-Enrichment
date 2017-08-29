@@ -150,6 +150,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.gradeid=e.target.selectedItem.value;
         sessionStorage.setItem("grdeidz",this.gradeid);
         this.gradename=e.target.selectedItem.textContent.trim();
+        this.$.bookservice.fnselectinnovatesubject(this.gradeid,this.gradename);
         this.innovatereport=true; 
          document.querySelector('#innovatesubjectzzzz').selected=-1;
         document.querySelector('#innovatetermidtttt').selected=-1;

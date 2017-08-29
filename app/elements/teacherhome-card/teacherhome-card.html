@@ -245,11 +245,6 @@
         <h4>Curriculum Planning</h4>
         </paper-button>
       </div>
-      <!-- <div class="card" hidden$="{{bookclassplann}}">
-        <paper-button on-click="fnbookclassplan" no ink><img src="../../images/appruval.jpg" height="180px" width="180px">
-        <h4>Evaluation</h4>
-        </paper-button>
-      </div>  --> 
       <div class="card" hidden$="{{bookrejectt}}">
         <paper-button on-click="fnbookreject" no ink><img src="../../images/reject.jpg" height="180px" width="180px">
         <h4>Incomplete Chapters</h4>
@@ -263,7 +258,7 @@
 
       <div class="card" hidden$="{{curriculamreport}}">
         <paper-button on-click="fncurriculamreport" no ink><img src="../../images/curriculamreport.jpg" height="180px" width="180px">
-        <h4>Curriculam Report</h4>
+        <h4>Curriculum Report</h4>
         </paper-button>
       </div>
        <div class="card" hidden$="{{evaluationreport}}">
@@ -280,7 +275,53 @@
 
       </div>
     </div>
+
     <!-- Co-ordinator options end -->
+
+    <div class="subcoordinator" hidden$="{{subcoordinator}}">
+      <div>
+        <div class="inner1" hidden$="{{hideleasonplancontainer}}">
+          <div class="card" hidden$="{{captureReportt}}">
+            <paper-button on-click="CaptureReportads" no ink><img src="../../images/active1.jpg" height="180px" width="180px">
+              <h4>Master</h4>
+            </paper-button>
+          </div>
+          <div class="card" hidden$="{{bookaprvall}}">
+            <paper-button on-click="fnbookapruval" no ink><img src="../../images/classplan.gif" height="180px" width="180px">
+              <h4>Curriculum Planning</h4>
+            </paper-button>
+          </div>
+          <div class="card" hidden$="{{bookrejectt}}">
+            <paper-button on-click="fnbookreject" no ink><img src="../../images/reject.jpg" height="180px" width="180px">
+              <h4>Incomplete Chapters</h4>
+            </paper-button>
+          </div>
+          <div class="card" hidden$="{{chapterreport}}">
+            <paper-button on-click="fnchapterreport" no ink><img src="../../images/chapterreport.jpg" height="180px" width="180px">
+              <h4>Incomplete Chapter Report</h4>
+            </paper-button>
+          </div>
+
+          <div class="card" hidden$="{{curriculamreport}}">
+            <paper-button on-click="fncurriculamreport" no ink><img src="../../images/curriculamreport.jpg" height="180px" width="180px">
+              <h4>Curriculam Report</h4>
+            </paper-button>
+          </div>
+          <div class="card" hidden$="{{evaluationreport}}">
+            <paper-button on-click="fnevaluationreport" no ink><img src="../../images/ereport.jpg" height="180px" width="180px">
+              <h4>Evaluation Report</h4>
+            </paper-button>
+          </div>
+          <div class="card" hidden$="{{innnovationreport}}">
+            <paper-button on-click="fninnovation" no ink><img src="../../images/innovations.jpg" height="180px" width="180px">
+              <h4>Innovation Report</h4>
+            </paper-button>
+          </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- Sub-coordinator options end -->
     <!-- high level common starts-->
     <div class="highlevelcommon" hidden$="{{highlevelcommon}}">
     <div class="inner1" hidden$="{{hideenrichmentcontainer}}">
@@ -584,6 +625,7 @@
         this.coordinator=true;
         this.highlevelcommon=true;
         this.hidemanagementreport=true;
+        this.subcoordinator=true;
         // this.createschooltype=true;
         // this.createsubject=true;
         // this.createrole=true;
@@ -837,7 +879,7 @@
       document.querySelector('app-card').setPage('homepage','');
       document.querySelector('home-page').setPage('incomplete-chapter-report','');
       this.$.bookservice.fnsetrejectbookgrade();
-      this.$.bookservice.fnsetrejectbooksubject();
+      //this.$.bookservice.fnsetrejectbooksubject();
      }
      if(localStorage.getItem('curr_sess_loggedassesmenttype')=="curriculamreport")
      {
@@ -850,14 +892,14 @@
       document.querySelector('app-card').setPage('homepage','');
       document.querySelector('home-page').setPage('evaluation-report-card','');
        this.$.bookservice.fnsetrejectbookgrade1();
-      this.$.bookservice.fnsetrejectbooksubject1();
+      //this.$.bookservice.fnsetrejectbooksubject1();
       }  
       if(localStorage.getItem('curr_sess_loggedassesmenttype')=="innovationreport") 
       {
           document.querySelector('app-card').setPage('homepage','');
           document.querySelector('home-page').setPage('innovation-report','');
              this.$.bookservice.fninnovategrade();
-             this.$.bookservice.fnselectinnovatesubject();
+             //this.$.bookservice.fnselectinnovatesubject();
       }
       this.$.cdialog.close();   
       },
@@ -1141,6 +1183,36 @@
             this.hidemasterscontainer=true;
             this.hideleasonplancontainer=false;
           }
+        }
+
+        if(sessionStorage.getItem("curr_sess_loggedroleid")=="subject-coordinator")
+        {
+          this.subcoordinator=false;
+          if(this.containerview=="Reportcard"){
+            this.hidereportcardcontainer=false;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=true;
+            this.hideleasonplancontainer=true;
+          }
+          else if(this.containerview=="Enrichment"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=false;
+            this.hidemasterscontainer=true;
+            this.hideleasonplancontainer=true;
+          }
+          else if(this.containerview=="Master"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=false;
+            this.hideleasonplancontainer=true;
+          }
+          else if(this.containerview=="Leasonplan"){
+            this.hidereportcardcontainer=true;
+            this.hideenrichmentcontainer=true;
+            this.hidemasterscontainer=true;
+            this.hideleasonplancontainer=false;
+          }
+
         }        
       },
       FnRefresh:function()
