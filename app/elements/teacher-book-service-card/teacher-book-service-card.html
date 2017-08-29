@@ -1759,21 +1759,15 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
                    obj.hidecheck11=false;
                    obj.rowid=parseInt(res2.length)+1+k;
                    temp.push(obj); 
-                   //alert('1');
-                  }
-                  
-                  //alert(JSON.stringify(obj));
+                   alert('1');
+                  }}
 
-                  //alert(JSON.stringify(res2[i]));
-                    
-                  
-                }
                 else{
                     temp.push(res2[i]);
                 }
             }
           }
-        //alert(JSON.stringify(res2));
+        alert(JSON.stringify(temp));
              
             if(flag==0){
                   for(var k=0;k<r;k++){
@@ -1803,9 +1797,29 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
            
           }                
           else {
-             for(var i=0;i<temp.length;i++){
+                for(var k=0;k<r;k++){
+              
+               var obj={};
+                   obj.concept_id="";  
+                   obj.concept="";   
+                   obj.capter_id=""; 
+                   obj.innovation="";  
+                   obj.remark="";  
+                   obj.planning_date="empty" ;
+                   obj.planned_to_date="" ;
+                   obj.rowidz="";
+                   obj.teachingaid="";
+                   obj.hidecheck=true; 
+                   obj.hidecheck1=false; 
+                   obj.hidecheck11=false;
+                   obj.rowid=parseInt(temp.length)+1+k;
+                    temp.push(obj);
+               } 
+              for(var i=0;i<temp.length;i++){
             temp[i].sno=i+1;
           }
+  document.querySelector('teacher-book-approve-card').overallarr1=temp;
+           
               res2=[];
               temp=[];
               this.periodafter="";
