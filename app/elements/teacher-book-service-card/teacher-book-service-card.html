@@ -2961,7 +2961,7 @@ fetchchapterResponse:function(e){
         {
             var res=e.detail.response.returnval;
             //alert('Inserted');
-            //alert(JSON.stringify(res));
+            alert(JSON.stringify(res));
            
              if(e.detail.response.returnval=='Updated')
             {
@@ -3123,23 +3123,7 @@ document.querySelector('incomplete-chapter-report').getreportarr=temparr;
       document.querySelector('evaluation-report-card').getreportarr=temparr;
 
         },
-     fnsetrejectbooksubject1:function(gradeid,gradename)
-         {
-            this.fnsetrejectbooksubject1url=sessionStorage.getItem("addrinfo")+"/bookrefsubject-service";
-             var obj={"school_id":"","gradeid":"","gradename":"","academic_year":""};
-              obj.gradeid=gradeid;
-              obj.gradename=gradename;
-              obj.school_id=sessionStorage.getItem("curr_sess_loggedschoolid");
-              obj.academic_year=localStorage.getItem("curr_sess_academicyear"); 
-              this.fnsetrejectbooksubject1param=obj;
-
-            this.$.fnsetrejectbooksubject1ajax.generateRequest();
-        },
-        fnsetrejectbooksubject1Response:function(e)
-        {
-            var res=e.detail.response.returnval;
-      document.querySelector('evaluation-report-card').chaptersubjectarr=res;
-        },
+     
          fnsetrejectbooksubject:function(gradename,gradeid)
          {
             this.fnsetrejectbooksubjecturl=sessionStorage.getItem("addrinfo")+"/bookrefsubject-service";
@@ -3226,17 +3210,18 @@ obj.academicyear=localStorage.getItem("curr_sess_academicyear");
       },
      
 
-       fnselectinnovatesubject:function(gradename,gradeid)
+       fnselectinnovatesubject:function(gradeid,gradename)
          {
-            this.fnselectinnovatesubjecturl=sessionStorage.getItem("addrinfo")+"/ bookrefsubject-service";
+            
+            
+            this.fnselectinnovatesubjecturl=sessionStorage.getItem("addrinfo")+"/ innovatechapsubject-service";
              var obj={"school_id":"","gradeid":"","gradename":"","academic_year":""};
               obj.gradeid=gradeid;
               obj.gradename=gradename;
               obj.school_id=sessionStorage.getItem("curr_sess_loggedschoolid");
               obj.academic_year=localStorage.getItem("curr_sess_academicyear"); 
               this.fnselectinnovatesubjectparam=obj;
-
-
+              alert(JSON.stringify(obj));
             this.$.fnselectinnovatesubjectajax.generateRequest();
         },
          fnselectinnovatesubjectResponse:function(e)

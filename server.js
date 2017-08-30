@@ -12438,6 +12438,27 @@ app.post('/bookrefsubject-service',  urlencodedParser,function (req,res)
 
 
 
+app.post('/innovatechapsubject-service',  urlencodedParser,function (req,res)
+
+  {  
+    var qur="select distinct(c.subjectid),s.subject_name from md_chapter c join md_subject s on(c.subjectid=s.subject_id) where c.school_id='"+req.query.school_id+"' and c.academic_year='"+req.query.academic_year+"' and c.gradeid='"+req.query.gradeid+"' order by subjectid";
+    
+    console.log("*******************");
+    console.log(qur);
+    connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      console.log(rows);
+      res.status(200).json({'returnval': rows});
+    }
+    else
+     res.status(200).json({'returnval': 'no rows'}); 
+  });
+});  
+
+
 var server = app.listen(5000, function () {
 var host = server.address().address
 var port = server.address().port
