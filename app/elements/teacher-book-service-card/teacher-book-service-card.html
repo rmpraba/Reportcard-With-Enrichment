@@ -1327,7 +1327,7 @@ var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
                
           }
       },
-
+     
         FnFetchConceptService:function(gradeid,subjectid,chapterid)
         {
             
@@ -1757,7 +1757,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
                    obj.hidecheck11=false;
                    obj.rowid=parseInt(res2.length)+1+k;
                    temp.push(obj); 
-                   //alert('1');
+
                   }}
 
                 else{
@@ -1765,7 +1765,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
                 }
             }
           }
-        //alert(JSON.stringify(temp));
+
              
             if(flag==0){
                   for(var k=0;k<r;k++){
@@ -3073,6 +3073,9 @@ document.querySelector('incomplete-chapter-report').getreportarr=temparr;
              var obj={"schoolid":"","academic_year":"","roleid":"","emp_id":""};
            obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
            obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+           obj.fromdate=localStorage.getItem("localsess_fromreport_service");
+           obj.todate=localStorage.getItem("localsess_toreport_service");
+
            obj.roleid=sessionStorage.getItem("curr_sess_loggedroleid");
            obj.emp_id=sessionStorage.getItem("curr_sess_loggedid");
            obj.subjectid=subjectid;
@@ -3158,8 +3161,10 @@ document.querySelector('incomplete-chapter-report').getreportarr=temparr;
         {
            this.fngetreporturl=sessionStorage.getItem("addrinfo")+"/fngetcurriculam-service";
            var obj={};
-           obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
-           obj.academicyear=localStorage.getItem("curr_sess_academicyear");
+       obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+    obj.fromdate=localStorage.getItem("localsess_fromreport_service");
+obj.todate=localStorage.getItem("localsess_toreport_service");
+obj.academicyear=localStorage.getItem("curr_sess_academicyear");
            obj.gradeid=gradeid;
            obj.subjectid=subjectid;
            this.fngetreportparam=obj;

@@ -12,8 +12,14 @@
         margin-top: 4%;
         margin-left: 48%;
       }
+      paper-dropdown-menu
+    {
+      width: 15%;
+      --paper-input-container-label: { color: red };
+      text-align:center;
+    }
     </style>
-    <div>
+    <div>  
       <center>
         <h3>CURRICULAM REPORT</h3>
       </center>
@@ -28,11 +34,21 @@
         </paper-dropdown-menu>
         <paper-dropdown-menu  label="Subject" style="margin-left: 5%;">
           <paper-menu id="cprsubject" class="dropdown-content"   on-iron-select="FnSelectSubject">
-            <template is="dom-repeat" items="{{subjectarr}}">
+  <template is="dom-repeat" items="{{subjectarr}}">
             <paper-item value="{{item.subject_id}}">{{item.subject_name}}</paper-item>
-            </template>    
+    </template>    
           </paper-menu>
         </paper-dropdown-menu>
+        <div style="margin-left: 2%;">
+ <curriculum-from-date-picker-card></curriculum-from-date-picker-card>
+        </div>
+        <div style="margin-left: 5%;">
+<curriculum-to-date-picker-card></curriculum-to-date-picker-card>
+        </div>
+
+       
+           
+  <paper-button style="background-color: black;color: white;" on-click="fnsearch">Search</paper-button>
       </div>
       <div>
         
@@ -105,7 +121,10 @@
         this.subjectid=e.target.selectedItem.value;
         localStorage.setItem("curr_sess_subjectid",this.subjectid);
         this.gradename=e.target.selectedItem.textContent.trim();
-        this.$.bookservice.getcurriculamdetails(this.gradeid,this.subjectid);
+       
+     },
+     fnsearch:function(e){
+ this.$.bookservice.getcurriculamdetails(this.gradeid,this.subjectid);
      },
      Fnrefresh11:function()
      {
