@@ -11206,7 +11206,7 @@ app.post('/fngetskills-service',  urlencodedParser,function (req,res)
 });
 
 
-app.post('/buffset-service' ,urlencodedParser, function (req, res)
+/*app.post('/buffset-service' ,urlencodedParser, function (req, res)
     {  
      var qur3="SELECT * FROM md_chapter  where capter_id='"+req.query.capter_id+"'";
 
@@ -11223,7 +11223,7 @@ app.post('/buffset-service' ,urlencodedParser, function (req, res)
           res.status(200).json({'returnval': 'invalid'});
 
       });
-    });
+    });*/
 
 
 app.post('/fngetsubconcepts-service',  urlencodedParser,function (req,res)
