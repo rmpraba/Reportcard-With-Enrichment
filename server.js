@@ -7,14 +7,18 @@ var dbserver_ip_address = process.env.OPENSHIFT_MYSQL_DB_HOST || '127.0.0.1'
 
 
 var connection = mysql.createConnection({
+   // host     : 'localhost',
+   // user     : 'root',
+   // password : '',
+   // database : 'reportcard11'
+
    host     : 'localhost',
-   user     : 'root',
-   password : '',
-   database : 'reportcard11'
-
-
-
+   port     : '62631',
+   user     : 'adminM1qnV1d',
+   password : 'HC2bIf7Sk2LD',
+   database : 'scorecarddb'
 });
+
 var bodyParser = require('body-parser'); 
 var app = express();
 var logfile;
@@ -2361,7 +2365,7 @@ app.post('/fetchhealthattendanceinfo-service',  urlencodedParser,function (req,r
 
   var qur1="select * from tr_term_attendance ta join tr_term_health th on(ta.student_id=th.student_id)"+
   " where ta.student_id='"+req.query.studid+"' and ta.term_id=th.term_id "+
-  "and ta.school_id='"+req.query.schoolid+"' and  ta.academic_year='"+req.query.academicyear+"' and th.school_id='"+req.query.schoolid+"'";
+  "and ta.school_id='"+req.query.schoolid+"' and  ta.academic_year='"+req.query.academicyear+"' and th.school_id='"+req.query.schoolid+"' and th.academic_year='"+req.query.academicyear+"'";
   
   connection.query(qur,function(err, rows)
     {
