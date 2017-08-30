@@ -1757,7 +1757,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
                    obj.hidecheck11=false;
                    obj.rowid=parseInt(res2.length)+1+k;
                    temp.push(obj); 
-                   // alert('1');
+
                   }}
 
                 else{
@@ -1765,7 +1765,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
                 }
             }
           }
-        // alert(JSON.stringify(temp));
+
              
             if(flag==0){
                   for(var k=0;k<r;k++){
@@ -2657,7 +2657,9 @@ for(var r=0;r<overall2.length;r++){
         },
 
  
-        FnFetchClassConceptService11:function(gradeid,subjectid,chapterid,sectoinidz){
+        FnFetchClassConceptService11:function(gradeid,subjectid,chapterid,sectoinidz)
+        {
+            //alert(2);
        this.fetchclassconcept11url=sessionStorage.getItem("addrinfo")+"/fetchclassconcept11-service";
      var obj={"schoolid":"","academic_year":"","roleid":"","emp_id":""};
     obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
@@ -2959,14 +2961,15 @@ fetchchapterResponse:function(e){
         {
             var res=e.detail.response.returnval;
             //alert('Inserted');
+            alert(JSON.stringify(res));
            
              if(e.detail.response.returnval=='Updated')
             {
-                document.querySelector('class-teacher-book-rejection-card').rejectopen2dialog();
+                document.querySelector('class-teacher-book-rejection-card').rsvopndialg();
                  this.FnFetchClassConceptService11();
             }
             else{
-                document.querySelector('class-teacher-book-rejection-card').rejfailureopen();
+                document.querySelector('class-teacher-book-rejection-card').rsfaildialog();
             }
         },
 
@@ -3120,23 +3123,7 @@ document.querySelector('incomplete-chapter-report').getreportarr=temparr;
       document.querySelector('evaluation-report-card').getreportarr=temparr;
 
         },
-     fnsetrejectbooksubject1:function(gradeid,gradename)
-         {
-            this.fnsetrejectbooksubject1url=sessionStorage.getItem("addrinfo")+"/bookrefsubject-service";
-             var obj={"school_id":"","gradeid":"","gradename":"","academic_year":""};
-              obj.gradeid=gradeid;
-              obj.gradename=gradename;
-              obj.school_id=sessionStorage.getItem("curr_sess_loggedschoolid");
-              obj.academic_year=localStorage.getItem("curr_sess_academicyear"); 
-              this.fnsetrejectbooksubject1param=obj;
-
-            this.$.fnsetrejectbooksubject1ajax.generateRequest();
-        },
-        fnsetrejectbooksubject1Response:function(e)
-        {
-            var res=e.detail.response.returnval;
-      document.querySelector('evaluation-report-card').chaptersubjectarr=res;
-        },
+     
          fnsetrejectbooksubject:function(gradename,gradeid)
          {
             this.fnsetrejectbooksubjecturl=sessionStorage.getItem("addrinfo")+"/bookrefsubject-service";
@@ -3223,22 +3210,22 @@ obj.academicyear=localStorage.getItem("curr_sess_academicyear");
       },
      
 
-       fnselectinnovatesubject:function(gradename,gradeid)
+       fnselectinnovatesubject:function(gradeid,gradename)
          {
-            this.fnselectinnovatesubjecturl=sessionStorage.getItem("addrinfo")+"/ bookrefsubject-service";
-             var obj={"school_id":"","gradeid":"","gradename":"","academic_year":""};
+            this.fnselectinnovatesubjecturl=sessionStorage.getItem("addrinfo")+"/innovatechapsubject-service";
+            var obj={"school_id":"","gradeid":"","gradename":"","academic_year":""};
               obj.gradeid=gradeid;
               obj.gradename=gradename;
               obj.school_id=sessionStorage.getItem("curr_sess_loggedschoolid");
               obj.academic_year=localStorage.getItem("curr_sess_academicyear"); 
               this.fnselectinnovatesubjectparam=obj;
-
-
+              //alert(JSON.stringify(obj));
             this.$.fnselectinnovatesubjectajax.generateRequest();
         },
          fnselectinnovatesubjectResponse:function(e)
         {
           var res=e.detail.response.returnval;
+          //alert(JSON.stringify(res));
           document.querySelector('innovation-report').innovationsubjectarr=res;
         },
         fngetchapterinnvt:function(gradeid,subjectid,termid)
@@ -3277,7 +3264,7 @@ obj.academicyear=localStorage.getItem("curr_sess_academicyear");
         getinnovationdetResponse:function(e)
         {
             var res=e.detail.response.returnval;
-            //alert(JSON.stringify(res));
+            alert(JSON.stringify(res));
             var temparr2=[];
             for(var i=0;i<res.length;i++)
             {
@@ -3312,10 +3299,7 @@ obj.academicyear=localStorage.getItem("curr_sess_academicyear");
             //alert(JSON.stringify(temparr2));
             
             document.querySelector('innovation-report').innovatearr=temparr2;
-
         }
-        
-
     });
   })();
   </script>

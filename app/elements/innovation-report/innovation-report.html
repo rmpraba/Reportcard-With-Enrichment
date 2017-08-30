@@ -49,7 +49,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <paper-dropdown-menu  label="Select Subject">
           <paper-menu id="innovatesubjectzzzz" class="dropdown-content"   on-iron-select="fnselectinnovtsubject">
             <template is="dom-repeat" items="{{innovationsubjectarr}}">
-              <paper-item value="{{item.subject_id}}">{{item.subject_name}}</paper-item>
+              <paper-item value="{{item.subjectid}}">{{item.subject_name}}</paper-item>
                   </template>    
                 </paper-menu>
         </paper-dropdown-menu>
@@ -150,6 +150,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.gradeid=e.target.selectedItem.value;
         sessionStorage.setItem("grdeidz",this.gradeid);
         this.gradename=e.target.selectedItem.textContent.trim();
+        //alert(this.gradeid+""+this.gradename);
         this.$.bookservice.fnselectinnovatesubject(this.gradeid,this.gradename);
         this.innovatereport=true; 
          document.querySelector('#innovatesubjectzzzz').selected=-1;

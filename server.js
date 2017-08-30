@@ -7,6 +7,7 @@ var dbserver_ip_address = process.env.OPENSHIFT_MYSQL_DB_HOST || '127.0.0.1'
 
 
 var connection = mysql.createConnection({
+
    host     : 'localhost',
    user     : 'root',
    password : '',
@@ -17,6 +18,7 @@ var connection = mysql.createConnection({
    user     : 'adminM1qnV1d',
    password : 'HC2bIf7Sk2LD',
    database : 'scorecarddb'*/
+
 });
 
 var bodyParser = require('body-parser'); 
@@ -12398,18 +12400,20 @@ app.post('/fngetchapterinnvt-service',  urlencodedParser,function (req,res)
 { 
   var qur2=" select * from md_curriculum_planning_approval where school_id='"+req.query.schoolid+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and academic_year='"+req.query.academic_year+"' and term_id='"+req.query.termid+"'  and chapter_id='"+req.query.capterid+"'";
 
+  console.log("********Innovation Report*********");
   console.log(qur2);
 
    connection.query(qur2,
     function(err, rows){
       if(!err)
       {
+          console.log(rows);
           res.status(200).json({'returnval': rows});
           
       }
 
       else
-          //console.log(err);
+          console.log(err);
           res.status(200).json({'returnval': 'invalid'});
       });
 });
@@ -12438,6 +12442,27 @@ app.post('/bookrefsubject-service',  urlencodedParser,function (req,res)
   });
 });  
 
+
+
+app.post('/innovatechapsubject-service',  urlencodedParser,function (req,res)
+
+  {  
+    var qur="select distinct(c.subjectid),s.subject_name from md_chapter c join md_subject s on(c.subjectid=s.subject_id) where c.school_id='"+req.query.school_id+"' and c.academic_year='"+req.query.academic_year+"' and c.gradeid='"+req.query.gradeid+"' order by subjectid";
+    
+    console.log("*******************");
+    console.log(qur);
+    connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      console.log(rows);
+      res.status(200).json({'returnval': rows});
+    }
+    else
+     res.status(200).json({'returnval': 'no rows'}); 
+  });
+});  
 
 
 var server = app.listen(5000, function () {
