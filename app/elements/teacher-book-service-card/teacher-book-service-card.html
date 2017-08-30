@@ -1308,8 +1308,7 @@ var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
      buffsetResponse:function(e){
       var res=e.detail.response.returnval;
       var bufperiod=parseInt(res[0].buffer_period)+parseInt(bufferperiod);
-      //alert(bufperiod);
-      this.buffset1url=sessionStorage.getItem("addrinfo")+"/buffset1-service";
+       this.buffset1url=sessionStorage.getItem("addrinfo")+"/buffset1-service";
       var obj={};
       obj.bufperiod=bufperiod;
       obj.capter_id=localStorage.getItem("curr_sess_capters");
@@ -1320,10 +1319,9 @@ var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
 
       buffset1Response:function(e)
       {
-          var res=e.detail.response.returnval;
-        //alert(JSON.stringify(res));
-
-          if(res=="Updated"){
+       var res=e.detail.response.returnval;
+       //alert(JSON.stringify(res));
+      if(res=="Updated"){
                this.conceptseq(); 
               this.FnFetchConceptService();
                
@@ -1793,7 +1791,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
             res2[i].sno=i+1;
             }
            document.querySelector('teacher-book-approve-card').overallarr1=res2;
-         //document.querySelector('teacher-book-approve-card').planningopenddd(); 
+//document.querySelector('teacher-book-approve-card').planningopenddd(); 
            
           }                
           else {
@@ -1813,7 +1811,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
                    obj.hidecheck1=false; 
                    obj.hidecheck11=false;
                    obj.rowid=parseInt(temp.length)+1+k;
-                    temp.push(obj);
+                     temp.push(obj);
                } 
               for(var i=0;i<temp.length;i++){
             temp[i].sno=i+1;

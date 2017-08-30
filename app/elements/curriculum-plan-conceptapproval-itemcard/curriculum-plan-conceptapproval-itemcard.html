@@ -34,10 +34,10 @@
               <td style="width: 5.5%;word-wrap: break-word;">
               {{skill}}
               </td>
-              <td style="width: 5.5%;">
+              <td style="width: 5.5%;word-wrap: break-word;">
                 {{bldvalues}}
               </td>
-              <td style="width: 5.5%;">
+              <td style="width: 5.5%;word-wrap: break-word;">
                 {{value}}
               </td>
               <td style="word-wrap: break-word;width: 5.5%;">
@@ -101,7 +101,7 @@
     Polymer({
       is: 'curriculum-plan-conceptapproval-itemcard',
       
-      FnYes:function(e){
+     /* FnYes:function(e){
         if(document.querySelector("#cpayes"+this.rowid+this.subconceptid).checked==true){
        completionstatus="Yes";
         document.querySelector("#cpano"+this.rowid+this.subconceptid).checked=false;
@@ -117,7 +117,28 @@
         }
         if(document.querySelector("#cpano"+this.rowid+this.subconceptid).checked==false)
        completionstatus="";
+      },*/
+
+
+      FnYes:function(e){
+        if(document.querySelector("#cpayes"+this.subconceptid).checked==true){
+       completionstatus="Yes";
+        document.querySelector("#cpano"+this.subconceptid).checked=false;
+        }
+        if(document.querySelector("#cpayes"+this.subconceptid).checked==false)
+      completionstatus="";
       },
+      FnNo:function(e){
+        if(document.querySelector("#cpano"+this.subconceptid).checked==true)
+        {
+      completionstatus="No";
+        document.querySelector("#cpayes"+this.subconceptid).checked=false;
+        }
+        if(document.querySelector("#cpano"+this.subconceptid).checked==false)
+       completionstatus="";
+      },
+
+
       FnSave:function(){
 
         if(completionstatus==""||completionstatus==null)
