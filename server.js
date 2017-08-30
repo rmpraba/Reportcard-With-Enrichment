@@ -12164,7 +12164,7 @@ app.post('/fngetconceptreport1-service',  urlencodedParser,function (req, res)
 {
 
 
-var qur="select * from md_curriculum_planning_approval where school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"'and term_id='"+req.query.termid+"'";
+var qur="select * from md_curriculum_planning_approval where school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"'and subject_id='"+req.query.subjectid+"' and grade_id='"+req.query.gradeid+"'and term_id='"+req.query.termid+"' and  planned_date_from between '"+req.query.fromdate+"' and '"+req.query.todate+"'";
  
  console.log(qur);
 
@@ -12193,7 +12193,8 @@ var qur="select * from md_curriculum_planning_approval where school_id='"+req.qu
 app.post('/fngetcurriculam-service',  urlencodedParser,function (req, res)
 {
   // var qur="select  s.subject_id,s.concept_id,s.capter_id,s.period,s.skill,s.innovation,s.remark,s.planning_date,ch.capter,cp.concept,b.subject_name,v.value_name from md_skill s join md_chapter ch on(ch.capter_id=s.capter_id) join md_concept cp on(cp.concept_id=s.concept_id) join md_subject b on(b.subject_id=s.subject_id) join md_book_value v on(v.rowid=s.rowid) where s.school_id='"+req.query.schoolid+"' and s.grade_id='"+req.query.gradeid+"'  and s.academic_year='"+req.query.academic_year+"' and ch.school_id='"+req.query.schoolid+"' and ch.academic_year='"+req.query.academic_year+"' and v.school_id='"+req.query.schoolid+"' and v.grade_id='"+req.query.gradeid+"'  and v.academic_year='"+req.query.academic_year+"'";
-  var qur="select * from md_curriculum_planning where school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"'";
+
+  var qur="select * from md_curriculum_planning where school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academicyear+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and  planned_date_from between '"+req.query.fromdate+"' and '"+req.query.todate+"'";
   
   console.log('-------------------Chapter Report----------------------');
   console.log(qur);

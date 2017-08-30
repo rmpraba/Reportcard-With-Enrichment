@@ -62,6 +62,16 @@
             </paper-menu>
           </paper-dropdown-menu>
        </span>
+   <span class="position"> 
+   <curriculum-from-date-picker-card></curriculum-from-date-picker-card>
+   </span>
+   <span class="position"> 
+     <curriculum-to-date-picker-card></curriculum-to-date-picker-card>
+   </span>
+   <span class="position">
+    <paper-button style="background-color: black;color: white;" on-click="fnsearch">Search</paper-button> 
+   </span>  
+         
       <div class="chapterreport" hidden$="{{incompletereport1}}">
        <table id="newreport2" border="1" style="border-collapse: collapse;
     margin-left: 1%;
@@ -162,11 +172,13 @@ this.incompletereport1=true;
     Fnchaptertermid:function(e){
         this.termid=e.target.selectedItem.textContent.trim();
         sessionStorage.setItem("termid",this.termid);
-      this.$.bookservice.fngetevalutionsection(this.gradeid,this.subjectid,this.termid);
+     
       this.incompletereport1=false;
 
       },
-        
+        fnsearch:function(e){
+      this.$.bookservice.fngetevalutionsection(this.gradeid,this.subjectid,this.termid);
+        },
       FnRefreshtt:function()
       {
         document.querySelector('#reportgradezzzz').selected=-1;

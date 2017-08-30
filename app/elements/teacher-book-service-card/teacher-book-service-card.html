@@ -1327,7 +1327,7 @@ var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
                
           }
       },
-
+     
         FnFetchConceptService:function(gradeid,subjectid,chapterid)
         {
             
@@ -3070,6 +3070,9 @@ document.querySelector('incomplete-chapter-report').getreportarr=temparr;
              var obj={"schoolid":"","academic_year":"","roleid":"","emp_id":""};
            obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
            obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+           obj.fromdate=localStorage.getItem("localsess_fromreport_service");
+           obj.todate=localStorage.getItem("localsess_toreport_service");
+
            obj.roleid=sessionStorage.getItem("curr_sess_loggedroleid");
            obj.emp_id=sessionStorage.getItem("curr_sess_loggedid");
            obj.subjectid=subjectid;
@@ -3155,8 +3158,10 @@ document.querySelector('incomplete-chapter-report').getreportarr=temparr;
         {
            this.fngetreporturl=sessionStorage.getItem("addrinfo")+"/fngetcurriculam-service";
            var obj={};
-           obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
-           obj.academicyear=localStorage.getItem("curr_sess_academicyear");
+       obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+    obj.fromdate=localStorage.getItem("localsess_fromreport_service");
+obj.todate=localStorage.getItem("localsess_toreport_service");
+obj.academicyear=localStorage.getItem("curr_sess_academicyear");
            obj.gradeid=gradeid;
            obj.subjectid=subjectid;
            this.fngetreportparam=obj;
