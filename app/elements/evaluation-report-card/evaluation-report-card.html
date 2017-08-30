@@ -34,27 +34,29 @@
         <h3>EVALUATION REPORT</h3>
       </center>
     </div>
-      <span class="position"> 
+
+    <div style="margin-left: 15%;">
+      <span> 
        <paper-dropdown-menu  label="Select the Grade">
-                <paper-menu id="reportgradezzzz" class="dropdown-content"   on-iron-select="fnselectgrade">
-                  <template is="dom-repeat" items="{{chaptergradearr}}">
-                    <paper-item value="{{item.gradeid}}">{{item.gradename}}</paper-item>
-                  </template>    
-                </paper-menu>
+          <paper-menu id="reportgradezzzz" class="dropdown-content"   on-iron-select="fnselectgrade">
+            <template is="dom-repeat" items="{{chaptergradearr}}">
+              <paper-item value="{{item.gradeid}}">{{item.gradename}}</paper-item>
+            </template>    
+          </paper-menu>
          </paper-dropdown-menu>
        </span>
       
-       <span class="position"> 
-         <paper-dropdown-menu  label="Select Subject">
-                <paper-menu id="reportsubjectzzzz" class="dropdown-content"   on-iron-select="fnselectsubject">
-                  <template is="dom-repeat" items="{{chaptersubjectarr}}">
-                    <paper-item value="{{item.subjectid}}">{{item.subject_name}}</paper-item>
-                  </template>    
-                </paper-menu>
+       <span> 
+         <paper-dropdown-menu  label="Select Subject" style="margin-left: 1%;">
+            <paper-menu id="reportsubjectzzzz" class="dropdown-content"   on-iron-select="fnselectsubject">
+              <template is="dom-repeat" items="{{chaptersubjectarr}}">
+                <paper-item value="{{item.subjectid}}">{{item.subject_name}}</paper-item>
+              </template>    
+            </paper-menu>
           </paper-dropdown-menu>
        </span>
-      <span class="position"> 
-         <paper-dropdown-menu id="term" label="Select Term">
+      <span> 
+         <paper-dropdown-menu id="term" label="Select Term" style="margin-left: 1%;">
            <paper-menu id="chaptertermidrrrrr" class="dropdown-content"   on-iron-select="Fnchaptertermid" attr-for-selected="value" required>
                 <paper-item value="term1">Term1</paper-item>
                 <paper-item value="Term2">Term2</paper-item>
@@ -62,15 +64,16 @@
             </paper-menu>
           </paper-dropdown-menu>
        </span>
-   <span class="position"> 
-   <curriculum-from-date-picker-card></curriculum-from-date-picker-card>
-   </span>
-   <span class="position"> 
-     <curriculum-to-date-picker-card></curriculum-to-date-picker-card>
-   </span>
-   <span class="position">
-    <paper-button style="background-color: black;color: white;" on-click="fnsearch">Search</paper-button> 
-   </span>  
+      <div style="margin-left: 50%;margin-top: -5.4%;width: 100%;"> 
+        <curriculum-from-date-picker-card></curriculum-from-date-picker-card>
+      </div>
+      <div style="margin-left: 63%;margin-top: -5.4%;width: 100%;"> 
+        <curriculum-to-date-picker-card></curriculum-to-date-picker-card>
+      </div>
+      <div style="margin-left: 78%;margin-top: -3.7%;">
+        <paper-button style="background-color: black;color: white;" on-click="fnsearch">Search</paper-button> 
+      </div> 
+    </div>   
          
       <div class="chapterreport" hidden$="{{incompletereport1}}">
        <table id="newreport2" border="1" style="border-collapse: collapse;
