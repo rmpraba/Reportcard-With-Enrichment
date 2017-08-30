@@ -1757,7 +1757,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
                    obj.hidecheck11=false;
                    obj.rowid=parseInt(res2.length)+1+k;
                    temp.push(obj); 
-                   alert('1');
+                   //alert('1');
                   }}
 
                 else{
@@ -1765,7 +1765,7 @@ var r=parseInt(res1[0].buffer_period)+parseInt(res1[0].period)-parseInt(temp1.le
                 }
             }
           }
-        alert(JSON.stringify(temp));
+        //alert(JSON.stringify(temp));
              
             if(flag==0){
                   for(var k=0;k<r;k++){
@@ -2657,7 +2657,9 @@ for(var r=0;r<overall2.length;r++){
         },
 
  
-        FnFetchClassConceptService11:function(gradeid,subjectid,chapterid,sectoinidz){
+        FnFetchClassConceptService11:function(gradeid,subjectid,chapterid,sectoinidz)
+        {
+            //alert(2);
        this.fetchclassconcept11url=sessionStorage.getItem("addrinfo")+"/fetchclassconcept11-service";
      var obj={"schoolid":"","academic_year":"","roleid":"","emp_id":""};
     obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
@@ -2959,6 +2961,7 @@ fetchchapterResponse:function(e){
         {
             var res=e.detail.response.returnval;
             //alert('Inserted');
+            //alert(JSON.stringify(res));
            
              if(e.detail.response.returnval=='Updated')
             {
