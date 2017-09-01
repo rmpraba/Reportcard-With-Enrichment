@@ -3124,7 +3124,7 @@ document.querySelector('incomplete-chapter-report').getreportarr=temparr;
 
         },
      
-         fnsetrejectbooksubject:function(gradename,gradeid)
+         fnsetrejectbooksubject:function(gradeid,gradename)
          {
             this.fnsetrejectbooksubjecturl=sessionStorage.getItem("addrinfo")+"/bookrefsubject-service";
 
@@ -3140,6 +3140,24 @@ document.querySelector('incomplete-chapter-report').getreportarr=temparr;
         {
             var res=e.detail.response.returnval;
             document.querySelector('incomplete-chapter-report').chaptersssubjectarr=res;
+        },
+        
+        fnsetrejectbooksubject1:function(gradeid,gradename)
+         {
+            this.fnsetrejectbooksubject1url=sessionStorage.getItem("addrinfo")+"/bookrefsubject-service";
+
+             var obj={"school_id":"","gradeid":"","gradename":"","academic_year":""};
+              obj.gradeid=gradeid;
+              obj.gradename=gradename;
+              obj.school_id=sessionStorage.getItem("curr_sess_loggedschoolid");
+              obj.academic_year=localStorage.getItem("curr_sess_academicyear"); 
+              this.fnsetrejectbooksubject1param=obj;
+            this.$.fnsetrejectbooksubject1ajax.generateRequest();
+        },
+        fnsetrejectbooksubject1Response:function(e)
+        {
+            var res=e.detail.response.returnval;
+            document.querySelector('evaluation-report-card').chapterevlsubjectarr=res;
         },
     getcurriculamdetails:function(gradeid,subjectid)
         {
@@ -3264,7 +3282,7 @@ obj.academicyear=localStorage.getItem("curr_sess_academicyear");
         getinnovationdetResponse:function(e)
         {
             var res=e.detail.response.returnval;
-            alert(JSON.stringify(res));
+            //alert(JSON.stringify(res));
             var temparr2=[];
             for(var i=0;i<res.length;i++)
             {

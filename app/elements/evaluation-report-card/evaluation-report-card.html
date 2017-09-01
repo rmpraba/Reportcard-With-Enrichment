@@ -49,7 +49,7 @@
        <span> 
          <paper-dropdown-menu  label="Select Subject" style="margin-left: 1%;">
             <paper-menu id="reportsubjectzzzz" class="dropdown-content"   on-iron-select="fnselectsubject">
-              <template is="dom-repeat" items="{{chaptersubjectarr}}">
+              <template is="dom-repeat" items="{{chapterevlsubjectarr}}">
                 <paper-item value="{{item.subjectid}}">{{item.subject_name}}</paper-item>
               </template>    
             </paper-menu>
@@ -175,12 +175,11 @@ this.incompletereport1=true;
     Fnchaptertermid:function(e){
         this.termid=e.target.selectedItem.textContent.trim();
         sessionStorage.setItem("termid",this.termid);
-     
-      this.incompletereport1=false;
-
+         this.incompletereport1=true;
       },
         fnsearch:function(e){
       this.$.bookservice.fngetevalutionsection(this.gradeid,this.subjectid,this.termid);
+      this.incompletereport1=false;
         },
       FnRefreshtt:function()
       {
