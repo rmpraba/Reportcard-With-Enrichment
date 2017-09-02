@@ -132,11 +132,13 @@
      fnsearch:function(e){
  this.$.bookservice.getcurriculamdetails(this.gradeid,this.subjectid);
      },
-     Fnrefresh11:function()
+     Fnrefreshcurrclm:function()
      {
         document.querySelector('#cprgrade').selected=-1;
         document.querySelector('#cprsubject').selected=-1;
         this.fullreport=true;
+        document.querySelector('curriculum-from-date-picker-card').FnClearevltttfrom();
+        document.querySelector('curriculum-to-date-picker-card').FnCleartoevltdd();
      }
     });
     })();

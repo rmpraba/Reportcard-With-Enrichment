@@ -38,7 +38,7 @@
     <div style="margin-left: 15%;">
       <span> 
        <paper-dropdown-menu  label="Select the Grade">
-          <paper-menu id="reportgradezzzz" class="dropdown-content"   on-iron-select="fnselectgrade">
+        <paper-menu id="reportevaltgradezzzz" class="dropdown-content"   on-iron-select="fnselectgrade">
             <template is="dom-repeat" items="{{chaptergradearr}}">
               <paper-item value="{{item.gradeid}}">{{item.gradename}}</paper-item>
             </template>    
@@ -48,7 +48,7 @@
       
        <span> 
          <paper-dropdown-menu  label="Select Subject" style="margin-left: 1%;">
-            <paper-menu id="reportsubjectzzzz" class="dropdown-content"   on-iron-select="fnselectsubject">
+            <paper-menu id="reportevltsubjectzzzz" class="dropdown-content"   on-iron-select="fnselectsubject">
               <template is="dom-repeat" items="{{chapterevlsubjectarr}}">
                 <paper-item value="{{item.subjectid}}">{{item.subject_name}}</paper-item>
               </template>    
@@ -57,7 +57,7 @@
        </span>
       <span> 
          <paper-dropdown-menu id="term" label="Select Term" style="margin-left: 1%;">
-           <paper-menu id="chaptertermidrrrrr" class="dropdown-content"   on-iron-select="Fnchaptertermid" attr-for-selected="value" required>
+           <paper-menu id="chapterevlttermidrrrrr" class="dropdown-content"   on-iron-select="Fnchaptertermid" attr-for-selected="value" required>
                 <paper-item value="term1">Term1</paper-item>
                 <paper-item value="Term2">Term2</paper-item>
                 <paper-item value="Term3">Term3</paper-item>
@@ -159,8 +159,8 @@ this.incompletereport1=true;
         sessionStorage.setItem("grdeidz",this.gradeid);
         this.gradename=e.target.selectedItem.textContent.trim();
         this.$.bookservice.fnsetrejectbooksubject1(this.gradeid,this.gradename);
-        document.querySelector('#reportsubjectzzzz').selected=-1; 
-        document.querySelector('#chaptertermidrrrrr').selected=-1;
+        document.querySelector('#reportevltsubjectzzzz').selected=-1; 
+        document.querySelector('#chapterevlttermidrrrrr').selected=-1;
         this.incompletereport1=true;
       },
 
@@ -169,7 +169,7 @@ this.incompletereport1=true;
         this.subjectid=e.target.selectedItem.value;
        sessionStorage.setItem("subjectidz",this.subjectid);
        this.subjectname=e.target.selectedItem.textContent.trim();
-       document.querySelector('#chaptertermidrrrrr').selected=-1;
+       document.querySelector('#chapterevlttermidrrrrr').selected=-1;
        this.incompletereport1=true;
      },
     Fnchaptertermid:function(e){
@@ -181,12 +181,14 @@ this.incompletereport1=true;
       this.$.bookservice.fngetevalutionsection(this.gradeid,this.subjectid,this.termid);
       this.incompletereport1=false;
         },
-      FnRefreshtt:function()
+      FnRefreshevaltsss:function()
       {
-        document.querySelector('#reportgradezzzz').selected=-1;
-        document.querySelector('#reportsubjectzzzz').selected=-1;
-         document.querySelector('#chaptertermidrrrrr').selected=-1;
+        document.querySelector('#reportevaltgradezzzz').selected=-1;
+        document.querySelector('#reportevltsubjectzzzz').selected=-1;
+         document.querySelector('#chapterevlttermidrrrrr').selected=-1;
         this.incompletereport1=true;
+        document.querySelector('curriculum-from-date-picker-card').FnClearevltttfrom();
+        document.querySelector('curriculum-to-date-picker-card').FnCleartoevltdd();
       }
 
 

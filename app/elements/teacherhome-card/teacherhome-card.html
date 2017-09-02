@@ -1508,14 +1508,13 @@
           fncurriculamreport:function(e)
           {
             localStorage.setItem('curr_sess_loggedassesmenttype','curriculamreport');
-            document.querySelector('curriculam-report').Fnrefresh11();
+            document.querySelector('curriculam-report').Fnrefreshcurrclm();
             this.$.cdialog.toggle();
           },
             fnevaluationreport:function(e)
           {
             localStorage.setItem('curr_sess_loggedassesmenttype','evaluationreport');
-          //  document.querySelector('curriculam-report').Fnrefresh11();
-          document.querySelector('evaluation-report-card').FnRefreshtt();
+          document.querySelector('evaluation-report-card').FnRefreshevaltsss();
             this.$.cdialog.toggle();
           },
           fninnovation:function(e)
