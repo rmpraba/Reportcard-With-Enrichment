@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
    host     : 'localhost',
    user     : 'root',
    password : '',
-   database : 'reportcard11'
+   database : 'reportcard1'
 
 
 });
@@ -7255,7 +7255,7 @@ app.post('/insertgradeinfo-service',urlencodedParser,function (req, res)
 //console.log(response);
 
 var qur1="UPDATE md_student SET ? WHERE id='"+req.query.studentname+"' and school_id='"+req.query.school_id+"' and "+" academic_year='"+req.query.academic_year+"'";
-//console.log(qur1);
+console.log(qur1);
   connection.query(qurr,
     function(err, rows){
     response.school_type=rows[0].school_type;
@@ -7269,7 +7269,7 @@ var qur1="UPDATE md_student SET ? WHERE id='"+req.query.studentname+"' and schoo
     }
     else
     {
-     // console.log(err);
+     console.log(err);
       res.status(200).json({'returnval': 'Not Updated!'});
     }
      });
@@ -12458,6 +12458,103 @@ app.post('/innovatechapsubject-service',  urlencodedParser,function (req,res)
      res.status(200).json({'returnval': 'no rows'}); 
   });
 });  
+
+
+
+
+app.post('/getgradestudent-service', urlencodedParser,function (req,res)
+{      
+     
+  var qur="SELECT * FROM md_grade";
+  connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    { 
+     //console.log(JSON.stringify(rows));   
+      res.status(200).json({'returnval': rows});
+    }
+    else
+      console.log(err);
+      res.status(200).json({'returnval': ''});
+  });
+});
+
+
+
+app.post('/addstudent-service', urlencodedParser,function (req,res)
+{      
+  var response={
+    school_id:req.query.schoolid,
+    school_name:req.query.schoolname,
+    admission_no:req.query.studnetid,
+    first_name:req.query.firstname,
+    middle_name:req.query.middlename,
+    last_name:req.query.lastname,
+    student_name:req.query.studentname,
+    class_for_admission:req.query.grade,
+    dob:req.query.dob,
+    age:req.query.age,
+    academic_year:req.query.academicyear,
+    father_name:req.query.fathername,
+    mother_name:req.query.mothername,
+    gender:req.query.gender,
+    transport_availed:req.query.transport,
+  }   
+  console.log("student add");
+  console.log("-------------------------");
+  console.log(response);
+  connection.query("INSERT INTO md_admission set ?",[response],
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': 'succ'});
+    }
+    else
+    {
+      console.log(err);
+      res.status(200).json({'returnval': 'fail'});
+    }  
+
+  });
+});
+
+
+app.post('/parentadd-service', urlencodedParser,function (req,res)
+{      
+  var response={
+    school_id:req.query.schoolid,
+    student_id:req.query.studnetid,
+    parent_name:req.query.fathername,
+    email:req.query.fatheremail,
+    mobile:req.query.fathermob,
+    address1:req.query.address1,
+    address2:req.query.address2,
+    address3:req.query.address3,
+    city:req.query.city,
+    pincode:req.query.pincode,
+    alternate_mail:req.query.matheremail,
+    mother_name:req.query.mothername
+  }   
+  console.log("student add");
+  console.log("-------------------------");
+  console.log(response);
+  connection.query("INSERT INTO parent set ?",[response],
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': 'succ'});
+    }
+    else
+    {
+      console.log(err);
+      res.status(200).json({'returnval': 'fail'});
+    }  
+
+  });
+});
 
 
 var server = app.listen(5000, function () {

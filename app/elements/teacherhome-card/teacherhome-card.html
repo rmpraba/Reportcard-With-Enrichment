@@ -15,6 +15,8 @@
 <link rel="import" href="../employee-report-service/employee-report-service.html">
 <link rel="import" href="../teacher-book-service-card/teacher-book-service-card.html">
 
+<link rel="import" href="../student-add-service/student-add-service.html">
+
 <dom-module id="teacherhome-card">
   <template>
     <style>
@@ -233,6 +235,13 @@
         <h4>Student To Section Report</h4>
         </paper-button>
        </div>
+
+       <div class="card" hidden$="{{studentadd}}">
+        <paper-button on-click="Fnaddstudent" no ink><img src="../../images/studentadd.jpg" height="180px" width="180px">
+        <h4>Student Add</h4>
+        </paper-button>
+       </div>
+
       </div>
       <div class="inner1" hidden$="{{hideleasonplancontainer}}">
       <div class="card" hidden$="{{captureReportt}}">
@@ -558,6 +567,12 @@
       <h4>Section Update</h4>
       </paper-button>
     </div>
+
+    <div class="card" hidden$="{{studentadd}}">
+      <paper-button on-click="Fnaddstudent" no ink><img src="../../images/studentadd.jpg" height="180px" width="180px">
+        <h4>Student Add</h4>
+      </paper-button>
+    </div>
     </div>
     </div>
     <!-- General ssschooladmin master ends-->
@@ -607,6 +622,7 @@
     <employee-report-service id="empservice"></employee-report-service>
     <student-report-service id="reportservice"></student-report-service>
     <teacher-book-service-card id="bookservice"></teacher-book-service-card>
+       <student-add-service id="studservice"></student-add-service>
 
   </template>
   <script>
@@ -1522,6 +1538,14 @@
              localStorage.setItem('curr_sess_loggedassesmenttype','innovationreport');
              document.querySelector('innovation-report').FnRefreshinnvt();
              this.$.cdialog.toggle();
+          },
+          Fnaddstudent:function(e)
+          {
+             document.querySelector('app-card').setPage('homepage','');
+              document.querySelector('home-page').setPage('student-add-card','');
+              this.$.studservice.fngetgrade();
+              document.querySelector('student-add-card').FnfullRefresh();
+
           }
        
     });
