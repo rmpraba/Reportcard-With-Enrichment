@@ -145,7 +145,7 @@ section p{
 
 
          <paper-dropdown-menu id="term" label="Select Term">
-            <paper-menu id="chaptertermid" class="dropdown-content"   on-iron-select="Fnchaptertermid" attr-for-selected="value" required>
+            <paper-menu id="chaptertermiddddd" class="dropdown-content"   on-iron-select="Fnchaptertermid" attr-for-selected="value" required>
                 <paper-item value="term1">Term1</paper-item>
                 <paper-item value="Term2">Term2</paper-item>
                 <paper-item value="Term3">Term3</paper-item>
@@ -234,13 +234,15 @@ var k;
      //this.captername="";
      this.$.newcardd.hidden=true;
      document.querySelector('#teacherrefzzzz').selected=-1;
+     document.querySelector('#chaptertermiddddd').selected=-1;
 
      },
      fnemployeename:function(e){
      this.subjectid=e.target.selectedItem.value;
        sessionStorage.setItem("subjectidz",this.subjectid);
-      this.subjectname=e.target.selectedItem.textContent.trim()
-      this.$.newcardd.hidden=false;
+      this.subjectname=e.target.selectedItem.textContent.trim();
+       document.querySelector('#chaptertermiddddd').selected=-1;
+      this.$.newcardd.hidden=true;
      
     },
    
@@ -248,6 +250,7 @@ var k;
     this.termid=e.target.selectedItem.textContent.trim()
    sessionStorage.setItem("termid",this.termid);
      this.$.bookservice.getcaptervalue();
+     this.$.newcardd.hidden=false;
    
     },
      fnset:function(e)
@@ -285,6 +288,7 @@ fnrefresh:function()
   this.$.newcardd.hidden=true;
   document.querySelector('#teacherref').selected=-1;
   document.querySelector('#teacherrefzzzz').selected=-1;
+   document.querySelector('#chaptertermiddddd').selected=-1;
   this.ready();
 },
 
@@ -302,7 +306,7 @@ Fnchapteredit:function()
 {
     this.hidecreatechapt=true;
       this.hideeditchapt=false;
-},
+}
 
 
 

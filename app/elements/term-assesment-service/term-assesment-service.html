@@ -841,6 +841,7 @@ this.fetchfastudentreporturl=sessionStorage.getItem("addrinfo")+"/fetchfastudent
          obj.gradename=localStorage.getItem("curr_sess_grade");
          obj.section=localStorage.getItem("curr_sess_section");
          obj.subject= localStorage.getItem("curr_sess_subject");
+         obj.academicyear=localStorage.getItem("curr_sess_academicyear");
          if(localStorage.getItem("curr_sess_subject")=="Art&Craft"||localStorage.getItem("curr_sess_subject")=="music"||localStorage.getItem("curr_sess_subject")=="dance"||localStorage.getItem("curr_sess_subject")=="Games"||localStorage.getItem("curr_sess_subject")=="Personality Development"||localStorage.getItem("curr_sess_subject")=="Attendance"||localStorage.getItem("curr_sess_subject")=="Health")
            obj.assesment= "Assesment3";
          else
@@ -855,6 +856,7 @@ this.fetchfastudentreporturl=sessionStorage.getItem("addrinfo")+"/fetchfastudent
          this.fetchfareporturl=sessionStorage.getItem("addrinfo")+"/fetchfareport-service";
          var obj={"schoolid":"","gradename":"","section":"","subject":"","assesment":"","termname":""};
            obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+           obj.academicyear=localStorage.getItem("curr_sess_academicyear");
            obj.termname= localStorage.getItem("curr_sess_termname");
            obj.gradename=localStorage.getItem("curr_sess_grade");
            obj.section=localStorage.getItem("curr_sess_section");

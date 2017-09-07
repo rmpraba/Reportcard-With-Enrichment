@@ -2275,6 +2275,11 @@ fnsetcoskill13:function(skarr,period,rowid,sno)
     this.buffdelurl=sessionStorage.getItem("addrinfo")+"/buffset-service";
     var obj={};
     obj.capter_id=localStorage.getItem("curr_sess_capters");
+     obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+        obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+          obj.subjectid=sessionStorage.getItem("subjectidz");
+        obj.gradeid=sessionStorage.getItem("grdeidz");
+        obj.termid=sessionStorage.getItem("termid"); 
     this.buffdelparam=obj;
    this.$.buffdelajax.generateRequest();
    },
@@ -3345,7 +3350,7 @@ document.querySelector('incomplete-chapter-report').getreportarr=temparr;
 
         },
      
-         fnsetrejectbooksubject:function(gradename,gradeid)
+         fnsetrejectbooksubject:function(gradeid,gradename)
          {
             this.fnsetrejectbooksubjecturl=sessionStorage.getItem("addrinfo")+"/bookrefsubject-service";
 
@@ -3361,6 +3366,24 @@ document.querySelector('incomplete-chapter-report').getreportarr=temparr;
         {
             var res=e.detail.response.returnval;
             document.querySelector('incomplete-chapter-report').chaptersssubjectarr=res;
+        },
+        
+        fnsetrejectbooksubject1:function(gradeid,gradename)
+         {
+            this.fnsetrejectbooksubject1url=sessionStorage.getItem("addrinfo")+"/bookrefsubject-service";
+
+             var obj={"school_id":"","gradeid":"","gradename":"","academic_year":""};
+              obj.gradeid=gradeid;
+              obj.gradename=gradename;
+              obj.school_id=sessionStorage.getItem("curr_sess_loggedschoolid");
+              obj.academic_year=localStorage.getItem("curr_sess_academicyear"); 
+              this.fnsetrejectbooksubject1param=obj;
+            this.$.fnsetrejectbooksubject1ajax.generateRequest();
+        },
+        fnsetrejectbooksubject1Response:function(e)
+        {
+            var res=e.detail.response.returnval;
+            document.querySelector('evaluation-report-card').chapterevlsubjectarr=res;
         },
     getcurriculamdetails:function(gradeid,subjectid)
         {
@@ -3431,19 +3454,22 @@ obj.academicyear=localStorage.getItem("curr_sess_academicyear");
               },
 fnselectinnovatesubject:function(gradeid,gradename)
          {
+
     this.fnselectinnovatesubjecturl=sessionStorage.getItem("addrinfo")+"/   innovatechapsubject-service";
              var obj={"school_id":"","gradeid":"","gradename":"","academic_year":""};
+
               obj.gradeid=gradeid;
               obj.gradename=gradename;
               obj.school_id=sessionStorage.getItem("curr_sess_loggedschoolid");
               obj.academic_year=localStorage.getItem("curr_sess_academicyear"); 
               this.fnselectinnovatesubjectparam=obj;
-              alert(JSON.stringify(obj));
+              //alert(JSON.stringify(obj));
             this.$.fnselectinnovatesubjectajax.generateRequest();
         },
          fnselectinnovatesubjectResponse:function(e)
         {
           var res=e.detail.response.returnval;
+          //alert(JSON.stringify(res));
           document.querySelector('innovation-report').innovationsubjectarr=res;
         },
         fngetchapterinnvt:function(gradeid,subjectid,termid)
@@ -3517,10 +3543,7 @@ fnselectinnovatesubject:function(gradeid,gradename)
             //alert(JSON.stringify(temparr2));
             
             document.querySelector('innovation-report').innovatearr=temparr2;
-
         }
-        
-
     });
   })();
   </script>

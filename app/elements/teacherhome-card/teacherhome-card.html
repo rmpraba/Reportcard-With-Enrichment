@@ -15,6 +15,8 @@
 <link rel="import" href="../employee-report-service/employee-report-service.html">
 <link rel="import" href="../teacher-book-service-card/teacher-book-service-card.html">
 
+<link rel="import" href="../student-add-service/student-add-service.html">
+
 <dom-module id="teacherhome-card">
   <template>
     <style>
@@ -74,7 +76,7 @@
     </div>
     <div class="inner1" hidden$="{{hideleasonplancontainer}}">
       <div class="card" hidden$="{{bookclassplann}}">
-        <paper-button on-click="fnbookclassplan" no ink><img src="../../images/appruval.jpg" height="180px" width="180px">
+        <paper-button on-click="fnbookclassplan" no ink><img src="../../images/done.jpg" height="180px" width="180px">
         <h4>Evaluation</h4>
         </paper-button>
       </div>     
@@ -233,6 +235,13 @@
         <h4>Student To Section Report</h4>
         </paper-button>
        </div>
+
+       <div class="card" hidden$="{{studentadd}}">
+        <paper-button on-click="Fnaddstudent" no ink><img src="../../images/studentadd.jpg" height="180px" width="180px">
+        <h4>Student Add</h4>
+        </paper-button>
+       </div>
+
       </div>
       <div class="inner1" hidden$="{{hideleasonplancontainer}}">
       <div class="card" hidden$="{{captureReportt}}">
@@ -267,11 +276,11 @@
         </paper-button>
       </div>
 
-      <div class="card" hidden$="{{innnovationreport}}">
+      <!-- <div class="card" hidden$="{{innnovationreport}}">
         <paper-button on-click="fninnovation" no ink><img src="../../images/innovations.jpg" height="180px" width="180px">
         <h4>Innovation Report</h4>
         </paper-button>
-      </div>
+      </div> -->
 
       </div>
     </div>
@@ -558,6 +567,12 @@
       <h4>Section Update</h4>
       </paper-button>
     </div>
+
+    <div class="card" hidden$="{{studentadd}}">
+      <paper-button on-click="Fnaddstudent" no ink><img src="../../images/studentadd.jpg" height="180px" width="180px">
+        <h4>Student Add</h4>
+      </paper-button>
+    </div>
     </div>
     </div>
     <!-- General ssschooladmin master ends-->
@@ -607,6 +622,7 @@
     <employee-report-service id="empservice"></employee-report-service>
     <student-report-service id="reportservice"></student-report-service>
     <teacher-book-service-card id="bookservice"></teacher-book-service-card>
+       <student-add-service id="studservice"></student-add-service>
 
   </template>
   <script>
@@ -1508,14 +1524,13 @@
           fncurriculamreport:function(e)
           {
             localStorage.setItem('curr_sess_loggedassesmenttype','curriculamreport');
-            document.querySelector('curriculam-report').Fnrefresh11();
+            document.querySelector('curriculam-report').Fnrefreshcurrclm();
             this.$.cdialog.toggle();
           },
             fnevaluationreport:function(e)
           {
             localStorage.setItem('curr_sess_loggedassesmenttype','evaluationreport');
-          //  document.querySelector('curriculam-report').Fnrefresh11();
-          document.querySelector('evaluation-report-card').FnRefreshtt();
+          document.querySelector('evaluation-report-card').FnRefreshevaltsss();
             this.$.cdialog.toggle();
           },
           fninnovation:function(e)
@@ -1523,6 +1538,14 @@
              localStorage.setItem('curr_sess_loggedassesmenttype','innovationreport');
              document.querySelector('innovation-report').FnRefreshinnvt();
              this.$.cdialog.toggle();
+          },
+          Fnaddstudent:function(e)
+          {
+             document.querySelector('app-card').setPage('homepage','');
+              document.querySelector('home-page').setPage('student-add-card','');
+              this.$.studservice.fngetgrade();
+              document.querySelector('student-add-card').FnfullRefresh();
+
           }
        
     });

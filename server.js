@@ -10,6 +10,7 @@ var connection = mysql.createConnection({
    user     : 'root',
    password : '',
    database : 'reportcard1'
+
 });
 
 var bodyParser = require('body-parser'); 
@@ -2531,9 +2532,9 @@ app.post('/onetofourreport-service',  urlencodedParser,function (req,res)
 
 app.post('/fetchstudentreport-service',  urlencodedParser,function (req, res)
 {
-  var qur="select * from tr_term_assesment_marks where  grade='"+req.query.gradename+"' and section ='"+req.query.section+"' and school_id='"+req.query.schoolid+"' and subject_id='"+req.query.subject+"' and assesment_id='"+req.query.assesment+"' and term_name='"+req.query.termname+"'";
+  var qur="select * from tr_term_assesment_marks where  grade='"+req.query.gradename+"' and section ='"+req.query.section+"' and school_id='"+req.query.schoolid+"' and subject_id='"+req.query.subject+"' and assesment_id='"+req.query.assesment+"' and term_name='"+req.query.termname+"' and academic_year='"+req.query.academicyear+"'";
   console.log('----------------------------------------fetchreport----------');
-  //console.log(qur);
+  console.log(qur);
   connection.query(qur,
     function(err, rows)
     {
@@ -7251,7 +7252,7 @@ app.post('/insertgradeinfo-service',urlencodedParser,function (req, res)
 //console.log(response);
 
 var qur1="UPDATE md_student SET ? WHERE id='"+req.query.studentname+"' and school_id='"+req.query.school_id+"' and "+" academic_year='"+req.query.academic_year+"'";
-//console.log(qur1);
+console.log(qur1);
   connection.query(qurr,
     function(err, rows){
     response.school_type=rows[0].school_type;
@@ -7265,7 +7266,7 @@ var qur1="UPDATE md_student SET ? WHERE id='"+req.query.studentname+"' and schoo
     }
     else
     {
-     // console.log(err);
+     console.log(err);
       res.status(200).json({'returnval': 'Not Updated!'});
     }
      });
@@ -10700,7 +10701,7 @@ app.post('/fnchapterupdatezzz-service',  urlencodedParser,function (req, res)
 
 app.post('/buffset-service' ,urlencodedParser, function (req, res)
     {  
-     var qur3="SELECT * FROM md_chapter  where capter_id='"+req.query.capter_id+"'";
+     var qur3="SELECT * FROM md_chapter  where capter_id='"+req.query.capter_id+"' and school_id='"+req.query.schoolid+"'  and academic_year='"+req.query.academic_year+"' and subjectid='"+req.query.subjectid+"' and gradeid='"+req.query.gradeid+"' and term_id='"+req.query.termid+"'";
 
     console.log(qur3);
       connection.query(qur3,function(err, rows){
@@ -11309,7 +11310,8 @@ app.post('/fngetskills-service',  urlencodedParser,function (req,res)
 
 
 
-app.post('/buffset-service' ,urlencodedParser, function (req, res)
+/*app.post('/buffset-service' ,urlencodedParser, function (req, res)
+>>>>>>> origin/master
     {  
      var qur3="SELECT * FROM md_chapter  where capter_id='"+req.query.capter_id+"'";
 
@@ -11326,7 +11328,7 @@ app.post('/buffset-service' ,urlencodedParser, function (req, res)
           res.status(200).json({'returnval': 'invalid'});
 
       });
-    });
+    });*/
 
 
 app.post('/fngetsubconcepts-service',  urlencodedParser,function (req,res)
@@ -12505,18 +12507,20 @@ app.post('/fngetchapterinnvt-service',  urlencodedParser,function (req,res)
 { 
   var qur2=" select * from md_curriculum_planning_approval where school_id='"+req.query.schoolid+"' and grade_id='"+req.query.gradeid+"' and subject_id='"+req.query.subjectid+"' and academic_year='"+req.query.academic_year+"' and term_id='"+req.query.termid+"'  and chapter_id='"+req.query.capterid+"'";
 
+  console.log("********Innovation Report*********");
   console.log(qur2);
 
    connection.query(qur2,
     function(err, rows){
       if(!err)
       {
+          console.log(rows);
           res.status(200).json({'returnval': rows});
           
       }
 
       else
-          //console.log(err);
+          console.log(err);
           res.status(200).json({'returnval': 'invalid'});
       });
 });
@@ -12566,6 +12570,103 @@ app.post('/innovatechapsubject-service',  urlencodedParser,function (req,res)
      res.status(200).json({'returnval': 'no rows'}); 
   });
 });  
+
+
+
+
+app.post('/getgradestudent-service', urlencodedParser,function (req,res)
+{      
+     
+  var qur="SELECT * FROM md_grade";
+  connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    { 
+     //console.log(JSON.stringify(rows));   
+      res.status(200).json({'returnval': rows});
+    }
+    else
+      console.log(err);
+      res.status(200).json({'returnval': ''});
+  });
+});
+
+
+
+app.post('/addstudent-service', urlencodedParser,function (req,res)
+{      
+  var response={
+    school_id:req.query.schoolid,
+    school_name:req.query.schoolname,
+    admission_no:req.query.studnetid,
+    first_name:req.query.firstname,
+    middle_name:req.query.middlename,
+    last_name:req.query.lastname,
+    student_name:req.query.studentname,
+    class_for_admission:req.query.grade,
+    dob:req.query.dob,
+    age:req.query.age,
+    academic_year:req.query.academicyear,
+    father_name:req.query.fathername,
+    mother_name:req.query.mothername,
+    gender:req.query.gender,
+    transport_availed:req.query.transport,
+  }   
+  console.log("student add");
+  console.log("-------------------------");
+  console.log(response);
+  connection.query("INSERT INTO md_admission set ?",[response],
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': 'succ'});
+    }
+    else
+    {
+      console.log(err);
+      res.status(200).json({'returnval': 'fail'});
+    }  
+
+  });
+});
+
+
+app.post('/parentadd-service', urlencodedParser,function (req,res)
+{      
+  var response={
+    school_id:req.query.schoolid,
+    student_id:req.query.studnetid,
+    parent_name:req.query.fathername,
+    email:req.query.fatheremail,
+    mobile:req.query.fathermob,
+    address1:req.query.address1,
+    address2:req.query.address2,
+    address3:req.query.address3,
+    city:req.query.city,
+    pincode:req.query.pincode,
+    alternate_mail:req.query.matheremail,
+    mother_name:req.query.mothername
+  }   
+  console.log("student add");
+  console.log("-------------------------");
+  console.log(response);
+  connection.query("INSERT INTO parent set ?",[response],
+    function(err, rows)
+    {
+    if(!err)
+    {    
+      res.status(200).json({'returnval': 'succ'});
+    }
+    else
+    {
+      console.log(err);
+      res.status(200).json({'returnval': 'fail'});
+    }  
+
+  });
+});
 
 
 var server = app.listen(5000, function () {

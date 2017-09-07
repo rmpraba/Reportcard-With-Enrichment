@@ -16,7 +16,8 @@
       }
       paper-input{
         width: 10%;
-         color: red;  
+        --paper-input-container-label: { color: red };
+        text-align:center;  
       }
     </style>
     <!--component which invokes the predefined date picker control-->
@@ -64,10 +65,12 @@
         
       }
     },
-    FnClear:function(){
+    FnCleartoevltdd:function()
+    {
+     // alert('to');
       this.showdate = moment(new Date()).format('L');
     },
-    
+   
 });
   </script>
 </dom-module>
