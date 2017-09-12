@@ -9,7 +9,7 @@
 <link rel="import" href="../bindmarks-card/bindmarks-card.html">
 <link rel="import" href="../deleteicon-card/deleteicon-card.html">
 <dom-module id="cc-art-craft-onetofour-card">
-  <template>
+  <template>  
     <style>
       :host {
         display: block;
@@ -83,20 +83,22 @@
        <th id="tb1">Creativity</th>
        <th id="tb1">Skill</th>
        <th id="tb1">Interest</th>
-       <th colspan="1" id="tb3"></th><th colspan="1" id="tb3"></th>
+       <th colspan="1" id="tb3" hidden$="{{fnclearsaveid}}"></th>
+       <th colspan="1" id="tb3" hidden$="{{fnclearsaveid}}"></th>
        </tr>
       <tr><th></th><th></th>
 
       <th id="tb1">(10)</th>
       <th id="tb1">(10)</th>
       <th id="tb1">(10)</th>
-      <th></th><th></th>
+      <th  hidden$="{{fnclearsaveid}}"></th>
+      <th  hidden$="{{fnclearsaveid}}"></th>
       </tr>
       </div>
 <template is="dom-repeat" items="{{markarr}}" as="m">
 <tr>
 <template is="dom-repeat" items="{{m}}" as="mark">
-<td colspan="3">{{mark}}</td>
+<td>{{mark}}</td>
 </template>
 </tr>
 </template>
@@ -159,6 +161,7 @@ var tableToExcel = (function() {
         this.$.btn2.hidden=true;
         this.$.submit.hidden=true;
         this.disableflag=false;
+        this.fnclearsaveid=false;
         // this.$.save.hidden=true;
       },
          FnResetFlag:function(){
@@ -259,6 +262,9 @@ var tableToExcel = (function() {
         this.disableflag=false;
       },
       FnSpinnerrActive:function(flag){
+       //alert("1");
+        this.fnclearsaveid=false;
+      
         if(flag==true)
         this.$.spinner.opened=true;
         if(flag==false)

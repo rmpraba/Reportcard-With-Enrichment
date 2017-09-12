@@ -47,7 +47,7 @@
           <paper-dropdown-menu id="section" label="Select Section" disabled="{{read}}" required>
             <paper-menu id="sectionnam1" class="dropdown-content"  on-iron-select="FnSelectSection"  attr-for-selected="value" required>
               <template is="dom-repeat" items="{{sectionarr}}">
-                <paper-item value="{{item.section_name}}">{{item.section_name}}</paper-item>
+                      <paper-item value="{{item.section_name}}">{{item.section_name}}</paper-item>
               </template>
             </paper-menu>
           </paper-dropdown-menu>
@@ -190,7 +190,7 @@
            this.$.assesmentservice.callFetchStudentInfo(gradename,section);                   
            document.querySelector('term-assesment-sheet-card').setPage('cc-maths-onetofour-card');
            document.querySelector('cc-maths-onetofour-card').setDefaultHeaders();
-           document.querySelector('cc-maths-onetofour-card').FnSpinnerrActive(true); 
+      document.querySelector('cc-maths-onetofour-card').FnSpinnerrActive(true); 
         }  
         if(subject=="EVS")
         { 
@@ -243,13 +243,12 @@
           else if(assesment=="SA1"||assesment=="SA2")
           {
           this.$.assesmentservice.callFetchFaStudentInfo();           
-          if((gradename=="Grade-9"||gradename=="Grade-10")&&localStorage.getItem("curr_sess_subject")=="English"){
-          document.querySelector('cc-sa-ninetoten-english').studarr=[]; 
-          document.querySelector('term-assesment-sheet-card').setPage('cc-sa-ninetoten-english');
-          document.querySelector('cc-sa-ninetoten-english').setDefaultHeaders();
-          document.querySelector('cc-sa-ninetoten-english').FnSpinnerrActive(true); 
-          }
-          else{
+       if((gradename=="Grade-9"||gradename=="Grade-10")&&localStorage.getItem("curr_sess_subject")=="English"){
+         document.querySelector('cc-sa-ninetoten-english').studarr=[]; 
+         document.querySelector('term-assesment-sheet-card').setPage('cc-sa-ninetoten-english');
+        document.querySelector('cc-sa-ninetoten-english').setDefaultHeaders();
+        document.querySelector('cc-sa-ninetoten-english').FnSpinnerrActive(true); }
+        else{
           document.querySelector('cc-sa-fivetoten-card').studarr=[]; 
           document.querySelector('term-assesment-sheet-card').setPage('cc-sa-fivetoten-card');
           document.querySelector('cc-sa-fivetoten-card').setDefaultHeaders();

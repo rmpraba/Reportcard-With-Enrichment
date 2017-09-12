@@ -91,7 +91,7 @@
       <th colspan="2" id="tb2">MentalAbility</th>
       <th colspan="2" id="tb2">TableActivity</th>
       <th colspan="1" id="tb1">WrittenWork</th>
-      <th colspan="1" id="tb3"></th><th colspan="1" id="tb3"></th>
+      <th colspan="1" id="tb3" hidden$="{{fnclearsaveid}}"></th><th colspan="1" id="tb3"  hidden$="{{fnclearsaveid}}"></th>
       </tr>
       <tr><th></th><th></th>
       <th  id="tb1"> Understanding</th>      
@@ -106,7 +106,7 @@
       <th id="tb1">Neatness</th>
 
       <th id="tb1">Activity</th>
-      <th></th><th></th>
+    <th  hidden$="{{fnclearsaveid}}"></th><th  hidden$="{{fnclearsaveid}}"></th>
       </tr>
       <tr><th></th><th></th>
       <th>{{assesment}}(10)</th>
@@ -119,9 +119,8 @@
 
       <th>{{assesment}}(10)</th>
       <th>{{assesment}}(10)</th>
-
       <th>{{assesment}}(10)</th>
-      <th></th><th></th>
+    <th  hidden$="{{fnclearsaveid}}"></th><th  hidden$="{{fnclearsaveid}}"></th>
       </tr>
       </div>
 <template is="dom-repeat" items="{{markarr}}" as="m">
@@ -148,7 +147,7 @@
 </template>
 </tr>
 </template>
-
+  
       <template is="dom-repeat" items="{{studarr}}">
       <tr>
         <!-- <td><paper-checkbox checked id="{{item.id}}" on-change="FnChange"></paper-checkbox></td> -->
@@ -284,11 +283,10 @@
       importmark:function()      
       { 
       this.disableflag=true;       
-        // this.$.assesmentservice.Fnimportmark();
+        //this.$.assesmentservice.Fnimportmark();
         this.$.assesmentservice.Fnauditterm();
       },
-     
-        FnRefresh:function()
+    FnRefresh:function()
       {
         this.markarr=[];
         this.importarr=[];
@@ -302,6 +300,7 @@
         this.disableflag=false;
       },
       FnSpinnerrActive:function(flag){
+        this.fnclearsaveid=false;
         if(flag==true)
         this.$.spinner.opened=true;
         if(flag==false)

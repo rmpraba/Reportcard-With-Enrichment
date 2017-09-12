@@ -53,15 +53,15 @@
           <paper-dropdown-menu id="section" label="Select Section" disabled="{{read}}" required>
             <paper-menu id="sectionnam2" class="dropdown-content"  on-iron-select="FnSelectSection"  attr-for-selected="value" required>
               <template is="dom-repeat" items="{{sectionarr}}">
-                <paper-item value="{{item.section_name}}">{{item.section_name}}</paper-item>
+    <paper-item value="{{item.section_name}}">{{item.section_name}}</paper-item>
               </template>
             </paper-menu>
           </paper-dropdown-menu>
 
-          <paper-dropdown-menu id="subject" label="Select Subject" disabled="{{read}}" required>
+         <paper-dropdown-menu id="subject" label="Select Subject" disabled="{{read}}" required>
             <paper-menu id="subjectnam2" class="dropdown-content"  on-iron-select="FnSelectSubject"  attr-for-selected="value" required>   
               <template is="dom-repeat" items="{{subjectarr}}">
-                <paper-item value="{{item.subject_name}}">{{item.subject_name}}</paper-item>
+               <paper-item value="{{item.subject_name}}">{{item.subject_name}}</paper-item>
               </template>
             </paper-menu>
           </paper-dropdown-menu>   
@@ -106,7 +106,7 @@
         this.callService();
       },
       callService:function(){
-        this.FnRefresh();
+        this.FnRefresh();  
         if(subject=="Health"||subject=="Attendance"||subject=="Physical Education"||subject=="Art Verticals")
         {
         } 

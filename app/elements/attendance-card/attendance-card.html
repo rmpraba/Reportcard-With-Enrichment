@@ -41,10 +41,20 @@
             font-family: Calibri;
             font-size: 17px;
           }
+          img
+          {
+                width: 35%;
+                height: 300px;
+                margin-left: 36%;
+           }
     </style>
-    <div>  
+    <div id="hidetop1"> 
+    <img src="../../images/notavilable.jpg"> 
+    </div>
+  
+
     <div class="spinner"><paper-dialog modal id="spinner" entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop><paper-spinner active></paper-spinner></paper-dialog></div>
-    <div>  
+  
     <div id="hidetop">
       <center><h1>{{schoolname}}</h1>
       
@@ -60,7 +70,7 @@
       <th id="tb1">Specific Comment</th>
       <th id="tb1"></th>
       </tr>  
-      </div>
+   
 
       <template is="dom-repeat" items="{{studarr}}">
       <tr><td colspan="6">
@@ -83,7 +93,16 @@
       },
       setWorkingDays:function(days){
         this.workingdays=days;
+        this.$.hidetop.hidden=false; 
+          this.$.hidetop1.hidden=true;    
+          
       },
+      setWorkingnotavilable:function(e){
+          this.$.hidetop.hidden=true; 
+          this.$.hidetop1.hidden=false;    
+          this.$.spinner.opened=false;
+      },
+
       FnSave:function(){
         alert('Attendance for this section is complete!');
       },

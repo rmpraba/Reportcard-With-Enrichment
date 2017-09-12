@@ -9,7 +9,7 @@ var connection = mysql.createConnection({
    host     : 'localhost',
    user     : 'root',
    password : '',
-   database : 'reportcard1'
+   database : 'reportcard11'
 
 });
 
@@ -2529,7 +2529,7 @@ app.post('/onetofourreport-service',  urlencodedParser,function (req,res)
   });
 });
 
-
+  
 app.post('/fetchstudentreport-service',  urlencodedParser,function (req, res)
 {
   var qur="select * from tr_term_assesment_marks where  grade='"+req.query.gradename+"' and section ='"+req.query.section+"' and school_id='"+req.query.schoolid+"' and subject_id='"+req.query.subject+"' and assesment_id='"+req.query.assesment+"' and term_name='"+req.query.termname+"' and academic_year='"+req.query.academicyear+"'";
