@@ -5094,11 +5094,11 @@ qur="SELECT CASE WHEN count1 = count2 THEN 'match' ELSE 'mismatch' END as result
 else{
 qur="SELECT CASE WHEN count1 = count2 THEN 'match' ELSE 'mismatch' END as result FROM(SELECT "+
 "(select count(distinct(student_id)) from tr_term_attendance "+
-"where school_id='"+req.query.schoolid+"' and grade='"+req.query.gradename+"' and section='"+req.query.sectionname+"' "+
+"where school_id='"+req.query.schoolid+"' and academic_year='"+req.query.acadamicyear+"' and grade='"+req.query.gradename+"' and section='"+req.query.sectionname+"' "+
 "and term_id='"+req.query.termname+"') AS count1, "+
-"(select count(*) from md_student where school_id='"+req.query.schoolid+"' and class_id=(select class_id from mp_grade_section where grade_id=(select grade_id "+
+"(select count(*) from md_student where school_id='"+req.query.schoolid+"' and academic_year='"+req.query.acadamicyear+"' and class_id=(select class_id from mp_grade_section where grade_id=(select grade_id "+
 "from md_grade where grade_name='"+req.query.gradename+"') and section_id=(select "+
-"section_id from md_section where section_name='"+req.query.sectionname+"' and school_id='"+req.query.schoolid+"'))) AS count2)  AS counts";
+"section_id from md_section where section_name='"+req.query.sectionname+"' and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.acadamicyear+"') and school_id='"+req.query.schoolid+"' and academic_year='"+req.query.acadamicyear+"')) AS count2)  AS counts";
 }
 console.log('----------------------------------------------------------');
 console.log(qur);

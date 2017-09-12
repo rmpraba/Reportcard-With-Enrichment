@@ -439,11 +439,11 @@ table{
         
       },
       callImage:function(){
-        document.querySelector('#img1').src="../../images/"+sessionStorage.getItem("curr_sess_loggedid")+sessionStorage.getItem("curr_sess_loggedschoolid")+".jpg";
+        document.querySelector('#img1').src="../../images/"+sessionStorage.getItem("curr_sess_loggedid")..toUpperCase()+sessionStorage.getItem("curr_sess_loggedschoolid").toUpperCase()+".jpg";
          if(sessionStorage.getItem("curr_sess_loggedschoolid")=="SCH003")
-          document.querySelector('#img2').src="../../images/Principal"+sessionStorage.getItem("curr_sess_loggedschoolid")+".jpg";
+          document.querySelector('#img2').src="../../images/principal"+sessionStorage.getItem("curr_sess_loggedschoolid").toUpperCase()+".jpg";
         else
-        document.querySelector('#img2').src="../../images/principal"+sessionStorage.getItem("curr_sess_loggedschoolid")+".jpg";
+        document.querySelector('#img2').src="../../images/principal"+sessionStorage.getItem("curr_sess_loggedschoolid").toUpperCase()+".jpg";
          this.schoolname=sessionStorage.getItem("curr_sess_loggedschoolname");
         this.schooladdress=sessionStorage.getItem("curr_sess_loggedschooladdress");
         this.academicyear=localStorage.getItem("curr_sess_academicyear");

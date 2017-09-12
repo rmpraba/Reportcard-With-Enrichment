@@ -122,7 +122,7 @@
       },
       FnSetHeaders:function(){
         // alert('yes'+document.querySelector('#pimg1'));
-        document.querySelector('#teimg1').src="../../images/"+sessionStorage.getItem("curr_sess_loggedid")+sessionStorage.getItem("curr_sess_loggedschoolid")+".jpg";
+        document.querySelector('#teimg1').src="../../images/"+sessionStorage.getItem("curr_sess_loggedid").toUpperCase()+sessionStorage.getItem("curr_sess_loggedschoolid")+".jpg";
         document.querySelector('#teimg2').src="../../images/principal"+sessionStorage.getItem("curr_sess_loggedschoolid")+".jpg";
       },
       print:function(){

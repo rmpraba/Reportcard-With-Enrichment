@@ -341,16 +341,16 @@
             // if((localStorage.getItem("curr_sess_termname")).toUpperCase()==(scholasticarr[i].term_name).toUpperCase()){
             obj.comment=scholasticarr[i].description;
             // }
-            if(scholasticarr[i].term_name=="term1"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term1"){
             obj.t1grade=scholasticarr[i].term_cat_grade;
             // alert("Term1: "+obj.t1grade);
             }
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             {
             obj.t2grade=scholasticarr[i].term_cat_grade;
             // alert("Term2: "+obj.t1grade);
             }
-            if(scholasticarr[i].term_name=="term3"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term3"){
             obj.t3grade=scholasticarr[i].term_cat_grade;    
             }
             if(engarr.length==0)
@@ -364,16 +364,16 @@
             {
             flag=1;
             // alert('yes');
-            if(scholasticarr[i].term_name=="term1"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term1"){
             engarr[j].t1grade=scholasticarr[i].term_cat_grade;
             // alert("Term1: "+obj.t1grade);
             }
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             {
             engarr[j].t2grade=scholasticarr[i].term_cat_grade;
             // alert("Term2: "+obj.t1grade);
             }
-            if(scholasticarr[i].term_name=="term3"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term3"){
             engarr[j].t3grade=scholasticarr[i].term_cat_grade;    
             }
             if((localStorage.getItem("curr_sess_termname")).toUpperCase()==(scholasticarr[i].term_name).toUpperCase()){
@@ -393,11 +393,11 @@
             obj.catcheck=scholasticarr[i].category_check;
             obj.category=scholasticarr[i].category;
             obj.comment=scholasticarr[i].description;
-            if(scholasticarr[i].term_name=="term1")
+            if((scholasticarr[i].term_name).toLowerCase()=="term1")
             obj.t1grade=scholasticarr[i].term_cat_grade;
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             obj.t2grade=scholasticarr[i].term_cat_grade;
-            if(scholasticarr[i].term_name=="term3")
+            if((scholasticarr[i].term_name).toLowerCase()=="term3")
             obj.t3grade=scholasticarr[i].term_cat_grade;
             // matharr.push(obj);
             if(matharr.length==0)
@@ -409,14 +409,14 @@
             if(matharr[j].category==scholasticarr[i].category)
             {
             flag=1;
-            if(scholasticarr[i].term_name=="term1"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term1"){
             matharr[j].t1grade=scholasticarr[i].term_cat_grade;
             }
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             {
             matharr[j].t2grade=scholasticarr[i].term_cat_grade;
             }
-            if(scholasticarr[i].term_name=="term3"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term3"){
             matharr[j].t3grade=scholasticarr[i].term_cat_grade;    
             }
             if((localStorage.getItem("curr_sess_termname")).toUpperCase()==(scholasticarr[i].term_name).toUpperCase()){
@@ -434,11 +434,11 @@
             obj.catcheck=scholasticarr[i].category_check;
             obj.category=scholasticarr[i].category;
             obj.comment=scholasticarr[i].description;
-            if(scholasticarr[i].term_name=="term1")
+            if((scholasticarr[i].term_name).toLowerCase()=="term1")
             obj.t1grade=scholasticarr[i].term_cat_grade;
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             obj.t2grade=scholasticarr[i].term_cat_grade;
-            if(scholasticarr[i].term_name=="term3")
+            if((scholasticarr[i].term_name).toLowerCase()=="term3")
             obj.t3grade=scholasticarr[i].term_cat_grade;
             // evsarr.push(obj);
             if(evsarr.length==0)
@@ -450,14 +450,14 @@
             if(evsarr[j].category==scholasticarr[i].category)
             {
             flag=1;
-            if(scholasticarr[i].term_name=="term1"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term1"){
             evsarr[j].t1grade=scholasticarr[i].term_cat_grade;
             }
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             {
             evsarr[j].t2grade=scholasticarr[i].term_cat_grade;
             }
-            if(scholasticarr[i].term_name=="term3"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term3"){
             evsarr[j].t3grade=scholasticarr[i].term_cat_grade;    
             }
             if((localStorage.getItem("curr_sess_termname")).toUpperCase()==(scholasticarr[i].term_name).toUpperCase()){
@@ -475,11 +475,11 @@
             obj.catcheck=scholasticarr[i].category_check;
             obj.category=scholasticarr[i].category;
             obj.comment=scholasticarr[i].description;
-            if(scholasticarr[i].term_name=="term1")
+            if((scholasticarr[i].term_name).toLowerCase()=="term1")
             obj.t1grade=scholasticarr[i].term_cat_grade;
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             obj.t2grade=scholasticarr[i].term_cat_grade;
-            if(scholasticarr[i].term_name=="term3")
+            if((scholasticarr[i].term_name).toLowerCase()=="term3")
             obj.t3grade=scholasticarr[i].term_cat_grade;
             // hinarr.push(obj);
             if(hinarr.length==0)
@@ -491,14 +491,14 @@
             if(hinarr[j].category==scholasticarr[i].category)
             {
             flag=1;
-            if(scholasticarr[i].term_name=="term1"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term1"){
             hinarr[j].t1grade=scholasticarr[i].term_cat_grade;
             }
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             {
             hinarr[j].t2grade=scholasticarr[i].term_cat_grade;
             }
-            if(scholasticarr[i].term_name=="term3"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term3"){
             hinarr[j].t3grade=scholasticarr[i].term_cat_grade;    
             }
             if((localStorage.getItem("curr_sess_termname")).toUpperCase()==(scholasticarr[i].term_name).toUpperCase()){
@@ -516,11 +516,11 @@
             obj.catcheck=scholasticarr[i].category_check;
             obj.category=scholasticarr[i].category;
             obj.comment=scholasticarr[i].description;
-            if(scholasticarr[i].term_name=="term1")
+            if((scholasticarr[i].term_name).toLowerCase()=="term1")
             obj.t1grade=scholasticarr[i].term_cat_grade;
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             obj.t2grade=scholasticarr[i].term_cat_grade;
-            if(scholasticarr[i].term_name=="term3")
+            if((scholasticarr[i].term_name).toLowerCase()=="term3")
             obj.t3grade=scholasticarr[i].term_cat_grade;
             // hinarr.push(obj);
             if(hinarr.length==0)
@@ -532,14 +532,14 @@
             if(hinarr[j].category==scholasticarr[i].category)
             {
             flag=1;
-            if(scholasticarr[i].term_name=="term1"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term1"){
             hinarr[j].t1grade=scholasticarr[i].term_cat_grade;
             }
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             {
             hinarr[j].t2grade=scholasticarr[i].term_cat_grade;
             }
-            if(scholasticarr[i].term_name=="term3"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term3"){
             hinarr[j].t3grade=scholasticarr[i].term_cat_grade;    
             }
             if((localStorage.getItem("curr_sess_termname")).toUpperCase()==(scholasticarr[i].term_name).toUpperCase()){
@@ -557,11 +557,11 @@
             obj.catcheck=scholasticarr[i].category_check;
             obj.category=scholasticarr[i].category;
             obj.comment=scholasticarr[i].description;
-            if(scholasticarr[i].term_name=="term1")
+            if((scholasticarr[i].term_name).toLowerCase()=="term1")
             obj.t1grade=scholasticarr[i].term_cat_grade;
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             obj.t2grade=scholasticarr[i].term_cat_grade;
-            if(scholasticarr[i].term_name=="term3")
+            if((scholasticarr[i].term_name).toLowerCase()=="term3")
             obj.t3grade=scholasticarr[i].term_cat_grade;
             // comarr.push(obj);
             if(comarr.length==0)
@@ -573,14 +573,14 @@
             if(comarr[j].category==scholasticarr[i].category)
             {
             flag=1;
-            if(scholasticarr[i].term_name=="term1"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term1"){
             comarr[j].t1grade=scholasticarr[i].term_cat_grade;
             }
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             {
             comarr[j].t2grade=scholasticarr[i].term_cat_grade;
             }
-            if(scholasticarr[i].term_name=="term3"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term3"){
             comarr[j].t3grade=scholasticarr[i].term_cat_grade;    
             }
             if((localStorage.getItem("curr_sess_termname")).toUpperCase()==(scholasticarr[i].term_name).toUpperCase()){
@@ -599,11 +599,11 @@
             obj.catcheck=scholasticarr[i].category_check;
             obj.category=scholasticarr[i].category;
             obj.comment=scholasticarr[i].description;
-            if(scholasticarr[i].term_name=="term1")
+            if((scholasticarr[i].term_name).toLowerCase()=="term1")
             obj.t1grade=scholasticarr[i].term_cat_grade;
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             obj.t2grade=scholasticarr[i].term_cat_grade;
-            if(scholasticarr[i].term_name=="term3")
+            if((scholasticarr[i].term_name).toLowerCase()=="term3")
             obj.t3grade=scholasticarr[i].term_cat_grade;
             // gkarr.push(obj);
             if(gkarr.length==0)
@@ -615,14 +615,14 @@
             if(gkarr[j].category==scholasticarr[i].category)
             {
             flag=1;
-            if(scholasticarr[i].term_name=="term1"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term1"){
             gkarr[j].t1grade=scholasticarr[i].term_cat_grade;
             }
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             {
             gkarr[j].t2grade=scholasticarr[i].term_cat_grade;
             }
-            if(scholasticarr[i].term_name=="term3"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term3"){
             gkarr[j].t3grade=scholasticarr[i].term_cat_grade;    
             }
             if((localStorage.getItem("curr_sess_termname")).toUpperCase()==(scholasticarr[i].term_name).toUpperCase()){
@@ -643,11 +643,11 @@
             obj.catcheck=scholasticarr[i].category_check;            
             obj.category=scholasticarr[i].category;
             obj.comment=scholasticarr[i].description;
-            if(scholasticarr[i].term_name=="term1")
+            if((scholasticarr[i].term_name).toLowerCase()=="term1")
             obj.t1grade=scholasticarr[i].term_cat_grade;
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             obj.t2grade=scholasticarr[i].term_cat_grade;
-            if(scholasticarr[i].term_name=="term3")
+            if((scholasticarr[i].term_name).toLowerCase()=="term3")
             obj.t3grade=scholasticarr[i].term_cat_grade;     
             // acarr.push(obj);
             if(acarr.length==0)
@@ -659,14 +659,14 @@
             if(acarr[j].category==scholasticarr[i].category)
             {
             flag=1;
-            if(scholasticarr[i].term_name=="term1"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term1"){
             acarr[j].t1grade=scholasticarr[i].term_cat_grade;
             }
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             {
             acarr[j].t2grade=scholasticarr[i].term_cat_grade;
             }
-            if(scholasticarr[i].term_name=="term3"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term3"){
             acarr[j].t3grade=scholasticarr[i].term_cat_grade;    
             }
             if((localStorage.getItem("curr_sess_termname")).toUpperCase()==(scholasticarr[i].term_name).toUpperCase()){
@@ -684,11 +684,11 @@
             obj.catcheck=scholasticarr[i].category_check;
             obj.category=scholasticarr[i].category;
             obj.comment=scholasticarr[i].description;
-            if(scholasticarr[i].term_name=="term1")
+            if((scholasticarr[i].term_name).toLowerCase()=="term1")
             obj.t1grade=scholasticarr[i].term_cat_grade;
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             obj.t2grade=scholasticarr[i].term_cat_grade;
-            if(scholasticarr[i].term_name=="term3")
+            if((scholasticarr[i].term_name).toLowerCase()=="term3")
             obj.t3grade=scholasticarr[i].term_cat_grade;
             // mdarr.push(obj);
             if(mdarr.length==0)
@@ -700,14 +700,14 @@
             if(mdarr[j].category==scholasticarr[i].category)
             {
             flag=1;
-            if(scholasticarr[i].term_name=="term1"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term1"){
             mdarr[j].t1grade=scholasticarr[i].term_cat_grade;
             }
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             {
             mdarr[j].t2grade=scholasticarr[i].term_cat_grade;
             }
-            if(scholasticarr[i].term_name=="term3"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term3"){
             mdarr[j].t3grade=scholasticarr[i].term_cat_grade;    
             }
             if((localStorage.getItem("curr_sess_termname")).toUpperCase()==(scholasticarr[i].term_name).toUpperCase()){
@@ -725,11 +725,11 @@
             obj.catcheck=scholasticarr[i].category_check;
             obj.category=scholasticarr[i].category;
             obj.comment=scholasticarr[i].description;
-            if(scholasticarr[i].term_name=="term1")
+            if((scholasticarr[i].term_name).toLowerCase()=="term1")
             obj.t1grade=scholasticarr[i].term_cat_grade;
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             obj.t2grade=scholasticarr[i].term_cat_grade;
-            if(scholasticarr[i].term_name=="term3")
+            if((scholasticarr[i].term_name).toLowerCase()=="term3")
             obj.t3grade=scholasticarr[i].term_cat_grade;
             // dancearr.push(obj);
             if(dancearr.length==0)
@@ -741,14 +741,14 @@
             if(dancearr[j].category==scholasticarr[i].category)
             {
             flag=1;
-            if(scholasticarr[i].term_name=="term1"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term1"){
             dancearr[j].t1grade=scholasticarr[i].term_cat_grade;
             }
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             {
             dancearr[j].t2grade=scholasticarr[i].term_cat_grade;
             }
-            if(scholasticarr[i].term_name=="term3"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term3"){
             dancearr[j].t3grade=scholasticarr[i].term_cat_grade;    
             }
             if((localStorage.getItem("curr_sess_termname")).toUpperCase()==(scholasticarr[i].term_name).toUpperCase()){
@@ -766,11 +766,11 @@
             obj.catcheck=scholasticarr[i].category_check;
             obj.category=scholasticarr[i].category;
             obj.comment=scholasticarr[i].description;
-            if(scholasticarr[i].term_name=="term1")
+            if((scholasticarr[i].term_name).toLowerCase()=="term1")
             obj.t1grade=scholasticarr[i].term_cat_grade;
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             obj.t2grade=scholasticarr[i].term_cat_grade;
-            if(scholasticarr[i].term_name=="term3")
+            if((scholasticarr[i].term_name).toLowerCase()=="term3")
             obj.t3grade=scholasticarr[i].term_cat_grade;
             // gamearr.push(obj);
             if(gamearr.length==0)
@@ -782,14 +782,14 @@
             if(gamearr[j].category==scholasticarr[i].category)
             {
             flag=1;
-            if(scholasticarr[i].term_name=="term1"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term1"){
             gamearr[j].t1grade=scholasticarr[i].term_cat_grade;
             }
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             {
             gamearr[j].t2grade=scholasticarr[i].term_cat_grade;
             }
-            if(scholasticarr[i].term_name=="term3"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term3"){
             gamearr[j].t3grade=scholasticarr[i].term_cat_grade;    
             }
             if((localStorage.getItem("curr_sess_termname")).toUpperCase()==(scholasticarr[i].term_name).toUpperCase()){
@@ -808,15 +808,15 @@
           obj.comment=scholasticarr[i].description; 
           obj.subject=scholasticarr[i].subject_name+"@"+localStorage.getItem("curr_sess_termname");
           obj.catcheck=scholasticarr[i].category_check;     
-          if(scholasticarr[i].term_name=="term1"){
+          if((scholasticarr[i].term_name).toLowerCase()=="term1"){
             // alert('term1');
           obj.t1grade=scholasticarr[i].term_cat_grade;
           }
-          if(scholasticarr[i].term_name=="term2"){
+          if((scholasticarr[i].term_name).toLowerCase()=="term2"){
             // alert('term2');
           obj.t2grade=scholasticarr[i].term_cat_grade;
           }
-          if(scholasticarr[i].term_name=="term3"){
+          if((scholasticarr[i].term_name).toLowerCase()=="term3"){
             // alert('term3');
           obj.t3grade=scholasticarr[i].term_cat_grade;
           }
@@ -830,14 +830,14 @@
             if(parr[j].category==scholasticarr[i].category)
             {
             flag=1;
-            if(scholasticarr[i].term_name=="term1"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term1"){
             parr[j].t1grade=scholasticarr[i].term_cat_grade;
             }
-            if(scholasticarr[i].term_name=="term2")
+            if((scholasticarr[i].term_name).toLowerCase()=="term2")
             {
             parr[j].t2grade=scholasticarr[i].term_cat_grade;
             }
-            if(scholasticarr[i].term_name=="term3"){
+            if((scholasticarr[i].term_name).toLowerCase()=="term3"){
             parr[j].t3grade=scholasticarr[i].term_cat_grade;    
             }
             if((localStorage.getItem("curr_sess_termname")).toUpperCase()==(scholasticarr[i].term_name).toUpperCase()){
@@ -1027,222 +1027,222 @@
           // var obj={"category":"","t1grade":"","t2grade":"","t3grade":"","comment":""}; 
           if(localStorage.getItem('curr_sess_loggedassesmenttype')=="Scorecard"){          
           if(arr[i].subject_id=="English"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('cce-onetofour-score-card').et1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('cce-onetofour-score-card').et2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('cce-onetofour-score-card').et3=arr[i].grade;   
             // engarr.push(obj);
           }
           if(arr[i].subject_id=="Mathematics"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('cce-onetofour-score-card').mt1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('cce-onetofour-score-card').mt2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('cce-onetofour-score-card').mt3=arr[i].grade;   
             // engarr.push(obj);
           }
           if(arr[i].subject_id=="EVS"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('cce-onetofour-score-card').evt1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('cce-onetofour-score-card').evt2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('cce-onetofour-score-card').evt3=arr[i].grade;   
             // engarr.push(obj);
           }
           if(arr[i].subject_id=="II Language Hindi"){    
           // alert('hindi');  
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('cce-onetofour-score-card').ht1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('cce-onetofour-score-card').ht2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('cce-onetofour-score-card').ht3=arr[i].grade;   
             // engarr.push(obj);
           }
           if(arr[i].subject_id=="II Language Kannada"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('cce-onetofour-score-card').ht1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('cce-onetofour-score-card').ht2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('cce-onetofour-score-card').ht3=arr[i].grade;   
             // engarr.push(obj);
           }
           if(arr[i].subject_id=="Computer"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('cce-onetofour-score-card').ct1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('cce-onetofour-score-card').ct2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('cce-onetofour-score-card').ct3=arr[i].grade;   
             // engarr.push(obj);
           }
           if(arr[i].subject_id=="GK"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('cce-onetofour-score-card').gt1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('cce-onetofour-score-card').gt2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('cce-onetofour-score-card').gt3=arr[i].grade;   
             // engarr.push(obj);
           }
           if(arr[i].subject_id=="Art&Craft"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('cce-onetofour-score-card').at1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('cce-onetofour-score-card').at2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('cce-onetofour-score-card').at3=arr[i].grade;   
             // engarr.push(obj);
           }
           if(arr[i].subject_id=="music"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('cce-onetofour-score-card').mdt1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('cce-onetofour-score-card').mdt2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('cce-onetofour-score-card').mdt3=arr[i].grade;   
             // engarr.push(obj);
           }
          
           if(arr[i].subject_id=="dance"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('cce-onetofour-score-card').dant1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('cce-onetofour-score-card').dant2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('cce-onetofour-score-card').dant3=arr[i].grade;   
             // engarr.push(obj);
           }
           if(arr[i].subject_id=="Games"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('cce-onetofour-score-card').gat1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('cce-onetofour-score-card').gat2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('cce-onetofour-score-card').gat3=arr[i].grade;   
             // engarr.push(obj);
           }
           if(arr[i].subject_id=="Personality Development"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('cce-onetofour-score-card').pdt1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('cce-onetofour-score-card').pdt2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('cce-onetofour-score-card').pdt3=arr[i].grade;   
             // engarr.push(obj);
           }
           }
           if(localStorage.getItem('curr_sess_loggedassesmenttype')=="Comparisonreport"){          
           if(arr[i].subject_id=="English"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('comparisonreport-card').et1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('comparisonreport-card').et2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('comparisonreport-card').et3=arr[i].grade;   
             // engarr.push(obj);
           }
           if(arr[i].subject_id=="Mathematics"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('comparisonreport-card').mt1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('comparisonreport-card').mt2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('comparisonreport-card').mt3=arr[i].grade;   
             // engarr.push(obj);
           }
           if(arr[i].subject_id=="EVS"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('comparisonreport-card').evt1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('comparisonreport-card').evt2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('comparisonreport-card').evt3=arr[i].grade;   
             // engarr.push(obj);
           }
           if(arr[i].subject_id=="II Language Hindi"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('comparisonreport-card').ht1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('comparisonreport-card').ht2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('comparisonreport-card').ht3=arr[i].grade;   
             // engarr.push(obj);
           }
           if(arr[i].subject_id=="II Language Kannada"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('comparisonreport-card').ht1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('comparisonreport-card').ht2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('comparisonreport-card').ht3=arr[i].grade;   
             // engarr.push(obj);
           }
           if(arr[i].subject_id=="Computer"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('comparisonreport-card').ct1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('comparisonreport-card').ct2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('comparisonreport-card').ct3=arr[i].grade;   
             // engarr.push(obj);
           }
           if(arr[i].subject_id=="GK"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('comparisonreport-card').gt1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('comparisonreport-card').gt2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('comparisonreport-card').gt3=arr[i].grade;   
             // engarr.push(obj);
           }
           if(arr[i].subject_id=="Art&Craft"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('comparisonreport-card').at1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('comparisonreport-card').at2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('comparisonreport-card').at3=arr[i].grade;   
             // engarr.push(obj);
           }
           if(arr[i].subject_id=="music"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('comparisonreport-card').mdt1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('comparisonreport-card').mdt2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('comparisonreport-card').mdt3=arr[i].grade;   
             // engarr.push(obj);
           }
           if(arr[i].subject_id=="dance"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('comparisonreport-card').dant1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('comparisonreport-card').dant2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('comparisonreport-card').dant3=arr[i].grade;   
             // engarr.push(obj);
           }
           if(arr[i].subject_id=="Games"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('comparisonreport-card').gat1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('comparisonreport-card').gat2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('comparisonreport-card').gat3=arr[i].grade;   
             // engarr.push(obj);
           }
           if(arr[i].subject_id=="Personality Development"){      
-            if(arr[i].term_name=="term1")
+            if((arr[i].term_name).toLowerCase()=="term1")
             document.querySelector('comparisonreport-card').pdt1=arr[i].grade;
-            if(arr[i].term_name=="term2")
+            if((arr[i].term_name).toLowerCase()=="term2")
             document.querySelector('comparisonreport-card').pdt2=arr[i].grade;
-            if(arr[i].term_name=="term3")
+            if((arr[i].term_name).toLowerCase()=="term3")
             document.querySelector('comparisonreport-card').pdt3=arr[i].grade;   
             // engarr.push(obj);
           }

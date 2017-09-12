@@ -391,11 +391,11 @@
         this.grade=localStorage.getItem("curr_sess_grade");
         this.section=localStorage.getItem("curr_sess_section");
         this.subject=localStorage.getItem("curr_sess_subject");
-        document.querySelector('#pimg1').src="../../images/"+sessionStorage.getItem("curr_sess_loggedid")+sessionStorage.getItem("curr_sess_loggedschoolid")+".jpg";
+        document.querySelector('#pimg1').src="../../images/"+sessionStorage.getItem("curr_sess_loggedid").toUpperCase()+sessionStorage.getItem("curr_sess_loggedschoolid")+".jpg";
         // if(sessionStorage.getItem("curr_sess_loggedschoolid")=="SCH003")
         //   document.querySelector('#pimg2').src="../../images/Principal"+sessionStorage.getItem("curr_sess_loggedschoolid")+".jpg";
         // else
-        document.querySelector('#pimg2').src="../../images/principal"+sessionStorage.getItem("curr_sess_loggedschoolid")+".jpg";
+        document.querySelector('#pimg2').src="../../images/principal"+sessionStorage.getItem("curr_sess_loggedschoolid").toUpperCase()+".jpg";
       },
        print:function(){
 
