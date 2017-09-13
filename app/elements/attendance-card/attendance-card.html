@@ -49,10 +49,16 @@
            }
     </style>
     <div id="hidetop1"> 
-    <img src="../../images/notavilable.jpg"> 
-    </div>
+   <paper-dialog id="attendencedialogid" modal>
+    <h2>Please upload the working days </h2>
+        </br>
+        <center>
+          <paper-button  style="color: white;background-color:black" dialog-confirm autofocus  on-click="fncancal">ok
+          </paper-button>     
+       </center>
+      </paper-dialog>
+    </div>  
   
-
     <div class="spinner"><paper-dialog modal id="spinner" entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop><paper-spinner active></paper-spinner></paper-dialog></div>
   
     <div id="hidetop">
@@ -98,11 +104,15 @@
           
       },
       setWorkingnotavilable:function(e){
+        this.$.attendencedialogid.open();
+
           this.$.hidetop.hidden=true; 
           this.$.hidetop1.hidden=false;    
           this.$.spinner.opened=false;
       },
-
+cancel:function(e){
+ this.$.attendencedialogid.close();
+},
       FnSave:function(){
         alert('Attendance for this section is complete!');
       },
