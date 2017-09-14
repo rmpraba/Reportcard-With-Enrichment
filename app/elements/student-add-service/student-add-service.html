@@ -79,10 +79,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         on-response="deletestudentinfoResponse"
         debounce-duration="300">
       </iron-ajax>
-
-      
-
-       <iron-ajax
+<iron-ajax
         method="post"
         id="deletestudtermmarksajax"
         url="{{deletestudtermmarksurl}}"
@@ -92,6 +89,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         on-response="deletestudtermmarksResponse"
         debounce-duration="300">
       </iron-ajax>
+<iron-ajax
+        method="post"
+        id="deletestudtermmarks1ajax"
+        url="{{deletestudtermmarks1url}}"
+        params="{{deletestudtermmarks1param}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="deletestudtermmarks1Response"
+        debounce-duration="300">
+      </iron-ajax>
+
   </template>
   <script>
   (function() {
@@ -227,7 +235,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             obj.studentid=id;
             obj.gradeid=gradeid;
             obj.classid=classid;
-            obj.flag='active';
+          
             this.deletestudentinfoparam=obj;
             //alert(JSON.stringify(obj));
             this.$.deletestudentinfoajax.generateRequest();
@@ -243,29 +251,50 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         deletestudtermmarks:function(studentid,gradeid,classid,grade,section,term)
         {
-          alert('call');
+        //  alert('call');
             this.deletestudtermmarksurl=sessionStorage.getItem("addrinfo")+"/deletetermstudent-service";
             var obj={"schoolid":"","academic_year":"","flag":""};
             obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
             obj.academic_year=localStorage.getItem("curr_sess_academicyear"); 
             obj.studentid=studentid;
-            obj.gradename=gradename;
+            obj.gradename=grade;
             obj.section=section;
             obj.term=term;
             this.deletestudtermmarksparam=obj;
-            // alert(JSON.stringify(obj));
+         
             this.$.deletestudtermmarksajax.generateRequest();
-        },
-        deletestudtermmarksResponse:function(e)
+          },
+          deletestudtermmarksResponse:function(e)
         {
-          alert('terms');
+        
           var res2=e.detail.response.trdeltarr;
-          alert(JSON.stringify(res2));
-
+          //alert(JSON.stringify(res2));
+           alert("Deleted");
           var res3=e.detail.response.overdelarr;
-          alert(JSON.stringify(res3));
+          //alert(JSON.stringify(res3));
 
-        }
+        },
+         deletestudtermmarks1:function(studentid,gradeid,classid,grade,section,term)
+        {
+        //  alert('call');
+            this.deletestudtermmarks1url=sessionStorage.getItem("addrinfo")+"/deletetermstudent1-service";
+            var obj={"schoolid":"","academic_year":"","flag":""};
+            obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+            obj.academic_year=localStorage.getItem("curr_sess_academicyear"); 
+            obj.studentid=studentid;
+            obj.gradename=grade;
+            obj.section=section;
+            obj.term=term;
+            this.deletestudtermmarks1param=obj;
+         
+            this.$.deletestudtermmarks1ajax.generateRequest();
+        },
+        deletestudtermmarks1Response:function(e)
+        {
+          var res=e.detail.response.returnval;
+          alert(JSON.stringify(res));
+
+         },
 
 
     });

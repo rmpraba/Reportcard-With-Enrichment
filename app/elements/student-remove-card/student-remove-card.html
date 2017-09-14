@@ -61,7 +61,7 @@
 
               <div class="field">
                 <paper-dropdown-menu id="term" label="Select Term">
-                  <paper-menu id="studtermremv" class="dropdown-content"   on-iron-select="fntermstud" attr-for-selected="value" required>
+                  <paper-menu id="studtermremvid" class="dropdown-content"   on-iron-select="fntermstud" attr-for-selected="value" required>
                     <paper-item value="Term1">Term1</paper-item>
                     <paper-item value="Term2">Term2</paper-item>
                     <paper-item value="Term3">Term3</paper-item>
@@ -172,16 +172,37 @@
         },
         fntermstud:function(e)
         {
-          this.termname=e.target.selectedItem.textContent.trim();
+
+          this.tremname=e.target.selectedItem.textContent.trim();
         },
 
         fnstuddelete:function()
         {
-          this.$.studservice.deletestudentinfo(this.studentid,this.gradeid,this.classid);
+         if(this.grade=="" || this.studid==""|| this.section=="" ||this.tremname==""){
+      alert("Pls Select the student");
+         }
+         else{
+
+            if(this.grade=="Nursery" ||this.grade=="Junior KG" || this.grade=="Senior KG" || this.grade=="Grade-1" || this.grade=="Grade-2" ||this.grade=="Grade-3" || this.grade=="Grade-4" ){
+         this.$.studservice.deletestudentinfo(this.studentid,this.gradeid,this.classid);
           this.$.studservice.deletestudtermmarks(this.studentid,this.gradeid,this.classid,this.grade,this.section,this.tremname);
-
-        }
-
+          this.fnref();
+         }
+         else{
+          this.$.studservice.deletestudentinfo(this.studentid,this.gradeid,this.classid);
+      this.$.studservice.deletestudtermmarks1(this.studentid,this.gradeid,this.classid,this.grade,this.section,this.tremname);
+       this.fnref();
+        }}},
+fnref:function(e){
+  
+document.querySelector('#studtermremvid').selected=-1;
+   this.studentid="";
+   this.gradeid="";
+   this.classid="";
+   this.grade="";
+   this.tremname="";
+   document.querySelector('#studentslist').selected=-1;
+ },
 
     });
   })();
