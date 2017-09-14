@@ -324,8 +324,12 @@
       },
       fetchworkingdaysResponse:function(e){
         var warr=e.detail.response.returnval; 
-        // alert(warr[0].no_of_days);       
-        document.querySelector('attendance-card').setWorkingDays(warr[0].no_of_days);
+        // alert(warr[0].no_of_days);  
+   if(warr=="invalid")
+  document.querySelector('attendance-card').setWorkingnotavilable();
+   else
+  document.querySelector('attendance-card').setWorkingDays(warr[0].no_of_days);
+     
       },
       callAcademicService:function(){
         this.$.academicajax.generateRequest();
@@ -451,9 +455,8 @@
          }
          // alert(JSON.stringify(healtharr));
         if(localStorage.getItem("curr_sess_subject")=="Health"){
-            //alert('d');
-        document.querySelector('cce-fivetoten-health-card').studarr=healtharr;  
-        document.querySelector('cce-fivetoten-health-card').FnSpinnerrActive(false);         
+document.querySelector('cce-fivetoten-health-card').studarr=healtharr;  
+document.querySelector('cce-fivetoten-health-card').FnSpinnerrActive(false);         
         } 
         else if(localStorage.getItem("curr_sess_subject")=="Attendance"){            
         document.querySelector('attendance-card').studarr=arr;                 
@@ -1111,7 +1114,7 @@ insertcosubcategorymarkResponse:function(e){
         document.querySelector('cs-discipline-card').setDefaultHeaders(); 
         document.querySelector('cs-discipline-card').studarr=coscholasticoverall;        
         }        
-       },
+       },   
 
       callFetchStudentInfoforattendance:function(){
        
@@ -1163,7 +1166,7 @@ insertcosubcategorymarkResponse:function(e){
            // document.querySelector('attendance-card').setDefaultHeaders();
             // alert(localStorage.getItem('curr_sess_report'));
             
-            if(localStorage.getItem('curr_sess_report')=='2') { 
+            if(localStorage.getItem('curr_sess_report')=='2'){ 
             document.querySelector('home-page').setPage('coscholasticassesment',''); 
             document.querySelector('coscholastic-assesment').hiddenpage();
             document.querySelector('coscholastic-assesment-sheet-card').setPage('attendance-card'); 
@@ -1175,7 +1178,7 @@ insertcosubcategorymarkResponse:function(e){
             document.querySelector('attendance-card').studarr=attendancearr;
             document.querySelector('attendance-card').FnSpinnerrActive(false);
             }
-      },
+          },
 
        callFetchStudentInfoforphysical:function(){
        

@@ -77,8 +77,8 @@
       <th id="tb1">Interest</th>
       <th id="tb1">Rhythm</th>
       <th id="tb1">Melody</th>
-      <th colspan="1" id="tb5"></th>
-      <th colspan="1" id="tb5"></th>
+      <th colspan="1" id="tb5" hidden$="{{fnclearsaveid1}}"></th>
+      <th colspan="1" id="tb5" hidden$="{{fnclearsaveid1}}"></th>
     </tr>  
 </div>
 <template is="dom-repeat" items="{{markarr}}" as="m">
@@ -264,6 +264,7 @@
          this.disableflag=false;
       },
        FnSpinnerrActive:function(flag){
+        this.fnclearsaveid1=false;
         if(flag==true)
         this.$.spinner.opened=true;
         if(flag==false)

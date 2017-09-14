@@ -176,7 +176,7 @@
         if(type=="Categorywise"){
         this.$.reportservice.callfetchsubjectnameService(); 
         this.hideterm=false;
-        // this.hideassesment=false;
+        this.hideassesment=true;
         this.hidesubject=false;
         this.$.categ.setDefaultHeaders();
         }
@@ -184,15 +184,21 @@
         this.$.reportservice.callfetchsubjectnameService(); 
         this.hideterm=false;
         this.hidesubject=false;
+        this.hideassesment=true;
+
         this.$.subject.setDefaultHeaders();
         } 
         if(type=="Assesmentwise"){
         this.hideterm=false;
         this.hideassesment=false;
+        this.hidesubject=true;      
+
         this.$.assesment.setDefaultHeaders();
         }                
         if(type=="Termwise"){
-        this.hideterm=false;        
+        this.hideterm=false;  
+        this.hideassesment=true;
+        this.hidesubject=true;      
         this.$.term.setDefaultHeaders(); 
         } 
         if(type=="ConsolidatedTerm"){

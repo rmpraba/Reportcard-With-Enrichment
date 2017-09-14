@@ -34,7 +34,8 @@
 
         <tr>
         <!-- <td><paper-checkbox checked id="{{studid}}" on-change="FnChange"></paper-checkbox></td> -->
-        <td hidden><paper-input value="{{studid}}"></paper-input><paper-item value="{{studname}}"></paper-item></td>
+        <td hidden><pa
+        per-input value="{{studid}}"></paper-input><paper-item value="{{studname}}"></paper-item></td>
         <!-- <td>{{serialno}}</td><td>{{studname}}</td> -->
         <td><paper-input disabled="{{read}}"  required allowed-pattern="^[0-9.a,]+$" value="{{understanding}}" id="p1" on-change="FnUnderstanding"></td>
         <td><paper-input disabled="{{read}}"  required  allowed-pattern="^[0-9.a,]+$" value="{{groupactivity}}" id="p2" on-change="FnGroupactivity"></paper-input></td>
@@ -212,7 +213,7 @@
             this.grade=grade[i];
           }
         }
-        return this.grade;        
+        return this.grade;           
       },
       callService:function(){
         this.$.assesmentservice.callinsertassesmentmarkService(this.studid,this.studname,"Concept","Understanding",this.understanding,1,8);

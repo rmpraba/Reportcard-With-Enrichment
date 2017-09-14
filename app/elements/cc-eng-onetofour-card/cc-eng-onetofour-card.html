@@ -86,8 +86,8 @@
       <th colspan="2" id="tb2">Speaking Skills</th>
       <th colspan="1" id="tb1">Listening Skills</th>
       <th colspan="1" id="tb1">Written Work</th>
-      <th colspan="1" id="tb5"></th><th colspan="1" id="tb5"></th>
-      </tr>
+      <th colspan="1" id="tb5" hidden$="{{fnclearsaveid}}"></th><th colspan="1" id="tb5" hidden$="{{fnclearsaveid}}"></th>
+      </tr>  
       <tr><th></th><th></th>
       <th id="tb1">Pronunciation</th>      
       <th id="tb1">Fluency</th>
@@ -103,7 +103,7 @@
       <th id="tb1">Recitation</th>
       <th id="tb1">Comprehension</th>
       <th id="tb1">Activity</th>
-       <th></th><th></th>
+       <th hidden$="{{fnclearsaveid}}"></th ><th hidden$="{{fnclearsaveid}}"></th>
       </tr>
       <tr><th></th><th></th>
       <th>{{assesment}}(10)</th>
@@ -124,7 +124,7 @@
       <th>{{assesment}}(10)</th>
 
       <th>{{assesment}}(10)</th>
-      <th></th><th></th>
+      <th hidden$="{{fnclearsaveid}}"></th><th hidden$="{{fnclearsaveid}}"></th>
       </tr>
       </div>
 <template is="dom-repeat" items="{{markarr}}" as="m">
@@ -304,6 +304,7 @@ var tableToExcel = (function() {
          this.disableflag=false;
       },
       FnSpinnerrActive:function(flag){
+        this.fnclearsaveid=false;
         if(flag==true)
         this.$.spinner.opened=true;
         if(flag==false)

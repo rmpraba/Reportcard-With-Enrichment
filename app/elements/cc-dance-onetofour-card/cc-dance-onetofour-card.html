@@ -1,6 +1,6 @@
 
 <link rel="import" href="..\..\bower_components/polymer/polymer.html">
-<link rel="import" href="..\..\bower_components/cc-dance-onetofour-item-card/cc-dance-onetofour-item-card.html">
+<link rel="import" href="..\..\bower_components/cc-dance-onetofour-item-card/cc-dance-onetofour-item-card.html">  
 
 <link rel="import" href="..\..\bower_components/paper-item/paper-item.html">
 <link rel="import" href="../validation-dialog/validation-dialog.html">
@@ -78,15 +78,15 @@
        <th id="tb1">Interest (10)</th>
        <th id="tb1">Rhythm (10)</th>
        <th id="tb1">Grace (10)</th>
-       <th colspan="1" id="tb3"></th>
-       <th colspan="1" id="tb3"></th>
+       <th colspan="1" id="tb3"  hidden$="{{fnclearsaveid}}"></th>
+       <th colspan="1" id="tb3"  hidden$="{{fnclearsaveid}}"></th>
       </tr>
 
 </div>
 <template is="dom-repeat" items="{{markarr}}" as="m">
 <tr>
 <template is="dom-repeat" items="{{m}}" as="mark">
-<td  colspan="3">{{mark}}</td>
+<td>{{mark}}</td>
 </template>
 </tr>
 </template>
@@ -252,6 +252,7 @@ var tableToExcel = (function() {
          this.disableflag=false;
       },
         FnSpinnerrActive:function(flag){
+       this.fnclearsaveid=false;
         if(flag==true)
         this.$.spinner.opened=true;
         if(flag==false)

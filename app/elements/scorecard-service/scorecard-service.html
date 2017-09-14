@@ -302,8 +302,10 @@
         if(e.detail.response.returnval=='match'){
           this.callFetchstudentnameService();
         }
-        else
-          alert('Scorecard is not ready..!Due to evaluation pending....');
+        else{
+          this.callFetchstudentnameService();
+          // alert('Scorecard is not ready..!Due to evaluation pending....');
+        }
       },
       callFetchstudentnameService:function(){
         this.fetchstudnameurl=sessionStorage.getItem("addrinfo")+"/fetchstudname-service";
