@@ -188,7 +188,7 @@ Fnselected:function(e)
           this.querySelector('#itemlistname').style.visibility='hidden';
           this.textvalue=e.target.selectedItem.textContent.trim();
           this.studentname=e.target.selectedItem.value;
-          //alert(this.textvalue+this.textvalue1);
+          //alert(this.textvalue+this.studentname);
           this.itemArray=[];
           document.querySelector('#itemlistname').selected=-1;
           this.$.uiservice.studentinfo(this.studentname);

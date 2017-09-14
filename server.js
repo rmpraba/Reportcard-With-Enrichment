@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
    host     : 'localhost',
    user     : 'root',
    password : '',
-   database : 'reportcard1'
+   database : 'reportcardcloud'
 
 
 });
@@ -7110,7 +7110,7 @@ app.post('/terminsert-service' , urlencodedParser,function (req, res)
     }
     else
     {
-      //console.log(err);
+      console.log(err);
       res.status(200).json({'returnval': 'Not Inserted!'});
     }
     });
@@ -7121,6 +7121,7 @@ app.post('/terminsert-service' , urlencodedParser,function (req, res)
         if(!err)
         res.status(200).json({'returnval': 'updated successfully'});
         else
+          console.log(err);
         res.status(200).json({'returnval': 'not updated'});
         });
         } 
@@ -12500,6 +12501,8 @@ app.post('/addstudent-service', urlencodedParser,function (req,res)
     mother_name:req.query.mothername,
     gender:req.query.gender,
     transport_availed:req.query.transport,
+    enquiry_no:req.query.enroll1,
+    admission_year:req.query.admissionyear,
   }   
   console.log("student add");
   console.log("-------------------------");
@@ -12557,11 +12560,117 @@ app.post('/parentadd-service', urlencodedParser,function (req,res)
 });
 
 
+app.post('/Fnfetchstudentremove-service', urlencodedParser,function (req,res)
+{  
+    var qur="SELECT * FROM md_student where school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"'";
+    connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    { 
+      //console.log(JSON.stringify(rows));   
+      res.status(200).json({'returnval': rows});
+    }
+    else
+      console.log(err);
+      res.status(200).json({'returnval': ''});
+  });
+});
+
+
+
+app.post('/Prestudentremove-service', urlencodedParser,function (req,res)
+{  
+
+    var qur="SELECT s.grade_id,s.class_id,g.grade_name,UPPER(c.section_id) as section_name  FROM `md_student` s join md_grade g on(g.grade_id=s.grade_id) join mp_grade_section c on(c.class_id=s.class_id) where s.school_id='"+req.query.schoolid+"' and s.academic_year='"+req.query.academic_year+"'  and  s.id='"+req.query.studentid+"'  and c.school_id='"+req.query.schoolid+"' and c.academic_year='"+req.query.academic_year+"'";
+
+
+    connection.query(qur,
+    function(err, rows)
+    {
+    if(!err)
+    { 
+      //console.log(JSON.stringify(rows));   
+      res.status(200).json({'returnval': rows});
+    }
+    else
+      console.log(err);
+      res.status(200).json({'returnval': ''});
+  });
+});
+
+
+
+app.post('/deletestudentremove-service',  urlencodedParser,function (req,res)
+  {  
+      var qur1="UPDATE md_student set flag='passive' where school_id='"+req.query.schoolid+"' and id='"+req.query.studentid+"' and academic_year='"+req.query.academic_year+"' and class_id='"+req.query.classid+"' and grade_id='"+req.query.gradeid+"'";
+
+
+      var qur2="UPDATE tr_student_to_subject set flag='passive' where school_id='"+req.query.schoolid+"' and grade='"+req.query.gradeid+"' and class_id='"+req.query.classid+"' and academic_year='"+req.query.academic_year+"'";
+
+    console.log("---------------------------------");
+    console.log(qur1);
+    console.log("---------------------------------");
+    console.log(qur2);
+    var updatearr1=[];
+    var delarr=[];
+    connection.query(qur1,function(err, rows){
+    if(!err)
+    { 
+    updatearr1=rows; 
+    connection.query(qur2,function(err, rows){
+    if(!err)
+    {  
+      //console.log(rows);
+      delarr=rows;
+     res.status(200).json({'updatearr1': 'updated','delarr':'updated'});
+    }
+    });
+    }
+    else
+      console.log(err);
+     res.status(200).json({'': 'no rows'}); 
+  });
+});
+
+
+
+app.post('/deletetermstudent-service',  urlencodedParser,function (req,res)
+  {  
+    var qur3="Delete from tr_term_assesment_marks where school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and term_name='"+req.query.term+"' and grade='"+req.query.gradename+"' and student_id='"+req.query.studentid+"' and section='"+req.query.section+"'";
+
+    var qur4="Delete from tr_term_assesment_overall_marks where school_id='"+req.query.schoolid+"' and academic_year='"+req.query.academic_year+"' and term_name='"+req.query.term+"' and grade='"+req.query.gradename+"' and student_id='"+req.query.studentid+"' and section='"+req.query.section+"'";
+
+    console.log("---------------------------------");
+    console.log(qur3);
+    console.log("---------------------------------");
+    console.log(qur4);
+    var trdeltarr=[];
+    var overdelarr=[];
+    connection.query(qur3,function(err, rows){
+    if(!err)
+    { 
+    trdeltarr=rows; 
+    connection.query(qur4,function(err, rows){
+    if(!err)
+    {  
+      //console.log(rows);
+      overdelarr=rows;
+     res.status(200).json({'trdeltarr': 'deleted','overdelarr':'deleted'});
+    }
+    });
+    }
+    else
+      console.log(err);
+     res.status(200).json({'': 'no rows'}); 
+  });
+});
+
+
+
 var server = app.listen(5000, function () {
 var host = server.address().address
 var port = server.address().port
 console.log("Example app listening at http://%s:%s", host, port)
 });
-
-
 

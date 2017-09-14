@@ -242,6 +242,8 @@
         </paper-button>
        </div>
 
+
+
       </div>
       <div class="inner1" hidden$="{{hideleasonplancontainer}}">
       <div class="card" hidden$="{{captureReportt}}">
@@ -571,6 +573,12 @@
     <div class="card" hidden$="{{studentadd}}">
       <paper-button on-click="Fnaddstudent" no ink><img src="../../images/studentadd.jpg" height="180px" width="180px">
         <h4>Student Add</h4>
+      </paper-button>
+    </div>
+
+    <div class="card" hidden$="{{studentremove}}">
+      <paper-button on-click="Fnremovestudent" no ink><img src="../../images/studentremove.jpg" height="180px" width="180px">
+        <h4>Student Remove</h4>
       </paper-button>
     </div>
     </div>
@@ -916,6 +924,12 @@
           document.querySelector('home-page').setPage('innovation-report','');
              this.$.bookservice.fninnovategrade();
              //this.$.bookservice.fnselectinnovatesubject();
+      }
+      if(localStorage.getItem('curr_sess_loggedassesmenttype')=="studentremove")
+      {
+         document.querySelector('app-card').setPage('homepage','');
+          document.querySelector('home-page').setPage('student-remove-card','');
+          this.$.studservice.fetchstudentremove();
       }
       this.$.cdialog.close();   
       },
@@ -1546,6 +1560,11 @@
               this.$.studservice.fngetgrade();
               document.querySelector('student-add-card').FnfullRefresh();
 
+          },
+          Fnremovestudent:function(e)
+          {
+            localStorage.setItem('curr_sess_loggedassesmenttype','studentremove');
+            this.$.cdialog.toggle();
           }
        
     });
