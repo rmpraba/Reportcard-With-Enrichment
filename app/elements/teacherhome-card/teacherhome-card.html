@@ -623,7 +623,7 @@
     <student-report-service id="reportservice"></student-report-service>
     <teacher-book-service-card id="bookservice"></teacher-book-service-card>
        <student-add-service id="studservice"></student-add-service>
-
+   
   </template>
   <script>
   (function() {
@@ -1267,14 +1267,14 @@
       FnTeacherbserver:function()
       {
         localStorage.setItem('curr_sess_loggedassesmenttype','teach_obser'); 
-        this.$.cdialog.toggle();
-         document.querySelector('app-card').setPage('homepage','');
-          document.querySelector('home-page').setPage('teacherobservation','Teacher Observation Card'); 
-         this.$.observerservice.fetchobserverdescription();
+        document.querySelector('app-card').setPage('homepage','');
+        document.querySelector('home-page').setPage('teacher-observation_card'); 
+        this.$.observerservice.fetchobserverdescription();
         this.$.observerservice.fetchteachersid();
-         document.querySelector('teacher-observation_card').Fnobservername();
-       //this.$.service.uname=sessionStorage.getItem("curr_sess_loggeduname");     
-      },
+        document.querySelector('teacher-observation_card').Fnobservername();
+        //this.$.service.uname=sessionStorage.getItem("curr_sess_loggeduname");
+        this.$.cdialog.toggle(); 
+      }, 
       FnComparison:function(){
         localStorage.setItem('curr_sess_loggedassesmenttype','Comparisonreport');
         this.$.scorecardservice.callGradeService();
@@ -1282,7 +1282,7 @@
       },
         SchoolTypeToGrade:function(e){
         document.querySelector('app-card').setPage('homepage','');
-        document.querySelector('home-page').setPage('master-school_type-creation','');
+        document.querySelector('home-page').setPage('master-school_type-creation',''); 
        //document.querySelector('schooltype-card').ready();
         this.$.uiservice.getschoolTypename();
         this.$.uiservice.SchooltypetoGrademapping();   

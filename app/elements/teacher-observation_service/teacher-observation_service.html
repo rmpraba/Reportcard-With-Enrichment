@@ -45,8 +45,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         handle-as="json"
         content-type="application/json"
         on-response="teachergradeResponse"
-        debounce-duration="300" 
-    >   
+        debounce-duration="300">   
+
 
     <iron-ajax
         
@@ -201,13 +201,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      },
      observerdescriptorResponse:function(e)
      {
-      var res=e.detail.response.returnval; 
-      //alert(res); 
-      for(var i=0;i<res.length;i++){
-        res[i].serialno=i+1;
-      }    
-            document.querySelector('teacher-observation_card').descriptorarr=res;
-     },
+
+    var res=e.detail.response.returnval; 
+    for(var i=0;i<res.length;i++){
+         res[i].serialno=i+1;
+       }    
+     document.querySelector('teacher-observation_card').descriptorarr=res;
+      },
      Fnteachergrade:function(teacherid)
      {
         this.teachergradeurl=sessionStorage.getItem("addrinfo")+"/teachergrade-service";
@@ -223,7 +223,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      {
       var res=e.detail.response.returnval; 
      // alert(JSON.stringify(res));
-            document.querySelector('teacher-observation_card').gradearrs=res;
+   document.querySelector('teacher-observation_card').gradearrs=res;
      },
      Fnteachersection:function(teacherid,gradeid)
      {
