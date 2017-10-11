@@ -1869,6 +1869,12 @@ var obj={"school_id":"","academic_year":"","grade_id":"","subject_id":""};
       this.buffseturl=sessionStorage.getItem("addrinfo")+"/buffset-service";
       var obj={};
       obj.capter_id=localStorage.getItem("curr_sess_capters");
+     obj.schoolid=sessionStorage.getItem("curr_sess_loggedschoolid");
+        obj.academic_year=localStorage.getItem("curr_sess_academicyear");
+          obj.subjectid=sessionStorage.getItem("subjectidz");
+        obj.gradeid=sessionStorage.getItem("grdeidz");
+        obj.termid=sessionStorage.getItem("termid"); 
+     
       this.buffsetparam=obj;
       this.$.buffsetajax.generateRequest();
      },
@@ -2009,7 +2015,7 @@ if(parseInt(this.periodafter)!=-1&&parseInt(this.periodafter)>0&&this.periodafte
               for(var i=0;i<res2.length;i++){
             res2[i].sno=i+1;
             }
-           document.querySelector('teacher-book-approve-card').overallarr1=res2;
+ document.querySelector('teacher-book-approve-card').overallarr1=res2;
            
           }                
           else {
@@ -2292,6 +2298,8 @@ fnsetcoskill13:function(skarr,period,rowid,sno)
       obj.delperiod=delperiod;
       obj.capter_id=localStorage.getItem("curr_sess_capters");
       this.buffdel1param=obj;
+          alert(JSON.stringify(obj));
+
       this.$.buffdel1ajax.generateRequest();
    },
 

@@ -3,11 +3,11 @@
 <dom-module id="aproval-book-innovatiosn-item-card">
   <template>
     <style>
-      :host {
+      :host {   
         display: block;
       }
       table
-      {
+      {   
           table-layout: fixed;
           width: 1900px;
           border-collapse: collapse;
@@ -17,7 +17,7 @@
      #remarkareaaaaa
       {
         overflow-x: visible;
-        overflow-y: hidden;
+        overflow-y: hidden;   
         height: 90px;
         width: 45%;
         margin-top: 14%;
@@ -370,7 +370,7 @@
           </center>
       </paper-dialog>
 
-
+    
      <paper-dialog id="savedialog" modal>
        <h3><center>SUCCESS</center></h3>
        <center>
@@ -620,7 +620,7 @@ fnpasssubarr:function(subsarr){
         alert("save");
         this.$.bookservice.fnmasterplaninsert(conarr,valuearr,skarr,subsarrr,this.period,this.innovation,this.remark,this.rowid,this.teachingaid,bldvaluearr,this.sno);
 
- this.$.bookservice.fnmasterplandisplyinsert(conarr,valuearr,skarr,subsarrr,this.period,this.innovation,this.remark,this.rowid,this.teachingaid,bldvaluearr,this.sno);
+     this.$.bookservice.fnmasterplandisplyinsert(conarr,valuearr,skarr,subsarrr,this.period,this.innovation,this.remark,this.rowid,this.teachingaid,bldvaluearr,this.sno);
             this.showdate=moment(new Date()).format('L');
             localStorage.setItem("localsess_from_service",this.showdate);
             setsubarr=[];
